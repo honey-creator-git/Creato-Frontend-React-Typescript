@@ -7,8 +7,8 @@ import TransferDialog from '../../../components/admin/transferDialog';
 import { SET_TRANSACTIONS } from '../../../redux/types';
 import Avatar from '../../../components/general/avatar';
 import { AddIcon, CreatoCoinIcon, TopUpIcon, SearchIcon } from '../../../assets/svg';
-import '../../../assets/styles/admin/transactions/adminTransactionsStyle.scss';
 import CONSTANT from '../../../constants/constant';
+import '../../../assets/styles/admin/transactions/adminTransactionsStyle.scss';
 
 const AdminTransactions = () => {
     const location = useLocation();
@@ -224,26 +224,24 @@ const AdminTransactions = () => {
                                             {transaction.description === 2 && `Purchase - ${transaction.donuts} Donuts`}
                                             {transaction.description === 3 &&
                                                 <>
-                                                    {/* {type === 0 && `${transaction.dareme.title} - Donut x1`} */}
-                                                    {type === 0 && 'Donut x1'}
+                                                    {type === 0 && `${transaction.dareme ? transaction.dareme.title : ''} - Donut x1`}
                                                     {type === 1 && `Vote Donut x1 for Free`}
                                                 </>
                                             }
-                                            {/* {transaction.description === 4 && <>Earnings from <strong>{transaction?.dareme?.title}</strong></>} */}
-                                            {/* {transaction.description === 4 && <>Earnings from <strong>{transaction?.dareme?.title}</strong></>} */}
+                                            {transaction.description === 4 && <>Earnings from <strong>{transaction.dareme ? transaction.dareme.title : ''}</strong></>}
                                             {transaction.description === 5 && "Vote as SuperFans"}
                                             {transaction.description === 6 && "Dare Request"}
-                                            {/* {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction?.dareme.title}</strong></>} */}
+                                            {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ''}</strong></>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
                                             {transaction.from === "USER" && transaction.user.name}
-                                            {/* {transaction.from === "DAREME" && transaction.dareme.title} */}
+                                            {transaction.from === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                                         </td>
                                         <td>
                                             {transaction.to === "ADMIN" && "Admin"}
                                             {transaction.to === "USER" && transaction.user.name}
-                                            {/* {transaction.to === "DAREME" && transaction.dareme.title} */}
+                                            {transaction.to === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                                         </td>
                                         <td>
                                             <div className="donuts-type">

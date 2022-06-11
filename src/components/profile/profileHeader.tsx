@@ -151,7 +151,7 @@ const ProfileHeader = (props: profileProps) => {
             <EditIcon color="#E17253" />
           </div>
         )}
-        <div className="youtube-icon">
+        {/* <div className="youtube-icon">
           <YoutubeIcon color="#E17253" />
         </div>
         <div className="instagram-icon">
@@ -161,7 +161,7 @@ const ProfileHeader = (props: profileProps) => {
           <div className="facebook-icon">
             <FacebookIcon color="#E17253" />
           </div>
-        )}
+        )} */}
         {/* {props.property === "view" && (
           <div className="twitter-icon">
             <TwitterIcon color="#E17253" />
