@@ -1,0 +1,31 @@
+.categories-wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+  .description {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: #696462;
+    margin: 10px 0;
+  }
+  .categories {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    .category {
+      width: fit-content;
+      margin: 5px 10px;
+    }
+  }
+  
+  .save-btn {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,31 @@
+.fanwall-like {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3px;
+
+    .fanwall-like-info {
+        display: flex;
+        align-items: center;
+
+        .like-count {
+            margin: 0 10px;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #54504E;
+        }
+
+        .like-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+            }
+        }
+    }
+}

@@ -1,0 +1,149 @@
+.dareme-details {
+  box-sizing: border-box;
+  display: flex;
+
+  .scroll-bar {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(245, 195, 149, 0.1);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(245, 195, 149, 0.5);
+      border-radius: 10px;
+      transition: 0.2s;
+      width: 12px;
+
+      &:hover {
+        background: #efa058;
+      }
+    }
+  }
+
+  .dareme-details-information {
+    width: 370px;
+
+    .desktop-header-info {
+      width: 340px;
+      margin: 0 auto;
+
+      .time-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left-time {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 18px;
+          color: #E17253;
+        }
+
+        .vote-info {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: bold;
+          color: black;
+
+          span {
+            width: fit-content;
+            margin: auto 5px;
+          }
+        }
+      }
+
+      .dare-title {
+        margin-top: 10px;
+        height: 56px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        color: black;
+      }
+
+      .dare-category {
+        margin-top: 10px;
+      }
+
+    }
+
+    .dare-btn {
+      width: 330px;
+      margin: 0px auto;
+      margin-top: 20px;
+    }
+
+    .or-style {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #000000;
+      margin: 16px 0px
+    }
+
+    .dare-options {
+      width: 340px;
+      margin: 0 auto;
+      overflow-y: scroll;
+
+      .dare-option {
+        margin: 0px 2px 5px 5px;
+      }
+    }
+  }
+
+  @media (min-width: 880px) {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 40px;
+    justify-content: space-between;
+
+    .dareme-details-videoCardDesktop {
+      width: 370px;
+      display: block;
+    }
+
+    .dareme-details-videoCardMobile {
+      display: none;
+    }
+
+    .dare-options {
+      max-height: 300px;
+    }
+  }
+
+  @media (max-width: 879px) {
+    justify-content: center;
+
+    .dareme-details-videoCardDesktop {
+      display: none;
+    }
+
+    .dareme-details-videoCardMobile {
+      width: 340px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .desktop-header-info {
+      display: none;
+    }
+
+    .dare-options {
+      max-height: 400px;
+    }
+  }
+}

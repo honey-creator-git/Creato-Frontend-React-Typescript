@@ -1,0 +1,125 @@
+.footer-wrapper {
+  width: 90%;
+  padding: 40px 12px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .footer-top {
+    display: flex;
+    color: #7e7875;
+
+    .part {
+      .title {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s;
+
+        :hover {
+          transform: scale(1.05);
+          transition: 0.3s;
+        }
+
+        .icon {
+          visibility: hidden;
+        }
+
+        @media (max-width: 600px) {
+          .icon {
+            visibility: visible;
+          }
+        }
+
+        h3 {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 18px;
+          display: flex;
+          align-items: center;
+          margin: 0;
+          padding: 12px;
+        }
+      }
+
+      .content {
+        a {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.005em;
+          padding: 12px;
+          margin: 0;
+          transition: 0.5s;
+          text-decoration: none;
+          color: #7E7875;
+
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+        }
+      }
+    }
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+
+  .footer-bottom {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: 600px) {
+      margin-top: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: row;
+
+      .icon {
+        margin: 14px;
+      }
+    }
+
+    h3 {
+      font-style: normal;
+      font-weight: bolder;
+      font-size: 24px;
+      line-height: 28px;
+      display: flex;
+      align-items: center;
+      color: #43403e;
+      margin-bottom: 0px;
+    }
+
+    h5 {
+      margin-top: 0px;
+    }
+
+    p {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.005em;
+      color: #000000;
+    }
+  }
+}

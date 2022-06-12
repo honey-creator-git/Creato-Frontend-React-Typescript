@@ -1,0 +1,90 @@
+.profile-edit-wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+
+  .avatar-info {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .avatar {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 70px;
+      overflow: hidden;
+
+      img {
+        object-fit: contain;
+        height: 100%;
+      }
+    }
+
+    .description {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      color: #000000;
+      margin-top: 10px;
+      z-index: 5px;
+      cursor: pointer;
+
+      &:hover {
+        color: grey;
+      }
+    }
+  }
+
+  .display-name {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .display-name-error {
+    display: flex;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: #AF3E1E;
+  }
+
+  .url {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-link {
+    margin-top: 15px;
+  }
+
+  .categories {
+    margin-top: 15px;
+
+  }
+
+  .save-btn {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .description {
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: #bcb6a9;
+  }
+}

@@ -1,0 +1,63 @@
+$primary-color: #efa058;
+
+.input-donuts-wrapper {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+
+  .input {
+    .label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: #000000;
+    }
+
+    .input-field {
+      &:hover {
+        border-color: $primary-color;
+      }
+
+      &:hover input::placeholder {
+        color: $primary-color;
+      }
+
+      &:focus-within {
+        border-color: #54504e;
+      }
+
+      width: 100%;
+      height: fit-content;
+      background: #ffffff;
+      border: 1px solid #54504e;
+      box-sizing: border-box;
+      border-radius: 15px;
+      padding: 12px 16px;
+
+      input {
+        width: 80px;
+        border: 0px;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #54504e;
+        height: 20px;
+        padding: 0;
+
+        &::placeholder {
+          font-style: italic;
+        }
+
+        &:focus::placeholder {
+          color: transparent;
+        }
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+}

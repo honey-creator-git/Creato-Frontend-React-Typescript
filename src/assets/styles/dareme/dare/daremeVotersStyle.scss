@@ -1,0 +1,64 @@
+.dareme-voters {
+  box-sizing: border-box;
+  display: flex;
+
+  // .scroll-bar {
+  //   &::-webkit-scrollbar {
+  //     width: 8px;
+  //   }
+
+  //   &::-webkit-scrollbar-track {
+  //     background-color: rgba(245, 195, 149, 0.1);
+  //     border-radius: 10px;
+  //   }
+
+  //   &::-webkit-scrollbar-thumb {
+  //     background: rgba(245, 195, 149, 0.5);
+  //     border-radius: 10px;
+  //     transition: 0.2s;
+  //     width: 12px;
+
+  //     &:hover {
+  //       background: #efa058;
+  //     }
+  //   }
+  // }
+
+  .dareme-voters-information {
+    width: 370px;
+    margin: 0 auto;
+
+    .dare-options {
+      width: 340px;
+      margin: 0 auto;
+      // overflow-y: scroll;
+
+      .dare-option {
+        margin: 5px 0px;
+      }
+
+      .vote-details {
+        padding: 0px 5px;
+
+        .vote-info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .donuts-count {
+            display: flex;
+            align-items: center;
+
+            span {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 14px;
+              color: #54504E;
+            }
+          }
+        }
+      }
+    }
+  }
+}

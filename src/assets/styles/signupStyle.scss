@@ -1,0 +1,90 @@
+.signup-wrapper {
+  width: 336px;
+  height: fit-content;
+  padding: 50px 37px 50px 37px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    color: #54504e;
+    margin: 0;
+  }
+
+  h4 {
+    text-align: left;
+    width: 263px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.005em;
+    color: #000000;
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    li {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.005em;
+      color: #000000;
+    }
+  }
+
+  .icons {
+    display: flex;
+    justify-content: space-between;
+    // justify-content: center;
+    width: 80%;
+    width: 40%;
+    padding: 38px 0 57px 0;
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 40px;
+      border: 1px solid #efa058;
+      transition: 0.3s;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+      background-color: rgba(239, 160, 88, 0.3);
+      border: 1px solid rgba(239, 160, 88, 0.1);
+    }
+
+    .icon:hover GoogleIcon {
+      color: white;
+    }
+  }
+
+  p {
+    color: #bcb6a9;
+    font-size: 14px;
+    max-width: 263px;
+    margin: 0;
+  }
+}

@@ -1,0 +1,55 @@
+.create-wrapper {
+    width: 100%;
+    max-width: 340px;
+    margin: auto;
+
+    .create-card {
+        width: 340px;
+        padding: 9px;
+        height: 120px;
+        background: #F5F5F4;
+        box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        cursor: pointer;
+
+        .card-icon {
+            width: 68px;
+            height: 68px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-part {
+            width: 250px;
+
+            .title-letter {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+                margin-bottom: 12px;
+            }
+
+            .body-letter {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+            }
+        }
+
+        &:hover,
+        :visited {
+            transform: scale(1.03);
+        }
+    }
+}

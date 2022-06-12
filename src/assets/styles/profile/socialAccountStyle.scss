@@ -1,0 +1,35 @@
+.socialaccount-wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+  .socialaccounts {
+    margin: 25px 0;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 0.25px solid #a8a8a8;
+      .icon {
+        width: 15%;
+      }
+      .title {
+        width: 50%;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.05em;
+      }
+      .btn {
+        width: fit-content;
+        float: right;
+      }
+    }
+  }
+  .save-btn {
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+  }
+}

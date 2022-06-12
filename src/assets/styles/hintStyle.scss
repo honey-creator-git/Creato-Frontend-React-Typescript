@@ -1,0 +1,67 @@
+.hint-wrapper {
+  position: fixed;
+  top: 120px;
+  width: 336px;
+  min-height: 229px;
+  display: flex;
+  justify-content: right;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  z-index: 20;
+  transition: 0.3s;
+
+  @media (min-width: 700px) {
+    top: 72px;
+  }
+
+  .hint {
+    width: 330px;
+    min-height: 229px;
+    box-sizing: border-box;
+    height: fit-content;
+    padding: 16px;
+    background-color: white;
+    border-radius: 5px;
+
+    .top {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      .hint-title {
+        display: flex;
+        flex-direction: row;
+
+        .hint-icon {
+          padding: 0 5px;
+        }
+
+        .title {
+          text-align: left;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 20px;
+          color: #000000;
+          margin: 0px 8px;
+        }
+      }
+
+      .cancel-icon {
+        padding: 0 13px;
+      }
+    }
+
+    .context {
+      white-space: pre-line;
+      text-align: left;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #000000;
+      margin: 18px 0px;
+    }
+  }
+}

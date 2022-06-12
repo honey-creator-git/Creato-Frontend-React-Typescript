@@ -1,0 +1,92 @@
+.dare-creator-wrapper {
+  box-sizing: border-box;
+  display: flex;
+
+  .dare-creator-info {
+    width: 370px;
+
+    .dare-creator-details {
+      width: 340px;
+      margin: 0px auto;
+
+      .avatars {
+        width: 220px;
+        margin: 20px auto 0px auto;
+        height: 120px;
+        position: relative;
+
+        .owner-avatar {
+          position: absolute;
+          z-index: 5;
+        }
+
+        .user-avatar {
+          position: absolute;
+          right: 0px;
+        }
+      }
+
+      .dare-option-title {
+        margin: 20px auto 0px auto;
+        width: 320px;
+      }
+
+      .dare-donut-amount {
+        width: 320px;
+        display: flex;
+        align-items: center;
+        margin: 20px auto 0px auto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+      .dare-donuts-count {
+        margin: 0px auto;
+        width: 320px;
+      }
+
+      .dare-creator-description {
+        width: 320px;
+        margin: 20px auto 0px auto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #54504E;
+      }
+
+      .dare-category-btn {
+        margin-top: 60px;
+        width: 330px;
+      }
+    }
+  }
+
+  @media (min-width: 880px) {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 40px;
+    justify-content: space-between;
+
+    .dare-creator-videoCardDesktop {
+      width: 370px;
+      display: block;
+    }
+
+  }
+
+  @media (max-width: 879px) {
+    justify-content: center;
+
+    .dare-creator-videoCardDesktop {
+      display: none;
+    }
+  }
+}

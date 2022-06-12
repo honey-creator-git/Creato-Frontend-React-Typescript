@@ -1,0 +1,61 @@
+.videoCard-desktop-wrapper {
+    position: relative;
+    width: 370px;
+    height: 520px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px 10px 0px 0px;
+
+    .videoCard-desktop-main {
+        position: relative;
+        width: 370px;
+        height: 520px;
+
+        .cover-image {
+            width: 370px;
+            height: 520px;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .react-player-height {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 10px 0px 0px;
+
+            video {
+                width: auto !important;
+                height: 100% !important;
+            }
+        }
+
+        .react-player-width {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 10px 0px 0px;
+
+            video {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+    }
+
+    .play-icon {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+}

@@ -1,0 +1,135 @@
+.preview-wrapper {
+  box-sizing: border-box;
+  display: flex;
+
+  .preview-information {
+    width: 370px;
+
+    .desktop-header-info {
+      width: 340px;
+      margin: 0 auto;
+
+      .time-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left-time {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 18px;
+          color: #E17253;
+        }
+
+        .vote-info {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: bold;
+          color: black;
+
+          span {
+            width: fit-content;
+            margin: auto 5px;
+          }
+        }
+      }
+
+      .dare-title {
+        margin-top: 10px;
+        height: fit-content;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        color: black;
+      }
+
+      .dare-category {
+        margin-top: 10px;
+      }
+
+    }
+
+    .dare-btn {
+      width: 330px;
+      margin: 0px auto;
+      margin-top: 20px;
+    }
+
+    .or-style {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #000000;
+      margin: 16px 0px
+    }
+
+    .dare-options {
+      width: 340px;
+      margin: 0 auto;
+      box-sizing: border-box;
+
+      .dare-option {
+        margin: 0px 2px 5px 5px;
+      }
+    }
+  }
+
+  @media (min-width: 880px) {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 40px;
+    justify-content: space-between;
+
+    .preview-desktop-videoCardDesktop {
+      width: 370px;
+      display: block;
+    }
+
+    .preview-videoCardMobile {
+      display: none;
+    }
+
+    .dare-creator {
+      display: block;
+    }
+
+  }
+
+  @media (max-width: 879px) {
+    justify-content: center;
+
+    .preview-desktop-videoCardDesktop {
+      display: none;
+    }
+
+    .desktop-header-info {
+      display: none;
+    }
+
+    .preview-videoCardMobile {
+      width: 340px;
+      margin: 10px auto 10px auto;
+      display: block;
+    }
+
+    .dare-creator {
+      display: none;
+    }
+
+    .dare-options {
+      background: #ffffff;
+      padding: 10px;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+    }
+  }
+}

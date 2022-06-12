@@ -1,0 +1,15 @@
+.layout-admin {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+
+  .sidebar {
+    width: 270px;
+  }
+
+  .main-body {
+    width: calc(100% - 270px);
+    margin: 0px 10px;
+    box-shadow: 5px 0px 20px 0px rgba($color: #000000, $alpha: 0.4);
+  }
+}

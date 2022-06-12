@@ -1,0 +1,89 @@
+.fanwall-videoCard-wrapper {
+    width: 325px;
+    position: relative;
+
+    .fanwall-videoCard {
+        width: 100%;
+        height: 455px;
+        position: relative;
+
+        .cover-image {
+            width: 325px;
+            height: 455px;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .react-player-height {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            video {
+                width: auto !important;
+                height: 100% !important;
+            }
+        }
+
+        .react-player-width {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            video {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        .play-icon {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+    }
+
+    .fanwall-letters {
+        width: 325px;
+        margin-top: 12px;
+        word-wrap: break-word;
+
+        .message-style {
+            width: 320px;
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    }
+
+    .fanwall-lock {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: 0.7;
+        background-color: white;
+    }
+
+    .lock-icon {
+        z-index: 5;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 45%;
+        left: 50%;
+    }
+}

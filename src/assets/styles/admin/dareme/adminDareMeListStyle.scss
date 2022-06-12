@@ -1,0 +1,91 @@
+.admin-daremes-wrapper {
+    padding: 10px 10px;
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+
+        .search-input {
+            margin-left: 20px;
+            width: calc(100% - 50px);
+            height: 40px;
+            border: none;
+            background-color: #F5F5F4;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: normal;
+            padding: 0px 10px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    table,
+    tr,
+    th,
+    td {
+        border-collapse: collapse;
+    }
+
+    .daremes-data {
+        .data-table {
+            width: 100%;
+
+            thead {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.005em;
+                color: #000000;
+                height: 52px;
+                background-color: #F2B176;
+
+                tr {
+                    text-align: left;
+
+                    th {
+                        padding-left: 5px;
+                    }
+                }
+            }
+
+            tbody {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.005em;
+                color: #000000;
+
+                tr {
+                    text-align: left;
+                    height: 34px;
+                    cursor: pointer;
+
+                    td {
+                        padding-left: 5px;
+
+                        .dareme-title {
+                            color: #F2B176;
+                            display: flex;
+                            align-items: center;
+
+                            &:hover {
+                                transform: scale(1.02, 1.02);
+                                color: red;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        background-color: rgb(240, 240, 240);
+                    }
+                }
+            }
+        }
+    }
+}

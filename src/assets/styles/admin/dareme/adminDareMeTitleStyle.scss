@@ -1,0 +1,48 @@
+.admin-dareme-title-wrapper {
+  box-sizing: border-box;
+  margin: 0px 20px 40px 20px;
+  position: relative;
+  
+    .title-input {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+  
+      input {
+        font-style: italic;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #54504e;
+        border: none;
+        width: 290px;
+      }
+  
+      input:focus {
+        outline: none;
+      }
+    }
+  
+    .categories {
+      margin-top: 38px;
+      display: flex;
+      justify-content: center;
+  
+      .title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 20px;
+        color: #54504e;
+      }
+  
+      .category {
+        margin-top: 16px;
+        width: fit-content;
+      }
+    }
+  
+    .save-btn {
+      width: 340px;
+      margin: 30px auto 0px auto;
+    }
+  }

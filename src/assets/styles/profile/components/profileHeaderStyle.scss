@@ -1,0 +1,88 @@
+.profile-header {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+
+  .avatar {
+    position: absolute;
+    left: 24px;
+    top: 10px;
+  }
+
+  .ellipsis-icon {
+    position: absolute;
+    right: 25px;
+    top: 28px;
+  }
+
+  .icons {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    left: 51px;
+    bottom: 12px;
+
+    .bell-icon {
+      padding-right: 33px;
+    }
+
+    .pen-icon {
+      padding-right: 33px;
+    }
+
+    .youtube-icon {
+      padding-right: 21px;
+    }
+
+    .instagram-icon {
+      padding-right: 21px;
+    }
+
+    .facebook-icon {
+      padding-right: 21px;
+    }
+  }
+
+  .create-btn {
+    width: 40px;
+    position: absolute;
+    right: 13px;
+    bottom: 9px;
+  }
+
+  .drop-down-list {
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    background-color: #ffffff;
+    width: 250px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    z-index: 10;
+    height: fit-content;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+
+    .list {
+      width: 100%;
+      height: 52px;
+      cursor: pointer;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        color: grey;
+      }
+    }
+  }
+}

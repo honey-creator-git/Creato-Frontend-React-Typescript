@@ -1,0 +1,60 @@
+.side-menu-wrapper {
+  .side-menu {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: fit-content;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+
+    .list {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      padding: 10px;
+      transition: 0.3s;
+      float: left;
+      cursor: pointer;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10%;
+        box-sizing: border-box;
+        position: relative;
+
+        .red-dot {
+          position: absolute;
+          right: 4px;
+          top: 2px;
+          width: 6px;
+          height: 6px;
+          border-radius: 6px;
+          background-color: red;
+        }
+      }
+
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+        padding-left: 10px;
+        margin: 0;
+      }
+    }
+
+    .list:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .logout p {
+      color: black;
+    }
+  }
+}

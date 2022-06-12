@@ -1,0 +1,539 @@
+.create-fundme-wrapper {
+  width: 100%;
+
+  @media (min-width: 881px) {
+    max-width: 880px;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 340px;
+  }
+
+  margin: auto;
+  position: relative;
+
+  .create-fundme-desktop {
+    width: 100%;
+    margin: 0 auto;
+
+    .card {
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+
+      .video {
+        position: relative;
+        margin: 40px 0px 40px 40px;
+        width: 370px;
+        height: 570px;
+        border-radius: 10px 10px 10px 10px;
+        background: #BAB6B5;
+
+        .cover-image {
+          width: 370px;
+          height: 570px;
+          display: flex;
+          position: absolute;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          border-radius: 10px 10px 10px 10px;
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper {
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+          width: 100% !important;
+          height: 100% !important;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px 10px 10px 10px;
+        }
+
+        .react-player-height {
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+          width: 100% !important;
+          height: 100% !important;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px 10px 10px 10px;
+
+          video {
+            width: auto !important;
+            height: 100% !important;
+          }
+        }
+
+        .react-player-width {
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+          width: 100% !important;
+          height: 100% !important;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px 10px 10px 10px;
+
+          video {
+            width: 100% !important;
+            height: auto !important;
+          }
+        }
+
+        .play-icon {
+          z-index: 5;
+          position: absolute;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
+        }
+
+        .load-video-btn {
+          width: 330px;
+          position: absolute;
+          bottom: 60px;
+          left: 20px;
+        }
+
+        .choose-cover {
+          position: absolute;
+          width: 305px;
+          left: 20px;
+          padding: 14px;
+          bottom: 5px;
+          border-radius: 10px;
+          background-color: white;
+          text-align: center;
+          cursor: pointer;
+
+          span {
+            color: white;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            color: green;
+          }
+        }
+
+        .load-text {
+          position: absolute;
+          width: 100%;
+          top: 145px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          h4 {
+            margin: 0px 0px 30px 0px;
+            max-width: 250px;
+            color: white;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+          }
+
+          p {
+            margin: 0px;
+            max-width: 260px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #ffffff;
+          }
+        }
+      }
+
+      .options {
+        position: relative;
+        margin: 40px 40px 40px 0px;
+        width: 370px;
+        height: 570px;
+
+        .deadline {
+          position: relative;
+          width: 119px;
+
+          .drop-down-lists {
+            position: absolute;
+            z-index: 10;
+            width: 200px;
+            background: #54504e;
+            opacity: 0.9;
+            backdrop-filter: blur(6px);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            padding: 0 10px;
+            overflow: hidden;
+
+            .list {
+              font-style: normal;
+              font-weight: normal;
+              font-size: 16px;
+              line-height: 20px;
+              text-align: center;
+              color: #ffffff;
+              padding: 10px 0;
+              width: 100%;
+              border-radius: 10px;
+              transition: 0.3s;
+              cursor: pointer;
+            }
+
+            .list:hover {
+              background-color: #efa058;
+            }
+          }
+        }
+
+        .fund-title {
+          margin-top: 25px;
+          width: 100%;
+        }
+
+        .funding-goal {
+          margin-top: 30px;
+          width: fit-content;
+          padding: 15px 0px;
+          position: absolute;
+          top: 40%;
+          left: 0;
+
+          .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0px;
+
+            .title {
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 800;
+              font-size: 20px;
+              line-height: 24px;
+              letter-spacing: 0.02em;
+              color: #EFA058;
+              display: flex;
+
+              span {
+                margin-left: 5px;
+              }
+            }
+          }
+
+          .goal-letter {
+            margin-left: 10px;
+            white-space: pre-line;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.005em;
+          }
+
+          .goal-input {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0px;
+          }
+        }
+
+        .category {
+          margin-top: 25px;
+          position: relative;
+          width: fit-content;
+
+          .drop-down-lists {
+            z-index: 10;
+            position: absolute;
+            width: 200px;
+            background: #54504e;
+            opacity: 0.9;
+            backdrop-filter: blur(6px);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            padding: 0 10px;
+            overflow: hidden;
+
+            .list {
+              font-style: normal;
+              font-weight: normal;
+              font-size: 16px;
+              line-height: 20px;
+              text-align: center;
+              color: #ffffff;
+              padding: 10px 0;
+              width: 100%;
+              border-radius: 10px;
+              transition: 0.3s;
+              cursor: pointer;
+            }
+
+            .list:hover {
+              background-color: #efa058;
+            }
+          }
+        }
+
+        .prev-btn {
+          position: absolute;
+          width: 100%;
+          bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .create-fundme-mobile {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    .video {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      border-radius: 10px;
+      background: #BAB6B5;
+
+      .cover-image {
+        width: 340px;
+        height: 520px;
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .react-player-height {
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 10px 10px;
+
+        video {
+          width: auto !important;
+          height: 100% !important;
+        }
+      }
+
+      .react-player-width {
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 10px 10px;
+
+        video {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+
+      .play-icon {
+        z-index: 5;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+
+      .deadline {
+        width: 119px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .fundme-title {
+        position: absolute;
+        top: 73px;
+        left: 10px;
+      }
+
+      .category {
+        position: absolute;
+        left: 10px;
+        bottom: 90px;
+      }
+
+      .load-video-btn {
+        width: 320px;
+        position: absolute;
+        bottom: 25px;
+        left: 10px;
+      }
+      .funding-goal {
+        margin-top: 30px;
+        width: fit-content;
+        padding: 15px 0px;
+        position: absolute;
+        top: 40%;
+        left: 0;
+  
+        .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 18px 0px;
+  
+          .title {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.02em;
+            color: #EFA058;
+            display: flex;
+
+  
+            span {
+              margin-left: 5px;
+            }
+          }
+        }
+  
+        .goal-letter {
+          margin-left: 10px;
+          white-space: pre-line;
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          letter-spacing: 0.005em;
+        }
+  
+        .goal-input {
+          display: flex;
+          justify-content: center;
+          padding: 20px 0px;
+        }
+      }
+    }
+
+    .fund-options {
+      padding: 20px 5px 5px 5px;
+      border-radius: 10px;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .prev-btn {
+      padding-top: 20px;
+    }
+  }
+
+  .dlg {
+    position: fixed;
+    left: 0;
+    top: 80%;
+    width: 100%;
+
+    background-color: rgba(84, 80, 78, 0.6);
+    color: white;
+    font-size: 16px;
+    transition: 0.5s;
+    z-index: 10;
+
+    .done {
+      background-color: rgba(84, 80, 78, 1);
+      display: flex;
+      width: 100%;
+      font-size: 18px;
+      justify-content: end;
+
+      .btn {
+        cursor: pointer;
+        text-align: center;
+        padding: 10px;
+        float: right;
+        width: 60px;
+        background-color: rgb(66, 64, 63);
+      }
+
+      .btn:hover {
+        background-color: #bab6b5;
+      }
+    }
+
+    .lists {
+      text-align: center;
+      cursor: pointer;
+      overflow-y: scroll;
+      height: 156px;
+
+      .list {
+        padding: 10px;
+        transition: 0.3s;
+      }
+
+      .list:hover {
+        background-color: rgba(84, 80, 78, 0.8);
+      }
+    }
+  }
+
+  .transparent-dlg {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    transition: 0.3s;
+  }
+
+  @media (min-width: 880px) {
+    .create-fundme-desktop {
+      display: block;
+    }
+
+    .create-fundme-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 880px) {
+    .create-fundme-desktop {
+      display: none;
+    }
+
+    .create-fundme-mobile {
+      display: block;
+    }
+  }
+}

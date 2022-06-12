@@ -1,0 +1,134 @@
+.videoCard-mobile-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 10px 10px 0px 0px;
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15));
+    cursor: pointer;
+
+    .videoCard-main {
+        position: relative;
+        width: 340px;
+        height: 470px;
+
+        .cover-image {
+            width: 340px;
+            height: 470px;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .react-player-height {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 10px 0px 0px;
+
+            video {
+                width: auto !important;
+                height: 100% !important;
+            }
+        }
+
+        .react-player-width {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 10px 0px 0px;
+
+            video {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        .mute-icon {
+            position: absolute;
+            right: 15px;
+            bottom: 68px;
+        }
+
+        .information {
+            padding: 8px 12px 8px 12px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            width: 316px;
+            border-radius: 10px;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+
+            .time-info {
+                display: flex;
+                justify-content: space-between;
+
+                .left-time {
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: #E17253;
+                }
+
+                .vote-info {
+                    display: flex;
+                    align-items: center;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #FFFFFF;
+
+                    span {
+                        width: fit-content;
+                        margin: auto 5px;
+                    }
+                }
+            }
+
+            .dare-title {
+                margin-top: 5px;
+                height: fit-content;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 28px;
+                color: #FFFFFF;
+            }
+
+            .category-btn {
+                margin-top: 10px;
+            }
+        }
+
+        .play-icon {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        .lock-icon {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+    }
+
+    .submit-button {
+        width: 313px;
+        position: absolute;
+        padding: 0px 13px;
+        bottom: 10px;
+    }
+}

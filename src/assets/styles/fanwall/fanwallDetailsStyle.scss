@@ -1,0 +1,185 @@
+.fanwall-detail-wrapper {
+    display: flex;
+    box-sizing: border-box;
+
+    .fanwall-info {
+        width: 370px;
+        padding: 5px 5px;
+        margin: 0 auto;
+
+        .dareme-vote-info {
+            width: 340px;
+            margin: 10px auto 0px auto;
+            display: flex;
+            justify-content: space-between;
+
+            .dareme-deadline {
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 18px;
+                color: #E17253;
+            }
+
+            .dareme-donuts {
+                display: flex;
+                align-items: center;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 18px;
+                color: black;
+            }
+        }
+
+        .dareme-title {
+            display: flex;
+            justify-content: space-between;
+            width: 340px;
+            margin: 0px auto;
+
+            .title {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 28px;
+                color: black;
+            }
+
+            .more-info {
+                margin-left: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                .drop-down-list {
+                    right: 0px;
+                    top: 20px;
+                    position: absolute;
+                    background-color: #ffffff;
+                    width: 250px;
+                    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+                    border-radius: 10px;
+                    z-index: 10;
+                    height: fit-content;
+                    overflow: hidden;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.2s linear;
+
+                    .list {
+                        width: 100%;
+                        height: 52px;
+                        cursor: pointer;
+                        font-style: normal;
+                        font-size: 16px;
+                        line-height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            color: grey;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .dareme-category {
+            margin: 5px auto 0px auto;
+            width: 340px;
+        }
+
+        .fanwall-mobile-card {
+            margin-top: 10px;
+        }
+
+        .win-option {
+            width: 340px;
+            margin: 10px auto 0px auto;
+        }
+
+        .line-vector {
+            margin: 10px auto 0px auto;
+            width: 330px;
+            height: 0px;
+            left: 0px;
+            top: 0px;
+            border: 0.5px solid #7E7875;
+        }
+
+        .top-fans {
+            width: 340px;
+            margin: 10px auto 0px auto;
+
+            .letter {
+                margin-left: 5px;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 18px;
+                color: #54504E;
+            }
+
+            .top-fan-avatar {
+                margin: 0 5px;
+            }
+        }
+    }
+
+    @media (min-width: 880px) {
+        max-width: 880px;
+        margin: 0 auto;
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        background: #ffffff;
+        border-radius: 5px;
+        padding: 40px;
+        justify-content: space-between;
+
+        .fanwall-desktop-card {
+            width: 370px;
+            margin: 0px auto;
+
+            .card-main-body {
+                width: 325px;
+                background: #FFFFFF;
+                box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+                border-radius: 10px;
+                padding: 8px;
+            }
+        }
+
+        .fanwall-mobile-card {
+            display: none;
+        }
+
+        .fanwall-like-mobile {
+            display: none;
+        }
+    }
+
+    @media (max-width: 879px) {
+        max-width: 340px;
+        justify-content: center;
+        margin: 0px auto;
+
+        .fanwall-info {
+            background: #FFFFFF;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        .fanwall-mobile-card {
+            display: flex;
+            justify-content: center;
+        }
+
+        .fanwall-desktop-card {
+            display: none;
+        }
+    }
+
+}

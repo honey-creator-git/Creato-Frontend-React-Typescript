@@ -1,0 +1,45 @@
+.balance-wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+  .table {
+    padding: 0;
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.005em;
+    color: #000000;
+    border: 0.25px solid #938d8a;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    .col1 {
+      width: 27%;
+      display: flex;
+      align-items: center;
+    }
+    .col2 {
+      width: 50%;
+      display: flex;
+      align-items: center;
+    }
+    .col3 {
+      width: 23%;
+      display: flex;
+      align-items: center;
+    }
+    .row {
+      display: flex;
+      padding: 4px 5px;
+    }
+    .header {
+      background-color: #efa058;
+      margin: 0;
+      padding: 8px 0 8px 0;
+      width: 100%;
+      display: block;
+    }
+  }
+}

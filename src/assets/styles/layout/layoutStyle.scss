@@ -1,0 +1,26 @@
+.layout {
+  width: 100%;
+  margin: auto;
+
+  .title-header {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 880px) {
+      max-width: 880px;
+    }
+
+    @media (max-width: 879px) {
+      max-width: 340px;
+    }
+  }
+}
+
+.font-size-md {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}

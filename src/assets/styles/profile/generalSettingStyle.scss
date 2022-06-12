@@ -1,0 +1,43 @@
+.setting-general {
+  max-width: 340px;
+  width: 100%;
+  margin: auto;
+
+  .settings {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .setting {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(209, 207, 207);
+      }
+
+      .part {
+        display: flex;
+        align-items: center;
+
+        .title {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 20px;
+          color: #000000;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}

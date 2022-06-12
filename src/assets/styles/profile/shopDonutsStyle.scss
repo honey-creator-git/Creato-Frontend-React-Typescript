@@ -1,0 +1,40 @@
+.shop-donuts {
+  width: 100%;
+
+  @media (min-width: 880px) {
+    max-width: 880px;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 370px;
+  }
+
+  margin: auto;
+
+  .part {
+    .title {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.005em;
+      color: #54504e;
+      margin-left: 20px;
+    }
+
+    .creatos {
+      display: flex;
+      overflow-x: scroll;
+      padding: 20px;
+      box-sizing: border-box;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .creato {
+        margin-right: 5px;
+      }
+    }
+  }
+}

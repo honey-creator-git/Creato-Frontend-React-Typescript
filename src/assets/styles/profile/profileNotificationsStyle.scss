@@ -1,0 +1,54 @@
+.profile-notifications {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+
+  @media (min-width: 880px) {
+    max-width: 800px;
+  }
+
+  .part {
+    .title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 18px;
+      letter-spacing: 0.005em;
+      color: #54504e;
+      padding: 10px 0;
+    }
+
+    .notifications {
+      display: flex;
+      flex-direction: column;
+
+      .notification {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgb(207, 207, 207);
+          transition: all 0.3s;
+        }
+
+        .content {
+          display: flex;
+          align-items: center;
+
+          .message {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.005em;
+            color: #54504e;
+            padding: 0 16px;
+          }
+        }
+      }
+    }
+  }
+}
