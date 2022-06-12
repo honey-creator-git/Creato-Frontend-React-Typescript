@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { daremeAction } from "../../../redux/actions/daremeActions";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
-import { notificationAction } from "../../../redux/actions/notificationAction"
-import VideoCardDesktop from "../../../components/fundme/videoCardDesktop";
-import VideoCardMobile from "../../../components/fundme/videoCardMobile";
+import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
+import VideoCardMobile from "../../../components/dareme/videoCardMobile";
 import AvatarLink from "../../../components/fundme/avatarLink";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog";
@@ -12,11 +12,9 @@ import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
-import { CreatoCoinIcon, LightbulbIcon } from '../../../assets/svg';
-import "../../../assets/styles/dareme/create/previewStyle.scss";
-import "../../../assets/styles/dareme/create/createDaremeStyle.scss";
+import { CreatoCoinIcon, HotIcon, RewardIcon } from '../../../assets/svg';
 import { SET_TEASER_FILE1, SET_COVER_FILE1 } from "../../../redux/types";
-// import Input from "../../../components/general/input";
+import "../../../assets/styles/fundme/create/previewStyle.scss";
 
 const FundmePreview = () => {
   const dispatch = useDispatch();
@@ -29,16 +27,9 @@ const FundmePreview = () => {
   const [openCopyLink, setOpenCopyLink] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const user = userState.user;
-  const [openHint, setOpenHint] = useState<boolean>(false);
-  const [openSubHint, setOpenSubHint] = useState<boolean>(false);
-  // const [goal, setGoal] = useState("");
-  const handleSubHintClick = () => {
-    setOpenSubHint(true);
-    setOpenHint(false);
-  }
 
   const SaveFundInfo = () => {
-    // dispatch(fundmeAction.publishFundme());
+    dispatch(fundmeAction.publishFundme());
     setOpenCopyLink(true);
   };
 
@@ -46,12 +37,9 @@ const FundmePreview = () => {
     setOpenPublishDlg(false);
     setIsCopied(false);
     SaveFundInfo();
-    dispatch(notificationAction.getNotification());
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
@@ -106,7 +94,7 @@ const FundmePreview = () => {
         shareType={"create"}
         fundmeTitle={fundState.title}
         fundmeId={fundState._id}
-      // ownerName={user.name}
+        ownerName={user.name}
       />
       <div className="preview-wrapper">
         <div className="preview-desktop-videoCardDesktop">
@@ -116,12 +104,10 @@ const FundmePreview = () => {
             coverImage={fundState.cover ? `${CONSTANT.SERVER_URL}/${fundState.cover}` : ""}
           />
           <AvatarLink
-            // username={user.name}
+            username={user.name}
             avatar={user.avatar}
             ownerId={user.id}
-            handleAvatar={() => { 
-              // dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); 
-            }}
+            handleAvatar={() => { navigate(`/${user.personalisedUrl}`) }}
             fundmeId={fundState._id}
           />
         </div>
@@ -139,15 +125,15 @@ const FundmePreview = () => {
             <div className="dare-title">
               <span>{fundState.title}</span>
             </div>
-            <div className="fund-category">
-              <CategoryBtn text={contexts.DAREME_CATEGORY_LIST[fundState.category - 1]} color="primary" />
+            <div className="dare-category">
+              <CategoryBtn text={contexts.FUNDME_CATEGORY_LIST[fundState.category - 1]} color="primary" />
             </div>
           </div>
           <div className="preview-videoCardMobile">
             <VideoCardMobile
               url={fundState.teaser ? `${CONSTANT.SERVER_URL}/${fundState.teaser}` : ""}
               donuts={0}
-              category={contexts.DAREME_CATEGORY_LIST[fundState.category - 1]}
+              category={contexts.FUNDME_CATEGORY_LIST[fundState.category - 1]}
               time={fundState.deadline}
               title={fundState.title}
               sizeType={fundState.sizeType}
@@ -155,67 +141,51 @@ const FundmePreview = () => {
               handleSubmit={() => { }}
             />
             <AvatarLink
-              // username={user.name}
+              username={user.name}
               avatar={user.avatar}
               ownerId={user.id}
-              handleAvatar={() => { 
-                // dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); 
-              }}
+              handleAvatar={() => { navigate(`/${user.personalisedUrl}`) }}
             />
           </div>
-          <div className="dare-creator">
-            <div className="dare-btn">
-              <div onClick={() => SaveFundInfo()}>
-                <ContainerBtn
-                  disabled={false}
-                  styleType="fill"
-                  text="Fund Creator"
-                />
+          <div className="funding-goal">
+            <div className="title">
+              <CreatoCoinIcon color="#EFA058" />
+              <label>Goal</label>
+            </div>
+            <div className="process-bar">
+              <div className="process-value" style={{ width: '16.5px' }}></div>
+            </div>
+            <div className="donuts-count">
+              <span>0 / {fundState.goal.toLocaleString()} Donuts</span>
+            </div>
+          </div>
+          <div className="dare-btn">
+            <ContainerBtn
+              disabled={false}
+              styleType="fill"
+              text={`${fundState.reward} Donuts (SuperFan!)`}
+              icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
+            />
+          </div>
+          <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ marginRight: '20px' }}>
+              <div className="reward-btn">
+                <RewardIcon color="white" width="25" height="25" />
               </div>
             </div>
-            <div className="or-style">or</div>
+            <label>Supporting the creator as SuperFan will get you entitled for the reward!</label>
           </div>
-          {/* <div className="dare-options">
-            {
-              options.map((option: any, index: any) =>
-                <FundOption
-                  key={index}
-                  leading={false}
-                  donuts={option.donuts}
-                  canVote={option.canVote}
-                  fundTitle={option.option}
-                  username={option.owner}
-                  disabled={false}
-                  handleSubmit={() => { }}
-                />
-              )
-            }
-          </div> */}
-          {/* <div className="funding-goal">
-              <div className="header">
-                  <div className="title">
-                      <CreatoCoinIcon color="#EFA058" />
-                      <span>{contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL}</span>
-                  </div>
-                  <div onClick={handleSubHintClick}><LightbulbIcon color="#10B981" /></div>
-              </div>
-              <div className="goal-letter">
-                  <span>{contexts.CREATE_FUNDME_LETTER.GOAL_LETTER}</span>
-              </div>
-              <div className="goal-input">
-                  <Input
-                      type="input"
-                      isNumber={true}
-                      placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
-                      title={goal}
-                      step={1}
-                      setTitle={setGoal}
-                      setFocus={() => { }}
-                  />
-              </div>
-          </div> */}
-
-
+          <div className="dare-btn">
+            <ContainerBtn
+              disabled={false}
+              styleType="outline"
+              text="1 Donut (Free!)"
+            />
+          </div>
+          <div className="below-text">
+            Supporting the creator for Free!<br />
+            This 1 Donut will be donated by Creato!
+          </div>
           <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setOpenPublishDlg(true) }}>
             <ContainerBtn text='Publish' styleType="fill" />
           </div>

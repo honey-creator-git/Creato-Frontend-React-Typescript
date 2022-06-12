@@ -9,13 +9,16 @@ import { useSelector } from 'react-redux';
 import "../../assets/styles/dareme/components/videoCardMobileStyle.scss";
 
 const VideoCardMobile = (props: any) => {
-    const { url, title, time, donuts, category, handleSubmit, finished, posted, sizeType, coverImage, fanwallData } = props;
+    const { url, title, time, donuts, category, handleSubmit, finished, posted, sizeType, coverImage, fanwallData, goal } = props;
     const playerRef = useRef<ReactPlayer | null>(null);
     const [play, setPlay] = useState(false);
     const userState = useSelector((state: any) => state.auth);
     const [muted, setMouted] = useState(true);
     const user = userState.user;
     const contexts = useContext(LanguageContext);
+    const interval = goal ? (Number(goal) / 20).toFixed(1) : 0;
+    const count = goal ? Number(Math.floor(Number(donuts) / Number(interval))) : 0;
+    const width = donuts === 0 ? Math.floor(Number(interval) / Number(goal) * 262) : Math.floor(Number(interval) * count / Number(goal) * 262);
 
     const calcTime = (time: any) => {
         if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
@@ -70,8 +73,8 @@ const VideoCardMobile = (props: any) => {
                             }}
                         />
                         <div className="mute-icon" onClick={(e) => {
-                               e.stopPropagation();
-                               setMouted(!muted); 
+                            e.stopPropagation();
+                            setMouted(!muted);
                         }}>
                             {muted === true ?
                                 <MuteVolumeIcon color="white" />
@@ -99,6 +102,14 @@ const VideoCardMobile = (props: any) => {
                         <CategoryBtn text={category} color="primary" disable={true} />
                     </div>
                 </div>
+                {goal &&
+                    <div className="process-bar">
+                        <div className="goal-bar">
+                            <div className="value-bar" style={{ width: donuts < goal ? `${width}px` : '262px' }}>
+                            </div>
+                        </div>
+                    </div>
+                }
                 {!play &&
                     <>
                         {(fanwallData && checkLock()) ?

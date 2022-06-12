@@ -22,9 +22,11 @@ const Profile = () => {
   const location = useLocation();
   const contexts = useContext(LanguageContext);
   const daremeStore = useSelector((state: any) => state.dareme);
+  const fundmeStore = useSelector((state: any) => state.fundme);
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userStore = useSelector((state: any) => state.auth);
   const daremes = daremeStore.daremes;
+  const fundmes = fundmeStore.fundmes;
   const fanwalls = fanwallState.fanwalls;
   const authuser = userStore.users[0];
   const [isSame, setIsSame] = useState(false);
@@ -103,14 +105,16 @@ const Profile = () => {
                   </p>
                 }
               </div>
-              {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUserdareme === true).length > 0 ?
+              {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0 ?
                 <div className="dare-card">
                   {
-                    daremes.filter((dareme: any) => dareme.isUserdareme === true)
+                    daremes.filter((dareme: any) => dareme.isUser === true)
                       .map((dareme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
                           <VideoCardMobile
                             donuts={dareme.donuts}
+                            goal={dareme.goal ? dareme.goal : null}
+                            reward={dareme.reward ? dareme.reward : null}
                             url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                             time={dareme.time}
                             title={dareme.title}
@@ -120,7 +124,10 @@ const Profile = () => {
                             coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                             handleSubmit={() => {
                               dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
-                              dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
+                              if (dareme.goal) {
+                                //Fundme Detail 
+                              }
+                              else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
                             }}
                           />
                           <AvatarLink
@@ -136,10 +143,10 @@ const Profile = () => {
                 </div> :
                 <div className="no-data">
                   {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
-                    <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { dispatch(daremeAction.getDraftDareme(navigate)); }}>
-                      <ContainerBtn text="Create DareMe" styleType="fill" icon={[<AddIcon color="white" />, <AddIcon color="white" />]} />
+                    <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate("/create") }}>
+                      <ContainerBtn text="Create" styleType="fill" icon={[<AddIcon color="white" />, <AddIcon color="white" />]} />
                     </div> :
-                    <span>No DareMe Yet...</span>
+                    <span>No DareMe/FundMe Yet...</span>
                   }
                 </div>
               }
@@ -153,14 +160,16 @@ const Profile = () => {
                   </p>
                 }
               </div>
-              {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUserdareme === false).length > 0 ?
+              {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0 ?
                 <div className="dare-card">
                   {
-                    daremes.filter((dareme: any) => dareme.isUserdareme === false)
+                    daremes.filter((dareme: any) => dareme.isUser === false)
                       .map((dareme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
                           <VideoCardMobile
                             donuts={dareme.donuts}
+                            goal={dareme.goal ? dareme.goal : null}
+                            reward={dareme.reward ? dareme.reward : null}
                             url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                             time={dareme.time}
                             title={dareme.title}
@@ -187,9 +196,9 @@ const Profile = () => {
                 <div className="no-data">
                   {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
                     <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate('/') }}>
-                      <ContainerBtn text="Dare a Creator" styleType="fill" icon={[<Dare2Icon color="white" />, <Dare2Icon color="white" />]} />
+                      <ContainerBtn text="Create with Creator" styleType="fill" icon={[<Dare2Icon color="white" />, <Dare2Icon color="white" />]} />
                     </div> :
-                    <span>No Dare Yet...</span>
+                    <span>No Activities Yet...</span>
                   }
                 </div>
               }

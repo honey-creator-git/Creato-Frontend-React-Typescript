@@ -57,6 +57,27 @@
             bottom: 68px;
         }
 
+        .process-bar {
+            position: absolute;
+            left: 40px;
+            bottom: 72px;
+
+            .goal-bar {
+                position: relative;
+                height: 13px;
+                width: 262px;
+                background-color: #C4C4C4;
+
+                .value-bar {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    height: 13px;
+                    background-color: #EFA058;
+                }
+            }
+        }
+
         .information {
             padding: 8px 12px 8px 12px;
             position: absolute;

@@ -99,8 +99,8 @@ export const CH = {
     PROFILE_LETTER: {
         COPY_PROFILE_LINK: '複製連結',
         CANCEL: '取消',
-        MY_DAREME: '我的DareMe',
-        OTHER_DAREME: "的DareMe",
+        MY_DAREME: '我的 DareMe & FundMe',
+        OTHER_DAREME: "的 DareMe & FundMe",
         I_DARED: '我已支持的DareMe',
         OTHER_DARED: '已支持的DareMe',
         MY_POSTS: '我的帖子',

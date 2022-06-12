@@ -14,8 +14,8 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon } from '../../../assets/svg';
+import { SET_TEASER_FILE, SET_COVER_FILE } from "../../../redux/types";
 import "../../../assets/styles/dareme/create/previewStyle.scss";
-import { SET_NEW_NOTIFICATION, SET_TEASER_FILE, SET_COVER_FILE } from "../../../redux/types";
 
 const Preview = () => {
   const dispatch = useDispatch();

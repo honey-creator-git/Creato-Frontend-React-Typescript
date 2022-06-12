@@ -38,7 +38,7 @@ const ProfileMenu = (props: any) => {
   return (
     <div style={style.profileMenu}>
       <div style={style.dareme} onClick={() => props.setViewType(0)}>
-        Dareme & Fundme
+        DareMe & FundMe
       </div>
       <div style={style.fanWall} onClick={() => props.setViewType(1)}>
         Fan Wall

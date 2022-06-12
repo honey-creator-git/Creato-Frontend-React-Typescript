@@ -12,7 +12,8 @@ import {
   SET_USER,
   SET_FANWALLS,
   SET_DAREME_DETAIL_INITIAL,
-  SET_ADMIN_OPTIONS
+  SET_ADMIN_OPTIONS,
+  SET_FUNDMES
 } from "../types";
 import * as api from "../../api";
 

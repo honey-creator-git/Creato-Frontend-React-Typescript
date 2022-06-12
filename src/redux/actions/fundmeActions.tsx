@@ -79,12 +79,12 @@ export const fundmeAction = {
     else dispatch({ type: SET_FUNDME_INITIAL });
   },
 
-  //   publishFundme: () => async (dispatch: Dispatch<any>) => {
-  //     api.publishFundme()
-  //       .then((result) => {
-  //         const { data } = result;
-  //       }).catch((err) => console.log(err));
-  //   },
+  publishFundme: () => async (dispatch: Dispatch<any>) => {
+    api.publishFundme()
+      .then((result) => {
+        const { data } = result;
+      }).catch((err) => console.log(err));
+  },
 
 
   //   //-------------------------------------

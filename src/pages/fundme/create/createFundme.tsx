@@ -391,7 +391,7 @@ const CreateFundme = () => {
                                             type="input"
                                             isNumber={true}
                                             placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
-                                            title={fundmeState.goal ? fundmeState.goal : goal}
+                                            title={fundmeState.goal ? fundmeState.goal : ""}
                                             step={1}
                                             setTitle={setGoal}
                                             setFocus={() => { }}
@@ -554,7 +554,7 @@ const CreateFundme = () => {
                                     type="input"
                                     isNumber={true}
                                     placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
-                                    title={fundmeState.goal ? fundmeState.goal : goal}
+                                    title={fundmeState.goal ? fundmeState.goal : ""}
                                     step={1}
                                     setTitle={setGoal}
                                     setFocus={() => { }}

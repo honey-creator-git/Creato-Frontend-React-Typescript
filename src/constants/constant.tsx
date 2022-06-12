@@ -17,6 +17,12 @@ const CONSTANT = {
         "New photography style in 2022? 📸",
         "Camping site for a group of beginners? 🏕️🥾"
     ],
+    FUNDME_TITLE_SUGGESTIONS: [
+        "My 1st virtual concert with you all!",
+        "A series of trekking videos to Norway",
+        "3 best audio companion for commuters 🎧",
+        "7-day strict diet challenge 🍎🥗"
+    ],
     FUNDME_REWARDS: [
         "Behind-the-scene videos 📽️",
         "Live chat session 🖥️",

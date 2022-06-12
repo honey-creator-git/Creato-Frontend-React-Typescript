@@ -12,7 +12,7 @@ import { SET_FUNDME } from "../../../redux/types";
 import { LanguageContext } from "../../../routes/authRoute";
 import "../../../assets/styles/dareme/create/daremeTitleStyle.scss";
 
-const categoris = CONSTANT.DARE_TITLE_SUGGESTIONS;
+const categoris = CONSTANT.FUNDME_TITLE_SUGGESTIONS;
 
 const FundmeTitle = () => {
   const navigate = useNavigate();
