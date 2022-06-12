@@ -7,7 +7,6 @@ import VideoCardDesktop from "../../../components/fundme/videoCardDesktop";
 import VideoCardMobile from "../../../components/fundme/videoCardMobile";
 import AvatarLink from "../../../components/fundme/avatarLink";
 import ContainerBtn from "../../../components/general/containerBtn";
-// import FundOption from "../../../components/general/fundOption";
 import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
@@ -16,7 +15,7 @@ import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, LightbulbIcon } from '../../../assets/svg';
 import "../../../assets/styles/dareme/create/previewStyle.scss";
 import "../../../assets/styles/dareme/create/createDaremeStyle.scss";
-import { SET_NEW_NOTIFICATION, SET_TEASER_FILE, SET_COVER_FILE } from "../../../redux/types";
+import { SET_TEASER_FILE1, SET_COVER_FILE1 } from "../../../redux/types";
 // import Input from "../../../components/general/input";
 
 const FundmePreview = () => {
@@ -30,23 +29,16 @@ const FundmePreview = () => {
   const [openCopyLink, setOpenCopyLink] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const user = userState.user;
-  const [options, setOptions] = useState<Array<any>>([]);
-
-
-
   const [openHint, setOpenHint] = useState<boolean>(false);
   const [openSubHint, setOpenSubHint] = useState<boolean>(false);
   // const [goal, setGoal] = useState("");
   const handleSubHintClick = () => {
     setOpenSubHint(true);
     setOpenHint(false);
-}
-
-
-
+  }
 
   const SaveFundInfo = () => {
-    dispatch(fundmeAction.publishFundme());
+    // dispatch(fundmeAction.publishFundme());
     setOpenCopyLink(true);
   };
 
@@ -61,35 +53,15 @@ const FundmePreview = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const tempOptions = [
-      {
-        voters: 0,
-        donuts: 0,
-        option: fundState.options[0] ? fundState.options[0].option.title : '',
-        // owner: user.name,
-        canVote: true,
-      },
-      {
-        voters: 0,
-        donuts: 0,
-        option: fundState.options[1] ? fundState.options[1].option.title : '',
-        // owner: user.name,
-        canVote: true,
-      },
-    ];
-    setOptions(tempOptions);
-  }, [fundState.options]);
-
   return (
     <>
       <div className="title-header">
         <Title
-          title="Preview"
+          title="Preview Fundme"
           back={() => {
-            dispatch({ type: SET_TEASER_FILE, payload: null });
-            dispatch({ type: SET_COVER_FILE, payload: null });
-            navigate("/fundme/create/rewards");
+            dispatch({ type: SET_TEASER_FILE1, payload: null });
+            dispatch({ type: SET_COVER_FILE1, payload: null });
+            navigate("/fundme/create");
           }}
         />
       </div>
@@ -124,7 +96,7 @@ const FundmePreview = () => {
             handleClick: () => {
               navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundState._id}`);
               setIsCopied(true);
-              dispatch({ type: SET_COVER_FILE, payload: null });
+              dispatch({ type: SET_COVER_FILE1, payload: null });
             }
           }
         ]}
@@ -134,7 +106,7 @@ const FundmePreview = () => {
         shareType={"create"}
         fundmeTitle={fundState.title}
         fundmeId={fundState._id}
-        // ownerName={user.name}
+      // ownerName={user.name}
       />
       <div className="preview-wrapper">
         <div className="preview-desktop-videoCardDesktop">
@@ -147,7 +119,9 @@ const FundmePreview = () => {
             // username={user.name}
             avatar={user.avatar}
             ownerId={user.id}
-            handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+            handleAvatar={() => { 
+              // dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); 
+            }}
             fundmeId={fundState._id}
           />
         </div>
@@ -184,7 +158,9 @@ const FundmePreview = () => {
               // username={user.name}
               avatar={user.avatar}
               ownerId={user.id}
-              handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+              handleAvatar={() => { 
+                // dispatch(fundmeAction.getFundmesByPersonalisedUrl(user.personalisedUrl, navigate)); 
+              }}
             />
           </div>
           <div className="dare-creator">
@@ -238,8 +214,8 @@ const FundmePreview = () => {
                   />
               </div>
           </div> */}
-          
-          
+
+
           <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setOpenPublishDlg(true) }}>
             <ContainerBtn text='Publish' styleType="fill" />
           </div>

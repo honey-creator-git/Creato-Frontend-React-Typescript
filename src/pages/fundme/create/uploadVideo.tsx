@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import { SET_TEASER_FILE, SET_COVER_FILE, SET_FUNDME } from "../../../redux/types";
+import { SET_TEASER_FILE1, SET_COVER_FILE1, SET_FUNDME } from "../../../redux/types";
 import CONSTANT from "../../../constants/constant";
 import Title from "../../../components/general/title";
 import Hint from "../../../components/general/hint";
@@ -27,7 +27,6 @@ const UploadVideo = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const selectCover = () => { navigate('/fundme/create/teaser/cover') }
-  // const rewards = () => {navigate('/fundme/create/rewards')}
 
   const handleUploadVideo = (e: any) => {
     const { files } = e.target;
@@ -42,7 +41,7 @@ const UploadVideo = () => {
           const type = size >= 0.65;
           const state = { ...fundmeState, sizeType: type };
           dispatch({ type: SET_FUNDME, payload: state });//SET_fundME -> SET_FUNDME
-          dispatch({ type: SET_TEASER_FILE, payload: loadFile });
+          dispatch({ type: SET_TEASER_FILE1, payload: loadFile });
         }
         video.src = URL.createObjectURL(loadFile);
       } else alert("The file size is over 30M");
@@ -63,13 +62,13 @@ const UploadVideo = () => {
         .then(blob => {
           const file = new File([blob], 'dot.png', blob);
           const imageFile = Object.assign(file, { preview: url });
-          dispatch({ type: SET_COVER_FILE, payload: imageFile });
+          dispatch({ type: SET_COVER_FILE1, payload: imageFile });
           if (type === 0) setOpen(true);
-          else navigate('/fundme/create/rewards')
+          else navigate('/fundme/create')
         });
     } else {
       if (type === 0) setOpen(true);
-       else navigate('/fundme/create/rewards')
+      else navigate('/fundme/create')
     }
   }
 
@@ -127,8 +126,8 @@ const UploadVideo = () => {
               <div
                 className="delete-icon"
                 onClick={() => {
-                  dispatch({ type: SET_TEASER_FILE, payload: null });
-                  dispatch({ type: SET_COVER_FILE, payload: null });
+                  dispatch({ type: SET_TEASER_FILE1, payload: null });
+                  dispatch({ type: SET_COVER_FILE1, payload: null });
                   const state = { ...fundmeState, sizeType: null, teaser: null, cover: null };
                   dispatch({ type: SET_FUNDME, payload: state });//
                 }}

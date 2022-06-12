@@ -8,7 +8,9 @@ const INITIAL_STATE: any = {
         category: null,
         teaser: null,
         cover: null,
-        options: [],
+        goal: null,
+        reward: null,
+        rewardText: null,
         published: null,
         sizeType: null,
         coverIndex: -1
@@ -16,10 +18,8 @@ const INITIAL_STATE: any = {
     teaserFile: null,
     teaserSizeType: null,
     coverFile: null,
-    option: null,
     category: null,
     title: null,
-    options: [],
     fundmes: []
 }
 
@@ -36,7 +36,9 @@ const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
                     deadline: null,
                     category: null,
                     teaser: null,
-                    options: [],
+                    goal: null,
+                    reward: null,
+                    rewardText: null,
                     published: false,
                     cover: null,
                     sizeType: null,
@@ -45,50 +47,31 @@ const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
                 teaserFile: null,
                 teaserSizeType: null,
                 coverFile: null,
-                option: null,
                 category: null,
                 title: null,
-                options: [],
                 fundmes: []
             };
-        case actionTypes.SET_FUNDME_DETAIL_INITIAL: 
-            state.fundme = {
-                owner: null,
-                title: null,
-                deadline: null,
-                category: null,
-                teaser: null,
-                options: [],
-                published: false,
-                cover: null,
-                sizeType: null,
-                coverIndex: -1
-            };
-            return { ...state };
         case actionTypes.SET_FUNDMES:
             state.fundmes = payload;
             return { ...state };
-        case actionTypes.SET_OPTION:
-            state.option = payload;
-            return { ...state };
-        case actionTypes.SET_TEASER_FILE:
+        case actionTypes.SET_TEASER_FILE1:
             state.teaserFile = payload;
             return { ...state };
-        case actionTypes.SET_COVER_FILE:
+        case actionTypes.SET_COVER_FILE1:
             state.coverFile = payload;
             return { ...state };
-        case actionTypes.SET_ADMIN_TITLE:
-            state.title = payload;
-            return { ...state };
-        case actionTypes.SET_ADMIN_CATEGORY:
-            state.category = payload;
-            return { ...state };
-        case actionTypes.SET_ADMIN_OPTIONS:
-            state.options = payload;
-            return { ...state };
-        case actionTypes.SET_ADMIN_TEASER_SIZE_TYPE:
-            state.teaserSizeType = payload;
-            return { ...state };
+        // case actionTypes.SET_ADMIN_TITLE:
+        //     state.title = payload;
+        //     return { ...state };
+        // case actionTypes.SET_ADMIN_CATEGORY:
+        //     state.category = payload;
+        //     return { ...state };
+        // case actionTypes.SET_ADMIN_OPTIONS:
+        //     state.options = payload;
+        //     return { ...state };
+        // case actionTypes.SET_ADMIN_TEASER_SIZE_TYPE:
+        //     state.teaserSizeType = payload;
+        //     return { ...state };
         default:
             return state;
     }

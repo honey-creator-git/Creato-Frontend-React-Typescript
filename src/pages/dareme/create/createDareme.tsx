@@ -122,7 +122,7 @@ const CreateDareme = () => {
         const file = new File([blob], 'dot.png', blob);
         const imageFile = Object.assign(file, { preview: url });
         dispatch({ type: SET_COVER_FILE, payload: imageFile });
-        if (type === 0) dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, `/${user.personalisedUrl}`));
+        if (type === 0) dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, prevRoute));
         else dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, imageFile, navigate, "/dareme/preview"));
       });
   }
@@ -151,8 +151,7 @@ const CreateDareme = () => {
             && daremeState.category === null
             && daremeState.title === null
             && (daremeState.options.length === 0 || (daremeState.options.length > 0 && daremeState.options[0].option.title === null && daremeState.options[1].option.title === null)))
-            // navigate(`/${user.personalisedUrl}`);
-            navigate(prevRoute)
+            navigate(prevRoute);
           else setOpen(true);
         }} hint={() => { setOpenHint(true); }} erase={() => { setOpenErase(true); }} />
       </div>
@@ -179,7 +178,7 @@ const CreateDareme = () => {
               text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
               handleClick: () => {
                 setOpen(false);
-                if (daremeStore.coverFile === null) getFirstFrame(0);
+                if (daremeStore.coverFile === null && daremeState.cover === null) getFirstFrame(0);
                 else dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, prevRoute));
               }
             }

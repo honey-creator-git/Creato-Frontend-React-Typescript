@@ -7,15 +7,14 @@ import Title from "../../../components/general/title";
 import Button from "../../../components/general/button";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
-// import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
+import Input from "../../../components/general/input";
 import CONSTANT from "../../../constants/constant";
 import Hint from "../../../components/general/hint";
-import { SET_COVER_FILE, SET_FUNDME, SET_DIALOG_STATE, SET_TEASER_FILE } from "../../../redux/types";
+import { SET_COVER_FILE1, SET_FUNDME, SET_DIALOG_STATE, SET_TEASER_FILE1 } from "../../../redux/types";
 import { LanguageContext } from "../../../routes/authRoute";
-import { AddIcon, EditIcon, PlayIcon, CreatoCoinIcon, LightbulbIcon } from "../../../assets/svg";
+import { AddIcon, EditIcon, PlayIcon, CreatoCoinIcon, LightbulbIcon, RewardIcon } from "../../../assets/svg";
 import "../../../assets/styles/fundme/create/createFundmeStyle.scss";
-import Input from "../../../components/general/input";
 
 const useWindowSize = () => {
     const [size, setSize] = useState(0);
@@ -45,8 +44,8 @@ const CreateFundme = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [openHint, setOpenHint] = useState<boolean>(false);
     const [openSubHint, setOpenSubHint] = useState<boolean>(false);
-    const [goal, setGoal] = useState("");
-    const [deadline, setDeadline] = useState(0);
+    const [goal, setGoal] = useState(fundmeState.goal ? fundmeState.goal : "");
+    const [deadline, setDeadline] = useState(3);
     const [category, setCategory] = useState(0);
     const [openDeadlineMenu, setOpenDeadlineMenu] = useState<boolean>(false);
     const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
@@ -84,7 +83,7 @@ const CreateFundme = () => {
                     const type = size >= 0.65;
                     const state = { ...fundmeState, sizeType: type };
                     dispatch({ type: SET_FUNDME, payload: state });
-                    dispatch({ type: SET_TEASER_FILE, payload: loadFile });
+                    dispatch({ type: SET_TEASER_FILE1, payload: loadFile });
                 }
                 video.src = URL.createObjectURL(loadFile);
             } else alert("The file size is over 35M");
@@ -92,15 +91,12 @@ const CreateFundme = () => {
     };
 
     const Preview = () => {
+        if (fundmeState.reward === null || fundmeState.rewardText === null) return false;
         if (fundmeState.title === null) return false;
         if (fundmeState.deadline === null) return false;
         if (fundmeState.category === null) return false;
         if (fundmeState.teaser === null && fundmeStore.teaserFile === null) return false;
-        // if (!fundmeState.options.length) return false;
-        // else {
-        //     if (fundmeState.options[0].option.title === undefined || fundmeState.options[0].option.title === "") return false;
-        //     if (fundmeState.options[1].option.title === undefined || fundmeState.options[1].option.title === "") return false;
-        // }
+        if (fundmeState.goal === null) return false;
         return true;
     };
 
@@ -117,7 +113,7 @@ const CreateFundme = () => {
             .then(blob => {
                 const file = new File([blob], 'dot.png', blob);
                 const imageFile = Object.assign(file, { preview: url });
-                dispatch({ type: SET_COVER_FILE, payload: imageFile });
+                dispatch({ type: SET_COVER_FILE1, payload: imageFile });
                 if (type === 0) dispatch(fundmeAction.saveFundme(fundmeState, fundmeStore.teaserFile, fundmeStore.coverFile, navigate, `/${user.personalisedUrl}`));
                 else dispatch(fundmeAction.saveFundme(fundmeState, fundmeStore.teaserFile, imageFile, navigate, "/fundme/preview"));
             });
@@ -133,6 +129,11 @@ const CreateFundme = () => {
         }
     }, [dlgState]);
 
+    useEffect(() => {
+        const state = { ...fundmeState, goal: goal !== "" ? parseInt(goal) : null };
+        dispatch({ type: SET_FUNDME, payload: state });
+    }, [goal]);
+
     return (
         <>
             <div className="title-header">
@@ -144,7 +145,10 @@ const CreateFundme = () => {
                         && (fundmeState.options.length === 0 || (fundmeState.options.length > 0 && fundmeState.options[0].option.title === null && fundmeState.options[1].option.title === null)))
                         navigate(`/${user.personalisedUrl}`);
                     else setOpen(true);
-                }} hint={handleHintClick} erase={() => { setOpenErase(true); }} />
+                }}
+                    hint={handleHintClick}
+                    erase={() => { setOpenErase(true); }}
+                />
             </div>
             <div className="create-fundme-wrapper" onClick={() => {
                 setOpenCategoryMenu(false);
@@ -276,41 +280,43 @@ const CreateFundme = () => {
                             </div>
                             <div className="options">
                                 <div className="deadline">
-                                    {fundmeState.deadline ? (
-                                        <div style={{ width: 'fit-content' }} onClick={(e) => {
+                                    <div className="deadline_reward" >
+                                        <div style={{ width: 'fit-content', }} onClick={(e) => {
                                             e.stopPropagation();
                                             setOpenDeadlineMenu(!openDeadlineMenu);
                                             setOpenCategoryMenu(false);
                                         }}>
-                                            <Button
-                                                text={contexts.FUNDME_DEADLINE_LIST[fundmeState.deadline - 1]}
-                                                icon={[<EditIcon color="white" />, <EditIcon color="white" />, <EditIcon color="white" />]}
-                                                fillStyle="outline"
-                                                bgColor="#059669"
-                                            />
+                                            {fundmeState.deadline ?
+                                                <Button
+                                                    text={contexts.FUNDME_DEADLINE_LIST[fundmeState.deadline - 3]}
+                                                    icon={[<EditIcon color="white" />, <EditIcon color="white" />, <EditIcon color="white" />]}
+                                                    fillStyle="outline"
+                                                    bgColor="#059669"
+                                                />
+                                                :
+                                                <Button
+                                                    shape="pill"
+                                                    color="primary"
+                                                    text={contexts.CREATE_FUNDME_LETTER.PERIOD}
+                                                    icon={[<AddIcon color="#EFA058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
+                                                    fillStyle="outline"
+                                                />
+                                            }
                                         </div>
-                                    ) : (
-                                        <div style={{ width: 'fit-content' }} onClick={(e) => {
-                                            e.stopPropagation();
-                                            setOpenDeadlineMenu(!openDeadlineMenu);
-                                            setOpenCategoryMenu(false);
-                                        }}>
-                                            <Button
-                                                shape="pill"
-                                                color="primary"
-                                                text={contexts.CREATE_FUNDME_LETTER.PERIOD}
-                                                icon={[<AddIcon color="#EFA058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
-                                                fillStyle="outline"
-                                            />
+                                        <div className="reward-btn"
+                                            style={(fundmeState.reward !== null && fundmeState.rewardText !== null) ? { backgroundColor: '#EFA058' } : { backgroundColor: '#E1E0DF' }}
+                                            onClick={() => { navigate('/fundme/create/rewards') }}
+                                        >
+                                            <RewardIcon color="white" width="25" height="25" />
                                         </div>
-                                    )}
+                                    </div>
                                     <div className="drop-down-lists" style={{ height: `${deadlineDropDownMenuheight}px`, zIndex: "10" }}>
                                         {contexts.FUNDME_DEADLINE_LIST.map((day: any, i: any) => (
                                             <div
                                                 className="list"
                                                 key={i}
                                                 onClick={() => {
-                                                    const state = { ...fundmeState, deadline: i + 1 };
+                                                    const state = { ...fundmeState, deadline: i + 3 };
                                                     dispatch({ type: SET_FUNDME, payload: state });
                                                     setOpenDeadlineMenu(!openDeadlineMenu);
                                                 }}
@@ -375,7 +381,7 @@ const CreateFundme = () => {
                                             <CreatoCoinIcon color="#EFA058" />
                                             <span>{contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL}</span>
                                         </div>
-                                        {/* <div onClick={handleSubHintClick}><LightbulbIcon color="#10B981" /></div> */}
+                                        <div onClick={handleSubHintClick}><LightbulbIcon color="#10B981" /></div>
                                     </div>
                                     <div className="goal-letter">
                                         <span>{contexts.CREATE_FUNDME_LETTER.GOAL_LETTER}</span>
@@ -385,7 +391,7 @@ const CreateFundme = () => {
                                             type="input"
                                             isNumber={true}
                                             placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
-                                            title={goal}
+                                            title={fundmeState.goal ? fundmeState.goal : goal}
                                             step={1}
                                             setTitle={setGoal}
                                             setFocus={() => { }}
@@ -400,7 +406,7 @@ const CreateFundme = () => {
                                             else dispatch(fundmeAction.saveFundme(fundmeState, fundmeStore.teaserFile, fundmeStore.coverFile, navigate, "/fundme/preview"));
                                         }
                                     }}
-                                    >
+                                >
                                     <ContainerBtn text={contexts.CREATE_FUNDME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
                                 </div>
                             </div>
@@ -446,32 +452,40 @@ const CreateFundme = () => {
                                 </div>
                             }
                             <div className="deadline">
-                                {fundmeState.deadline ? (
-                                    <Button
-                                        handleSubmit={handledeadlineDlgOpen}
-                                        text={contexts.FUNDME_DEADLINE_LIST[fundmeState.deadline - 1]}
-                                        icon={[
-                                            <EditIcon color="white" />,
-                                            <EditIcon color="white" />,
-                                            <EditIcon color="white" />,
-                                        ]}
-                                        fillStyle="outline"
-                                        bgColor="#059669"
-                                    />
-                                ) : (
-                                    <Button
-                                        handleSubmit={handledeadlineDlgOpen}
-                                        shape="pill"
-                                        color="primary"
-                                        text={contexts.CREATE_FUNDME_LETTER.PERIOD}
-                                        icon={[
-                                            <AddIcon color="#EFA058" />,
-                                            <AddIcon color="white" />,
-                                            <AddIcon color="white" />,
-                                        ]}
-                                        fillStyle="outline"
-                                    />
-                                )}
+                                <div>
+                                    {fundmeState.deadline ? (
+                                        <Button
+                                            handleSubmit={handledeadlineDlgOpen}
+                                            text={contexts.FUNDME_DEADLINE_LIST[fundmeState.deadline - 3]}
+                                            icon={[
+                                                <EditIcon color="white" />,
+                                                <EditIcon color="white" />,
+                                                <EditIcon color="white" />,
+                                            ]}
+                                            fillStyle="outline"
+                                            bgColor="#059669"
+                                        />
+                                    ) : (
+                                        <Button
+                                            handleSubmit={handledeadlineDlgOpen}
+                                            shape="pill"
+                                            color="primary"
+                                            text={contexts.CREATE_FUNDME_LETTER.PERIOD}
+                                            icon={[
+                                                <AddIcon color="#EFA058" />,
+                                                <AddIcon color="white" />,
+                                                <AddIcon color="white" />,
+                                            ]}
+                                            fillStyle="outline"
+                                        />
+                                    )}
+                                </div>
+                                <div className="reward-btn"
+                                    style={(fundmeState.reward !== null && fundmeState.rewardText !== null) ? { backgroundColor: '#EFA058' } : { backgroundColor: '#E1E0DF' }}
+                                    onClick={() => { navigate('/fundme/create/rewards') }}
+                                >
+                                    <RewardIcon color="white" width="25" height="25" />
+                                </div>
                             </div>
                             <div className="fundme-title">
                                 {fundmeState.title ? (
@@ -520,80 +534,32 @@ const CreateFundme = () => {
                                         styleType="outline"
                                     />
                                 ) : (
-                                    <ContainerBtn text={contexts.CREATE_FUNDME_LETTER. TEASER_VIDEO_UPLOADED} styleType="outline" />
+                                    <ContainerBtn text={contexts.CREATE_FUNDME_LETTER.UPLOAD_TEASER_VIDEO} styleType="outline" />
                                 )}
                             </div>
                         </div>
-                        <div className="dare-options">
-                            {/* <div
-                                className="dare-option"
-                                onClick={() => navigate("/fundme/create/options")}
-                            >
-                                <DareOption
-                                    leading={false}
-                                    canVote={
-                                        daremeState.options[0]?.option.title === undefined ||
-                                            daremeState.options[0]?.option.title === ""
-                                            ? false
-                                            : true
-                                    }
-                                    disabled={false}
-                                    donuts={0}
-                                    dareTitle={
-                                        daremeState.options[0] === undefined || daremeState.options[0].option.title === ''
-                                            ? `${contexts.CREATE_FUNDME_LETTER.FIRST_DARE_OPTION}`
-                                            : daremeState.options[0]?.option.title
-                                    }
-                                    username={user ? user.name : ''}
-                                    handleSubmit={() => { }}
-                                />
-                            </div> */}
-                            {/* <div
-                                className="dare-option"
-                                onClick={() => navigate("/fundme/create/options")}
-                            >
-                                <DareOption
-                                    leading={false}
-                                    canVote={
-                                        daremeState.options[1]?.option.title === undefined ||
-                                            daremeState.options[1]?.option.title === ""
-                                            ? false
-                                            : true
-                                    }
-                                    disabled={false}
-                                    donuts={0}
-                                    dareTitle={
-                                        daremeState.options[1] === undefined || daremeState.options[1].option.title === ''
-                                            ? `${contexts.CREATE_FUNDME_LETTER.SECOND_DARE_OPTION}`
-                                            : daremeState.options[1]?.option.title
-                                    }
-                                    username={user ? user.name : ''}
-                                    handleSubmit={() => { }}
-                                />
-                            </div> */}
-                                <div className="funding-goal" style={{marginTop:'30px'}}>
-                                    <div className="header">
-                                        <div className="title">
-                                            <CreatoCoinIcon color="#EFA058" />
-                                            <span>{contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL}</span>
-                                        </div>
-                                        {/* <div onClick={handleSubHintClick}><LightbulbIcon color="#10B981" /></div> */}
-                                    </div>
-                                    <div className="goal-letter" style={{marginTop:'10px'}}>
-                                        <span>{contexts.CREATE_FUNDME_LETTER.GOAL_LETTER}</span>
-                                    </div>
-                                    <div className="goal-input" style={{marginTop:'15px'}}>
-                                        <Input
-                                            type="input"
-                                            isNumber={true}
-                                            placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
-                                            title={goal}
-                                            step={1}
-                                            setTitle={setGoal}
-                                            setFocus={() => { }}
-                                        />
-                                    </div>
+                        <div className="funding-goal">
+                            <div className="header">
+                                <div className="title">
+                                    <CreatoCoinIcon color="#EFA058" />
+                                    <span>{contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL}</span>
                                 </div>
+                                <div onClick={handleSubHintClick}><LightbulbIcon color="#10B981" /></div>
+                            </div>
+                            <div className="goal-letter" style={{ marginTop: '10px' }}>
+                                <span>{contexts.CREATE_FUNDME_LETTER.GOAL_LETTER}</span>
+                            </div>
+                            <div className="goal-input" style={{ marginTop: '15px' }}>
+                                <Input
+                                    type="input"
+                                    isNumber={true}
+                                    placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
+                                    title={fundmeState.goal ? fundmeState.goal : goal}
+                                    step={1}
+                                    setTitle={setGoal}
+                                    setFocus={() => { }}
+                                />
+                            </div>
                         </div>
                         <div
                             className="prev-btn"
@@ -624,7 +590,7 @@ const CreateFundme = () => {
                     </div>
                     <div className="lists">
                         {contexts.FUNDME_DEADLINE_LIST.map((day: any, i: any) => (
-                            <div key={i} className="list" onClick={() => setDeadline(i + 1)}>
+                            <div key={i} className="list" onClick={() => setDeadline(i + 3)}>
                                 {day}
                             </div>
                         ))}
@@ -654,8 +620,7 @@ const CreateFundme = () => {
                 <div
                     className="transparent-dlg"
                     style={{
-                        display: `${(titleDlgOpen || openCategoryDlg) === true ? "block" : "none"
-                            }`,
+                        display: `${(titleDlgOpen || openCategoryDlg) === true ? "block" : "none"}`,
                     }}
                 ></div>
             </div>

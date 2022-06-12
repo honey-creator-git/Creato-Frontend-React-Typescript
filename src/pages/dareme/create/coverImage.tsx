@@ -73,7 +73,10 @@ const CoverImage = () => {
     }, []);
 
     useEffect(() => {
-        if (thumbNumber > 0) playerRef.current?.seekTo(0);
+        if (thumbNumber > 0) {
+            dispatch({ type: SET_LOADING_TRUE });
+            playerRef.current?.seekTo(0);
+        }
     }, [thumbNumber]);
 
     useEffect(() => {

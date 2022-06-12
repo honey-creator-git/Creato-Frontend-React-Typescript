@@ -38,10 +38,10 @@ const AuthRoute = (props: routeProps) => {
             // setContexts(user.language === 'EN' ? EN : CH);
             socket.emit('connected', user.email, user.role);
             socket.on("wallet_change", (donuts: any) => walletChange(donuts));
-            socket.on("create_notification", () => {
-                dispatch(notificationAction.getNotification())
-            });
-            dispatch(notificationAction.getNotification());
+            // socket.on("create_notification", () => {
+            //     dispatch(notificationAction.getNotification())
+            // });
+            // dispatch(notificationAction.getNotification());
         }
     }, [user]);
 

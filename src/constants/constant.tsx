@@ -18,11 +18,11 @@ const CONSTANT = {
         "Camping site for a group of beginners? 🏕️🥾"
     ],
     FUNDME_REWARDS: [
-        "Behind-the-scene videos",
-        "Live chat session",
-        "Photos I have not released before",
-        "Private Thank-you message",
-        "Limited edition T-shirt"
+        "Behind-the-scene videos 📽️",
+        "Live chat session 🖥️",
+        "Photos I have not released before 📷",
+        "Private Thank-you message 📥",
+        "Limited edition T-shirt 👕👚"
     ],
     DARE_OPTION_SUGGESTIONS: [
         "Cooking a 3-course meal for two! 🍽️👩🏼‍🍳",

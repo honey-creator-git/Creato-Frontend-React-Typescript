@@ -1,6 +1,5 @@
 .hint-wrapper {
   position: fixed;
-  top: 120px;
   width: 336px;
   min-height: 229px;
   display: flex;
@@ -9,10 +8,6 @@
   border-radius: 5px;
   z-index: 20;
   transition: 0.3s;
-
-  @media (min-width: 700px) {
-    top: 72px;
-  }
 
   .hint {
     width: 330px;

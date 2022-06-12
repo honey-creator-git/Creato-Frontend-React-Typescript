@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../../assets/styles/inputStyle.scss";
 
 const Input = (props: any) => {
-  const { type, label, wordCount, placeholder, title, setTitle, setFocus, isNumber, isUrl, step } = props;
+  const { type, label, wordCount, placeholder, title, setTitle, setFocus, isNumber, isUrl, step, maxnum, minnum, width } = props;
   const [words, setWords] = useState<Number>(0);
 
   const isCharacterAndNumber = (url: any) => {
@@ -27,9 +27,14 @@ const Input = (props: any) => {
       let value = e.target.value;
       if (isNumber) {
         let first: number = Number(value);
-        let second: any = Number(value).toFixed(1)
+        let second: any = Number(value).toFixed(1);
         let diff = Math.abs(first - second);
         if (diff < 0.1 && diff > 0.0) value = Number(value).toFixed(1);
+        if (minnum !== undefined && maxnum !== undefined) {
+          value = parseInt(value);
+          if (value < minnum) value = minnum;
+          if (value > maxnum) value = maxnum;
+        }
       }
       setTitle(value);
     }
@@ -40,7 +45,7 @@ const Input = (props: any) => {
   }, [title]);
 
   return (
-    <div className="input-wrapper">
+    <div className="input-wrapper" style={{ width: width ? `${width}px` : '320px' }}>
       <div className="input">
         <div className="label">{label}</div>
         <div
@@ -57,6 +62,7 @@ const Input = (props: any) => {
                 onFocus={setFocus}
               /> :
               <input
+                style={{ width: width ? `${width - 32}px` : '288px' }}
                 type={isNumber ? "number" : "text"}
                 placeholder={placeholder}
                 maxLength={wordCount}

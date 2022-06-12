@@ -1,12 +1,29 @@
+import { useLayoutEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { CloseIcon, LightbulbIcon } from "../../assets/svg";
 import "../../assets/styles/hintStyle.scss";
 
-const Hint = (props: any) => {
-  const { color, context, title, open, exit } = props;
+const useWindowSize = () => {
+  const [size, setSize] = useState(0);
+  useLayoutEffect(() => {
+    function updateSize() { setSize(window.innerWidth) }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
 
+const Hint = (props: any) => {
+  const size = useWindowSize();
+  const user = useSelector((state: any) => state.auth.user);
+  const { color, context, title, open, exit } = props;
+  const addingVal = (user && user.role === "ADMIN") ? 55 : 0;
+  const height = size >= 880 ? 72 : 120 + addingVal;
   const Style = {
     right: open === true ? "0px" : "-336px",
     backgroundColor: color,
+    top: `${height}px`,
   };
 
   return (

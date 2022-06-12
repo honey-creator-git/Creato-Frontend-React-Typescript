@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { LanguageContext } from '../routes/authRoute';
 import { daremeAction } from '../redux/actions/daremeActions';
+import { fundmeAction } from '../redux/actions/fundmeActions';
 import Title from '../components/general/title';
 import Dialog from '../components/general/dialog';
 import { CreatoCoinIcon, LightbulbIcon, SpreadIcon } from '../assets/svg';
@@ -18,9 +19,9 @@ const Create = () => {
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
     const gotoDareMe = () => { dispatch(daremeAction.getDraftDareme(navigate)) }
-    const gotoFundMe = () => {
-        setOpenLinkSocial(true);
-        navigate("/fundme/create");
+    const gotoFundMe = () => { 
+        // setOpenLinkSocial(true);
+        dispatch(fundmeAction.getDraftFundme(navigate));
     }
 
     return (

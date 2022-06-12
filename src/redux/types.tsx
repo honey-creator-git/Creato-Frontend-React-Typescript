@@ -15,6 +15,8 @@ export const SET_FUNDME = 'SET_FUNDME';
 export const SET_OPTION = 'SET_OPTION';
 export const SET_TEASER_FILE = "SET_TEASER_FILE";
 export const SET_COVER_FILE = "SET_COVER_FILE";
+export const SET_TEASER_FILE1 = "SET_TEASER_FILE1";
+export const SET_COVER_FILE1 = "SET_COVER_FILE1";
 
 export const SET_USER = 'SET_USER';
 export const SET_NAME_EXIST = 'SET_NAME_EXIST';

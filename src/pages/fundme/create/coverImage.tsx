@@ -6,7 +6,7 @@ import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_COVER_FILE, SET_FUNDME } from "../../../redux/types";
+import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_COVER_FILE1, SET_FUNDME } from "../../../redux/types";
 import CONSTANT from "../../../constants/constant";
 import "../../../assets/styles/dareme/create/coverImageStyle.scss";
 
@@ -73,7 +73,10 @@ const FundCoverImage = () => {
     }, []);
 
     useEffect(() => {
-        if (thumbNumber > 0) playerRef.current?.seekTo(0);
+        if (thumbNumber > 0) {
+            dispatch({ type: SET_LOADING_TRUE });
+            playerRef.current?.seekTo(0);
+        }
     }, [thumbNumber]);
 
     useEffect(() => {
@@ -123,7 +126,7 @@ const FundCoverImage = () => {
                                                 const imageFile = Object.assign(file, { preview: thumbnails[seletedIndex] });
                                                 const state = { ...fundmeState, coverIndex: seletedIndex, cover: null };
                                                 dispatch({ type: SET_FUNDME, payload: state });
-                                                dispatch({ type: SET_COVER_FILE, payload: imageFile });
+                                                dispatch({ type: SET_COVER_FILE1, payload: imageFile });
                                                 navigate(url);
                                             });
                                     } else navigate(url);
@@ -177,7 +180,7 @@ const FundCoverImage = () => {
                                     const imageFile = Object.assign(file, { preview: thumbnails[seletedIndex] });
                                     const state = { ...fundmeState, coverIndex: seletedIndex, cover: null };
                                     dispatch({ type: SET_FUNDME, payload: state });
-                                    dispatch({ type: SET_COVER_FILE, payload: imageFile });
+                                    dispatch({ type: SET_COVER_FILE1, payload: imageFile });
                                     navigate(url);
                                 });
                         } else navigate(url);

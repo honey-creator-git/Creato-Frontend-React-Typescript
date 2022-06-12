@@ -1,102 +1,90 @@
 .dareme-title-wrapper {
-    width: 100%;
-    margin: auto;
-    max-width: 340px;
-    position: relative;
-  
-    .title-input {
-      margin-top: 50px;
-      display: flex;
-      justify-content: center;
-  
-      input {
-        font-style: italic;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 20px;
-        color: #54504e;
-        border: none;
-        width: 290px;
-        width: 320px;
-        height: 48px;
-      }
-  
-      input:focus {
-        outline: none;
-      }
+  width: 100%;
+  margin: auto;
+  max-width: 340px;
+  position: relative;
+
+  .headerSet {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    line-height: 24px;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    font-family: 'Lato';
+    font-weight: 800;
+    color: #EFA058;
+    font-style: normal;
+  }
+
+  .donuts-number {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #000000;
+  }
+
+  .audience-letter {
+    padding: 5px;
+    margin-top: 15px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.005em;
+    color: #696462;
+  }
+
+  .title-input {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    input {
+      font-style: italic;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #54504e;
+      border: none;
+      width: 290px;
+      width: 320px;
+      height: 48px;
     }
-  
-    .categories {
-      margin-top: 38px;
-      display: flex;
-      justify-content: center;
-  
-      .title {
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 20px;
-        color: #54504e;
-      }
-  
-      .category {
-        margin-top: 16px;
-        width: fit-content;
-      }
-    }
-    .headerSet {
-        position: relative;
-        top: 20%;
-        line-height: 24px;
-        font-size: 20px;
-        letter-spacing: 0.02em;
-        font-family: 'Lato';
-        font-weight: 800;
-        color: #EFA058;
-        font-style: normal;
-        width: 293px;
-        height: 24px;   
-      }
-      .donuts-number-panel {
 
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
-        gap: 12px;
-
-        width: 349px;
-        height: 497px;
-        overflow-x: scroll;
-
-
-        background: #FFFFFF;
-        border-radius: 5px;
-
-
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-    }
-      .donuts-number {
-        // font-family: 'Lato';
-        // font-style: normal;
-        // font-weight: 400;
-        // font-size: 16px;
-        // line-height: 20px;
-        /* Auto layout */
-
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
-        gap: 12px;
-        background: #FFFFFF;
-        border-radius: 5px;
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-      }
-    .save-btn {
-      margin-top: 30px;
+    input:focus {
+      outline: none;
     }
   }
+
+  .categories {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+    .title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 20px;
+      color: #54504e;
+    }
+
+    .category {
+      margin-top: 16px;
+      width: fit-content;
+    }
+  }
+
+  .save-btn {
+    margin-top: 30px;
+  }
+}
