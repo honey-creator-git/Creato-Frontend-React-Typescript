@@ -21,6 +21,7 @@ import FundCoverImage from '../pages/fundme/create/coverImage';
 import FundCreator from '../pages/fundme/fund/fundCreator';
 import FundmeDetails from '../pages/fundme/fund/fundmeDetails';
 import FundmeRewards from '../pages/fundme/create/rewards';
+import FundmeVoters from '../pages/fundme/fund/fundmeVoters';
 
 import Profile from '../pages/profile/profile';
 import ProfileEdit from '../pages/profile/edit/profileEdit';
@@ -79,10 +80,10 @@ const AppRoutes = () => {
             <Route path="fundme/create/teaser/cover" element={<AuthRoute child={<FundCoverImage />} routeType="private" />} />
             <Route path="fundme/create/rewards" element={<AuthRoute child={<FundmeRewards />} routeType="private" />} />
             <Route path="fundme/preview" element={<AuthRoute child={<FundmePreview />} routeType="private" />} />
-            <Route path="fundme/details/:daremeId" element={<AuthRoute child={<FundmeDetails />} />} />
-            <Route path="fundme/fund/:daremeId" element={<AuthRoute child={<FundCreator />} routeType="private" />} />
             <Route path="fundme/create/teaser" element={<AuthRoute child={<FundUploadVideo />} routeType="private" />} />
-
+            <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundmeDetails />} />} />
+            <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
+            <Route path="fundme/fund/:fundmeId" element={<AuthRoute child={<FundCreator />} routeType="private" />} />
 
             <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
             <Route path="users/:userId/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />

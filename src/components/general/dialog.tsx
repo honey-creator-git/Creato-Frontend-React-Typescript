@@ -10,7 +10,7 @@ import CONSTANT from "../../constants/constant";
 import "../../assets/styles/dialogStyle.scss";
 
 const Dialog = (props: any) => {
-    const { display, title, exit, context, buttons, icon, social, avatars, daremeId, ownerName, wrapExit, sizeType, subcontext, shareType, daremeTitle } = props;
+    const { display, title, exit, context, buttons, icon, social, avatars, daremeId, ownerName, wrapExit, sizeType, subcontext, shareType, daremeTitle, isFundme, subTitle } = props;
 
     return (
         <div className="dialog-wrapper" style={display ? { visibility: 'visible', opacity: 1 } : {}} onClick={wrapExit}>
@@ -60,6 +60,11 @@ const Dialog = (props: any) => {
                         }
                     </>
                 }
+                {subTitle &&
+                    <div className="dialog-subcontext-top-header">
+                        <span style={{ whiteSpace: 'pre-line' }}>{subTitle}</span>
+                    </div>
+                }
                 <div className="dialog-context">
                     <span style={{ whiteSpace: 'pre-line' }}>{context}</span>
                 </div>
@@ -99,25 +104,32 @@ const Dialog = (props: any) => {
                 {social &&
                     <div className="dialog-social">
                         <div className="link" onClick={() => {
-                            window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                            if (isFundme) { }
+                            else window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
                         }}>
                             <FacebookIcon color="#EFA058" />
                         </div>
                         <div className="link" onClick={() => {
                             let text = "";
-                            if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
-                            else if(shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
-                            else if(shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
-                            window.open(`whatsapp://send?text=${text}`);
+                            if (isFundme) { }
+                            else {
+                                if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
+                                else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
+                                else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
+                                window.open(`whatsapp://send?text=${text}`);
+                            }
                         }}>
                             <WhatsappIcon color="#EFA058" />
                         </div>
                         <div className="link" onClick={() => {
                             let text = "";
-                            if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
-                            else if(shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
-                            else if(shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!`;
-                            window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer');
+                            if (isFundme) { }
+                            else {
+                                if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
+                                else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
+                                else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!`;
+                                window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer');
+                            }
                         }}>
                             <TwitterIcon color="#EFA058" />
                         </div>

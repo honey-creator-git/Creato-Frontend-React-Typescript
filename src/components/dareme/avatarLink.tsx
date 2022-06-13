@@ -23,7 +23,7 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 }
 
 const AvatarLink = (props: any) => {
-    const { avatar, username, ownerId, handleAvatar, daremeId, isFanwall, delData } = props;
+    const { avatar, username, ownerId, handleAvatar, daremeId, isFanwall, delData, isFundme } = props;
     const [moreInfo, setMoreInfo] = useState(false);
     const userState = useSelector((state: any) => state.auth);
     const user = userState.user;
@@ -50,7 +50,10 @@ const AvatarLink = (props: any) => {
                 <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                     <div className="list" onClick={() => {
                         if (isFanwall) navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/fanwall/detail/${daremeId}`);
-                        else navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                        else {
+                            if (isFundme) navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`);
+                            else navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                        }
                         setMoreInfo(false);
                     }}>
                         Copy link
@@ -58,15 +61,16 @@ const AvatarLink = (props: any) => {
                     {isFanwall ?
                         <>
                             {(user && user.id === ownerId) &&
-                                <div className="list" onClick={() => {
-
-                                }}>
+                                <div className="list" onClick={() => { }}>
                                     Edit
                                 </div>
                             }
                         </> :
-                        <div className="list">
-                            <a href="https://www.creatogether.app/contact-us" target="_blank" style={{ textDecoration: 'none' }} >Report</a>
+                        <div className="list" onClick={() => {
+                            setMoreInfo(false);
+                            window.open("https://www.creatogether.app/contact-us");
+                        }}>
+                            Report
                         </div>
                     }
                     {(user && user.id === ownerId) &&

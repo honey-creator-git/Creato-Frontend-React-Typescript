@@ -11,7 +11,6 @@ export const SET_FUNDME_DETAIL_INITIAL = 'SET_FUNDME_DETAIL_INITIAL';
 export const SET_FUNDMES = 'SET_FUNDMES';
 export const SET_FUNDME = 'SET_FUNDME';
 
-
 export const SET_OPTION = 'SET_OPTION';
 export const SET_TEASER_FILE = "SET_TEASER_FILE";
 export const SET_COVER_FILE = "SET_COVER_FILE";

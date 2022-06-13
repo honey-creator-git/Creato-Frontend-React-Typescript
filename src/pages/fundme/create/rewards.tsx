@@ -83,9 +83,9 @@ const FundmeRewards = () => {
             type="input"
             isNumber={true}
             title={reward}
-            width={100}
+            width={150}
             minnum={10}
-            maxnum={10000}
+            maxnum={1000000000}
             step={1}
             setTitle={setReward}
             setFocus={() => { }}

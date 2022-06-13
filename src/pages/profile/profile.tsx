@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fanwallAction } from "../../redux/actions/fanwallActions";
 import { daremeAction } from "../../redux/actions/daremeActions";
+import { fundmeAction } from "../../redux/actions/fundmeActions";
 import VideoCardMobile from "../../components/dareme/videoCardMobile";
 import ProfileHeader from "../../components/profile/profileHeader";
 import ProfileMenu from "../../components/profileMenu";
@@ -22,11 +23,9 @@ const Profile = () => {
   const location = useLocation();
   const contexts = useContext(LanguageContext);
   const daremeStore = useSelector((state: any) => state.dareme);
-  const fundmeStore = useSelector((state: any) => state.fundme);
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userStore = useSelector((state: any) => state.auth);
   const daremes = daremeStore.daremes;
-  const fundmes = fundmeStore.fundmes;
   const fanwalls = fanwallState.fanwalls;
   const authuser = userStore.users[0];
   const [isSame, setIsSame] = useState(false);
@@ -118,15 +117,13 @@ const Profile = () => {
                             url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                             time={dareme.time}
                             title={dareme.title}
-                            category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                            category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                             finished={dareme.finished}
                             sizeType={dareme.sizeType}
                             coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                             handleSubmit={() => {
                               dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
-                              if (dareme.goal) {
-                                //Fundme Detail 
-                              }
+                              if (dareme.goal) dispatch(fundmeAction.checkDetailsAndResults(dareme._id, navigate));
                               else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
                             }}
                           />

@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { daremeAction } from "../../../redux/actions/daremeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
-import AvatarLink from "../../../components/fundme/avatarLink";
+import AvatarLink from "../../../components/dareme/avatarLink";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Avatar from "../../../components/general/avatar";

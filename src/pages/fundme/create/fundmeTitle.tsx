@@ -79,7 +79,7 @@ const FundmeTitle = () => {
           <Input
             type="input"
             placeholder={contexts.DAREME_TITLE_LETTER.TITLE_PLACEHOLDER}
-            wordCount={30}
+            wordCount={40}
             title={title ? title : ""}
             setTitle={setTitle}
             setFocus={() => { }}

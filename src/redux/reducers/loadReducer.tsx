@@ -9,6 +9,7 @@ const INITIAL_STATE: any = {
         state: false
     },
     currentDareMe: null,
+    currentFundMe: null,
 }
 
 const loadRedcuer = (state: any = INITIAL_STATE, action: any) => {
@@ -26,6 +27,8 @@ const loadRedcuer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state, dlgState: payload };
         case actionTypes.SET_CURRENT_DAREME:
             return { ...state, currentDareMe: payload };
+        case actionTypes.SET_CURRENT_FUNDME:
+            return { ...state, currentFundMe: payload };
         default:
             return state;
     }

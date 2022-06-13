@@ -5,7 +5,7 @@ import { daremeAction } from "../../../redux/actions/daremeActions";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import VideoCardMobile from "../../../components/dareme/videoCardMobile";
-import AvatarLink from "../../../components/fundme/avatarLink";
+import AvatarLink from "../../../components/dareme/avatarLink";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";

@@ -51,6 +51,22 @@ const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
                 title: null,
                 fundmes: []
             };
+        case actionTypes.SET_FUNDME_DETAIL_INITIAL:
+            state.fundme = {
+                owner: null,
+                title: null,
+                deadline: null,
+                category: null,
+                teaser: null,
+                goal: null,
+                reward: null,
+                rewardText: null,
+                published: false,
+                cover: null,
+                sizeType: null,
+                coverIndex: -1
+            };
+            return { ...state };
         case actionTypes.SET_FUNDMES:
             state.fundmes = payload;
             return { ...state };

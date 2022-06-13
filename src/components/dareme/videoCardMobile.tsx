@@ -18,7 +18,7 @@ const VideoCardMobile = (props: any) => {
     const contexts = useContext(LanguageContext);
     const interval = goal ? (Number(goal) / 20).toFixed(1) : 0;
     const count = goal ? Number(Math.floor(Number(donuts) / Number(interval))) : 0;
-    const width = donuts === 0 ? Math.floor(Number(interval) / Number(goal) * 262) : Math.floor(Number(interval) * count / Number(goal) * 262);
+    const width = donuts < interval ? Math.floor(Number(interval) / Number(goal) * 262) : Math.floor(Number(interval) * count / Number(goal) * 262);
 
     const calcTime = (time: any) => {
         if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
