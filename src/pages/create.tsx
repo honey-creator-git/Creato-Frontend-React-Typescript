@@ -20,7 +20,7 @@ const Create = () => {
 
     const gotoDareMe = () => { dispatch(daremeAction.getDraftDareme(navigate)) }
     const gotoFundMe = () => { 
-        // setOpenLinkSocial(true);
+        setOpenLinkSocial(true);
         dispatch(fundmeAction.getDraftFundme(navigate));
     }
 
