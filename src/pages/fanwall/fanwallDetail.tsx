@@ -205,8 +205,7 @@ const FanwallDetails = () => {
                     {/* {(user && user.id === fanwall.writer._id) &&
                       <> */}
                         <div className="list" onClick={() => {
-                          navigate('/dareme/fanwall/post/+daremeId');
-                          
+                          navigate('/dareme/fanwall/post/+daremeId');                          
                         }}>
                           Edit
                         </div>

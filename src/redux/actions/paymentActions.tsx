@@ -1,3 +1,4 @@
+// import { dataIndexAttribute } from "react-horizontal-scrolling-menu/dist/types/constants";
 import { Dispatch } from "redux";
 import * as api from "../../api";
 import {
@@ -17,10 +18,12 @@ export const paymentACtion = {
         if (data.success) {
           dispatch({ type: SET_USER, payload: data.user });
           dispatch({ type: SET_DIALOG_STATE, payload: { type: "buyDonut", state: true } });
-        }
-      }).catch((err) => {
-        console.log(err);
-        dispatch({ type: SET_LOADING_FALSE });
+        } else {
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "error", state: true , msg: data.msg} });
+        }        
+      }).catch((err) => {        
+        dispatch({ type: SET_LOADING_FALSE });        
+        dispatch({ type: SET_DIALOG_STATE, payload: { type: "error", state: true ,msg: 'Pay processing failed!'} });
       });
   },
 }

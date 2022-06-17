@@ -22,15 +22,17 @@ const CheckoutForm = (props: any) => {
     const elements = useElements();
 
     const [errorToDisplay, setErrorToDisplay] = useState('');
-
+    
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-
         if (!stripe || !elements) return;
-
+        
         const cardElement: any = elements.getElement(CardElement);
+        if(!cardElement) return setErrorToDisplay('No exit card!');
         const token = await stripe.createToken(cardElement);
+        if(token.error) return setErrorToDisplay('' + token.error.message);        
         dispatch(paymentACtion.buyDonuts(token.token, props.donutPlan));
+        setErrorToDisplay('');
     }
 
     useEffect(() => {

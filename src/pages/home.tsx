@@ -72,12 +72,15 @@ const Home = () => {
   const [openDonutsPlanDlg, setOpenDonutsPlanDlg] = useState(false);
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
   const [openTopupDlg, setOpenTopupDlg] = useState(false);
+  const [openErrorDlg,setOpenErrorDlg] = useState(false);
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false);
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
   const [fanwallId, setFanwallId] = useState("");
+  const [errorText,setErrorText] = useState("")
   const user = userState.user;
   const dlgState = loadState.dlgState;
+  
 
   const BuyDonuts = (creato: any) => {
     if (user) setDonutPlan(creato);
@@ -102,6 +105,11 @@ const Home = () => {
     } else if (dlgState.type === 'welcome') {
       if (dlgState.state) {
         setOpenWelcomeDlg(true);
+      }
+    } else if(dlgState.type === 'error') {
+      if (dlgState.state) {
+        setOpenErrorDlg(true);
+        setErrorText(dlgState.msg);
       }
     }
   }, [dlgState]);
@@ -154,6 +162,32 @@ const Home = () => {
             }
           }
         ]}
+      />
+      <Dialog
+        display={openErrorDlg}
+        exit={() => {
+          setOpenErrorDlg(false);
+          setDonutPlan(null);
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+        }}
+        wrapExit={() => {
+          setOpenErrorDlg(false);
+          setDonutPlan(null);
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+        }}
+        title="Error!"
+        context={errorText}
+        // buttons={[
+        //   {
+        //     text: 'Dare now',
+        //     handleClick: () => {
+        //       setOpenErrorDlg(false);
+        //       setDonutPlan(null);
+        //       dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+        //       navigate("/");
+        //     }
+        //   }
+        // ]}
       />
       <Dialog
         display={openWelcomeDlg}

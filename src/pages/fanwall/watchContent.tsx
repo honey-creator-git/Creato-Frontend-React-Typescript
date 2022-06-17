@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ReactPlayer from "react-player";
@@ -21,7 +21,8 @@ const WatchContent = () => {
     const [isSignIn, setIsSignIn] = useState(false);
     const [isUnLock, setIsUnLock] = useState(false);
     const [isTopUp, setIsTopUp] = useState(false);
-
+    const playerRef = useRef<ReactPlayer | null>(null);
+    
     const checkLock = () => {
         if (user && fanwall.dareme && fanwall.dareme.options) {
             if (user.id + "" === fanwall.writer._id + "") return false;
@@ -35,7 +36,7 @@ const WatchContent = () => {
         } else return true;
     }
 
-    useEffect(() => {
+    useEffect(() => {        
         window.scrollTo(0, 0);
     }, []);
 
@@ -102,11 +103,21 @@ const WatchContent = () => {
                 <div className="watch-content-letter">
                     <span>Let's have a look at what you voted For!</span>
                 </div>
-                <ReactPlayer
+                {/* <ReactPlayer
+                    onReady={()=>console.log('player is ready!')}
                     className="react-player"
                     url={fanwall.embedUrl}
                     playing
-                />
+                    ref={playerRef}
+                    onProgress={(progress) => {
+                        if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
+                    }}
+                /> */}
+                <div className="react-player">
+                    <video controls autoPlay onAbort={() => console.log('video tag is aborted')}>
+                        <source src={fanwall.embedUrl}></source>
+                    </video>
+                </div>
                 <div className="watch-content-btn">
                     <Button
                         handleSubmit={() => {

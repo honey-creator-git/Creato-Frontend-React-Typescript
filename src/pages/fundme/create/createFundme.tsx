@@ -556,6 +556,8 @@ const CreateFundme = () => {
                                     placeholder={contexts.CREATE_FUNDME_LETTER.GOAL_PLACEHOLDER}
                                     title={fundmeState.goal ? fundmeState.goal : ""}
                                     step={1}
+                                    maxnum={100000000}
+                                    minnum={0}
                                     setTitle={setGoal}
                                     setFocus={() => { }}
                                 />
