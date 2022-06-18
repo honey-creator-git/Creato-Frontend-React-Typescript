@@ -20,8 +20,8 @@ const Create = () => {
 
     const gotoDareMe = () => { dispatch(daremeAction.getDraftDareme(navigate)) }
     const gotoFundMe = () => { 
-        setOpenLinkSocial(true);
-        dispatch(fundmeAction.getDraftFundme(navigate));
+        // setOpenLinkSocial(true);
+        // dispatch(fundmeAction.getDraftFundme(navigate));
     }
 
     return (

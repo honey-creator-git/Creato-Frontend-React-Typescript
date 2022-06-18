@@ -1,7 +1,8 @@
-import { useEffect, useState ,useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ReactPlayer from "react-player";
+import YouTubePlayer from "react-player/youtube";
 import { useSelector } from "react-redux";
 import Title from "../../components/general/title";
 import Button from "../../components/general/button";
@@ -22,7 +23,7 @@ const WatchContent = () => {
     const [isUnLock, setIsUnLock] = useState(false);
     const [isTopUp, setIsTopUp] = useState(false);
     const playerRef = useRef<ReactPlayer | null>(null);
-    
+
     const checkLock = () => {
         if (user && fanwall.dareme && fanwall.dareme.options) {
             if (user.id + "" === fanwall.writer._id + "") return false;
@@ -35,8 +36,12 @@ const WatchContent = () => {
             return true;
         } else return true;
     }
+    const transUrl = (channel: string) => {
+        let url = new URL(channel);
+        return url.origin + url.pathname.replace('shorts', 'embed');
+    }
 
-    useEffect(() => {        
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
@@ -103,20 +108,22 @@ const WatchContent = () => {
                 <div className="watch-content-letter">
                     <span>Let's have a look at what you voted For!</span>
                 </div>
-                {/* <ReactPlayer
-                    onReady={()=>console.log('player is ready!')}
+                {/* <ReactPlayer                  
                     className="react-player"
                     url={fanwall.embedUrl}
                     playing
-                    ref={playerRef}
-                    onProgress={(progress) => {
-                        if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-                    }}
                 /> */}
-                <div className="react-player">
+                {/* <div className="react-player">
                     <video controls autoPlay onAbort={() => console.log('video tag is aborted')}>
                         <source src={fanwall.embedUrl}></source>
                     </video>
+                </div> */}
+                <div className="react-player">
+                    <iframe src={transUrl(fanwall.embedUrl)}
+                        width="750"
+                        height="500" 
+                        allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" >
+                    </iframe>
                 </div>
                 <div className="watch-content-btn">
                     <Button
