@@ -120,8 +120,8 @@ const WatchContent = () => {
                 </div> */}
                 <div className="react-player">
                     <iframe src={transUrl(fanwall.embedUrl)}
-                        width="750"
-                        height="500" 
+                        width="600"
+                        height="400"
                         allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" >
                     </iframe>
                 </div>
