@@ -20,7 +20,8 @@ const INITIAL_STATE: any = {
     coverFile: null,
     category: null,
     title: null,
-    fundmes: []
+    fundmes: [],
+    votes: [],
 }
 
 const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -75,6 +76,9 @@ const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state };
         case actionTypes.SET_COVER_FILE1:
             state.coverFile = payload;
+            return { ...state };
+        case actionTypes.SET_FUNDME_VOTES:
+            state.votes = payload;
             return { ...state };
         // case actionTypes.SET_ADMIN_TITLE:
         //     state.title = payload;

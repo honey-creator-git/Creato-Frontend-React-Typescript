@@ -175,6 +175,7 @@ const Profile = () => {
                             sizeType={dareme.sizeType}
                             coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                             handleSubmit={() => {
+                              console.log('check 1');
                               dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
                               dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
                             }}

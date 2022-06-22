@@ -9,6 +9,7 @@ export const EN = {
         CREATE_DAREME: 'Create DareMe',
         DAREME_TITLE: 'DareMe Title',
         FUNDME_TITLE: 'FundMeTitle',
+        FUNDME_RESULT:"FundMe Result",
         REWARDS_TITLE: 'Rewards',
         DARE_OPTIONS: 'Dare options',
         UPLOAD_TEASER: 'Upload a teaser video (ideally <20 seconds)',

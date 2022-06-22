@@ -105,6 +105,7 @@ export const daremeAction = {
     dispatch({ type: SET_LOADING_TRUE });
     api.checkDareMeFinished(daremeId)
       .then((result: any) => {
+        console.log('check ponst 2')
         const { data } = result;
         dispatch({ type: SET_DAREME_INITIAL });
         if (data.finished) navigate(`/dareme/result/${daremeId}`);

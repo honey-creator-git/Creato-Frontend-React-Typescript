@@ -1,17 +1,18 @@
 import { Dispatch } from "redux";
 import {
   SET_FUNDME_INITIAL,
-  // SET_FUNDMES,
+  SET_FUNDMES,
   SET_FUNDME,
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
-  // SET_FANWALL,
-  // SET_FANWALL_INITIAL,
+  SET_FANWALL,
+  SET_FANWALL_INITIAL,
   // SET_OPTION,
-  // SET_USERS,
+  SET_USERS,
   SET_USER,
   // SET_FANWALLS,
   SET_FUNDME_DETAIL_INITIAL,
+  SET_FUNDME_VOTES,
   // SET_ADMIN_OPTIONS
 } from "../types";
 import * as api from "../../api";
@@ -132,10 +133,14 @@ export const fundmeAction = {
 
   getFundmeVoters: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
-    // api.getFundmeVoters({ fundmeId: fundmeId})
-    //   .then((result: any) => {
-    //     const { data } = result;
-    //   }).catch((err) => console.log(err));
+    api.getFundmeVoters(fundmeId)
+      .then((result: any) => {
+        const { data } = result;
+        if(data.success) {
+          dispatch({type:SET_FUNDME_VOTES, payload:data.votes});
+          dispatch({type:SET_LOADING_FALSE});
+        }
+      }).catch((err) => console.log(err));
   },
 
   //   //-------------------------------------
@@ -151,19 +156,20 @@ export const fundmeAction = {
   //       }).catch((err) => console.log(err));
   //   },
 
-  //   getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     dispatch({ type: SET_FUNDME_INITIAL });
-  //     api.getFundmeResult(fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_FANWALL, payload: data.fanwall });
-  //           dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //           dispatch({ type: SET_LOADING_FALSE });
-  //         }
-  //       }).catch((err) => console.log(err));
-  //   },
+    getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      dispatch({ type: SET_FUNDME_INITIAL });
+      api.getFundmeResult(fundmeId)
+        .then((result) => {
+          const { data } = result;
+          console.log('dataaaaaaaa',data);
+          if (data.success) {
+            dispatch({ type: SET_FANWALL, payload: data.fanwall });
+            dispatch({ type: SET_FUNDME, payload: data.fundme });
+            dispatch({ type: SET_LOADING_FALSE });
+          }
+        }).catch((err) => console.log(err));
+    },
 
   //   getOptionDetails: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
   //     dispatch({ type: SET_LOADING_TRUE });
@@ -215,17 +221,17 @@ export const fundmeAction = {
   //       }).catch((err: any) => console.log(err));
   //   },
 
-  //   getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     api.getFundmesByPersonalisedUrl({ url: url })
-  //       .then((result) => {
-  //         const { data } = result;
-  //         dispatch({ type: SET_FUNDMES, payload: data.fundmes });
-  //         dispatch({ type: SET_USERS, payload: [data.user] });
-  //         dispatch({ type: SET_LOADING_FALSE });
-  //         navigate(`/${url}`);
-  //       }).catch((err) => console.log(err));
-  //   },
+    getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      api.getFundmesByPersonalisedUrl({ url: url })
+        .then((result) => {
+          const { data } = result;
+          dispatch({ type: SET_FUNDMES, payload: data.fundmes });
+          dispatch({ type: SET_USERS, payload: [data.user] });
+          dispatch({ type: SET_LOADING_FALSE });
+          navigate(`/${url}`);
+        }).catch((err) => console.log(err));
+    },
 
   //   fundCreator: (fundmeId: any, title: any, amount: any, navigate: any) => async (dispatch: Dispatch<any>) => {
   //     api.checkFundMeFinished(fundmeId)
@@ -305,20 +311,21 @@ export const fundmeAction = {
   //   //     }).catch((err: any) => console.log(err));
   //   // },
 
-  //   postFanwall: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     api.getFanwallByFundMeId(fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //           dispatch({ type: SET_FANWALL_INITIAL });
-  //           if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall });
-  //           dispatch({ type: SET_LOADING_FALSE });
-  //           navigate(`/fundme/fanwall/post/${fundmeId}`);
-  //         }
-  //       }).catch(err => console.log(err));
-  //   },
+    postFanwall: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      api.getFanwallByFundMeId(fundmeId)
+        .then((result) => {
+          const { data } = result;
+          console.log('hello post fan wall is ...',data);
+          if (data.success) {
+            // dispatch({ type: SET_FUNDME, payload: data.fundme });
+            dispatch({ type: SET_FANWALL_INITIAL });
+            if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall });
+            dispatch({ type: SET_LOADING_FALSE });
+            navigate(`/fundme/fanwall/post/${fundmeId}`);
+          }
+        }).catch(err => console.log(err));
+    },
 
   //   winFundOption: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
   //     api.winFundOption({ optionId: optionId, fundmeId: fundmeId })

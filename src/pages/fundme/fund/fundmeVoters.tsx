@@ -15,59 +15,57 @@ const FundmeVoters = () => {
     const navigate = useNavigate();
     const { fundmeId } = useParams();
     const contexts = useContext(LanguageContext);
-    const daremeState = useSelector((state: any) => state.dareme);
+    const fundmeState = useSelector((state: any) => state.fundme);
+    
+    const votes = fundmeState.votes;
+    
+    const [resultVotes, setResultVotes] = useState<Array<any>>([]);
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(fundmeAction.getFundmeVoters(fundmeId));
     }, [location]);
-
+    
+    useEffect(() => {
+        if(votes && votes.length > 0) {
+            setResultVotes(votes)
+        }
+    }, [votes]);
     return (
         <>
             <div className="title-header">
                 <Title
                     title={"Voters"}
                     back={() => { dispatch(fundmeAction.checkDetailsAndResults(fundmeId, navigate)) }}
+                    // back={() => { navigate(`/fundme/details/${fundmeId}`) }}
                 />
             </div>
-            {/* {resultOptions.length > 0 &&
-                <>
-                    <div className="dareme-voters">
-                        <div className="dareme-voters-information">
-                            <div className="dare-options">
-                                {
-                                    resultOptions.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
-                                        <div key={index}>
-                                            <div className="vote-details">
-                                                {option.option.voteInfo.sort((first: any, second: any) => {
-                                                    const firstDonuts = first.donuts + (first.canFree === false ? 1 : 0);
-                                                    const secondDonuts = second.donuts + (second.canFree === false ? 1 : 0);
-                                                    if (firstDonuts >= secondDonuts) return -1;
-                                                    else return 1;
-                                                }).map((vote: any, vIndex: any) => (
-                                                    <div key={vIndex} className="vote-info">
-                                                        {vote.voter.name &&
-                                                            <Avatar
-                                                                avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
-                                                                username={vote.voter.name}
-                                                                avatarStyle="horizontal"
-                                                            />
-                                                        }
-                                                        <div className="donuts-count">
-                                                            <CreatoCoinIcon color="#54504E" />
-                                                            <span>{vote.donuts + (vote.canFree === false ? 1 : 0)}</span>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
+            <div className="dareme-voters">
+                <div className="dareme-voters-information">
+                    <div className="dare-options">
+                        <div className="vote-details">
+                            {resultVotes.length > 0 &&
+                                resultVotes.map((vote: any, vIndex: any) => (
+                                    <div key={vIndex} className="vote-info">
+                                        {vote.voter.name &&
+                                            <Avatar
+                                                avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
+                                                username={vote.voter.name}
+                                                avatarStyle="horizontal"
+                                            />
+                                        }
+                                        <div className="donuts-count">
+                                            <CreatoCoinIcon color="#54504E" />
+                                            <span>{vote.donuts + (vote.canFree === false ? 1 : 0)}</span>
                                         </div>
-                                    ))
-                                }
-                            </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
-                </>
-            } */}
+                </div>
+            </div>
         </>
     );
 };

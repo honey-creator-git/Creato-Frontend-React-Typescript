@@ -235,12 +235,12 @@ const AdminTransactions = () => {
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
-                                            {transaction.from === "USER" && transaction.user.name}
+                                            {transaction.from === "USER" && `${transaction.user ? transaction.user.name : ''}`}
                                             {transaction.from === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                                         </td>
-                                        <td>
+                                        <td className={transaction._id}>
                                             {transaction.to === "ADMIN" && "Admin"}
-                                            {transaction.to === "USER" && transaction.user.name}
+                                            {transaction.to === "USER" && `${transaction.user ? transaction.user.name : ''}`}
                                             {transaction.to === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                                         </td>
                                         <td>

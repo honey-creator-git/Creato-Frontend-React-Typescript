@@ -118,13 +118,11 @@ const WatchContent = () => {
                         <source src={fanwall.embedUrl}></source>
                     </video>
                 </div> */}
-                <div className="react-player">
-                    <iframe src={transUrl(fanwall.embedUrl)}
-                        width="600"
-                        height="400"
-                        allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" >
-                    </iframe>
-                </div>
+                <iframe src={transUrl(fanwall.embedUrl)} 
+                    width={300}
+                    height={200}
+                    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" >
+                </iframe>
                 <div className="watch-content-btn">
                     <Button
                         handleSubmit={() => {
