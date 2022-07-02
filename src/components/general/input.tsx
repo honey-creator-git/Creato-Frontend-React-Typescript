@@ -41,7 +41,8 @@ const Input = (props: any) => {
   };
 
   useEffect(() => {
-    setWords(title.length);
+    if (title)
+      setWords(title.length);
   }, [title]);
 
   return (

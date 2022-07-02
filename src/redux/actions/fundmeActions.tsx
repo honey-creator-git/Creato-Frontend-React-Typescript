@@ -36,7 +36,7 @@ export const fundmeAction = {
     let resultTeaser = null;
     let resultCover = null;
     if (fundme.title === null && fundme.deadline === null && fundme.category === null && (fundme.teaser === null && teaser === null) && fundme.goal === null) {
-      navigate(url);
+      navigate('/');
     } else {
       if (teaser && teaser.preview.indexOf('uploads') === -1) {
         const formData = new FormData();
@@ -58,7 +58,7 @@ export const fundmeAction = {
           const { data } = res;
           if (data.success) {
             dispatch({ type: SET_FUNDME, payload: data.fundme });
-            navigate(url);
+            navigate('/');
           }
           dispatch({ type: SET_LOADING_FALSE });
         }).catch((err) => console.log(err));
@@ -136,9 +136,9 @@ export const fundmeAction = {
     api.getFundmeVoters(fundmeId)
       .then((result: any) => {
         const { data } = result;
-        if(data.success) {
-          dispatch({type:SET_FUNDME_VOTES, payload:data.votes});
-          dispatch({type:SET_LOADING_FALSE});
+        if (data.success) {
+          dispatch({ type: SET_FUNDME_VOTES, payload: data.votes });
+          dispatch({ type: SET_LOADING_FALSE });
         }
       }).catch((err) => console.log(err));
   },
@@ -156,20 +156,19 @@ export const fundmeAction = {
   //       }).catch((err) => console.log(err));
   //   },
 
-    getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-      dispatch({ type: SET_LOADING_TRUE });
-      dispatch({ type: SET_FUNDME_INITIAL });
-      api.getFundmeResult(fundmeId)
-        .then((result) => {
-          const { data } = result;
-          console.log('dataaaaaaaa',data);
-          if (data.success) {
-            dispatch({ type: SET_FANWALL, payload: data.fanwall });
-            dispatch({ type: SET_FUNDME, payload: data.fundme });
-            dispatch({ type: SET_LOADING_FALSE });
-          }
-        }).catch((err) => console.log(err));
-    },
+  getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE });
+    dispatch({ type: SET_FUNDME_INITIAL });
+    api.getFundmeResult(fundmeId)
+      .then((result) => {
+        const { data } = result;
+        if (data.success) {
+          dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: 'fundme' } });
+          dispatch({ type: SET_FUNDME, payload: data.fundme });
+          dispatch({ type: SET_LOADING_FALSE });
+        }
+      }).catch((err) => console.log(err));
+  },
 
   //   getOptionDetails: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
   //     dispatch({ type: SET_LOADING_TRUE });
@@ -221,17 +220,17 @@ export const fundmeAction = {
   //       }).catch((err: any) => console.log(err));
   //   },
 
-    getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-      dispatch({ type: SET_LOADING_TRUE });
-      api.getFundmesByPersonalisedUrl({ url: url })
-        .then((result) => {
-          const { data } = result;
-          dispatch({ type: SET_FUNDMES, payload: data.fundmes });
-          dispatch({ type: SET_USERS, payload: [data.user] });
-          dispatch({ type: SET_LOADING_FALSE });
-          navigate(`/${url}`);
-        }).catch((err) => console.log(err));
-    },
+  getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE });
+    api.getFundmesByPersonalisedUrl({ url: url })
+      .then((result) => {
+        const { data } = result;
+        dispatch({ type: SET_FUNDMES, payload: data.fundmes });
+        dispatch({ type: SET_USERS, payload: [data.user] });
+        dispatch({ type: SET_LOADING_FALSE });
+        navigate(`/${url}`);
+      }).catch((err) => console.log(err));
+  },
 
   //   fundCreator: (fundmeId: any, title: any, amount: any, navigate: any) => async (dispatch: Dispatch<any>) => {
   //     api.checkFundMeFinished(fundmeId)
@@ -311,21 +310,20 @@ export const fundmeAction = {
   //   //     }).catch((err: any) => console.log(err));
   //   // },
 
-    postFanwall: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-      dispatch({ type: SET_LOADING_TRUE });
-      api.getFanwallByFundMeId(fundmeId)
-        .then((result) => {
-          const { data } = result;
-          console.log('hello post fan wall is ...',data);
-          if (data.success) {
-            // dispatch({ type: SET_FUNDME, payload: data.fundme });
-            dispatch({ type: SET_FANWALL_INITIAL });
-            if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall });
-            dispatch({ type: SET_LOADING_FALSE });
-            navigate(`/fundme/fanwall/post/${fundmeId}`);
-          }
-        }).catch(err => console.log(err));
-    },
+  postFanwall: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE });
+    api.getFanwallByFundMeId(fundmeId)
+      .then((result) => {
+        const { data } = result;
+        if (data.success) {
+          dispatch({ type: SET_FUNDME, payload: data.fundme });
+          dispatch({ type: SET_FANWALL_INITIAL, payload: 'fundme'});
+          if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall});
+          dispatch({ type: SET_LOADING_FALSE });
+          navigate(`/dareme/fanwall/post/${fundmeId}`);
+        }
+      }).catch(err => console.log(err));
+  },
 
   //   winFundOption: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
   //     api.winFundOption({ optionId: optionId, fundmeId: fundmeId })

@@ -36,9 +36,13 @@ const WatchContent = () => {
             return true;
         } else return true;
     }
-    const transUrl = (channel: string) => {
-        let url = new URL(channel);
-        return url.origin + url.pathname.replace('shorts', 'embed');
+    const transUrl = (channel: any) => {
+        if (channel) {
+            let url = new URL(channel);
+            let temp = url.pathname.split('/');
+            return 'https://youtube.com/embed/' + temp[temp.length - 1];
+        }
+        else return 'https://youtube.com/embed/Ct9C8a33R0U';
     }
 
     useEffect(() => {
@@ -118,9 +122,9 @@ const WatchContent = () => {
                         <source src={fanwall.embedUrl}></source>
                     </video>
                 </div> */}
-                <iframe src={transUrl(fanwall.embedUrl)} 
-                    width={300}
-                    height={200}
+                <iframe src={transUrl(fanwall.embedUrl)}
+                    width={'100%'}
+                    height={'400px'}
                     allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" >
                 </iframe>
                 <div className="watch-content-btn">

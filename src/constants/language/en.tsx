@@ -38,6 +38,20 @@ export const EN = {
         FUNDME_BODY_LETTER: 'Support my creative content & get rewarded!',
         FUNDME_REWARDS: 'e.g. exclusive chat, signed postcard etc',
     },
+    REVIEW_LETTER: {
+        DONUTS_NUMBER: 'Number of Donuts',
+        DNUTS: 'Donuts',
+        AUDIENCE_LETTER: 'For audience to entitle as a SuperFan.',
+        REWARDS: 'Reward For SuperFans',
+        EXCLUSIVE_CHAT: 'e.g. exclusive chat, signed postcard etc'
+    },
+    FUNDME_REWARDS: [
+        "Behind-the-scene videos 📽️",
+        "Live chat session 🖥️",
+        "Photos I have not released before 📷",
+        "Private Thank-you message 📥",
+        "Limited edition T-shirt 👕👚"
+    ],
     CREATE_FUNDME_LETTER: {
         PERIOD:'Period',
         TITLE: 'FundMe Title',
@@ -132,12 +146,12 @@ export const EN = {
         URL_ERROR: 'This URL handle already existed! Please use another one.'
     },
     HOME_LETTER: {
-        DAREME_WITH_MOST_DONUTS: 'DareMe with Most Donuts 🍩',
+        DAREME_WITH_MOST_DONUTS: 'DareMe & FundMe with Most Donuts 🍩',
         EVERY_TALKING: 'Everyone is talking about this',
-        NEW_RELEASE: 'New Release DareMe',
-        ONGOING_DAREME: 'Ongoing DareMe',
+        NEW_RELEASE: 'New Release DareMe & FundMe',
+        ONGOING_DAREME: 'Ongoing DareMe & FundMe',
         GET_DONUTS_TO_DARE: 'GET Donuts to Dare!',
-        FINISHED_DAREME: 'Finished DareMe',
+        FINISHED_DAREME: 'Finished DareMe & FundMe',
         POST_ON_FANWALL: 'Posts on Fanwall'
     },
     CREATE_DAREME_LETTER: {
@@ -253,13 +267,15 @@ export const EN = {
             VOTE_FREE: '1 Free Donut for:',
             VOTE_SUPER: 'SuperFan:',
             HAVE_DARED: 'I have dared:',
+            HAVE_FUNDED:'I have funded:',
             I_DARE: 'I dare:',
             ACCEPT_REQUEST: 'Accept request',
             DARE_ACCEPTED: 'Dare accepted',
             DARE_DECLIEND: 'Dare declined',
             STAY_TUNED: 'Stay tuned!',
             CONGRAT: 'Congratulations!',
-            UNLOCK_REWARDS: 'Unlock Rewards?'
+            UNLOCK_REWARDS: 'Unlock Rewards?',
+            DIRECT_BROWSER_TITLE: 'Open In Browser 🌐'
         },
         BODY_LETTER: {
             ERASE_DATA: 'Erase all the input fields',
@@ -282,7 +298,8 @@ export const EN = {
             WIN_CONG: 'won the DareMe!\n\nShare it to your Fans to stay tuned!',
             CAN_EDIT_AFTER_POSTING: 'Post can be edited afterwards.',
             DELETE_POST: 'Deleting the post',
-            UNLOCK_FANWALL: '500 Donuts is required.'
+            UNLOCK_FANWALL: '500 Donuts is required.',
+            DIRECT_BROWSER_CONTENT: 'Open in browser \n for a better experience. \n\n 開啓瀏覽器 \n 獲得更好的用戶體驗'
         },
         BUTTON_LETTER: {
             CONFIRM: 'Confirm',
@@ -296,7 +313,8 @@ export const EN = {
             DECLINE: 'Decline',
             PUBLISH: 'Publish',
             DELETE: 'Delete',
-            CANCEL: 'Cancel'
+            CANCEL: 'Cancel',
+            DIRECT: 'Open/開啓'
         }
     },
     HINT: {
@@ -320,5 +338,6 @@ export const EN = {
 
         }
 
-    }
+    },
+    PUBLISH: 'publish'
 };

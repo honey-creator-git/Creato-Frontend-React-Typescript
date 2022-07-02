@@ -61,7 +61,7 @@ import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
 
 import AdminTransactions from '../pages/admin/transactions/transactions';
 import Error404 from '../pages/error/error404';
-import PostFanwallFundme from '../pages/fanwall/postFanwallFundme';
+// import PostFanwallFundme from '../pages/fanwall/postFanwallFundme';
 import UploadVideoFundme from '../pages/fanwall/uploadVideoFundme';
 
 const AppRoutes = () => {
@@ -90,10 +90,7 @@ const AppRoutes = () => {
             <Route path="fundme/fund/:fundmeId" element={<AuthRoute child={<FundCreator />} routeType="private" />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
             <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
-            <Route path="fundme/fanwall/post/:fundmeId" element={<AuthRoute child={<PostFanwallFundme />} routeType="private" />} />
-            <Route path="fundme/fanwall/post/:fundmeId/upload" element={<AuthRoute child={<UploadVideoFundme/>} routeType="private" />} />
-            {/* <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} /> */}
-            {/* <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} /> */}
+            
 
             <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
             <Route path="users/:userId/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
@@ -120,10 +117,9 @@ const AppRoutes = () => {
             <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
             <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />
             <Route path="dareme/requests/:daremeId" element={<AuthRoute child={<DareRequests />} routeType="private" />} />
-            <Route path="dareme/fanwall/post/:daremeId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
-            <Route path="dareme/fanwall/post/:daremeId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
-            <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} />
-            <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
+
+
+            
 
             <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
             <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
@@ -134,6 +130,19 @@ const AppRoutes = () => {
             <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
             <Route path="/not-founder-cover" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
+
+
+
+            <Route path="dareme/fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
+            <Route path="dareme/fanwall/post/:daremeId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
+            <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} />
+            <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
+
+            {/* <Route path="fanwall/post/:fundmeId" element={<AuthRoute child={<PostFanwallFundme />} routeType="private" />} /> */}
+            <Route path="fundme/fanwall/post/:fundmeId/upload" element={<AuthRoute child={<UploadVideoFundme/>} routeType="private" />} />
+            {/* <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} /> */}
+            {/* <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} /> */}
+
         </Routes>
     );
 }

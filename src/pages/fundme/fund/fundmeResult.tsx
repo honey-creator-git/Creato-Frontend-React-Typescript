@@ -96,7 +96,6 @@ const FundmeResult = () => {
     }
 
     useEffect(() => {
-        console.log('fundmen resujlt page');
         window.scrollTo(0, 0);
         dispatch(fundmeAction.getFundmeResult(fundmeId));
     }, [location]);
@@ -117,7 +116,7 @@ const FundmeResult = () => {
             <div className="title-header">
                 <Title
                     title={contexts.HEADER_TITLE.FUNDME_RESULT}
-                    back={() => { navigate(loadState.prevRoute); }}
+                    back={() => { navigate('/'); }}
                     voters={() => { navigate(`/fundme/${fundmeId}/voters`) }}
                     ownerId={fundme?.owner?._id}
                 />

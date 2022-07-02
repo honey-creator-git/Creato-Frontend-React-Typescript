@@ -15,6 +15,8 @@ import '../../assets/styles/payment/stripe/checkoutFormStyle.scss';
 
 const stripePromise = loadStripe(CONSTANT.STRIPE_PUBLIC_KEY);
 
+console.log('LOADED PAGE1')
+
 const CheckoutForm = (props: any) => {
     const dispatch = useDispatch();
     const formRef = useRef<any>(null);
@@ -24,12 +26,15 @@ const CheckoutForm = (props: any) => {
     const [errorToDisplay, setErrorToDisplay] = useState('');
     
     const handleSubmit = async (e: any) => {
+
+        console.log('HANDLE SUBMIT')
         e.preventDefault();
-        if (!stripe || !elements) return;
         
+        if (!stripe || !elements) return;
         const cardElement: any = elements.getElement(CardElement);
         if(!cardElement) return setErrorToDisplay('No exit card!');
         const token = await stripe.createToken(cardElement);
+        console.log(token)
         if(token.error) return setErrorToDisplay('' + token.error.message);        
         dispatch(paymentACtion.buyDonuts(token.token, props.donutPlan));
         setErrorToDisplay('');
@@ -81,6 +86,5 @@ const PaymentForm = (props: any) => {
         </Elements>
     )
 }
-
 
 export default PaymentForm;

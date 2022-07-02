@@ -35,6 +35,7 @@ const CreateFundme = () => {
     const fundmeStore = useSelector((state: any) => state.fundme);
     const userState = useSelector((state: any) => state.auth);
     const loadState = useSelector((state: any) => state.load);
+    const prevRoute = useSelector((state: any) => state.load.prevRoute);
     const fundmeState = fundmeStore.fundme;
     const dlgState = loadState.dlgState;
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -141,8 +142,7 @@ const CreateFundme = () => {
                     if ((fundmeState.teaser === null && fundmeStore.teaserFile === null)
                         && fundmeState.deadline === null
                         && fundmeState.category === null
-                        && fundmeState.title === null
-                        && (fundmeState.options.length === 0 || (fundmeState.options.length > 0 && fundmeState.options[0].option.title === null && fundmeState.options[1].option.title === null)))
+                        && fundmeState.title === null)
                         navigate(`/${user.personalisedUrl}`);
                     else setOpen(true);
                 }}
@@ -181,8 +181,9 @@ const CreateFundme = () => {
                             text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
                             handleClick: () => {
                                 setOpen(false);
-                                if (fundmeStore.coverFile === null) getFirstFrame(0);
-                                else dispatch(fundmeAction.saveFundme(fundmeState, fundmeStore.teaserFile, fundmeStore.coverFile, navigate, `/${user.personalisedUrl}`));
+                                const video: any = document.getElementById("element")?.firstChild;
+                                if (fundmeStore.coverFile === null && video) getFirstFrame(0);
+                                else dispatch(fundmeAction.saveFundme(fundmeState, fundmeStore.teaserFile, fundmeStore.coverFile, navigate, prevRoute));
                             }
                         }
                     ]}

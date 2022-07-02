@@ -7,12 +7,17 @@ import {
     SET_FANWALL,
     SET_FANWALL_WINOPTION,
     SET_FANWALL_TOPFANS,
-    SET_USER
+    SET_FANWALL_GOAL,
+    SET_FANWALL_WALLET,
+    SET_USER,
+    SET_FUNDME,
+    SET_DAREME
 } from "../types";
 import * as api from "../../api";
+import { daremeAction } from "./daremeActions";
 
 export const fanwallAction = {
-    saveFanwall: (fanwall: any, daremeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    saveFanwall: (fanwall: any, itemId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         dispatch({ type: SET_LOADING_TRUE });
         let result: any = null;
         let cover: any = null;
@@ -36,7 +41,8 @@ export const fanwallAction = {
         }
         api.saveFanwall({
             fanwallId: fanwall.id,
-            daremeId: daremeId,
+            type: fanwall.type,
+            itemId: itemId,
             sizeType: fanwall.sizeType,
             cover: cover?.data.success ? cover.data.path : fanwall.cover,
             video: result?.data.success ? result.data.path : fanwall.video,
@@ -45,23 +51,28 @@ export const fanwallAction = {
             posted: fanwall.posted
         }).then((result) => {
             const { data } = result;
+            dispatch({ type: SET_LOADING_FALSE });
             if (data.success) {
-                dispatch({ type: SET_LOADING_FALSE });
-                navigate(`/dareme/result/${daremeId}`);
+                if (fanwall.type == 'dareme') navigate(`/dareme/result/${itemId}`);
+                else navigate(`/fundme/result/${itemId}`);
             }
         }).catch(err => console.log(err));
     },
 
     getPostDetail: (fanwallId: any) => async (dispatch: Dispatch<any>) => {
         dispatch({ type: SET_LOADING_TRUE });
-        dispatch({ type: SET_FANWALL_INITIAL });
         api.getPostDetail(fanwallId)
             .then((result: any) => {
                 const { data } = result;
                 if (data.success) {
+                    dispatch({ type: SET_FUNDME, payload: data.fanwall.fundme });
+                    dispatch({ type: SET_DAREME, payload: data.fanwall.dareme })
+                    dispatch({ type: SET_FANWALL_INITIAL, payload: data.goal ? 'fundme' : 'dareme' });
                     dispatch({ type: SET_FANWALL_TOPFANS, payload: data.topFuns });
                     dispatch({ type: SET_FANWALL, payload: data.fanwall });
                     dispatch({ type: SET_FANWALL_WINOPTION, payload: data.winOption });
+                    dispatch({ type: SET_FANWALL_GOAL, payload: data.goal });
+                    dispatch({ type: SET_FANWALL_WALLET, payload: data.wallet });
                     dispatch({ type: SET_LOADING_FALSE });
                 }
             }).catch((err: any) => console.log(err));

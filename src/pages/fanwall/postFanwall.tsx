@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { daremeAction } from "../../redux/actions/daremeActions";
+import { fundmeAction } from "../../redux/actions/fundmeActions";
 import { fanwallAction } from "../../redux/actions/fanwallActions";
 import VideoCardDesktop from "../../components/dareme/videoCardDesktop";
 import VideoCardFanwall from "../../components/fanwall/videoCardFanwall";
@@ -19,14 +20,18 @@ import '../../assets/styles/fanwall/postFanwallStyle.scss';
 
 
 const PostFanwall = () => {
-    const { daremeId } = useParams();
+    const { itemId } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const daremeState = useSelector((state: any) => state.dareme);
+    const fundmeState = useSelector((state: any) => state.fundme);
     const fanwallState = useSelector((state: any) => state.fanwall);
+
     const dareme = daremeState.dareme;
+    const fundme = fundmeState.fundme;
     const fanwall = fanwallState.fanwall;
+
     const [message, setMessage] = useState(fanwall.message ? fanwall.message : "");
     const [embedUrl, setEmbedUrl] = useState(fanwall.embedUrl ? fanwall.embedUrl : "");
     const [type, setType] = useState(0);
@@ -35,6 +40,11 @@ const PostFanwall = () => {
     const [isPublish, setIsPublish] = useState(false);
     const contexts = useContext(LanguageContext);
     const prevRoute = useSelector((state: any) => state.load.prevRoute);
+
+    const item = fanwallState.itemType == 'dareme' ? dareme : fundme;
+
+    console.log('item...',item);
+    console.log('item.type.....',fanwallState.itemType);
 
     const youtube_parser = (url: any) => {
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -50,28 +60,30 @@ const PostFanwall = () => {
 
     const goDaremeResult = () => {
         setIsSave(false);
-        dispatch(fanwallAction.saveFanwall({ 
+        dispatch(fanwallAction.saveFanwall({
             id: fanwall._id,
             video: fanwall.video,
             cover: fanwall.cover,
             sizeType: fanwall.sizeType,
             message: message,
             embedUrl: embedUrl,
-            posted: false
-         }, daremeId, navigate));
+            posted: false,
+            type: fanwallState.itemType
+        }, item._id, navigate));
     }
 
     const publishFanwall = () => {
         setIsPublish(false);
-        dispatch(fanwallAction.saveFanwall({ 
+        dispatch(fanwallAction.saveFanwall({
             id: fanwall._id,
             video: fanwall.video,
             sizeType: fanwall.sizeType,
             cover: fanwall.cover,
             message: message,
             embedUrl: embedUrl,
-            posted: true
-         }, daremeId, navigate));
+            posted: true,
+            type: fanwallState.itemType
+        }, item._id, navigate));
     }
 
     useEffect(() => {
@@ -79,11 +91,10 @@ const PostFanwall = () => {
     }, [location]);
 
     useEffect(() => {
-        console.log(message.split("\n"));
     }, [message]);
 
     useEffect(() => {
-        if (embedUrl.indexOf("youtube") && youtube_parser(embedUrl)) {
+        if (embedUrl.indexOf("youtu") && youtube_parser(embedUrl)) {
             setType(1);
             setVideoId(youtube_parser(embedUrl));
         } else if (embedUrl.indexOf("vimeo") && vimeo_parser(embedUrl)) {
@@ -97,13 +108,11 @@ const PostFanwall = () => {
     return (
         <>
             <div className="title-header">
-                <Title title={contexts.HEADER_TITLE.POSTING_ON_FANWALL} 
-                back={() => {
-                    setIsSave(true);
-                }} 
+                <Title title={contexts.HEADER_TITLE.POSTING_ON_FANWALL}
+                    back={() => navigate(prevRoute)}
                 />
             </div>
-            {dareme.owner &&
+            {item.owner &&
                 <div className="dareme-post-fanwall">
                     <Dialog
                         display={isSave}
@@ -134,21 +143,39 @@ const PostFanwall = () => {
                     <div className="dareme-post-fanwall-videoCardDesktop">
                         <VideoCardDesktop
                             url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                            sizeType={dareme.sizeType}
-                            coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                            sizeType={item.sizeType}
+                            coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
                         />
-                        <AvatarLink
-                            username={dareme.owner.name}
-                            avatar={dareme.owner.avatar}
-                            ownerId={dareme.owner._id}
-                            handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
-                            daremeId={dareme._id}
-                        />
+                        {fanwallState.itemType == 'dareme' &&
+                            <AvatarLink
+                                username={item.owner.name}
+                                avatar={item.owner.avatar}
+                                ownerId={item.owner._id}
+                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
+                                itemId={item._id}
+                            />
+                        }
+                        {
+                            fanwallState.itemType == 'fundme' &&
+                            <AvatarLink
+                                username={item.owner.name}
+                                avatar={item.owner.avatar}
+                                ownerId={item.owner._id}
+                                handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
+                                itemId={item._id}
+                            />
+                        }
+
                     </div>
                     <div className="dare-post-fanwall-info scroll-bar">
                         <div className="dare-post-fanwall-main">
                             <div className="reward-name">
-                                <span>{dareme.options.filter((option: any) => option.option.win === true)[0].option.title}</span>
+                                {fanwallState.itemType == 'dareme' &&
+                                    <span>{item.options.filter((option: any) => option.option.win === true)[0].option.title}</span>
+                                }
+                                {fanwallState.itemType == 'fundme' &&
+                                    <span>{item.title}</span>
+                                }
                             </div>
                             <div>
                                 <Input
@@ -207,7 +234,7 @@ const PostFanwall = () => {
                             {fanwall.video ?
                                 <div className="post-video">
                                     <VideoCardFanwall
-                                        url={fanwall.video?.preview ? fanwall.video.preview : fanwall.video ? `${CONSTANT.SERVER_URL}/${fanwall.video}`: ""}
+                                        url={fanwall.video?.preview ? fanwall.video.preview : fanwall.video ? `${CONSTANT.SERVER_URL}/${fanwall.video}` : ""}
                                         coverImage={fanwall.cover?.preview ? fanwall.cover.preview : fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
                                         sizeType={fanwall.sizeType ? fanwall.sizeType : false}
                                     />
@@ -222,7 +249,7 @@ const PostFanwall = () => {
                                 <div onClick={() => {
                                     const state = { ...fanwall, message: message, embedUrl: embedUrl };
                                     dispatch({ type: SET_FANWALL, payload: state })
-                                    navigate(`/dareme/fanwall/post/${daremeId}/upload`);
+                                    navigate(`/dareme/fanwall/post/${itemId}/upload`);
                                 }}>
                                     <ContainerBtn
                                         text={contexts.POSTING_ON_FANWALL.EXCLUSIVE_VIDEO}

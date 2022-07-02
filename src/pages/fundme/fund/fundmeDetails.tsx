@@ -158,7 +158,7 @@ const FundmeDetails = () => {
           />
           <Dialog
             display={isFundCopyLink}
-            title={contexts.DIALOG.HEADER_TITLE.HAVE_DARED}
+            title={contexts.DIALOG.HEADER_TITLE.HAVE_FUNDED}
             avatars={type === 1 ? [
               fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
               user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
@@ -176,9 +176,9 @@ const FundmeDetails = () => {
               }
             ]}
             social
+            isFundme={true}
             ownerName={fundme.owner.name}
             daremeId={fundmeId}
-            shareType={"vote"}
             daremeTitle={fundme.title}
           />
           <Dialog
@@ -230,9 +230,9 @@ const FundmeDetails = () => {
               }
             ]}
             social
-            isFundme={true}
             daremeId={fundmeId}
             ownerName={fundme.owner.name}
+            daremeTitle={fundme.title}
           />
           <Dialog
             display={isOneFree}

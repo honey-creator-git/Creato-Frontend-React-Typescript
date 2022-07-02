@@ -56,8 +56,9 @@ const DaremeDetails = () => {
 
   const dareCreator = (user: any) => {
     if (user) {
-      if (dareme.time > 1) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
-      else setIsDareDisable(true);
+      dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
+      // // if (dareme.time > 1) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
+      // // else setIsDareDisable(true);
     } else setIsSignIn(true);
   }
 
@@ -211,7 +212,7 @@ const DaremeDetails = () => {
                   :
                   <div onClick={() => { dareCreator(user); }}>
                     <ContainerBtn
-                      disabled={dareme.time < 1 ? true : false}
+                      // disabled={dareme.time < 1 ? true : false}
                       styleType="fill"
                       text={contexts.DAREME_DETAILS.HAVE_IDEA}
                     />

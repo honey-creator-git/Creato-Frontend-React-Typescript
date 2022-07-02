@@ -33,7 +33,7 @@ const AvatarLink = (props: any) => {
     useEffect(() => {
         if (!res) setMoreInfo(res);
     }, [res]);
-
+    
     return (
         <>
             <div className="avatar-link-wrapper">
@@ -60,7 +60,7 @@ const AvatarLink = (props: any) => {
                     </div>
                     {isFanwall ?
                         <>
-                            {(user && user.id === ownerId) &&
+                            {(user && user.id === ownerId && isFanwall) &&
                                 <div className="list" onClick={() => { }}>
                                     Edit
                                 </div>
@@ -73,10 +73,10 @@ const AvatarLink = (props: any) => {
                             Report
                         </div>
                     }
-                    {(user && user.id === ownerId) &&
+                    {(user && user.id === ownerId && isFanwall) &&
                         <div className="list" onClick={() => {
                             setMoreInfo(false);
-                            if (isFanwall) delData();
+                            delData();
                         }}>
                             Delete
                         </div>

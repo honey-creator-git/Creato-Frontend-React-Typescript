@@ -1,5 +1,5 @@
-import { useEffect, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { daremeAction } from "../redux/actions/daremeActions";
 import { LanguageContext } from "../routes/authRoute";
@@ -18,6 +18,7 @@ import CONSTANT from "../constants/constant";
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_FANWALL_INITIAL } from "../redux/types";
 import { RewardIcon } from "../assets/svg";
 import "../assets/styles/homeStyle.scss";
+import { fundmeAction } from "../redux/actions/fundmeActions";
 
 const creatoList = [
   {
@@ -72,19 +73,19 @@ const Home = () => {
   const [openDonutsPlanDlg, setOpenDonutsPlanDlg] = useState(false);
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
   const [openTopupDlg, setOpenTopupDlg] = useState(false);
-  const [openErrorDlg,setOpenErrorDlg] = useState(false);
+  const [openErrorDlg, setOpenErrorDlg] = useState(false);
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false);
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
   const [fanwallId, setFanwallId] = useState("");
-  const [errorText,setErrorText] = useState("")
+  const [errorText, setErrorText] = useState("")
   const user = userState.user;
   const dlgState = loadState.dlgState;
-  
 
-  const BuyDonuts = (creato: any) => {
-    if (user) setDonutPlan(creato);
+  const buyDonuts = async(creato: any) => {
+    if (user) {await setDonutPlan(creato);}
     else setOpenSigninDlg(true);
+    console.log(donutPlan)
   }
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const Home = () => {
   useEffect(() => {
     setOpenDonutsPlanDlg(donutPlan);
   }, [donutPlan]);
-
+  
   useEffect(() => {
     if (dlgState.type === "buyDonut") {
       if (dlgState.state) {
@@ -106,14 +107,14 @@ const Home = () => {
       if (dlgState.state) {
         setOpenWelcomeDlg(true);
       }
-    } else if(dlgState.type === 'error') {
+    } else if (dlgState.type === 'error') {
       if (dlgState.state) {
         setOpenErrorDlg(true);
         setErrorText(dlgState.msg);
       }
     }
   }, [dlgState]);
-
+  
   return (
     <div className="home-wrapper">
       <PaymentForm
@@ -177,17 +178,17 @@ const Home = () => {
         }}
         title="Error!"
         context={errorText}
-        // buttons={[
-        //   {
-        //     text: 'Dare now',
-        //     handleClick: () => {
-        //       setOpenErrorDlg(false);
-        //       setDonutPlan(null);
-        //       dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
-        //       navigate("/");
-        //     }
-        //   }
-        // ]}
+      // buttons={[
+      //   {
+      //     text: 'Dare now',
+      //     handleClick: () => {
+      //       setOpenErrorDlg(false);
+      //       setDonutPlan(null);
+      //       dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+      //       navigate("/");
+      //     }
+      //   }
+      // ]}
       />
       <Dialog
         display={openWelcomeDlg}
@@ -264,8 +265,9 @@ const Home = () => {
               <div className="dareme" key={i}>
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+                  goal={dareme.goal ? dareme.goal : null}
+                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   title={dareme.title}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   donuts={dareme.donuts}
                   time={dareme.time}
                   finished={dareme.finished}
@@ -273,14 +275,22 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
                 <AvatarLink
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                  }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -295,7 +305,7 @@ const Home = () => {
           {creatoList.map((creato, i) => (
             <div className="donuts" key={i} onClick={() => {
               dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" });
-              BuyDonuts(creato);
+              buyDonuts(creato);
             }}>
               <Creato
                 discountedPercent={creato.discountedPercent}
@@ -317,7 +327,8 @@ const Home = () => {
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                   title={dareme.title}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                  goal={dareme.goal ? dareme.goal : null}
+                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   donuts={dareme.donuts}
                   time={dareme.time}
                   finished={dareme.finished}
@@ -325,14 +336,22 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
                 <AvatarLink
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                  }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -359,7 +378,8 @@ const Home = () => {
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                   title={dareme.title}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                  goal={dareme.goal ? dareme.goal : null}
+                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   donuts={dareme.donuts}
                   time={dareme.time}
                   finished={dareme.finished}
@@ -367,14 +387,22 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
                 <AvatarLink
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                  }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -408,7 +436,8 @@ const Home = () => {
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                   title={dareme.title}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                  goal={dareme.goal ? dareme.goal : null}
+                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   donuts={dareme.donuts}
                   time={dareme.time}
                   finished={dareme.finished}
@@ -416,14 +445,22 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
                 <AvatarLink
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                  }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -473,23 +510,6 @@ const Home = () => {
           )): '' } */}
       {/* </div> */}
       {/*  </div> */}
-      <div className="section">
-        <div className="title">{contexts.HOME_LETTER.GET_DONUTS_TO_DARE}</div>
-        <div className="donuts-list scroll-bar">
-          {creatoList.map((creato, i) => (
-            <div className="donuts" key={i} onClick={() => {
-              dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" });
-              BuyDonuts(creato);
-            }}>
-              <Creato
-                discountedPercent={creato.discountedPercent}
-                donutCount={creato.donutCount}
-                property={creato.property}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
       {(daremes.length > 0 && daremes.filter((dareme: any) => (dareme.finished === true && dareme.fanwall === false)).length > 0) &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.FINISHED_DAREME}</div>
@@ -510,7 +530,8 @@ const Home = () => {
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                   title={dareme.title}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                  goal={dareme.goal ? dareme.goal : null}
+                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   donuts={dareme.donuts}
                   time={dareme.time}
                   sizeType={dareme.sizeType}
@@ -518,14 +539,22 @@ const Home = () => {
                   finished={dareme.finished}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
                 <AvatarLink
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (dareme.type == 'dareme')
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    else if (dareme.type == 'fundme')
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                  }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -553,18 +582,28 @@ const Home = () => {
                   title={fanwall.dareme.title}
                   sizeType={fanwall.sizeType}
                   coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
-                  category={contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
+                  goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
+                  category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
                   posted={true}
                   fanwallData={fanwall}
                   handleSubmit={() => {
                     dispatch({ type: SET_FANWALL_INITIAL });
                     navigate(`/dareme/fanwall/detail/${fanwall.id}`)
+                    // if (fanwall.dareme.goal)
+                    //   navigate(`/fundme/fanwall/detail/${fanwall.id}`)
+                    // else
+                    //   navigate(`/dareme/fanwall/detail/${fanwall.id}`)
                   }}
                 />
                 <AvatarLink
                   username={fanwall.writer.name}
                   avatar={fanwall.writer.avatar}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate)); }}
+                  handleAvatar={() => {
+                    if (fanwall.dareme.goal)
+                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
+                    else
+                      dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
+                  }}
                   ownerId={fanwall.writer._id}
                   url={"/"}
                   delData={() => {

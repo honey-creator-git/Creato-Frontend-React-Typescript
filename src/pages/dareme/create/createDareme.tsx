@@ -133,6 +133,7 @@ const CreateDareme = () => {
 
   useEffect(() => {
     setPrevBtn(Preview());
+    console.log(daremeState.options)
   }, [daremeState]);
 
   useEffect(() => {
@@ -178,7 +179,9 @@ const CreateDareme = () => {
               text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
               handleClick: () => {
                 setOpen(false);
-                if (daremeStore.coverFile === null && daremeState.cover === null) getFirstFrame(0);
+                const video: any = document.getElementById("element")?.firstChild;
+                
+                if (daremeStore.coverFile === null && daremeState.cover === null && video) getFirstFrame(0);
                 else dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, prevRoute));
               }
             }
@@ -412,14 +415,16 @@ const CreateDareme = () => {
                       leading={false}
                       canVote={
                         daremeState.options[0]?.option.title === undefined ||
-                          daremeState.options[0]?.option.title === ""
+                          daremeState.options[0]?.option.title === "" ||
+                            daremeState.options[0]?.option.title === null
                           ? false
                           : true
                       }
                       disabled={false}
                       donuts={0}
                       dareTitle={daremeState.options[0] === undefined ||
-                        daremeState.options[0].option.title === '' ?
+                        daremeState.options[0].option.title === null ||
+                          daremeState.options[0].option.title === '' ?
                         `${contexts.CREATE_DAREME_LETTER.FIRST_DARE_OPTION}` : daremeState.options[0]?.option.title}
                       username={user ? user.name : ''}
                       handleSubmit={() => { }}
@@ -433,15 +438,18 @@ const CreateDareme = () => {
                       leading={false}
                       canVote={
                         daremeState.options[1]?.option.title === undefined ||
-                          daremeState.options[1]?.option.title === ""
+                          daremeState.options[1]?.option.title === null ||
+                            daremeState.options[1]?.option.title === ""
                           ? false
                           : true
                       }
                       disabled={false}
                       donuts={0}
                       dareTitle={
-                        daremeState.options[1] === undefined || daremeState.options[1].option.title === ''
-                          ? `${contexts.CREATE_DAREME_LETTER.FIRST_DARE_OPTION}`
+                        daremeState.options[1] === undefined || 
+                          daremeState.options[1].option.title === null ||
+                            daremeState.options[1].option.title === ''
+                          ? `${contexts.CREATE_DAREME_LETTER.SECOND_DARE_OPTION}`
                           : daremeState.options[1]?.option.title
                       }
                       username={user ? user.name : ''}

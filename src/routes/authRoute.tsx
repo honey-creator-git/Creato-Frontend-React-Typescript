@@ -9,7 +9,6 @@ import Layout from '../layout/layout';
 import Layout1 from "../layout/layout1";
 import socketIOClient from "socket.io-client";
 import CONSTANT from '../constants/constant'
-import { notificationAction } from '../redux/actions/notificationAction';
 
 interface routeProps {
     child: any;
@@ -35,7 +34,8 @@ const AuthRoute = (props: routeProps) => {
 
     useEffect(() => {
         if (user) {
-            // setContexts(user.language === 'EN' ? EN : CH);
+            const lang: any = user.language === 'EN' ? EN : CH;
+            setContexts(lang);
             socket.emit('connected', user.email, user.role);
             socket.on("wallet_change", (donuts: any) => walletChange(donuts));
             // socket.on("create_notification", () => {

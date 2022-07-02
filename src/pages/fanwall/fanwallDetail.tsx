@@ -14,20 +14,26 @@ import CategoryBtn from "../../components/general/categoryBtn";
 import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
 import { CreatoCoinIcon, MoreIcon, WinningIcon } from "../../assets/svg";
-import { SET_PREVIOUS_ROUTE } from "../../redux/types";
+import { SET_PREVIOUS_ROUTE ,SET_FANWALL_TYPE} from "../../redux/types";
 import "../../assets/styles/fanwall/fanwallDetailsStyle.scss";
 
 const FanwallDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { fanwallId } = useParams();
+
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userState = useSelector((state: any) => state.auth);
   const loadState = useSelector((state: any) => state.load);
+
   const fanwall = fanwallState.fanwall;
   const winOption = fanwallState.winOption;
   const topFuns = fanwallState.topFuns;
+  const goal = fanwallState.goal;
+  const wallet = fanwallState.wallet;
+
   const contexts = useContext(LanguageContext);
+
   const [totalDonuts, setTotalDonuts] = useState<any>(0);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(0);
@@ -36,13 +42,18 @@ const FanwallDetails = () => {
   const [isTopUp, setIsTopUp] = useState(false);
   const [moreInfo, setMoreInfo] = useState(false);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
-  const user = userState.user;
 
+
+  const interval = goal ? (Number(goal) / 20).toFixed(1) : 0;
+  const count = goal ? Number(Math.floor(Number(wallet) / Number(interval))) : 0;
+  const width = wallet <= interval ? Math.floor(Number(interval) / Number(goal) * 330) : Math.floor(Number(interval) * count / Number(goal) * 330);
+
+  const user = userState.user;
+  
   const handleUnlock = () => {
     if (user) setIsUnLock(true);
     else setIsSignIn(true);
   }
-
   const handleLike = () => {
     if (user) {
       const likes = fanwall.likes.filter((like: any) => (like.liker + "" === user.id + ""));
@@ -78,11 +89,11 @@ const FanwallDetails = () => {
 
   return (
     <>
-      {(winOption && fanwall.writer) &&
+      {(fanwall.writer) &&
         <div>
           <div className="title-header">
             <Title title={contexts.HEADER_TITLE.POST_DETAILS} back={() => {
-              navigate(loadState.prevRoute);
+              navigate('/');
             }} />
           </div>
           <div className="fanwall-detail-wrapper">
@@ -202,10 +213,12 @@ const FanwallDetails = () => {
                     }}>
                       Copy link
                     </div>
-                    {/* {(user && user.id === fanwall.writer._id) &&
-                      <> */}
+                    {(user && user.id === fanwall.writer._id) &&
+                      <>
                         <div className="list" onClick={() => {
-                          navigate('/dareme/fanwall/post/+daremeId');                          
+                          if(fanwall.dareme) dispatch({type:SET_FANWALL_TYPE,payload:'dareme'});
+                          else dispatch({type:SET_FANWALL_TYPE,payload:'fundme'});
+                          navigate(`/dareme/fanwall/post/${fanwallId}`);
                         }}>
                           Edit
                         </div>
@@ -215,8 +228,8 @@ const FanwallDetails = () => {
                         }}>
                           Delete
                         </div>
-                      {/* </>
-                    } */}
+                      </>
+                    }
                     <div className="list" onClick={() => { setMoreInfo(false) }}>Cancel</div>
                   </div>
                 </div>
@@ -234,6 +247,20 @@ const FanwallDetails = () => {
                   handleUnlock={handleUnlock}
                 />
               </div>
+              {(fanwall.writer && goal) &&
+                <div className="funding-goal">
+                  <div className="title">
+                    <CreatoCoinIcon color="#EFA058" />
+                    <label>{wallet < goal ? "Goal" : "Goal Reached!"}</label>
+                  </div>
+                  <div className="process-bar">
+                    <div className="process-value" style={{ width: wallet < goal ? `${width}px` : '330px' }}></div>
+                  </div>
+                  <div className="donuts-count">
+                    <span><span className={wallet >= goal ? "over-donuts" : ""}>{wallet.toLocaleString()}</span> / {goal.toLocaleString()} Donuts</span>
+                  </div>
+                </div>
+              }
               {(fanwall.writer && winOption) &&
                 <div className="win-option">
                   <DareOption
@@ -264,7 +291,7 @@ const FanwallDetails = () => {
                   <div className="letter">Top Fans</div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px' }}>
-                  {topFuns.length > 0 &&
+                  {topFuns && topFuns.length > 0 &&
                     topFuns.map((fan: any, index: any) => (
                       <div className="top-fan-avatar" key={index} onClick={() => { navigate(`/${fan.personalisedUrl}`); }}>
                         <Avatar

@@ -8,6 +8,7 @@ import Title from '../components/general/title';
 import Dialog from '../components/general/dialog';
 import { CreatoCoinIcon, LightbulbIcon, SpreadIcon } from '../assets/svg';
 import "../assets/styles/createStyle.scss";
+import {SET_PREVIOUS_ROUTE} from '../redux/types';
 
 const Create = () => {
     const navigate = useNavigate();
@@ -18,9 +19,10 @@ const Create = () => {
 
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
-    const gotoDareMe = () => { dispatch(daremeAction.getDraftDareme(navigate)) }
+    const gotoDareMe = () => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/create' }); dispatch(daremeAction.getDraftDareme(navigate)) }
     const gotoFundMe = () => { 
         setOpenLinkSocial(true);
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/create' });
         dispatch(fundmeAction.getDraftFundme(navigate));
     }
 

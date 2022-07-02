@@ -11,7 +11,7 @@ import "../../assets/styles/dialogStyle.scss";
 
 const Dialog = (props: any) => {
     const { display, title, exit, context, buttons, icon, social, avatars, daremeId, ownerName, wrapExit, sizeType, subcontext, shareType, daremeTitle, isFundme, subTitle } = props;
-
+    
     return (
         <div className="dialog-wrapper" style={display ? { visibility: 'visible', opacity: 1 } : {}} onClick={wrapExit}>
             <div className="dialog-main" onClick={e => e.stopPropagation()}>
@@ -70,8 +70,11 @@ const Dialog = (props: any) => {
                 </div>
                 {subcontext &&
                     <>
-                        <div className="dialog-subcontext-top-header">
-                            <span style={{ whiteSpace: 'pre-line' }}>🎉 You’ve earned 60 Donuts!</span>
+                        <div className="dialog-subcontext-top-header"> 
+                        { Date.now() - new Date("Fr July 03 2022 00:00:00 GMT+0800").getTime() <= 0 ? 
+                            <span style={{ whiteSpace: 'pre-line' }}>🎉 You’ve earned 60 Donuts!</span> : 
+                            <span style={{ whiteSpace: 'pre-line' }}>🎉 You’ve earned 30 Donuts!</span>
+                        }
                         </div>
                         <div className="dialog-subcontext-header">
                             <span style={{ whiteSpace: 'pre-line' }}>You can now:</span>
@@ -104,14 +107,19 @@ const Dialog = (props: any) => {
                 {social &&
                     <div className="dialog-social">
                         <div className="link" onClick={() => {
-                            if (isFundme) { }
+                            if (isFundme) {
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`);
+                             }
                             else window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
                         }}>
                             <FacebookIcon color="#EFA058" />
                         </div>
                         <div className="link" onClick={() => {
                             let text = "";
-                            if (isFundme) { }
+                            if (isFundme) {
+                                text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`;
+                                window.open(`whatsapp://send?text=${text}`);
+                             }
                             else {
                                 if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
                                 else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
@@ -123,7 +131,10 @@ const Dialog = (props: any) => {
                         </div>
                         <div className="link" onClick={() => {
                             let text = "";
-                            if (isFundme) { }
+                            if (isFundme) { 
+                                text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
+                                window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}&text=${text}`, 'sharer');
+                            }
                             else {
                                 if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
                                 else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;

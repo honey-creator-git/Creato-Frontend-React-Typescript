@@ -37,7 +37,7 @@ export const daremeAction = {
     let resultCover = null;
     if (dareme.title === null && dareme.deadline === null && dareme.category === null && (dareme.teaser === null && teaser === null)
       && (dareme.options.length === 0 || (dareme.options.length !== 0 && dareme.options[0].option.title === "" && dareme.options[1].option.title === ""))) {
-      navigate(url);
+      navigate('/');
     } else {
       if (teaser && teaser.preview.indexOf('uploads') === -1) {
         const formData = new FormData();
@@ -59,7 +59,7 @@ export const daremeAction = {
           const { data } = res;
           if (data.success) {
             dispatch({ type: SET_DAREME, payload: data.dareme });
-            navigate(url);
+            navigate('/');
           }
           dispatch({ type: SET_LOADING_FALSE });
         }).catch((err) => console.log(err));
@@ -133,7 +133,7 @@ export const daremeAction = {
       .then((result) => {
         const { data } = result;
         if (data.success) {
-          dispatch({ type: SET_FANWALL, payload: data.fanwall });
+          dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: 'dareme' } });
           dispatch({ type: SET_DAREME, payload: data.dareme });
           dispatch({ type: SET_LOADING_FALSE });
         }
@@ -296,7 +296,7 @@ export const daremeAction = {
         const { data } = result;
         if (data.success) {
           dispatch({ type: SET_DAREME, payload: data.dareme });
-          dispatch({ type: SET_FANWALL_INITIAL });
+          dispatch({ type: SET_FANWALL_INITIAL, payload: 'dareme' });
           if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall });
           dispatch({ type: SET_LOADING_FALSE });
           navigate(`/dareme/fanwall/post/${daremeId}`);
@@ -403,7 +403,7 @@ export const daremeAction = {
     api.getDaremeOptions(daremeId)
       .then((result) => {
         const { data } = result;
-        if(data.success) {
+        if (data.success) {
           dispatch({ type: SET_ADMIN_OPTIONS, payload: data.options });
           dispatch({ type: SET_LOADING_FALSE });
         }

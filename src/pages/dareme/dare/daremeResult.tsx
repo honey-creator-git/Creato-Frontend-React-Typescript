@@ -68,7 +68,7 @@ const DaremeResult = () => {
             <div className="title-header">
                 <Title
                     title={contexts.HEADER_TITLE.DAREME_RESULT}
-                    back={() => { navigate(loadState.prevRoute); }}
+                    back={() => { navigate('/'); }}
                     voters={() => { navigate(`/dareme/${daremeId}/voters`) }}
                     ownerId={dareme?.owner?._id}
                 />

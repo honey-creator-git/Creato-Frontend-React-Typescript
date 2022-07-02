@@ -1,8 +1,23 @@
 export const CH = {
     DAREME_CATEGORY_LIST: ['週末交給你決定', '寵粉絲系列', '創作做什麼', '節日挑戰', '參與其中吧 ', '找數真漢子 ', '挑戰我吧', '才華招募', '求包養系列'],
+    FUNDME_CATEGORY_LIST: ['人生第一次', '寵粉絲系列', '參與其中吧', '找數真漢子', '挑戰我吧', '求包養系列'],
     DAREME_DEADLINE_LIST: ["1 日", "2 日", "3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日"],
     CREATOR_CATEGORY_LIST: ["藝人", "作家", "Blogger", "健身教練", "Gamer", "Instagram Creator", "直播主", "音樂人", "攝影師", "播客", "Tiktok Creator", "影片製作者", "YouTuber"],
     FUNDME_DEADLINE_LIST: ["3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日", "11 日", "12 日", "13 日", "14 日"],
+    REVIEW_LETTER: {
+        DONUTS_NUMBER: '甜甜圈數量',
+        DNUTS: '甜甜圈',
+        AUDIENCE_LETTER: '讓觀眾獲得超級粉絲的資格',
+        REWARDS: '給超級粉絲的獎勵',
+        EXCLUSIVE_CHAT: 'e.g. 獨家聊天、簽名明信片等'
+    },
+    FUNDME_REWARDS: [
+        "獨家幕後影片 📽️",
+        "實時聊天 🖥️",
+        "從未發布的照片 📷",
+        "感謝語 📥",
+        "限量版 T-shirt 👕👚"
+    ],
     HEADER_TITLE: {
         CREATE_FUNDME: '創建 FundMe',
         CREATE_DAREME: '創建 DareMe',
@@ -28,16 +43,22 @@ export const CH = {
     },
     CREATE_LETTER: {
         DAREME_TITLE_LETTER: 'DareMe',
-        DAREME_BODY_LETTER: 'Let fans be part of my creative journey!',
+        DAREME_BODY_LETTER: '誠邀粉絲參與我的內容創作',
         FUNDME_TITLE_LETTER: 'FundMe',
-        FUNDME_BODY_LETTER: 'Support my creative content & get rewarded!',
+        FUNDME_BODY_LETTER: '支持我的創作點子變為現實',
     },
     CREATE_FUNDME_LETTER: {
-        PERIOD: 'Period',
-        FUNDME_TITLE: 'FundMe Title',
-        FUNDING_GOAL: 'Goal',
-        GOAL_LETTER: 'Set an achievable goal for creative content!\ni.e. 10 Donut = $1 USD\ne.g. 3,000 Donuts = ~$2,300 HKD\ne.g. 10,000 Donuts = ~$7,800 HKD',
-        GOAL_PLACEHOLDER: 'e.g. 8,000 Donuts',
+        PERIOD: '期限',
+        FUNDING_GOAL: '目標',
+        GOAL_LETTER: '為內容創作設定一個可實現的甜甜圈目標 \n i.e. 10 甜甜圈 = $1 美元 \n e.g. 3,000 甜甜圈 = ~$2,300 港元 \n e.g. 10,000 甜甜圈 = ~$7,800 港元',
+        GOAL_PLACEHOLDER: 'e.g. 8,000 甜甜圈',
+        UPLOAD_TEASER_VIDEO: '上載預告短片',
+        PREVIEW: '創建',
+        TITLE: 'FundMe 標題',
+        CATEGORY: '類別',
+        CHANGE_TEASER: '更改預告短片',
+        CHOOSE_COVER: '選擇封面',
+        
     },
     GENERAL_COMPONENT: {
         MOBILE_VIDEO_CARD: {
@@ -247,6 +268,7 @@ export const CH = {
             STAY_TUNED: '敬請期待!',
             CONGRAT: '恭喜！',
             UNLOCK_REWARDS: '解鎖獨家內容',
+            DIRECT_BROWSER_TITLE: 'Open In Browser 🌐'
         },
         BODY_LETTER: {
             ERASE_DATA: '刪除所有已輸入的資料',
@@ -270,6 +292,7 @@ export const CH = {
             CAN_EDIT_AFTER_POSTING: '請注意發布後不可修改。',
             DELETE_POST: '刪除帖子',
             UNLOCK_FANWALL: '需要500個冬甩',
+            DIRECT_BROWSER_CONTENT: 'Open in browser \n for a better experience. \n\n 開啓瀏覽器 \n 獲得更好的用戶體驗'
         },
         BUTTON_LETTER: {
             CONFIRM: '確認',
@@ -282,7 +305,8 @@ export const CH = {
             DECLINE: '拒絕',
             PUBLISH: '發佈',
             DELETE: '刪除',
-            CANCEL: '取消'
+            CANCEL: '取消',
+            DIRECT: 'Open/開啓'
         },
     },
     HINT: {
@@ -295,13 +319,14 @@ export const CH = {
             WHAT_IS_TEASER: '什麼是預告?',
         },
         BODY_LETTER: {
-            GOAL: 'Set a Donut amount for funding goal. You will still receive your funding even though the goal has not been met.\n\n10 Donuts = ~$1 USD',
-            WHAT_IS_FUNDME: 'It is a space for creators & fans to bring creative content to life.\n\nAudience who pay to support will get exclusive rewards offered by creators.',
+            GOAL: '為創作目標設置一個甜甜圈金額。即使目標尚未實現，您仍將收到您的甜甜圈 \n i.e. 10 甜甜圈 = $1 美元',
+            WHAT_IS_FUNDME: 'Creato是創作者和粉絲將創作點子變為現實的共創空間, 付費支持的觀眾將獲得創作者提供的獨家獎勵',
             WHAT_IS_DAREME: 'DareMe是您和您的觀眾共同策劃內容創作的地方\n\n與他們分享您的想法，一起 create together 吧！',
             DAREME_TITLE: '簡短描述一下你的想法\n\n幫助粉絲參與您的內容創作 🎨🖌️',
             DARE_OPTIONS: '提出兩個 Dare 來開始 DareMe. ⚖️\n\nDareMe 開始後, 您的粉絲將可向您提出新的 Dare 給您考慮. 💭',
             WHAT_IS_TEASER: '分享您的想法給觀眾們 😛\n\n把預告短片在 20 秒內完成! 🤳🏻',
 
         }
-    }
+    },
+    PUBLISH: '發佈'
 };

@@ -86,7 +86,7 @@ const Preview = () => {
         wrapExit={() => { setOpenPublishDlg(false) }}
         buttons={[
           {
-            text: "Publish",
+            text: contexts.PUBLISH,
             handleClick: () => { onPublish() }
           }
         ]}
@@ -200,7 +200,7 @@ const Preview = () => {
             }
           </div>
           <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setOpenPublishDlg(true) }}>
-            <ContainerBtn text='Publish' styleType="fill" />
+            <ContainerBtn text={contexts.PUBLISH} styleType="fill" />
           </div>
         </div>
       </div>

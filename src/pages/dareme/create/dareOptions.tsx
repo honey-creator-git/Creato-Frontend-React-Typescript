@@ -18,7 +18,7 @@ const DareOptions = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const daremeStore = useSelector((state: any)=> state.dareme);
-  const options = daremeStore.options;
+  const options = daremeStore.dareme.options;
   const contexts = useContext(LanguageContext);
   const [open, setOpen] = useState<boolean>(false)
   const [openHint, setOpenHint] = useState<boolean>(false);
@@ -32,7 +32,7 @@ const DareOptions = () => {
   const onConfirm = () => {
     handleSave();
   };
-
+  
   const handleSave = () => {
     const res = [
       {
@@ -75,17 +75,17 @@ const DareOptions = () => {
           hint={() => setOpenHint(!openHint)}
         />
       </div>
-      <div className="dare-option-wrapper">
+      <div className="dare-option-wrapper"> 
         <Dialog
           title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
-          display={open}
+          display={open} 
           exit={() => { setOpen(false); }}
           wrapExit={() => { setOpen(false); }}
           context={contexts.DIALOG.BODY_LETTER.SAVE_DRAFT}
-          buttons={[
+          buttons={[ 
             {
-              text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
-              handleClick: () => { onConfirm() }
+              text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`, 
+              handleClick: () => { onConfirm() } 
             }
           ]}
         />

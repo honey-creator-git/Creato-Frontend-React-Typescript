@@ -7,13 +7,10 @@ import Hint from "../../../components/general/hint";
 import Input from "../../../components/general/input";
 import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";
-import CONSTANT from "../../../constants/constant";
 import { SET_FUNDME } from "../../../redux/types";
 import { LanguageContext } from "../../../routes/authRoute";
 import { HotIcon } from "../../../assets/svg";
 import "../../../assets/styles/fundme/create/rewards.scss";
-
-const categoris = CONSTANT.FUNDME_REWARDS;
 
 const FundmeRewards = () => {
   const navigate = useNavigate();
@@ -25,6 +22,7 @@ const FundmeRewards = () => {
   const [title, setTitle] = useState<string>(fundmeState.rewardText ? fundmeState.rewardText : "");
   const [reward, setReward] = useState(fundmeState.reward ? fundmeState.reward : 10);
   const [open, setOpen] = useState<boolean>(false);
+  const categoris: string[] = contexts.FUNDME_REWARDS;
 
   const handleSave = () => {
     const state = { ...fundmeState, rewardText: title === "" ? null : title, reward: reward };
@@ -75,10 +73,10 @@ const FundmeRewards = () => {
         />
         <div className="headerSet">
           <HotIcon color="#EFA058" />
-          <span>&nbsp;Donuts</span>
+          <span>&nbsp;{contexts.REVIEW_LETTER.DNUTS}</span>
         </div>
         <div className="donuts-number" style={{ marginTop: '20px' }}>
-          <label>Number of Donuts</label>
+          <label>{contexts.REVIEW_LETTER.DONUTS_NUMBER}</label>
           <Input
             type="input"
             isNumber={true}
@@ -91,15 +89,15 @@ const FundmeRewards = () => {
             setFocus={() => { }}
           />
         </div>
-        <div className="audience-letter">For audience to entitle as a SuperFan.</div>
+        <div className="audience-letter">{contexts.REVIEW_LETTER.AUDIENCE_LETTER}</div>
         <div className="headerSet">
           <HotIcon color="#EFA058" />
-          <span>&nbsp;Reward For SuperFans</span>
+          <span>&nbsp;{contexts.REVIEW_LETTER.REWARDS}</span>
         </div>
         <div className="title-input">
           <Input
             type="input"
-            placeholder="e.g. exclusive chat, signed postcard etc"
+            placeholder={contexts.REVIEW_LETTER.EXCLUSIVE_CHAT}
             wordCount={40}
             title={title}
             setTitle={setTitle}

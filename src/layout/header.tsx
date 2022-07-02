@@ -52,7 +52,7 @@ const Header = () => {
       return false;
     return true;
   }
-
+  
   const gotoHome = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: "createDareMe", state: true } });
     else {
