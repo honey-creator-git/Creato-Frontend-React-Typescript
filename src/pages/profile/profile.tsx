@@ -36,7 +36,6 @@ const Profile = () => {
 
   const handleCreateDareMe = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname });
-    console.log("........................")
     navigate("/create");
   };
 

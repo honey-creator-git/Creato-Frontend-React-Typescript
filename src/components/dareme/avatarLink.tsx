@@ -58,10 +58,12 @@ const AvatarLink = (props: any) => {
                     }}>
                         Copy link
                     </div>
-                    {isFanwall ?
+                    {isFanwall || (user && user.role === "ADMIN") ?
                         <>
-                            {(user && user.id === ownerId && isFanwall) &&
-                                <div className="list" onClick={() => { }}>
+                            {(user && user.id === ownerId && isFanwall || (user && user.role === "ADMIN")) &&
+                                <div className="list" onClick={() => {
+                                    // if (isFundme) navigator('');
+                                }}>
                                     Edit
                                 </div>
                             }
@@ -73,7 +75,7 @@ const AvatarLink = (props: any) => {
                             Report
                         </div>
                     }
-                    {(user && user.id === ownerId && isFanwall) &&
+                    {(user && user.id === ownerId && isFanwall || (user && user.role === "ADMIN")) &&
                         <div className="list" onClick={() => {
                             setMoreInfo(false);
                             delData();

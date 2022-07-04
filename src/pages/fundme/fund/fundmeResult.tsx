@@ -205,13 +205,13 @@ const FundmeResult = () => {
                                             </div>
                                         </>
                                     }
-                                </> :
+                                </> : 
                                 <>
                                     <div className="dare-btn" onClick={() => {
-                                        if (fanwall === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
+                                        if (fanwall.fanwall === null || fanwall.fanwall.posted === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
                                         else {
                                             dispatch({ type: SET_FANWALL_INITIAL });
-                                            navigate(`/dareme/fanwall/detail/${fanwall._id}`);
+                                            navigate(`/dareme/fanwall/detail/${fanwall.fanwall._id}`);
                                         }
                                     }}>
                                         <ContainerBtn text={contexts.DAREME_FINISHED.VIEW_ON_FANWALL} styleType="fill" />

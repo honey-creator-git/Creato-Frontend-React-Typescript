@@ -267,8 +267,7 @@ export const CH = {
             DARE_DECLIEND: '拒絕挑戰',
             STAY_TUNED: '敬請期待!',
             CONGRAT: '恭喜！',
-            UNLOCK_REWARDS: '解鎖獨家內容',
-            DIRECT_BROWSER_TITLE: 'Open In Browser 🌐'
+            UNLOCK_REWARDS: '解鎖獨家內容'
         },
         BODY_LETTER: {
             ERASE_DATA: '刪除所有已輸入的資料',
@@ -291,8 +290,7 @@ export const CH = {
             WIN_CONG: '勝出是次DareMe!\n分享到社交平台吧！',
             CAN_EDIT_AFTER_POSTING: '請注意發布後不可修改。',
             DELETE_POST: '刪除帖子',
-            UNLOCK_FANWALL: '需要500個冬甩',
-            DIRECT_BROWSER_CONTENT: 'Open in browser \n for a better experience. \n\n 開啓瀏覽器 \n 獲得更好的用戶體驗'
+            UNLOCK_FANWALL: '需要500個冬甩'
         },
         BUTTON_LETTER: {
             CONFIRM: '確認',
@@ -305,9 +303,15 @@ export const CH = {
             DECLINE: '拒絕',
             PUBLISH: '發佈',
             DELETE: '刪除',
-            CANCEL: '取消',
-            DIRECT: 'Open/開啓'
+            CANCEL: '取消'
         },
+    },
+    PAYMENT: {
+        PAYMENT_TITLE: "支付方法",
+        STRIPE_ACCOUNT: "Stripe帳戶",
+        STRIPE_CONTENT: "用當地銀行賬戶直接收款 \n 不設最低收費",
+        BUTTON_CONNECT: "連接",
+        COMING_SOON: "快將推出"
     },
     HINT: {
         TITLE: {

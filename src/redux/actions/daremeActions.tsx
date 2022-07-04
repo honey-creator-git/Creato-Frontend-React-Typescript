@@ -37,7 +37,7 @@ export const daremeAction = {
     let resultCover = null;
     if (dareme.title === null && dareme.deadline === null && dareme.category === null && (dareme.teaser === null && teaser === null)
       && (dareme.options.length === 0 || (dareme.options.length !== 0 && dareme.options[0].option.title === "" && dareme.options[1].option.title === ""))) {
-      navigate('/');
+      navigate(url);
     } else {
       if (teaser && teaser.preview.indexOf('uploads') === -1) {
         const formData = new FormData();
@@ -59,7 +59,7 @@ export const daremeAction = {
           const { data } = res;
           if (data.success) {
             dispatch({ type: SET_DAREME, payload: data.dareme });
-            navigate('/');
+            navigate(url);
           }
           dispatch({ type: SET_LOADING_FALSE });
         }).catch((err) => console.log(err));

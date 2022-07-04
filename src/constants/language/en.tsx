@@ -259,6 +259,13 @@ export const EN = {
         PRIVACY_POLICIES: 'Privacy Policy',
         CONTACT_US: 'Contact Us / Help'
     },
+    PAYMENT: {
+        PAYMENT_TITLE: "Payment",
+        STRIPE_ACCOUNT: "Stripe account",
+        STRIPE_CONTENT: "Get paid direcly to local bank account \n No min. charge",
+        BUTTON_CONNECT: "Connect",
+        COMING_SOON: "Coming soon"
+    },
     DIALOG: {
         HEADER_TITLE: {
             CONFIRM: 'Confirm:',
@@ -274,8 +281,7 @@ export const EN = {
             DARE_DECLIEND: 'Dare declined',
             STAY_TUNED: 'Stay tuned!',
             CONGRAT: 'Congratulations!',
-            UNLOCK_REWARDS: 'Unlock Rewards?',
-            DIRECT_BROWSER_TITLE: 'Open In Browser 🌐'
+            UNLOCK_REWARDS: 'Unlock Rewards?'
         },
         BODY_LETTER: {
             ERASE_DATA: 'Erase all the input fields',
@@ -298,8 +304,7 @@ export const EN = {
             WIN_CONG: 'won the DareMe!\n\nShare it to your Fans to stay tuned!',
             CAN_EDIT_AFTER_POSTING: 'Post can be edited afterwards.',
             DELETE_POST: 'Deleting the post',
-            UNLOCK_FANWALL: '500 Donuts is required.',
-            DIRECT_BROWSER_CONTENT: 'Open in browser \n for a better experience. \n\n 開啓瀏覽器 \n 獲得更好的用戶體驗'
+            UNLOCK_FANWALL: '500 Donuts is required.'
         },
         BUTTON_LETTER: {
             CONFIRM: 'Confirm',
@@ -313,8 +318,7 @@ export const EN = {
             DECLINE: 'Decline',
             PUBLISH: 'Publish',
             DELETE: 'Delete',
-            CANCEL: 'Cancel',
-            DIRECT: 'Open/開啓'
+            CANCEL: 'Cancel'
         }
     },
     HINT: {

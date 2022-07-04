@@ -22,7 +22,7 @@ const Auth = (props: any) => {
   const location = useLocation();
   const loadState = useSelector((state: any) => state.load);
   const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB);
-  const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' ? true : false);
+  const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
   const [isHover, setIsHover] = useState(false);
   const [isHover1, setIsHover1] = useState(false);
   const prevRoute = loadState.prevRoute;
@@ -111,9 +111,20 @@ const Auth = (props: any) => {
             text: 'Open / 開啓',
             handleClick: () => {
               if (navigator.userAgent.indexOf('like Mac') !== -1) {
-                window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
+                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                } else {
+                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                }
               } else if (navigator.userAgent.indexOf('Android') !== -1) {
-                window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
+                  let link = document.createElement('a');
+                  link.setAttribute("href", `intent:${CONSTANT.SERVER_URL}/auth/signin#Intent;end`);
+                  link.setAttribute("target", "_blank");
+                  link.click();
+                } else {
+                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                }
               }
             }
           }
@@ -125,7 +136,7 @@ const Auth = (props: any) => {
             <h4>Sign up to enjoy: </h4>
             <br />
             <ul>
-              <li>✅ 60 donuts for free (~$6USD)</li>
+              <li>✅ 30 donuts for free (~$3USD)</li>
               <li>✅ Support & create with Creators</li>
               <li>✅ A private space for fans & creators</li>
             </ul>

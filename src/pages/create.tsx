@@ -15,14 +15,19 @@ const Create = () => {
     const dispatch = useDispatch();
     const contexts = useContext(LanguageContext);
     const prevRoute = useSelector((state: any) => state.load.prevRoute);
+    const user = useSelector((state: any) => state.auth.user);
     const [openLinkSocial, setOpenLinkSocial] = useState(false);
 
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
-    const gotoDareMe = () => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/create' }); dispatch(daremeAction.getDraftDareme(navigate)) }
+    const gotoDareMe = () => {
+        const prevRt =  prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt }); 
+        dispatch(daremeAction.getDraftDareme(navigate)) 
+    }
     const gotoFundMe = () => { 
-        setOpenLinkSocial(true);
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/create' });
+        const prevRt =  prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt }); 
         dispatch(fundmeAction.getDraftFundme(navigate));
     }
 

@@ -49,7 +49,7 @@ const VideoCardFanwall = (props: any) => {
             </div>
             <div className="fanwall-letters">
                 {lock ?
-                    letters.substring(0, 70) + " ... ... ... ..." :
+                    (letters ? letters.substring(0, 70) + " ... ... ... ..." : "") :
                     <Linkify
                         componentDecorator={(decoratedHref: any, decoratedText: any, key: any) => (
                             <a target="blank" href={decoratedHref} key={key}>

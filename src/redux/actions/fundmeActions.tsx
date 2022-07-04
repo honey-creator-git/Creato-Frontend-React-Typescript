@@ -36,7 +36,7 @@ export const fundmeAction = {
     let resultTeaser = null;
     let resultCover = null;
     if (fundme.title === null && fundme.deadline === null && fundme.category === null && (fundme.teaser === null && teaser === null) && fundme.goal === null) {
-      navigate('/');
+      navigate(url);
     } else {
       if (teaser && teaser.preview.indexOf('uploads') === -1) {
         const formData = new FormData();
@@ -58,7 +58,7 @@ export const fundmeAction = {
           const { data } = res;
           if (data.success) {
             dispatch({ type: SET_FUNDME, payload: data.fundme });
-            navigate('/');
+            navigate(url);
           }
           dispatch({ type: SET_LOADING_FALSE });
         }).catch((err) => console.log(err));

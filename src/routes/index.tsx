@@ -117,10 +117,7 @@ const AppRoutes = () => {
             <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
             <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />
             <Route path="dareme/requests/:daremeId" element={<AuthRoute child={<DareRequests />} routeType="private" />} />
-
-
             
-
             <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
             <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
             <Route path="admin/daremes" element={<AuthRoute child={<DareMeList />} routeType="private" />} />
@@ -130,8 +127,6 @@ const AppRoutes = () => {
             <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
             <Route path="/not-founder-cover" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
-
-
 
             <Route path="dareme/fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
             <Route path="dareme/fanwall/post/:daremeId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />

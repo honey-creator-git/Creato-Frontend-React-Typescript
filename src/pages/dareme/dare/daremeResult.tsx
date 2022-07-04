@@ -68,7 +68,7 @@ const DaremeResult = () => {
             <div className="title-header">
                 <Title
                     title={contexts.HEADER_TITLE.DAREME_RESULT}
-                    back={() => { navigate('/'); }}
+                    back={() => { navigate(loadState.prevRoute); }}
                     voters={() => { navigate(`/dareme/${daremeId}/voters`) }}
                     ownerId={dareme?.owner?._id}
                 />
@@ -230,10 +230,10 @@ const DaremeResult = () => {
                                         </> :
                                         <>
                                             <div onClick={() => {
-                                                if (fanwall === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
+                                                if (fanwall.fanwall === null || fanwall.fanwall.posted === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
                                                 else {
                                                     dispatch({ type: SET_FANWALL_INITIAL });
-                                                    navigate(`/dareme/fanwall/detail/${fanwall._id}`);
+                                                    navigate(`/dareme/fanwall/detail/${fanwall.fanwall._id}`);
                                                 }
                                             }}>
                                                 <ContainerBtn text={contexts.DAREME_FINISHED.VIEW_ON_FANWALL} styleType="fill" />
