@@ -61,10 +61,6 @@ const DareMeDetails = () => {
         window.scrollTo(0, 0);
         dispatch(daremeAction.getDaremeDetails(daremeId));
     }, [location]);
-
-    useEffect(() => {
-        console.log(daremeState)
-    })
     
     return (
         <div className="admin-dareme-detail-wrapper" onClick={() => { setOpenCategoryMenu(false); }}>

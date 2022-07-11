@@ -67,13 +67,13 @@ const SupportCreator = () => {
         console.log(dareme)
         console.log(option)
         if (dareme && option)
-            for (let i = 0 ; i < dareme.options.length ; i++)
-                if (dareme.options[i].option._id == option._id) 
+            for (let i = 0; i < dareme.options.length; i++)
+                if (dareme.options[i].option._id == option._id)
                     setVoters(dareme.options[i].option.voters)
     })
-    
+
     const checkVoted = () => {
-        
+
         if (dareme.options && user) {
             for (let i = 0; i < dareme.options.length; i++)
                 for (let j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
@@ -86,14 +86,14 @@ const SupportCreator = () => {
         }
         return false;
     }
-    
-    useEffect(() => {   
+
+    useEffect(() => {
         window.scrollTo(0, 0);
         console.log(option)
         dispatch(daremeAction.getOptionDetails(optionId, daremeId));
-        
+
     }, [location, dispatch, optionId]);
-    
+
     return (
         <>
             <div className="title-header">
@@ -102,7 +102,7 @@ const SupportCreator = () => {
                     navigate(`/dareme/details/${daremeId}`);
                 }} />
             </div>
-            {(option && dareme.owner) && 
+            {(option && dareme.owner) &&
                 <>
                     <Dialog
                         display={isSignIn}

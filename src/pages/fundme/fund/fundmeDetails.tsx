@@ -69,12 +69,13 @@ const FundmeDetails = () => {
         setIsCopyLink(true);
       }
       else {
-        if (user.wallet < donuts) setIsTopUp(true);
+        if (donuts === 1) {
+          setIsFree(true);
+          setType(0);
+        }
         else {
-          if (donuts === 1) {
-            setIsFree(true);
-            setType(0);
-          } else {
+          if (user.wallet < donuts) setIsTopUp(true);
+          else {
             setIsSuperFan(true);
             setType(1);
           }
@@ -88,7 +89,6 @@ const FundmeDetails = () => {
     window.scrollTo(0, 0);
     dispatch(fundmeAction.getFundmeDetails(fundmeId));
     dispatch({ type: SET_CURRENT_FUNDME, payload: null });
-    console.log(fundme)
   }, [location]);
 
   const checkCanFree = () => {

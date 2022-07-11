@@ -24,7 +24,6 @@ import FundmeRewards from '../pages/fundme/create/rewards';
 import FundmeVoters from '../pages/fundme/fund/fundmeVoters';
 import FundmeResult from '../pages/fundme/fund/fundmeResult';
 
-
 import Profile from '../pages/profile/profile';
 import ProfileEdit from '../pages/profile/edit/profileEdit';
 
@@ -73,7 +72,7 @@ const AppRoutes = () => {
             <Route path="/" element={<AuthRoute child={<Home />} />} />
             <Route path="auth/signin" element={<AuthRoute child={<Auth isSignin={true} />} />} />
             <Route path="auth/signup" element={<AuthRoute child={<Auth isSignin={false} />} />} />
-            <Route path="create" element={<AuthRoute child={<Create />} />} />
+            <Route path="create" element={<AuthRoute child={<Create />} routeType="private" />} />
             <Route path="dareme/create" element={<AuthRoute child={<CreateDareme />} routeType="private" />} />
            
             <Route path="dareme/create/teaser" element={<AuthRoute child={<UploadVideo />} routeType="private" />} />

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import Button from "../general/button";
 import { PlayIcon } from "../../assets/svg";
@@ -8,10 +8,6 @@ const VideoCardDesktop = (props: any) => {
     const { url, sizeType, coverImage } = props;
     const playerRef = useRef<ReactPlayer | null>(null);
     const [play, setPlay] = useState(false);
-
-    useEffect(() => {
-        console.log(url)
-    }, [])
 
     return (
         <div className="videoCard-desktop-wrapper">

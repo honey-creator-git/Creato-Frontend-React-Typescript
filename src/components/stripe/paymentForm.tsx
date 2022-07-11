@@ -15,8 +15,6 @@ import '../../assets/styles/payment/stripe/checkoutFormStyle.scss';
 
 const stripePromise = loadStripe(CONSTANT.STRIPE_PUBLIC_KEY);
 
-console.log('LOADED PAGE1')
-
 const CheckoutForm = (props: any) => {
     const dispatch = useDispatch();
     const formRef = useRef<any>(null);

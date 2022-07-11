@@ -261,6 +261,7 @@ export const CH = {
             VOTE_FREE: '免費支持',
             VOTE_SUPER: '超級觀眾',
             HAVE_DARED: '已支持:',
+            HAVE_FUNDED: 'Funded👏🏻',
             I_DARE: '我挑戰：',
             ACCEPT_REQUEST: '接受挑戰',
             DARE_ACCEPTED: '已接受挑戰',
