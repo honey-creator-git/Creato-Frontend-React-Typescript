@@ -8,7 +8,7 @@ import Title from '../components/general/title';
 import Dialog from '../components/general/dialog';
 import { CreatoCoinIcon, LightbulbIcon, SpreadIcon } from '../assets/svg';
 import "../assets/styles/createStyle.scss";
-import {SET_PREVIOUS_ROUTE} from '../redux/types';
+import { SET_PREVIOUS_ROUTE } from '../redux/types';
 
 const Create = () => {
     const navigate = useNavigate();
@@ -21,13 +21,13 @@ const Create = () => {
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
     const gotoDareMe = () => {
-        const prevRt =  prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt }); 
-        dispatch(daremeAction.getDraftDareme(navigate)) 
+        const prevRt = prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt });
+        dispatch(daremeAction.getDraftDareme(navigate))
     }
-    const gotoFundMe = () => { 
-        const prevRt =  prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt }); 
+    const gotoFundMe = () => {
+        const prevRt = prevRoute == `/${user.personalisedUrl}` ? `/${user.personalisedUrl}` : '/';
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: prevRt });
         dispatch(fundmeAction.getDraftFundme(navigate));
     }
 
