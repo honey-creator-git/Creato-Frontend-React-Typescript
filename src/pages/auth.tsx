@@ -78,6 +78,7 @@ const Auth = (props: any) => {
   };
 
   const responseFacebook = (response: any) => {
+    console.log(response)
     let browser = "";
     if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
     else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";

@@ -102,8 +102,8 @@ export const fundmeAction = {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_FUNDME_DETAIL_INITIAL });
     api.getFundMeDetails(fundmeId)
-      .then((result) => {
-        const { data } = result;
+      .then((result: any) => {
+        const {data} = result;
         if (data.success) {
           dispatch({ type: SET_FUNDME, payload: data.fundme });
           dispatch({ type: SET_LOADING_FALSE });
@@ -341,83 +341,83 @@ export const fundmeAction = {
   //         }
   //       }).catch((err: any) => console.log(err));
   //   },
+  
+  // ADMIN
+  getFundMeList: (search: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE });
+    dispatch({ type: SET_FUNDME_INITIAL });
+    api.getFundMeList({ search: search })
+      .then((result) => {
+        const { data } = result;
+        if (data.success) dispatch({ type: SET_FUNDMES, payload: data.fundmes });
+        dispatch({ type: SET_LOADING_FALSE });
+      }).catch(err => console.log(err));
+  },
 
-  //   //ADMIN
-  //   // getFundMeList: (search: any) => async (dispatch: Dispatch<any>) => {
-  //   //   dispatch({ type: SET_LOADING_TRUE });
-  //   //   dispatch({ type: SET_FUNDME_INITIAL });
-  //   //   api.getFundMeList({ search: search })
-  //   //     .then((result) => {
-  //   //       const { data } = result;
-  //   //       if (data.success) dispatch({ type: SET_FUNDMES, payload: data.fundmes });
-  //   //       dispatch({ type: SET_LOADING_FALSE });
-  //   //     }).catch(err => console.log(err));
-  //   // },
+    setFundMeShow: (show: any, fundmeId: any, fundme: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      api.setFundMeShow({ show: show }, fundmeId)
+        .then((result) => {
+          const { data } = result;
+          if (data.success) {
+            const state = { ...fundme, show: show };
+            dispatch({ type: SET_FUNDME, payload: state });
+          }
+          dispatch({ type: SET_LOADING_FALSE });
+        }).catch(err => console.log(err))
+    },
 
-  //   setFundMeShow: (show: any, fundmeId: any, fundme: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     api.setFundMeShow({ show: show }, fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           const state = { ...fundme, show: show };
-  //           dispatch({ type: SET_FUNDME, payload: state });
-  //         }
-  //         dispatch({ type: SET_LOADING_FALSE });
-  //       }).catch(err => console.log(err))
-  //   },
+    deleteFundMe: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      api.deleteFundMe(fundmeId)
+        .then((result) => {
+          const { data } = result;
+          if (data.success) {
+            dispatch({ type: SET_FUNDMES, payload: [] });
+            navigate('/admin/fundmes');
+          }
+        }).catch(err => console.log(err));
+    },
 
-  //   deleteFundMe: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     api.deleteFundMe(fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_FUNDMES, payload: [] });
-  //           navigate('/admin/fundmes');
-  //         }
-  //       }).catch(err => console.log(err));
-  //   },
+    updateFundMe: (fundmeId: any, fundmeData: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      let resultTeaser = null;
+      let resultCover = null;
+      if (fundmeData.teaserFile) {
+        const formData = new FormData();
+        formData.append("file", fundmeData.teaserFile);
+        const config = { headers: { "content-type": "multipart/form-data" } };
+        resultTeaser = await api.uploadFile(formData, config);
+      }
+      if (fundmeData.coverFile) {
+        const formData = new FormData();
+        formData.append("file", fundmeData.coverFile);
+        const config = { headers: { "content-type": "multipart/form-data" } };
+        resultCover = await api.selectCover(formData, config);
+      }
+      if (resultTeaser?.data.success) fundmeData.teaserFile = resultTeaser.data.path;
+      if (resultCover?.data.success) fundmeData.coverFile = resultCover.data.path;
+      api.updateFundMe(fundmeId, { fundme: fundmeData })
+        .then((result) => {
+          const { data } = result;
+          if (data.success) {
+            dispatch({ type: SET_LOADING_FALSE });
+            navigate(`/admin/fundmes`);
+          }
+        }).catch(err => console.log(err));
+    },
 
-  //   updateFundMe: (fundmeId: any, fundmeData: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     let resultTeaser = null;
-  //     let resultCover = null;
-  //     if (fundmeData.teaserFile) {
-  //       const formData = new FormData();
-  //       formData.append("file", fundmeData.teaserFile);
-  //       const config = { headers: { "content-type": "multipart/form-data" } };
-  //       resultTeaser = await api.uploadFile(formData, config);
-  //     }
-  //     if (fundmeData.coverFile) {
-  //       const formData = new FormData();
-  //       formData.append("file", fundmeData.coverFile);
-  //       const config = { headers: { "content-type": "multipart/form-data" } };
-  //       resultCover = await api.selectCover(formData, config);
-  //     }
-  //     if (resultTeaser?.data.success) fundmeData.teaserFile = resultTeaser.data.path;
-  //     if (resultCover?.data.success) fundmeData.coverFile = resultCover.data.path;
-  //     api.updateFundMe(fundmeId, { fundme: fundmeData })
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_LOADING_FALSE });
-  //           navigate(`/admin/fundmes`);
-  //         }
-  //       }).catch(err => console.log(err));
-  //   },
-
-  //   // deleteOption: (fundmeId: any, optionId: any) => async (dispatch: Dispatch<any>) => {
-  //   //   dispatch({ type: SET_LOADING_TRUE });
-  //   //   api.deleteOption(fundmeId, optionId)
-  //   //     .then((result) => {
-  //   //       const { data } = result;
-  //   //       if (data.success) {
-  //   //         dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //   //         dispatch({ type: SET_LOADING_FALSE });
-  //   //       }
-  //   //     }).catch(err => console.log(err));
-  //   // },
+    deleteOption: (fundmeId: any, optionId: any) => async (dispatch: Dispatch<any>) => {
+      dispatch({ type: SET_LOADING_TRUE });
+      api.deleteOption(fundmeId, optionId)
+        .then((result) => {
+          const { data } = result;
+          if (data.success) {
+            dispatch({ type: SET_FUNDME, payload: data.fundme });
+            dispatch({ type: SET_LOADING_FALSE });
+          }
+        }).catch(err => console.log(err));
+    },
 
   //   getFundmeOptions: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
   //     dispatch({ type: SET_LOADING_TRUE });

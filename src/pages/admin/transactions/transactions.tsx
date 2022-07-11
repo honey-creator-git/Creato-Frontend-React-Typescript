@@ -27,6 +27,7 @@ const AdminTransactions = () => {
         setType(type);
         dispatch({ type: SET_TRANSACTIONS, payload: [] });
         dispatch(transactionActions.getAdminTransactions(type));
+        console.log(transactionList)
     }
 
     const calcColor = (type: any, description: any) => {
@@ -133,7 +134,7 @@ const AdminTransactions = () => {
                         <div className="donuts-type">
                             Total Donuts Circulating: {transactions.adminDonuts ? (transactions.adminDonuts + transactions.userDonuts + transactions.daremeDonuts).toLocaleString() : 0}
                         </div>
-                        <div className="donuts-type">
+                        <div className="donuts-type">   
                             Admin: {transactions.adminDonuts ? transactions.adminDonuts.toLocaleString() : 0}
                         </div>
                         <div className="donuts-type">
@@ -141,6 +142,9 @@ const AdminTransactions = () => {
                         </div>
                         <div className="donuts-type">
                             DareMe: {transactions.daremeDonuts ? transactions.daremeDonuts.toLocaleString() : 0}
+                        </div>
+                        <div className="donuts-type">
+                            FundMe: {transactions.fundmeDonuts ? transactions.fundmeDonuts.toLocaleString() : 0}
                         </div>
                         <div className="donuts-control">
                             <Button
@@ -230,8 +234,8 @@ const AdminTransactions = () => {
                                             }
                                             {transaction.description === 4 && <>Earnings from <strong>{transaction.dareme ? transaction.dareme.title : ''}</strong></>}
                                             {transaction.description === 5 && "Vote as SuperFans"}
-                                            {transaction.description === 6 && "Dare Request"}
-                                            {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ''}</strong></>}
+                                            {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "Fund Request")}
+                                            {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : transaction.fundme ? transaction.fundme.title : ""}</strong></>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}

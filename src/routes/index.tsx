@@ -58,6 +58,9 @@ import DareMeList from '../pages/admin/dareme/dareMeList';
 import DaremeDetail from '../pages/admin/dareme/dareMeDetails';
 import DareMeTitile from '../pages/admin/dareme/dareMeTitle';
 import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
+import FundMeList from '../pages/admin/fundme/fundMeList';
+import FundMeDetail from '../pages/admin/fundme/fundMeDetail';
+import FundMeTitle from '../pages/admin/fundme/fundMeTitle';
 
 import AdminTransactions from '../pages/admin/transactions/transactions';
 import Error404 from '../pages/error/error404';
@@ -124,6 +127,10 @@ const AppRoutes = () => {
             <Route path="admin/daremes/details/:daremeId" element={<AuthRoute child={<DaremeDetail />} routeType="private" />} />
             <Route path="admin/daremes/details/:daremeId/title" element={<AuthRoute child={<DareMeTitile />} routeType="private" />} />
             <Route path="admin/daremes/details/:daremeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
+            <Route path="admin/fundmes" element={<AuthRoute child={<FundMeList />} routeType="private" />} />
+            <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<FundMeDetail />} routeType="private" />} />
+            <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
+            <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
             <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
             <Route path="/not-founder-cover" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />

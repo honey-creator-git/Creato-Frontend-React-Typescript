@@ -8,6 +8,7 @@ import {
   AddIcon,
   EditIcon,
   FacebookIcon,
+  HotIcon,
   InstagramIcon,
   MoreIcon,
   NotificationOutlineIcon,
@@ -22,6 +23,7 @@ import Dialog from "../general/dialog";
 import { SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { notificationAction } from "../../redux/actions/notificationAction";
 import "../../assets/styles/profile/components/profileHeaderStyle.scss";
+import {CreatoCoinIcon} from "../../assets/svg";
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
   const [more, setMore] = useState(moreInfo);
@@ -50,17 +52,22 @@ const ProfileHeader = (props: profileProps) => {
   const navigate = useNavigate();
   const userStore = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  const authuser = userStore.users[0];
+  const authuser = userStore.users[0];  
   const user = userStore.user;
   const contexts = useContext(LanguageContext);
+  const daremeStore = useSelector((state: any) => state.dareme);
+  const daremes = daremeStore.daremes;
+  const voterCount = daremeStore.voterCount;
   const [categoryText, setCategoryText] = useState("");
   const [moreInfo, setMoreInfo] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false);
+  const [totalDonuts, setTotalDonuts] = useState(0);
   const wrapRef = useRef<any>(null);
   const res = useOutsideAlerter(wrapRef, moreInfo);
 
   useEffect(() => {
+    console.log(voterCount)
     if (authuser && authuser.categories.length) {
       let categories = authuser.categories;
       let texts = ""
@@ -71,6 +78,13 @@ const ProfileHeader = (props: profileProps) => {
       });
       setCategoryText(texts);
     }
+    if (daremes.length !== 0) {
+      let donutSum = 0;
+      for (let i = 0 ; i < daremes.length ; i++)
+        if (daremes[i].finished == true && daremes[i].isUser == true) 
+          donutSum += daremes[i].donuts;
+      setTotalDonuts(donutSum);
+    }
   }, [authuser]);
 
   useEffect(() => {
@@ -80,6 +94,40 @@ const ProfileHeader = (props: profileProps) => {
       })
     }
   }, [user, authuser]);
+
+  const formalNumber = (num: Number) => {
+    if (num <= 999) return num;
+    const s_reverseNum = num.toString().split("").reverse().join("");
+    let s_buffer = "";
+    let cnt = 0;
+    for (let i = 0 ; i < s_reverseNum.length ; i++) {
+      s_buffer += s_reverseNum[i];    
+      if (cnt == 2) {
+        cnt = 0;
+        s_buffer += ',';
+      }
+      cnt++;
+    }
+    return s_buffer.split("").reverse().join("");
+  }
+
+  const roundNumber = (num: number) => {
+    if (num <= 9999)
+      return formalNumber(num);
+    else if (num <= 99999) {
+      return (Math.round(num / 100) / 10).toString() + "K";
+    }
+    else if (num <= 999999) {
+      return (Math.round(num / 1000)).toString() + "K";
+    }
+    else {
+      return (Math.round(num / 100000) / 10).toString() + "M";
+    }
+  }
+
+  const roundFloat = (value: number) => {
+    return Math.round(value * 10) / 10;
+  }
 
   const subscribedUser = async () => {
     try {
@@ -99,7 +147,7 @@ const ProfileHeader = (props: profileProps) => {
   return (
     <div
       className="profile-header"
-      style={{ height: `${props.size === "mobile" ? "129px" : "204px"}` }}
+      style={{ height: `${props.size === "mobile" ? "169px" : "254px"}` }}
     >
       <Dialog
         display={isSignIn}
@@ -129,6 +177,16 @@ const ProfileHeader = (props: profileProps) => {
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
       </div>
+      { voterCount || totalDonuts ? 
+        <div className="rating-container">
+          <span className="Voting-value"><b>{roundNumber(voterCount)} </b></span>
+          <HotIcon className="rating-icons" color="#EFA058" width="18"/>
+          <span><b>SuperFans</b></span>
+          <span className="Voting-value"> <b>&nbsp; {roundNumber(totalDonuts)}</b></span>
+          <CreatoCoinIcon className="rating-icons" color="#EFA058" width="18"/>
+        </div> :
+        <></>
+      }
       <div className="icons">
         {props.property === "view" ? (
           <div className="bell-icon" onClick={subscribedUser}>

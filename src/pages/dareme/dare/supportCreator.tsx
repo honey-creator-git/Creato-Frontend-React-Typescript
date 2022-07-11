@@ -30,6 +30,7 @@ const SupportCreator = () => {
     const [openFreeDlg, setOpenFreeDlg] = useState(false);
     const [isSignIn, setIsSignIn] = useState(false);
     const [type, setType] = useState(0);
+    const [voters, setVoters] = useState(0);
     const option = daremeState.option;
     const dareme = daremeState.dareme;
     const user = userState.user;
@@ -62,7 +63,17 @@ const SupportCreator = () => {
         return true;
     }
 
+    useEffect(() => {
+        console.log(dareme)
+        console.log(option)
+        if (dareme && option)
+            for (let i = 0 ; i < dareme.options.length ; i++)
+                if (dareme.options[i].option._id == option._id) 
+                    setVoters(dareme.options[i].option.voters)
+    })
+    
     const checkVoted = () => {
+        
         if (dareme.options && user) {
             for (let i = 0; i < dareme.options.length; i++)
                 for (let j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
@@ -75,13 +86,14 @@ const SupportCreator = () => {
         }
         return false;
     }
-
-
-    useEffect(() => {
+    
+    useEffect(() => {   
         window.scrollTo(0, 0);
+        console.log(option)
         dispatch(daremeAction.getOptionDetails(optionId, daremeId));
+        
     }, [location, dispatch, optionId]);
-
+    
     return (
         <>
             <div className="title-header">
@@ -90,7 +102,7 @@ const SupportCreator = () => {
                     navigate(`/dareme/details/${daremeId}`);
                 }} />
             </div>
-            {(option && dareme.owner) &&
+            {(option && dareme.owner) && 
                 <>
                     <Dialog
                         display={isSignIn}
@@ -224,7 +236,7 @@ const SupportCreator = () => {
                                     <div className="support-option">
                                         <DareOption
                                             donuts={option.donuts}
-                                            voters={checkVoted() ? 1 : undefined}
+                                            voters={checkVoted() ? voters : 0}
                                             dareTitle={option.title}
                                             username={option.writer.name}
                                             disabled={false}

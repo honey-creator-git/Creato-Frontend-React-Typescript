@@ -266,7 +266,7 @@ const FanwallDetails = () => {
                   <DareOption
                     canVote={false}
                     donuts={winOption.donuts}
-                    voters={0}
+                    voters={winOption.voters}
                     disabled={false}
                     leading={true}
                     dareTitle={winOption.title}

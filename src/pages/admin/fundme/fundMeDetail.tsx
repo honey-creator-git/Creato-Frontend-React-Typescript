@@ -6,28 +6,27 @@ import Title from "../../../components/general/title";
 import Button from "../../../components/general/button";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 // import AvatarLink from "../../../components/dareme/AvatarLink";
-import DareOption from "../../../components/general/dareOption";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import Dialog from "../../../components/general/dialog";
 import CONSTANT from "../../../constants/constant";
-import { daremeAction } from "../../../redux/actions/daremeActions";
+import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_ADMIN_CATEGORY, SET_ADMIN_TEASER_SIZE_TYPE, SET_TEASER_FILE, SET_COVER_FILE } from "../../../redux/types";
+import { SET_ADMIN_CATEGORY, SET_ADMIN_TEASER_SIZE_TYPE, SET_TEASER_FILE1, SET_COVER_FILE1 } from "../../../redux/types";
 import { VisibleIcon, HiddenIcon, DeleteIcon } from "../../../assets/svg";
 import "../../../assets/styles/admin/dareme/adminDareMeDetailStyle.scss";
 
-const DareMeDetails = () => {
+const FundMeDetails = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { daremeId } = useParams();
+    const { fundmeId } = useParams();
     const contexts = useContext(LanguageContext);
-    const daremeState = useSelector((state: any) => state.dareme);
+    const fundmeState = useSelector((state: any) => state.fundme);
     const [isOpenDeleteDlg, setIsOpenDeleteDlg] = useState(false);
     const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const categoryDropDownMenuheight = openCategoryMenu === true ? contexts.DAREME_CATEGORY_LIST.length * 40 + 20 : 0;
-    const dareme = daremeState.dareme;
+    const categoryDropDownMenuheight = openCategoryMenu === true ? contexts.FUNDME_CATEGORY_LIST.length * 40 + 20 : 0;
+    const fundme = fundmeState.fundme;
 
     const handleUploadVideo = (e: any) => {
         const { files } = e.target;
@@ -42,7 +41,7 @@ const DareMeDetails = () => {
                     const size = video.videoWidth / video.videoHeight;
                     const type = size >= 0.65;
                     dispatch({ type: SET_ADMIN_TEASER_SIZE_TYPE, payload: type });
-                    dispatch({ type: SET_TEASER_FILE, payload: loadFile });
+                    dispatch({ type: SET_TEASER_FILE1, payload: loadFile });
                 }
                 video.src = URL.createObjectURL(loadFile);
             } else alert("The file size is over 30M");
@@ -59,18 +58,14 @@ const DareMeDetails = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        dispatch(daremeAction.getDaremeDetails(daremeId));
+        dispatch(fundmeAction.getFundmeDetails(fundmeId));
     }, [location]);
-
-    useEffect(() => {
-        console.log(daremeState)
-    })
     
     return (
         <div className="admin-dareme-detail-wrapper" onClick={() => { setOpenCategoryMenu(false); }}>
-            <Title title="DareMe Details"
-                back={() => { navigate('/admin/daremes') }} del={true} hint={() => { setIsOpenDeleteDlg(true) }} />
-            {dareme.owner &&
+            <Title title="FundMe Details"
+                back={() => { navigate('/admin/fundmes') }} del={true} hint={() => { setIsOpenDeleteDlg(true) }} />
+            {fundme.owner &&
                 <>
                     <Dialog
                         display={isOpenDeleteDlg}
@@ -87,7 +82,7 @@ const DareMeDetails = () => {
                                 text: "Delete",
                                 handleClick: () => {
                                     setIsOpenDeleteDlg(false);
-                                    dispatch(daremeAction.deleteDareMe(dareme._id, navigate))
+                                    dispatch(fundmeAction.deleteFundMe(fundme._id, navigate))
                                 }
                             }
                         ]}
@@ -95,14 +90,14 @@ const DareMeDetails = () => {
                     <div className="dareme-detail">
                         <div className="dareme-detail-videocard">
                             <VideoCardDesktop
-                                url={daremeState.teaserFile ? daremeState.teaserFile.preview : CONSTANT.SERVER_URL + "/" + dareme.teaser}
-                                sizeType={daremeState.teaserSizeType !== null ? daremeState.teaserSizeType : dareme.sizeType}
-                                coverImage={daremeState.coverFile ? daremeState.coverFile.preview : daremeState.teaserFile ? "" : dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                                url={fundmeState.teaserFile ? fundmeState.teaserFile.preview : CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                                sizeType={fundmeState.teaserSizeType !== null ? fundmeState.teaserSizeType : fundme.sizeType}
+                                coverImage={fundmeState.coverFile ? fundmeState.coverFile.preview : fundmeState.teaserFile ? "" : fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
                             />
                             <ReactPlayer
                                 id="element"
                                 hidden
-                                url={daremeState.teaserFile ? daremeState.teaserFile.preview : ""}
+                                url={fundmeState.teaserFile ? fundmeState.teaserFile.preview : ""}
                             />
                             <div className="change-teaser-btn">
                                 <Button text="Change teaser" shape="rounded" fillStyle="fill" color="primary" width="100%" handleSubmit={() => { fileInputRef.current?.click() }} />
@@ -121,7 +116,7 @@ const DareMeDetails = () => {
                                 <Button
                                     shape="pill"
                                     color="primary"
-                                    text={dareme.finished ? "Ended" : calc(dareme.time)}
+                                    text={fundme.finished ? "Ended" : calc(fundme.time)}
                                     fillStyle="fill"
                                 />
                             </div>
@@ -129,8 +124,8 @@ const DareMeDetails = () => {
                                 <Button
                                     shape="pill"
                                     color="primary"
-                                    text={daremeState.title ? `${daremeState.title.substring(0, 15)}${daremeState.title.length > 15 ? "..." : ""}`
-                                        : `${dareme.title.substring(0, 15)}${dareme.title.length > 15 ? "..." : ""}`}
+                                    text={fundmeState.title ? `${fundmeState.title.substring(0, 15)}${fundmeState.title.length > 15 ? "..." : ""}`
+                                        : `${fundme.title.substring(0, 15)}${fundme.title.length > 15 ? "..." : ""}`}
                                     fillStyle="fill"
                                     handleSubmit={() => { navigate(`${location.pathname}/title`); }}
                                 />
@@ -140,14 +135,14 @@ const DareMeDetails = () => {
                                 setOpenCategoryMenu(!openCategoryMenu);
                             }}>
                                 <CategoryBtn
-                                    text={contexts.DAREME_CATEGORY_LIST[daremeState.category ? daremeState.category - 1 : dareme.category - 1]}
+                                    text={contexts.FUNDME_CATEGORY_LIST[fundmeState.category ? fundmeState.category - 1 : fundme.category - 1]}
                                     color="primary"
                                 />
                                 <div
                                     className="drop-down-lists"
                                     style={{ height: `${categoryDropDownMenuheight}px` }}
                                 >
-                                    {contexts.DAREME_CATEGORY_LIST.map((category: any, i: any) => (
+                                    {contexts.FUNDME_CATEGORY_LIST.map((category: any, i: any) => (
                                         <div
                                             className="list"
                                             key={i}
@@ -161,46 +156,16 @@ const DareMeDetails = () => {
                                     ))}
                                 </div>
                             </div>
-                            <div className="dare-options scroll-bar">
-                                {
-                                    dareme.options.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
-                                        <div className="dare-option" key={index}>
-                                            <div className="dare">
-                                                <DareOption
-                                                    dareTitle={index > 1 ? option.option.title : daremeState.options.length ? daremeState.options[index].option.title : option.option.title}
-                                                    donuts={option.option.donuts}
-                                                    voters={1}
-                                                    disabled={false}
-                                                    username={option.option.writer.name}
-                                                    handleSubmit={() => {
-                                                        if (index < 2) navigate(`/admin/daremes/details/${daremeId}/options`);
-                                                    }}
-                                                />
-                                            </div>
-                                            <div className="del-icon">
-                                                {index > 1 &&
-                                                    <div onClick={() => { dispatch(daremeAction.deleteOption(daremeId, option.option._id)) }}>
-                                                        <DeleteIcon color="#efa058" />
-                                                    </div>
-                                                }
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
                         </div>
                     </div>
-                    <div className="visible-icon" onClick={() => { dispatch(daremeAction.setDareMeShow(!dareme.show, dareme._id, dareme)) }}>
-                        {dareme.show ? <HiddenIcon color="#EFA058" /> : <VisibleIcon color="#EFA058" /> }
+                    <div className="visible-icon" onClick={() => { dispatch(fundmeAction.setFundMeShow(!fundme.show, fundme._id, fundme)) }}>
+                        {fundme.show ? <HiddenIcon color="#EFA058" /> : <VisibleIcon color="#EFA058" /> }
                     </div>
                     <div className="save-button" onClick={() => {
-                        let title = daremeState.title ? daremeState.title : dareme.title;
-                        let category = daremeState.category ? daremeState.category : dareme.category;
-                        let options = daremeState.options.length > 0 ?
-                            !(daremeState.options[0].option.title === dareme.options[0].option.title && daremeState.options[1].option.title === dareme.options[1].option.title) ?
-                                daremeState.options : null : null;
-                        let teaserFile = daremeState.teaserFile ? daremeState.teaserFile : null;
-                        let coverFile = daremeState.coverFile ? daremeState.coverFile : null;
+                        let title = fundmeState.title ? fundmeState.title : fundme.title;
+                        let category = fundmeState.category ? fundmeState.category : fundme.category;
+                        let teaserFile = fundmeState.teaserFile ? fundmeState.teaserFile : null;
+                        let coverFile = fundmeState.coverFile ? fundmeState.coverFile : null;
                         if (teaserFile) {
                             const video: any = document.getElementById("element")?.firstChild;
                             let canvas = document.createElement("canvas") as HTMLCanvasElement;
@@ -214,14 +179,14 @@ const DareMeDetails = () => {
                                 .then(blob => {
                                     const file = new File([blob], 'dot.png', blob);
                                     const imageFile = Object.assign(file, { preview: url });
-                                    dispatch({ type: SET_COVER_FILE, payload: imageFile });
-                                    dispatch(daremeAction.updateDareMe(daremeId, {
-                                        title: title, category: category, options: options, teaserFile: teaserFile, coverFile: imageFile, teaserType: daremeState.teaserSizeType
+                                    dispatch({ type: SET_COVER_FILE1, payload: imageFile });
+                                    dispatch(fundmeAction.updateFundMe(fundmeId, {
+                                        title: title, category: category, teaserFile: teaserFile, coverFile: imageFile, teaserType: fundmeState.teaserSizeType
                                     }, navigate));
                                 });
                         } else {
-                            dispatch(daremeAction.updateDareMe(daremeId, {
-                                title: title, category: category, options: options, teaserFile: teaserFile, coverFile: coverFile, teaserType: daremeState.teaserSizeType
+                            dispatch(fundmeAction.updateFundMe(fundmeId, {
+                                title: title, category: category, teaserFile: teaserFile, coverFile: coverFile, teaserType: fundmeState.teaserSizeType
                             }, navigate));
                         }
                     }}>
@@ -233,4 +198,4 @@ const DareMeDetails = () => {
     )
 }
 
-export default DareMeDetails;
+export default FundMeDetails;

@@ -104,10 +104,17 @@ const Dialog = (props: any) => {
                 {social &&
                     <div className="dialog-social">
                         <div className="link" onClick={() => {
-                            if (isFundme) {
-                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`);
-                             }
-                            else window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                            let text = "";
+                            if (isFundme) { 
+                                text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}&quote=${text}`, 'sharer');
+                            }
+                            else {
+                                if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
+                                else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
+                                else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!`;
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&quote=${text}`, 'sharer');
+                            }
                         }}>
                             <FacebookIcon color="#EFA058" />
                         </div>

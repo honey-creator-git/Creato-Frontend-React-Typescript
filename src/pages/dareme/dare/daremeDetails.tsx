@@ -33,7 +33,7 @@ const DaremeDetails = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [isDareDisable, setIsDareDisable] = useState(false);
   const user = userState.user;
-
+  
   const calcTime = (time: any) => {
     if (time > 1) return Math.ceil(time) + " days";
     if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
@@ -53,7 +53,7 @@ const DaremeDetails = () => {
       return false;
     } else return false;
   }
-
+  
   const dareCreator = (user: any) => {
     if (user) {
       dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
@@ -100,7 +100,7 @@ const DaremeDetails = () => {
           ownerId={dareme?.owner?._id}
         />
       </div>
-      {(resultOptions.length > 0 && dareme.owner) &&
+      {(resultOptions.length > 0 && dareme.owner) && 
         <>
           <Dialog
             display={isSignIn}
@@ -209,7 +209,7 @@ const DaremeDetails = () => {
                       icon={[<NotificationwithCircleIcon color="white" circleColor="white" />, <NotificationwithCircleIcon color="white" circleColor="white" />]}
                     />
                   </div>
-                  :
+                  : 
                   <div onClick={() => { dareCreator(user); }}>
                     <ContainerBtn
                       // disabled={dareme.time < 1 ? true : false}

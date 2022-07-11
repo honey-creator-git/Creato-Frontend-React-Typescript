@@ -11,10 +11,32 @@
     top: 10px;
   }
 
+  .avatar_empty {
+    position: absolute;
+    left: 24px;
+    top: 10px;
+  }
+
   .ellipsis-icon {
     position: absolute;
     right: 25px;
     top: 28px;
+  }
+
+  .ellipsis-icon_empty {
+    position: absolute;
+    right: 25px;
+    top: 28px;
+  }
+
+  .rating-icons {
+    position: relative !important;
+    top: 6px !important;
+  }
+
+  .rating-icons_empty {
+    position: relative !important;
+    top: 6px !important;
   }
 
   .icons {
@@ -46,6 +68,48 @@
       padding-right: 21px;
     }
   }
+
+  .icons_empty {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    left: 51px;
+    bottom: 12px;
+
+    .bell-icon {
+      padding-right: 33px;
+    }
+
+    .pen-icon {
+      padding-right: 33px;
+    }
+
+    .youtube-icon {
+      padding-right: 21px;
+    }
+
+    .instagram-icon {
+      padding-right: 21px;
+    }
+
+    .facebook-icon {
+      padding-right: 21px;
+    }
+  }
+
+  .Voting-value {
+    font-size: 22px;
+  }
+
+  .rating-container {
+    position: absolute;
+    left: 94px;
+    bottom: 58px;
+  }
+
+
 
   .create-btn {
     width: 40px;

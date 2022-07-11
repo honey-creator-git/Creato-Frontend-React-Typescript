@@ -20,7 +20,8 @@ const INITIAL_STATE: any = {
     category: null,
     title: null,
     options: [],
-    daremes: []
+    daremes: [],
+    voterCount: 0
 }
 
 const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -88,6 +89,9 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state };
         case actionTypes.SET_ADMIN_TEASER_SIZE_TYPE:
             state.teaserSizeType = payload;
+            return { ...state };
+        case actionTypes.SET_VOTER_COUNT:
+            state.voterCount = payload;
             return { ...state };
         default:
             return state;

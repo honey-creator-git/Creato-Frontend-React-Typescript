@@ -27,7 +27,7 @@ const VideoCardMobile = (props: any) => {
         if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
         else return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
     }
-
+    
     const checkLock = () => {
         if (user && fanwallData.dareme && fanwallData.dareme.options) {
             if (user.id + "" === fanwallData.writer._id + "") return false;

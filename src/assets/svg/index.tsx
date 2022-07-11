@@ -266,6 +266,7 @@ export const CloseIcon = (props: any) => (
 );
 export const CreatoCoinIcon = (props: any) => (
   <svg
+    className="rating-icons"
     width={props.width === undefined ? "24" : props.width}
     height={props.height === undefined ? "24" : props.height}
     viewBox="0 0 25 25"
@@ -375,6 +376,7 @@ export const HiddenIcon = (props: any) => (
 );
 export const HotIcon = (props: any) => (
   <svg
+    className="rating-icons"
     width={props.width === undefined ? "24" : props.width}
     height={props.height === undefined ? "24" : props.height}
     viewBox="0 0 24 24"

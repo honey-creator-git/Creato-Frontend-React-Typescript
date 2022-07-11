@@ -80,18 +80,18 @@ const fundmeReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_FUNDME_VOTES:
             state.votes = payload;
             return { ...state };
-        // case actionTypes.SET_ADMIN_TITLE:
-        //     state.title = payload;
-        //     return { ...state };
-        // case actionTypes.SET_ADMIN_CATEGORY:
-        //     state.category = payload;
-        //     return { ...state };
+        case actionTypes.SET_ADMIN_TITLE:
+            state.title = payload;
+            return { ...state };
+        case actionTypes.SET_ADMIN_CATEGORY:
+            state.category = payload;
+            return { ...state };
         // case actionTypes.SET_ADMIN_OPTIONS:
         //     state.options = payload;
         //     return { ...state };
-        // case actionTypes.SET_ADMIN_TEASER_SIZE_TYPE:
-        //     state.teaserSizeType = payload;
-        //     return { ...state };
+        case actionTypes.SET_ADMIN_TEASER_SIZE_TYPE:
+            state.teaserSizeType = payload;
+            return { ...state };
         default:
             return state;
     }

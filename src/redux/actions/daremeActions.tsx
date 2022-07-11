@@ -13,7 +13,8 @@ import {
   SET_FANWALLS,
   SET_DAREME_DETAIL_INITIAL,
   SET_ADMIN_OPTIONS,
-  SET_FUNDMES
+  SET_FUNDMES,
+  SET_VOTER_COUNT
 } from "../types";
 import * as api from "../../api";
 
@@ -118,6 +119,7 @@ export const daremeAction = {
     dispatch({ type: SET_DAREME_DETAIL_INITIAL });
     api.getDareMeDetails(daremeId)
       .then((result) => {
+        console.log(result)
         const { data } = result;
         if (data.success) {
           dispatch({ type: SET_DAREME, payload: data.dareme });
@@ -198,7 +200,7 @@ export const daremeAction = {
         if (data.success) dispatch({ type: SET_DAREME, payload: data.dareme });
       }).catch((err: any) => console.log(err));
   },
-
+  
   getDaremesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getDaremesByPersonalisedUrl({ url: url })
@@ -206,6 +208,7 @@ export const daremeAction = {
         const { data } = result;
         dispatch({ type: SET_DAREMES, payload: data.daremes });
         dispatch({ type: SET_USERS, payload: [data.user] });
+        dispatch({ type: SET_VOTER_COUNT, payload: data.voterCount })
         dispatch({ type: SET_LOADING_FALSE });
         navigate(`/${url}`);
       }).catch((err) => console.log(err));
@@ -240,7 +243,7 @@ export const daremeAction = {
         else navigate(`/dareme/details/${daremeId}`);
       }).catch(err => console.log(err));
   },
-
+  
   getDaremeRequests: (daremeId: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_DAREME_INITIAL });

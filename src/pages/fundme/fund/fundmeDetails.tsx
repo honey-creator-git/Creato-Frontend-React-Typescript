@@ -88,6 +88,7 @@ const FundmeDetails = () => {
     window.scrollTo(0, 0);
     dispatch(fundmeAction.getFundmeDetails(fundmeId));
     dispatch({ type: SET_CURRENT_FUNDME, payload: null });
+    console.log(fundme)
   }, [location]);
 
   const checkCanFree = () => {

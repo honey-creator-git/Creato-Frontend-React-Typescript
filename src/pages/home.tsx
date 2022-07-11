@@ -285,11 +285,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
+                  isFundme={dareme.type == 'fundme' ? true : false}
                   handleAvatar={() => {
-                    if (dareme.type == 'dareme')
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                    else if (dareme.type == 'fundme')
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -346,11 +344,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
+                  isFundme={dareme.type == 'fundme' ? true : false}
                   handleAvatar={() => {
-                    if (dareme.type == 'dareme')
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                    else if (dareme.type == 'fundme')
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -397,11 +393,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
+                  isFundme={dareme.type == 'fundme' ? true : false}
                   handleAvatar={() => {
-                    if (dareme.type == 'dareme')
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                    else if (dareme.type == 'fundme')
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -455,11 +449,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
+                  isFundme={dareme.type == 'fundme' ? true : false}
                   handleAvatar={() => {
-                    if (dareme.type == 'dareme')
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                    else if (dareme.type == 'fundme')
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -549,11 +541,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
+                  isFundme={dareme.type == 'fundme' ? true : false}
                   handleAvatar={() => {
-                    if (dareme.type == 'dareme')
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                    else if (dareme.type == 'fundme')
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -599,9 +589,6 @@ const Home = () => {
                   username={fanwall.writer.name}
                   avatar={fanwall.writer.avatar}
                   handleAvatar={() => {
-                    if (fanwall.dareme.goal)
-                      dispatch(fundmeAction.getFundmesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
-                    else
                       dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
                   }}
                   ownerId={fanwall.writer._id}

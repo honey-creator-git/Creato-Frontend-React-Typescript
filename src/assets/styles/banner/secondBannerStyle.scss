@@ -1,8 +1,28 @@
+
+$primary-500: #EFA058;
+$secondary-300: #F5C395;
+
 .second-banner-wrapper {
     position: relative;
     cursor: pointer;
+}
 
-    .banner-image {
-        max-width: 100%;
-    }
+.carousel .control-next.control-arrow:before {
+    border-left: 27px solid $primary-500!important
+}
+
+.carousel .control-arrow:before, .carousel.carousel-slider .control-arrow:before {
+    border-top: 15px solid transparent!important;
+    border-bottom: 15px solid transparent!important;
+}
+
+.carousel .control-prev.control-arrow:before {
+    border-right: 27px solid $primary-500!important
+}
+
+.carousel .control-dots .dot {
+    width: 15px!important;
+    height: 15px!important;
+    background: $secondary-300!important;
+    margin: 0 10px!important;
 }

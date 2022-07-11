@@ -170,13 +170,15 @@ const Profile = () => {
                             url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
                             time={dareme.time}
                             title={dareme.title}
-                            category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                            category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                             finished={dareme.finished}
                             sizeType={dareme.sizeType}
                             coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                             handleSubmit={() => {
+                              console.log(dareme)
                               dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
-                              dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
+                              if (dareme.goal) dispatch(fundmeAction.checkDetailsAndResults(dareme._id, navigate));
+                              else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
                             }}
                           />
                           <AvatarLink

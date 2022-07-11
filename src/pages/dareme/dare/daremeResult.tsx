@@ -62,7 +62,7 @@ const DaremeResult = () => {
             setIsWin(resultOptions.filter((option: any) => option.option.win === true).length ? true : false);
         }
     }, [resultOptions]);
-
+    
     return (
         <>
             <div className="title-header">

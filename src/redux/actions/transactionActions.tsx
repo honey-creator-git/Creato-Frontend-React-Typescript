@@ -20,7 +20,8 @@ export const transactionActions = {
                         type: SET_DONUTS_INFO, payload: {
                             adminDonuts: data.adminDonuts,
                             userDonuts: data.userDonuts,
-                            daremeDonuts: data.daremeDonuts
+                            daremeDonuts: data.daremeDonuts,
+                            fundmeDonuts: data.fundmeDonuts
                         }
                     });
                     dispatch({ type: SET_USERS, payload: data.users });

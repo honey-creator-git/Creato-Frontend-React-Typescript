@@ -7,7 +7,8 @@ import {
   RewardIcon,
   NoOfPeopleIcon,
   NotificationfillIcon,
-  SettingIcon
+  SettingIcon,
+  LightbulbIcon
 } from "../assets/svg";
 import "../assets/styles/sidebarStyle.scss";
 
@@ -46,10 +47,18 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/admin/daremes" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <Dare2Icon className="icon-svg" color={location.pathname.indexOf('/admin/daremes') !== -1 ? "#EFA058" : hoverPath === "/admin/daremes" ? "#EFA058" : "#A6A29F"} />
+            <LightbulbIcon className="icon-svg" color={location.pathname.indexOf('/admin/daremes') !== -1 ? "#EFA058" : hoverPath === "/admin/daremes" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>DareMe</span>
+          </div>
+        </NavLink>
+        <NavLink to="/admin/fundmes" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+          <div className="icon">
+            <Dare2Icon className="icon-svg" color={location.pathname.indexOf('/admin/fundmes') !== -1 ? "#EFA058" : hoverPath === "/admin/fundmes" ? "#EFA058" : "#A6A29F"} />
+          </div>
+          <div className="item-letter">
+            <span>FundMe</span>
           </div>
         </NavLink>
         <NavLink to="/admin/fanwalls" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
