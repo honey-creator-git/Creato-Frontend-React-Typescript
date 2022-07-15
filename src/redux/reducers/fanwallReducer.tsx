@@ -12,6 +12,7 @@ const INITIAL_STATE: any = {
         cover: null,
         posted: null,
     },
+    tips: [],
     winOption: null,
     goal: null,
     wallet: null,
@@ -41,6 +42,9 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_FANWALL_TYPE:
             state.itemType = payload;
             return { ...state };
+        case actionTypes.SET_TIPS:
+            state.tips = payload;
+            return { ...state };
         case actionTypes.SET_FANWALL_INITIAL:
             return {
                 fanwall: {
@@ -54,6 +58,7 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
                     posted: null,
                     cover: null,
                 },
+                tips: [],
                 winOption: null,
                 goal: null,
                 wallet: null,

@@ -41,10 +41,7 @@ const PostFanwall = () => {
     const contexts = useContext(LanguageContext);
     const prevRoute = useSelector((state: any) => state.load.prevRoute);
 
-    const item = fanwallState.itemType == 'dareme' ? dareme : fundme;
-
-    console.log('item...',item);
-    console.log('item.type.....',fanwallState.itemType);
+    const item = fanwallState.itemType === 'dareme' ? dareme : fundme;
 
     const youtube_parser = (url: any) => {
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -146,7 +143,7 @@ const PostFanwall = () => {
                             sizeType={item.sizeType}
                             coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
                         />
-                        {fanwallState.itemType == 'dareme' &&
+                        {fanwallState.itemType === 'dareme' &&
                             <AvatarLink
                                 username={item.owner.name}
                                 avatar={item.owner.avatar}
@@ -156,7 +153,7 @@ const PostFanwall = () => {
                             />
                         }
                         {
-                            fanwallState.itemType == 'fundme' &&
+                            fanwallState.itemType === 'fundme' &&
                             <AvatarLink
                                 username={item.owner.name}
                                 avatar={item.owner.avatar}
@@ -170,10 +167,10 @@ const PostFanwall = () => {
                     <div className="dare-post-fanwall-info scroll-bar">
                         <div className="dare-post-fanwall-main">
                             <div className="reward-name">
-                                {fanwallState.itemType == 'dareme' &&
+                                {fanwallState.itemType === 'dareme' &&
                                     <span>{item.options.filter((option: any) => option.option.win === true)[0].option.title}</span>
                                 }
-                                {fanwallState.itemType == 'fundme' &&
+                                {fanwallState.itemType === 'fundme' &&
                                     <span>{item.title}</span>
                                 }
                             </div>

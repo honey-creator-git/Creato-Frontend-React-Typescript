@@ -10,8 +10,9 @@ import {
 import ContainerBtn from "../general/containerBtn";
 import CONSTANT from "../../constants/constant";
 import { CloseIcon } from "../../assets/svg";
-import { paymentACtion } from "../../redux/actions/paymentActions";
+import { paymentAction } from "../../redux/actions/paymentActions";
 import '../../assets/styles/payment/stripe/checkoutFormStyle.scss';
+import { tipAction } from "../../redux/actions/tipActions";
 
 const stripePromise = loadStripe(CONSTANT.STRIPE_PUBLIC_KEY);
 
@@ -22,19 +23,17 @@ const CheckoutForm = (props: any) => {
     const elements = useElements();
 
     const [errorToDisplay, setErrorToDisplay] = useState('');
-    
-    const handleSubmit = async (e: any) => {
 
-        console.log('HANDLE SUBMIT')
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        
+
         if (!stripe || !elements) return;
         const cardElement: any = elements.getElement(CardElement);
-        if(!cardElement) return setErrorToDisplay('No exit card!');
+        if (!cardElement) return setErrorToDisplay('No exit card!');
         const token = await stripe.createToken(cardElement);
-        console.log(token)
-        if(token.error) return setErrorToDisplay('' + token.error.message);        
-        dispatch(paymentACtion.buyDonuts(token.token, props.donutPlan));
+        if (token.error) return setErrorToDisplay('' + token.error.message);
+        if (props.tipData !== undefined) dispatch(tipAction.tipDonutAsVistor(token.token, props.donutPlan, props.tipData));
+        else dispatch(paymentAction.buyDonuts(token.token, props.donutPlan));
         setErrorToDisplay('');
     }
 

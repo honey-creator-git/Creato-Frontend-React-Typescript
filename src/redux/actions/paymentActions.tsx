@@ -1,4 +1,3 @@
-// import { dataIndexAttribute } from "react-horizontal-scrolling-menu/dist/types/constants";
 import { Dispatch } from "redux";
 import * as api from "../../api";
 import {
@@ -8,7 +7,7 @@ import {
   SET_USER
 } from "../types";
 
-export const paymentACtion = {
+export const paymentAction = {
   buyDonuts: (token: any, donutPlan: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.buyDonuts({ token: token, item: donutPlan })

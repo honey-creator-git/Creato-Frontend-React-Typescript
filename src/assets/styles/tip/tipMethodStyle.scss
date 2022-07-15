@@ -1,0 +1,55 @@
+.tip-method {
+    width: 100%;
+    margin: auto;
+
+    @media (min-width: 880px) {
+        max-width: 880px;
+    }
+
+    @media (max-width: 880px) {
+        max-width: 355px;
+    }
+
+    .tip-method-body {
+        .top-letter {
+            margin: 40px auto;
+            width: 260px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+            color: #F5C395;
+        }
+
+        .or {
+            width: 330px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-around;
+
+            .or-style {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                text-align: center;
+                color: #BAB6B5;
+            }
+
+            .line {
+                border: solid #CECBCA;
+                margin-top: 10px;
+                border-width: 1px 0px 0px 0px;
+                width: 125px;
+            }
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

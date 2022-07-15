@@ -11,7 +11,8 @@ import {
     SET_FANWALL_WALLET,
     SET_USER,
     SET_FUNDME,
-    SET_DAREME
+    SET_DAREME,
+    SET_TIPS
 } from "../types";
 import * as api from "../../api";
 import { daremeAction } from "./daremeActions";
@@ -86,6 +87,7 @@ export const fanwallAction = {
                 const { data } = result;
                 if (data.success) {
                     dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
+                    dispatch({ type: SET_TIPS, payload: data.tips });
                     dispatch({ type: SET_LOADING_FALSE });
                 }
             }).catch((err: any) => console.log(err));

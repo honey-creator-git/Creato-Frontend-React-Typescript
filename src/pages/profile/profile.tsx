@@ -10,10 +10,13 @@ import ProfileMenu from "../../components/profileMenu";
 import ContainerBtn from "../../components/general/containerBtn";
 import Dialog from "../../components/general/dialog";
 import AvatarLink from "../../components/dareme/avatarLink";
-import { Dare2Icon, HotIcon, RewardIcon, AddIcon } from "../../assets/svg";
+import TipCard from "../../components/profile/tipCard";
+import TipMessageDlg from "../../components/profile/tipMessageDlg";
+import { Dare2Icon, HotIcon, RewardIcon, AddIcon, TipIcon, ExpandIcon, RetrieveIcon } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
 import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
+import visitorImg from "../../assets/img/visitor_avatar.png";
 import "../../assets/styles/profile/profileStyle.scss";
 
 const Profile = () => {
@@ -26,6 +29,7 @@ const Profile = () => {
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userStore = useSelector((state: any) => state.auth);
   const daremes = daremeStore.daremes;
+  const tips = fanwallState.tips;
   const fanwalls = fanwallState.fanwalls;
   const authuser = userStore.users[0];
   const [isSame, setIsSame] = useState(false);
@@ -33,11 +37,30 @@ const Profile = () => {
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
   const [fanwallId, setFanwallId] = useState("");
   const user = userStore.user;
+  const [expandState, setExpandState] = useState(false);
+  const [tipIndex, setTipIndex] = useState(2);
+  const [hoverState, setHoverState] = useState(false);
+  const [selectedTipData, setSelectedTipData] = useState<any>(null);
+  const [openTipMessageDlg, setOpenTipMessageDlg] = useState(false);
+  const [timerId, setTimerId] = useState<any>(0);
 
   const handleCreateDareMe = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname });
     navigate("/create");
   };
+
+  const openDlg = (index: any) => {
+    setSelectedTipData({
+      username: tips[index].tipper ? tips[index].tipper.name : tips[index].nickname,
+      tip: tips[index].tip,
+      message: tips[index].message,
+      avatars: [
+        user.avatar ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : "",
+        tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
+      ]
+    });
+    setOpenTipMessageDlg(true);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,10 +68,41 @@ const Profile = () => {
   }, [location]);
 
   useEffect(() => {
+    if (expandState) {
+      if (tipIndex === 2 && tips.length > 2) {
+        const tId = setInterval(() => {
+          setTipIndex((tipIndex) => tipIndex + 1);
+        }, 80);
+        setTimerId(tId);
+      }
+    } else {
+      if (tipIndex > 2 && tips.length > 2) {
+        const tId = setInterval(() => {
+          setTipIndex((tipIndex) => tipIndex - 1);
+        }, 80);
+        setTimerId(tId);
+      }
+    }
+  }, [expandState]);
+
+  useEffect(() => {
+    if (tips.length > 2 && tipIndex === tips.length && timerId) clearInterval(timerId);
+    if (tips.length > 2 && tipIndex === 2 && timerId) {
+      window.scrollTo(0, 0);
+      clearInterval(timerId);
+    }
+  }, [tipIndex]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     const personalisedUrl = pathname.substring(1);
     if (viewType === 0) dispatch(daremeAction.getDaremesByPersonalisedUrl(personalisedUrl, navigate));
-    else dispatch(fanwallAction.getFanwallsByPersonalUrl(personalisedUrl));
+    else {
+      setTipIndex(2);
+      setExpandState(false);
+      setTimerId(0);
+      dispatch(fanwallAction.getFanwallsByPersonalUrl(personalisedUrl));
+    }
   }, [viewType]);
 
   useEffect(() => {
@@ -62,6 +116,12 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
+      <TipMessageDlg
+        display={openTipMessageDlg}
+        wrapExit={() => { setOpenTipMessageDlg(false) }}
+        exit={() => { setOpenTipMessageDlg(false) }}
+        tipData={selectedTipData}
+      />
       <Dialog
         display={openDelPostDlg}
         exit={() => { setOpenDelPostDlg(false) }}
@@ -175,7 +235,6 @@ const Profile = () => {
                             sizeType={dareme.sizeType}
                             coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                             handleSubmit={() => {
-                              console.log(dareme)
                               dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
                               if (dareme.goal) dispatch(fundmeAction.checkDetailsAndResults(dareme._id, navigate));
                               else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
@@ -206,6 +265,42 @@ const Profile = () => {
         ) : (
           <div className="fanWall">
             <div className="dare-cards">
+              {tips.length > 0 &&
+                <div className="tips">
+                  <div className="title">
+                    <TipIcon color="#EFA058" />
+                    <p>Donuts Received</p>
+                  </div>
+                  <div className="tip-card">
+                    {tips.map((tip: any, index: any) => {
+                      if (index < tipIndex) {
+                        return <div className="card-detail" key={index}>
+                          <TipCard
+                            avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
+                            username={tip.tipper ? tip.tipper.name : tip.nickname}
+                            tip={tip.tip}
+                            message={tip.message}
+                            handleClick={() => { openDlg(index) }}
+                          />
+                        </div>
+                      }
+                    }
+                    )}
+                  </div>
+                  {tips.length > 2 &&
+                    <div className="arrow"
+                      onClick={() => { setExpandState(!expandState) }}
+                      onMouseOver={() => { setHoverState(true) }}
+                      onMouseLeave={() => { setHoverState(false) }}
+                    >
+                      {expandState ?
+                        <RetrieveIcon color="#000000" width={hoverState ? 30 : 24} height={hoverState ? 30 : 24} />
+                        :
+                        <ExpandIcon color="#000000" width={hoverState ? 30 : 24} height={hoverState ? 30 : 24} />}
+                    </div>
+                  }
+                </div>
+              }
               <div className="my-dareMe">
                 <div className="title">
                   <RewardIcon color="#EFA058" />

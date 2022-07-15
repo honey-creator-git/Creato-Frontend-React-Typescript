@@ -66,6 +66,9 @@ import Error404 from '../pages/error/error404';
 // import PostFanwallFundme from '../pages/fanwall/postFanwallFundme';
 import UploadVideoFundme from '../pages/fanwall/uploadVideoFundme';
 
+import TipDonut from '../pages/tip/tipDonut';
+import TipMethod from '../pages/tip/tipMethod';
+
 const AppRoutes = () => {
     return (
         <Routes>
@@ -74,7 +77,9 @@ const AppRoutes = () => {
             <Route path="auth/signup" element={<AuthRoute child={<Auth isSignin={false} />} />} />
             <Route path="create" element={<AuthRoute child={<Create />} routeType="private" />} />
             <Route path="dareme/create" element={<AuthRoute child={<CreateDareme />} routeType="private" />} />
-           
+            <Route path="/:creatorLink/tip" element={<AuthRoute child={<TipDonut />} />} />
+            <Route path="/tipmethod" element={<AuthRoute child={<TipMethod />} />} />
+
             <Route path="dareme/create/teaser" element={<AuthRoute child={<UploadVideo />} routeType="private" />} />
             <Route path="dareme/create/teaser/cover" element={<AuthRoute child={<CoverImage />} routeType="private" />} />
             <Route path="dareme/create/title" element={<AuthRoute child={<DaremeTitile />} routeType="private" />} />
@@ -92,7 +97,6 @@ const AppRoutes = () => {
             <Route path="fundme/fund/:fundmeId" element={<AuthRoute child={<FundCreator />} routeType="private" />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
             <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
-            
 
             <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
             <Route path="users/:userId/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
@@ -119,7 +123,7 @@ const AppRoutes = () => {
             <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
             <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />
             <Route path="dareme/requests/:daremeId" element={<AuthRoute child={<DareRequests />} routeType="private" />} />
-            
+
             <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
             <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
             <Route path="admin/daremes" element={<AuthRoute child={<DareMeList />} routeType="private" />} />
@@ -140,7 +144,7 @@ const AppRoutes = () => {
             <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
 
             {/* <Route path="fanwall/post/:fundmeId" element={<AuthRoute child={<PostFanwallFundme />} routeType="private" />} /> */}
-            <Route path="fundme/fanwall/post/:fundmeId/upload" element={<AuthRoute child={<UploadVideoFundme/>} routeType="private" />} />
+            <Route path="fundme/fanwall/post/:fundmeId/upload" element={<AuthRoute child={<UploadVideoFundme />} routeType="private" />} />
             {/* <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} /> */}
             {/* <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} /> */}
 

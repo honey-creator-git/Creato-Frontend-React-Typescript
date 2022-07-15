@@ -38,6 +38,47 @@
     .dare-cards {
       margin: 0px;
 
+      .tips {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding-left: 10px;
+
+          p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #efa058;
+            margin-left: 10px;
+          }
+        }
+
+        .tip-card {
+          padding: 10px 0px;
+
+          .card-detail {
+            display: flex;
+            justify-content: center;
+            margin: 7px auto;
+          }
+        }
+
+        .arrow {
+          margin: 0px auto;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
       .my-dareMe {
         display: flex;
         flex-direction: column;

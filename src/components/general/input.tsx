@@ -25,7 +25,7 @@ const Input = (props: any) => {
     else {
       setWords(e.target.value.length);
       let value = e.target.value;
-      if (isNumber) {
+      if (isNumber && value !== "") {
         let first: number = Number(value);
         let second: any = Number(value).toFixed(1);
         let diff = Math.abs(first - second);

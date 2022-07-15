@@ -93,6 +93,7 @@ export const daremeAction = {
   getDarmesOngoing: () => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_DAREME_INITIAL });
+    dispatch({ type: SET_FANWALL_INITIAL });
     api.getDaremesOngoing()
       .then((result) => {
         const { data } = result;
@@ -106,7 +107,6 @@ export const daremeAction = {
     dispatch({ type: SET_LOADING_TRUE });
     api.checkDareMeFinished(daremeId)
       .then((result: any) => {
-        console.log('check ponst 2')
         const { data } = result;
         dispatch({ type: SET_DAREME_INITIAL });
         if (data.finished) navigate(`/dareme/result/${daremeId}`);
@@ -200,7 +200,7 @@ export const daremeAction = {
         if (data.success) dispatch({ type: SET_DAREME, payload: data.dareme });
       }).catch((err: any) => console.log(err));
   },
-  
+
   getDaremesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getDaremesByPersonalisedUrl({ url: url })
@@ -243,7 +243,7 @@ export const daremeAction = {
         else navigate(`/dareme/details/${daremeId}`);
       }).catch(err => console.log(err));
   },
-  
+
   getDaremeRequests: (daremeId: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_DAREME_INITIAL });

@@ -17,8 +17,8 @@ import { fanwallAction } from "../redux/actions/fanwallActions";
 import CONSTANT from "../constants/constant";
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_FANWALL_INITIAL } from "../redux/types";
 import { RewardIcon } from "../assets/svg";
-import "../assets/styles/homeStyle.scss";
 import { fundmeAction } from "../redux/actions/fundmeActions";
+import "../assets/styles/homeStyle.scss";
 
 const creatoList = [
   {
@@ -82,21 +82,20 @@ const Home = () => {
   const user = userState.user;
   const dlgState = loadState.dlgState;
 
-  const buyDonuts = async(creato: any) => {
-    if (user) {await setDonutPlan(creato);}
+  const buyDonuts = async (creato: any) => {
+    if (user) { await setDonutPlan(creato); }
     else setOpenSigninDlg(true);
-    console.log(donutPlan)
   }
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(daremeAction.getDarmesOngoing());
-  }, [location]);
+  }, [location, dispatch]);
 
   useEffect(() => {
     setOpenDonutsPlanDlg(donutPlan);
   }, [donutPlan]);
-  
+
   useEffect(() => {
     if (dlgState.type === "buyDonut") {
       if (dlgState.state) {
@@ -114,7 +113,7 @@ const Home = () => {
       }
     }
   }, [dlgState]);
-  
+
   return (
     <div className="home-wrapper">
       <PaymentForm
@@ -214,6 +213,7 @@ const Home = () => {
             handleClick: () => {
               setOpenWelcomeDlg(false);
               dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              if (loadState.prevRoute !== "") navigate(loadState.prevRoute);
             }
           }
         ]}
@@ -275,9 +275,9 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type == 'dareme')
+                    if (dareme.type === 'dareme')
                       dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type == 'fundme')
+                    else if (dareme.type === 'fundme')
                       dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
@@ -285,9 +285,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  isFundme={dareme.type == 'fundme' ? true : false}
+                  isFundme={dareme.type === 'fundme' ? true : false}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -334,9 +334,9 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type == 'dareme')
+                    if (dareme.type === 'dareme')
                       dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type == 'fundme')
+                    else if (dareme.type === 'fundme')
                       dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
@@ -344,9 +344,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  isFundme={dareme.type == 'fundme' ? true : false}
+                  isFundme={dareme.type === 'fundme' ? true : false}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -383,9 +383,9 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type == 'dareme')
+                    if (dareme.type === 'dareme')
                       dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type == 'fundme')
+                    else if (dareme.type === 'fundme')
                       dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
@@ -393,9 +393,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  isFundme={dareme.type == 'fundme' ? true : false}
+                  isFundme={dareme.type === 'fundme' ? true : false}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -439,9 +439,9 @@ const Home = () => {
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type == 'dareme')
+                    if (dareme.type === 'dareme')
                       dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type == 'fundme')
+                    else if (dareme.type === 'fundme')
                       dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
@@ -449,9 +449,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  isFundme={dareme.type == 'fundme' ? true : false}
+                  isFundme={dareme.type === 'fundme' ? true : false}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -531,9 +531,9 @@ const Home = () => {
                   finished={dareme.finished}
                   handleSubmit={() => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type == 'dareme')
+                    if (dareme.type === 'dareme')
                       dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type == 'fundme')
+                    else if (dareme.type === 'fundme')
                       dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
                   }}
                 />
@@ -541,9 +541,9 @@ const Home = () => {
                   username={dareme.owner.name}
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
-                  isFundme={dareme.type == 'fundme' ? true : false}
+                  isFundme={dareme.type === 'fundme' ? true : false}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
                   }}
                   daremeId={dareme.id}
                 />
@@ -589,7 +589,7 @@ const Home = () => {
                   username={fanwall.writer.name}
                   avatar={fanwall.writer.avatar}
                   handleAvatar={() => {
-                      dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
+                    dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
                   }}
                   ownerId={fanwall.writer._id}
                   url={"/"}

@@ -21,6 +21,7 @@ const VideoCardMobile = (props: any) => {
     const width = donuts < interval ? Math.floor(Number(interval) / Number(goal) * 262) : Math.floor(Number(interval) * count / Number(goal) * 262);
 
     const calcTime = (time: any) => {
+        if (finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
         if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
         if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
         if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;

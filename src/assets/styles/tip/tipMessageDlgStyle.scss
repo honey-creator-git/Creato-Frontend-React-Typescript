@@ -1,0 +1,121 @@
+.tip-dialog-wrapper {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+
+    .dialog-main {
+        box-sizing: border-box;
+        padding: 24px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        padding: 24px;
+        width: 320px;
+        background: #ffffff;
+        z-index: 15;
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        pointer-events: unset;
+
+        .avatars-wrapper {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 130px;
+
+            .dialog-avatars {
+                width: 220px;
+                height: 100%;
+                position: relative;
+
+                .owner-avatar {
+                    position: absolute;
+                }
+
+                .user-avatar {
+                    position: absolute;
+                    z-index: 10;
+                    right: 0px;
+                }
+            }
+        }
+
+        .donuts-count {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .donuts-icon {
+                margin-left: -15px;
+            }
+
+            .count {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 56px;
+                color: #EFA058;
+            }
+        }
+
+        .dialog-social {
+            display: flex;
+            justify-content: center;
+            margin-top: 18px;
+
+            .link {
+                padding: 0px 10px;
+            }
+        }
+
+        .message-wrapper {
+            margin: 20px auto 0px auto;
+            width: 250px;
+            background: #F5F5F4;
+            border-radius: 15px;
+
+            .text {
+                padding: 10px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 16px;
+                letter-spacing: 0.02em;
+                color: #43403E;
+            }
+        }
+
+        .username {
+            margin: 10px 0px 20px 0px;
+            display: flex;
+            justify-content: space-around;
+
+            .name-text {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                letter-spacing: 0.005em;
+                color: #54504E;
+            }
+        }
+
+        .exit-btn {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

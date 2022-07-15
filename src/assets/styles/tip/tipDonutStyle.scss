@@ -1,0 +1,81 @@
+.tip-donuts {
+    width: 100%;
+    margin: auto;
+
+    @media (min-width: 880px) {
+        max-width: 880px;
+    }
+
+    @media (max-width: 880px) {
+        max-width: 355px;
+    }
+
+    .tip-donuts-body {
+        .user-avatar {
+            margin: 0px auto 10px auto;
+        }
+
+        .nickname {
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .donuts-number {
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .letter {
+                margin-right: 25px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.05em;
+                color: #000000;
+            }
+        }
+
+        .message {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .donut-package {
+            width: 350px;
+            margin: 15px auto 10px auto;
+
+            .package-title {
+                margin-left: 20px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.05em;
+                color: #000000;
+            }
+
+            .donuts-plan {
+                width: 350px;
+                margin-top: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                .donuts {
+                    margin: 5px 1px;
+                }
+            }
+        }
+    }
+
+    .send-btn {
+        margin: 20px auto 0px auto;
+        width: 320px;
+    }
+}

@@ -7,23 +7,24 @@ import Avatar from "../general/avatar";
 import {
   AddIcon,
   EditIcon,
-  FacebookIcon,
+  // FacebookIcon,
   HotIcon,
-  InstagramIcon,
+  // InstagramIcon,
   MoreIcon,
   NotificationOutlineIcon,
   NotificationSubscribedIcon,
-  TwitterIcon,
-  YoutubeIcon,
+  // TwitterIcon,
+  // YoutubeIcon,
+  TipIcon,
+  CreatoCoinIcon
 } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
 import { SET_PROFILE_DATA } from "../../redux/types";
 import { subscribeUser } from '../../api'
 import Dialog from "../general/dialog";
 import { SET_PREVIOUS_ROUTE } from "../../redux/types";
-import { notificationAction } from "../../redux/actions/notificationAction";
+// import { notificationAction } from "../../redux/actions/notificationAction";
 import "../../assets/styles/profile/components/profileHeaderStyle.scss";
-import {CreatoCoinIcon} from "../../assets/svg";
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
   const [more, setMore] = useState(moreInfo);
@@ -52,7 +53,7 @@ const ProfileHeader = (props: profileProps) => {
   const navigate = useNavigate();
   const userStore = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  const authuser = userStore.users[0];  
+  const authuser = userStore.users[0];
   const user = userStore.user;
   const contexts = useContext(LanguageContext);
   const daremeStore = useSelector((state: any) => state.dareme);
@@ -67,7 +68,6 @@ const ProfileHeader = (props: profileProps) => {
   const res = useOutsideAlerter(wrapRef, moreInfo);
 
   useEffect(() => {
-    console.log(voterCount)
     if (authuser && authuser.categories.length) {
       let categories = authuser.categories;
       let texts = ""
@@ -80,12 +80,12 @@ const ProfileHeader = (props: profileProps) => {
     }
     if (daremes.length !== 0) {
       let donutSum = 0;
-      for (let i = 0 ; i < daremes.length ; i++)
-        if (daremes[i].finished == true && daremes[i].isUser == true) 
+      for (let i = 0; i < daremes.length; i++)
+        if (daremes[i].finished === true && daremes[i].isUser === true)
           donutSum += daremes[i].donuts;
       setTotalDonuts(donutSum);
     }
-  }, [authuser]);
+  }, [authuser, contexts.CREATOR_CATEGORY_LIST, daremes]);
 
   useEffect(() => {
     if (user && authuser) {
@@ -100,9 +100,9 @@ const ProfileHeader = (props: profileProps) => {
     const s_reverseNum = num.toString().split("").reverse().join("");
     let s_buffer = "";
     let cnt = 0;
-    for (let i = 0 ; i < s_reverseNum.length ; i++) {
-      s_buffer += s_reverseNum[i];    
-      if (cnt == 2) {
+    for (let i = 0; i < s_reverseNum.length; i++) {
+      s_buffer += s_reverseNum[i];
+      if (cnt === 2) {
         cnt = 0;
         s_buffer += ',';
       }
@@ -125,10 +125,6 @@ const ProfileHeader = (props: profileProps) => {
     }
   }
 
-  const roundFloat = (value: number) => {
-    return Math.round(value * 10) / 10;
-  }
-
   const subscribedUser = async () => {
     try {
       if (user) {
@@ -138,6 +134,11 @@ const ProfileHeader = (props: profileProps) => {
     } catch (err) {
       console.log({ err })
     }
+  }
+
+  const tipping = () => {
+    if (user) navigate(`/${authuser.personalisedUrl}/tip`);
+    else navigate('/tipmethod');
   }
 
   useEffect(() => {
@@ -177,13 +178,13 @@ const ProfileHeader = (props: profileProps) => {
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
       </div>
-      { voterCount || totalDonuts ? 
+      {voterCount || totalDonuts ?
         <div className="rating-container">
           <span className="Voting-value"><b>{roundNumber(voterCount)} </b></span>
-          <HotIcon className="rating-icons" color="#EFA058" width="18"/>
+          <HotIcon className="rating-icons" color="#EFA058" width="18" />
           <span><b>SuperFans</b></span>
           <span className="Voting-value"> <b>&nbsp; {roundNumber(totalDonuts)}</b></span>
-          <CreatoCoinIcon className="rating-icons" color="#EFA058" width="18"/>
+          <CreatoCoinIcon className="rating-icons" color="#EFA058" width="18" />
         </div> :
         <></>
       }
@@ -226,8 +227,8 @@ const ProfileHeader = (props: profileProps) => {
           </div>
         )} */}
       </div>
-      {(user && authuser && user.id === authuser._id) &&
-        <div className="create-btn">
+      <div className="create-btn">
+        {(user && authuser && user.id === authuser._id) ?
           <Button
             handleSubmit={props.handleCreateDareMe}
             color="primary"
@@ -235,8 +236,20 @@ const ProfileHeader = (props: profileProps) => {
             fillStyle="fill"
             icon={[<AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />]}
           />
-        </div>
-      }
+          :
+          <>
+            {(daremes.filter((dareme: any) => dareme.finished === true)).length > 0 &&
+              <Button
+                handleSubmit={tipping}
+                color="primary"
+                shape="pill"
+                fillStyle="fill"
+                icon={[<TipIcon color="white" />, <TipIcon color="white" />, <TipIcon color="white" />]}
+              />
+            }
+          </>
+        }
+      </div>
       <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
         <div className="list" onClick={() => {
           navigator.clipboard.writeText(`www.creatogether.io/${authuser.personalisedUrl}`);

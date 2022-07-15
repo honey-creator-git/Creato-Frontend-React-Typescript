@@ -5,7 +5,7 @@ import { LanguageContext } from '../../routes/authRoute';
 
 const Creato = (props: any) => {
     const contexts = useContext(LanguageContext);
-    const { property, donutCount, discountedPercent, hoverDisable } = props;
+    const { property, donutCount, discountedPercent, hoverDisable, selected } = props;
     const [isHover, setHover] = useState(false);
 
     const styles = {
@@ -21,7 +21,7 @@ const Creato = (props: any) => {
             background: '#FFFFFF',
             boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.15)',
             borderRadius: '10px',
-            border: property === 'popular' ? '2px solid #EFA058' : '0px',
+            border: selected ? '2px solid #FF0000' : property === 'popular' ? '2px solid #EFA058' : '2px solid #FFFF',
         },
         creatoLogo: {
             position: 'absolute' as const,
@@ -76,13 +76,13 @@ const Creato = (props: any) => {
         },
         popular: {
             position: 'absolute' as const,
-            width: '110px',
+            width: '108px',
             height: '15px',
             top: '-1px',
-            left: '-1px',
+            left: '0px',
             background: '#EFA058',
             boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.15)',
-            borderRadius: '10px 10px 0px 0px',
+            borderRadius: '8px 8px 0px 0px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

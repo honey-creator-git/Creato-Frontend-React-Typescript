@@ -101,3 +101,6 @@ export const getFundmeVoters = (fundmeId: any) => API.get(`/api/fundme/voters/${
 // export const getFundmeRequests = (fundmeId: any) => API.get(`/api/fundme/requests/${fundmeId}`);
 
 export const getFanwallByFundMeId = (fundmeId: any) => API.get(`/api/fanwall/fundme/${fundmeId}`);
+
+export const tipUser = (data: any) => API.post('/api/tip', data);
+export const buyDonutForTip = (data: any) => API.post('/api/tip/buy', data);

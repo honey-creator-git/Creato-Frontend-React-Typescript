@@ -114,7 +114,7 @@ const ShopDonuts = () => {
         context={`You have topped up ${donutPlan ? donutPlan.donutCount : 'xxx'} Donuts\nDonuts balance: ${user ? user.wallet : 'xxx'}`}
         buttons={[
           {
-            text: 'Dare now',
+            text: loadState.prevRoute.indexOf("tip") !== -1 ? 'Tip now' : 'Dare now',
             handleClick: () => {
               setOpenTopupDlg(false);
               setDonutPlan(null);

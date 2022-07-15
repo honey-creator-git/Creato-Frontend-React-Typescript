@@ -1,0 +1,123 @@
+.tipcard-wrapper {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 330px;
+    height: 98px;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    transition: 0.2s;
+    display: flex;
+    padding: 5px 10px;
+    justify-content: space-between;
+
+    .avatar {
+        display: flex;
+        align-items: center;
+    }
+
+    .tip-info {
+        margin-left: 10px;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .top-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .username {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+                text-align: center;
+                color: #000000;
+            }
+
+            .donuts-info {
+                display: flex;
+                align-items: center;
+
+                .donuts-icon {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .donuts-number {
+                    margin-left: 2px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #EFA058;
+                }
+            }
+        }
+
+        .bottom-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            .message {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.02em;
+                color: #000000;
+            }
+
+            .see-more {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 18px;
+                color: #7E7875;
+                transition: 0.2s;
+            }
+        }
+    }
+
+    &:hover {
+        background-color: #EFA058;
+
+        .tip-info {
+            .top-info {
+                .username {
+                    color: #FFFFFF;
+                }
+
+                .donuts-info {
+                    .donuts-number {
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+    }
+
+    &:active {
+        transform: scale(0.995);
+        box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 880px) {
+        width: 460px;
+        height: 110px;
+
+        .tip-info {
+            .top-info {
+                margin-top: 15px;
+            }
+        }
+    }
+}
