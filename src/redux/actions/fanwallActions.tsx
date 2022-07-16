@@ -63,6 +63,7 @@ export const fanwallAction = {
             .then((result: any) => {
                 const { data } = result;
                 if (data.success) {
+                    dispatch({ type: SET_FANWALL_INITIAL, payload: data.fanwall.fundme ? 'fundme' : 'dareme' });
                     if (data.fanwall.dareme) {
                         dispatch({ type: SET_DAREME, payload: data.fanwall.dareme });
                         dispatch({ type: SET_FANWALL_WINOPTION, payload: data.winOption });
@@ -70,7 +71,6 @@ export const fanwallAction = {
                         dispatch({ type: SET_FUNDME, payload: data.fanwall.fundme });
                         dispatch({ type: SET_FANWALL_WINOPTION, payload: null });
                     }
-                    dispatch({ type: SET_FANWALL_INITIAL, payload: data.fanwall.fundme ? 'fundme' : 'dareme' });
                     dispatch({ type: SET_FANWALL_TOPFANS, payload: data.topFuns });
                     dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: data.fanwall.fundme ? 'fundme' : 'dareme' } });
                     dispatch({ type: SET_LOADING_FALSE });

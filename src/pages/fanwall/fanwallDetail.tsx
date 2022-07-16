@@ -24,13 +24,10 @@ const FanwallDetails = () => {
 
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userState = useSelector((state: any) => state.auth);
-  const loadState = useSelector((state: any) => state.load);
 
   const fanwall = fanwallState.fanwall;
   const winOption = fanwallState.winOption;
   const topFuns = fanwallState.topFuns;
-  const goal = fanwallState.goal;
-  const wallet = fanwallState.wallet;
 
   const contexts = useContext(LanguageContext);
 
@@ -43,11 +40,12 @@ const FanwallDetails = () => {
   const [moreInfo, setMoreInfo] = useState(false);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
 
-
-  const interval = goal ? (Number(goal) / 20).toFixed(1) : 0;
-  const count = goal ? Number(Math.floor(Number(wallet) / Number(interval))) : 0;
-  const width = wallet <= interval ? Math.floor(Number(interval) / Number(goal) * 330) : Math.floor(Number(interval) * count / Number(goal) * 330);
-
+  let width;
+  if (fanwall.fundme) {
+    const interval = fanwall.fundme.goal ? (Number(fanwall.fundme.goal) / 20).toFixed(1) : 0;
+    const count = fanwall.fundme.goal ? Number(Math.floor(Number(fanwall.fundme.wallet) / Number(interval))) : 0;
+    width = fanwall.fundme.wallet <= interval ? Math.floor(Number(interval) / Number(fanwall.fundme.goal) * 330) : Math.floor(Number(interval) * count / Number(fanwall.fundme.goal) * 330);
+  }
   const user = userState.user;
 
   const handleUnlock = () => {
@@ -63,6 +61,7 @@ const FanwallDetails = () => {
 
   const checkLock = () => {
     if (user) {
+      if (user.role === "ADMIN") return false;
       if (user.id + "" === fanwall.writer._id + "") return false;
       if (fanwall.dareme && fanwall.dareme.options) {
         const options = fanwall.dareme.options.filter((option: any) => option.option.win === true);
@@ -87,10 +86,17 @@ const FanwallDetails = () => {
   }, [fanwallId, dispatch]);
 
   useEffect(() => {
-    if (fanwall && fanwall.dareme && fanwall.writer && fanwall.dareme.options) {
-      setTotalDonuts(fanwall.dareme.options.filter((option: any) => option.option.status === 1).reduce((sum: any, option: any) => sum + option.option.donuts, 0));
-      setTitle(fanwall.dareme.title);
-      setCategory(fanwall.dareme.category);
+    if (fanwall && fanwall.writer) {
+      if (fanwall.dareme) {
+        if (fanwall.dareme.options) {
+          setTotalDonuts(fanwall.dareme.options.filter((option: any) => option.option.status === 1).reduce((sum: any, option: any) => sum + option.option.donuts, 0));
+          setTitle(fanwall.dareme.title);
+          setCategory(fanwall.dareme.category);
+        }
+      } else {
+        setTitle(fanwall.fundme.title);
+        setCategory(fanwall.fundme.category);
+      }
     }
   }, [fanwall]);
 
@@ -258,10 +264,10 @@ const FanwallDetails = () => {
                 <div className="funding-goal">
                   <div className="title">
                     <CreatoCoinIcon color="#EFA058" />
-                    <label>{wallet < goal ? "Goal" : "Goal Reached!"}</label>
+                    <label>{fanwall.fundme.wallet < fanwall.fundme.goal ? "Goal" : "Goal Reached!"}</label>
                   </div>
                   <div className="process-bar">
-                    <div className="process-value" style={{ width: wallet < goal ? `${width}px` : '330px' }}></div>
+                    <div className="process-value" style={{ width: fanwall.fundme.wallet < fanwall.fundme.goal ? `${width}px` : '330px' }}></div>
                   </div>
                   <div className="donuts-count">
                     <span><span className={fanwall.fundme.wallet >= fanwall.fundme.goal ? "over-donuts" : ""}>{fanwall.fundme.wallet.toLocaleString()}</span> / {fanwall.fundme.goal.toLocaleString()} Donuts</span>

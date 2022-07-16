@@ -13,7 +13,6 @@ import {
   SET_FANWALLS,
   SET_DAREME_DETAIL_INITIAL,
   SET_ADMIN_OPTIONS,
-  SET_FUNDMES,
   SET_VOTER_COUNT
 } from "../types";
 import * as api from "../../api";
@@ -300,7 +299,7 @@ export const daremeAction = {
         if (data.success) {
           dispatch({ type: SET_DAREME, payload: data.dareme });
           dispatch({ type: SET_FANWALL_INITIAL, payload: 'dareme' });
-          if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall });
+          if (data.fanwall) dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: "dareme" } });
           dispatch({ type: SET_LOADING_FALSE });
           navigate(`/dareme/fanwall/post/${daremeId}`);
         }
@@ -316,7 +315,7 @@ export const daremeAction = {
             .then((result) => {
               const { data } = result;
               if (data.success) {
-                dispatch({ type: SET_FANWALL, payload: data.fanwall });
+                dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: "dareme" } });
                 dispatch({ type: SET_DAREME, payload: data.dareme });
               }
             }).catch((err) => console.log(err));

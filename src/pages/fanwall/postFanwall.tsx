@@ -237,7 +237,7 @@ const PostFanwall = () => {
                                     />
                                     <div className="delete-icon" onClick={() => {
                                         const state = { ...fanwall, video: null, cover: null };
-                                        dispatch({ type: SET_FANWALL, payload: state })
+                                        dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } })
                                     }}>
                                         <DeleteIcon color="#BAB6B5" />
                                     </div>
@@ -245,8 +245,8 @@ const PostFanwall = () => {
                                 :
                                 <div onClick={() => {
                                     const state = { ...fanwall, message: message, embedUrl: embedUrl };
-                                    dispatch({ type: SET_FANWALL, payload: state });
-                                    if(fanwallState.itemType === 'dareme') navigate(`/dareme/fanwall/post/${itemId}/upload`);
+                                    dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } });
+                                    if (fanwallState.itemType === 'dareme') navigate(`/dareme/fanwall/post/${itemId}/upload`);
                                     else navigate(`/fundme/fanwall/post/${itemId}/upload`);
                                 }}>
                                     <ContainerBtn

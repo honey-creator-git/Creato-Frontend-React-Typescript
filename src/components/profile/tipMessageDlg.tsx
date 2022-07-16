@@ -42,21 +42,21 @@ const TipMessageDlg = (props: any) => {
                         </div>
                         <div className="dialog-social">
                             <div className="link" onClick={() => {
-                                let text = `I have tipped xxx Donuts to [owner's name] on Creato! Check it out`;
-                                window.open(`https://www.facebook.com/sharer/sharer.php?quote=${text}`, 'sharer');
+                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${tipData.ownerURL}&quote=${text}`, 'sharer');
 
                             }}>
                                 <FacebookIcon color="#EFA058" />
                             </div>
                             <div className="link" onClick={() => {
-                                let text = `I have tipped xxx Donuts to [owner's name] on Creato! Check it out`;
+                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out%0a${tipData.ownerURL}`;
                                 window.open(`https://wa.me/?text=${text}`);
                             }}>
                                 <WhatsappIcon color="#EFA058" />
                             </div>
                             <div className="link" onClick={() => {
-                                let text = `I have tipped xxx Donuts to [owner's name] on Creato! Check it out`;
-                                window.open(`https://twitter.com/share?text=${text}`, 'sharer');
+                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
+                                window.open(`https://twitter.com/share?url=${tipData.ownerURL}&text=${text}`, 'sharer');
                             }}>
                                 <TwitterIcon color="#EFA058" />
                             </div>

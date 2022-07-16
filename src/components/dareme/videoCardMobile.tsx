@@ -28,14 +28,22 @@ const VideoCardMobile = (props: any) => {
         if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
         else return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
     }
-    
+
     const checkLock = () => {
-        if (user && fanwallData.dareme && fanwallData.dareme.options) {
+        if (user) {
+            if (user.role === "ADMIN") return false;
             if (user.id + "" === fanwallData.writer._id + "") return false;
-            const options = fanwallData.dareme.options.filter((option: any) => option.option.win === true);
-            for (let i = 0; i < options[0].option.voteInfo.length; i++) {
-                const voteInfo = options[0].option.voteInfo[i];
-                if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+            if (fanwallData.dareme && fanwallData.dareme.options) {
+                const options = fanwallData.dareme.options.filter((option: any) => option.option.win === true);
+                for (let i = 0; i < options[0].option.voteInfo.length; i++) {
+                    const voteInfo = options[0].option.voteInfo[i];
+                    if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+                }
+            } else if (fanwallData.dareme && fanwallData.dareme.options === null) {
+                for (let i = 0; i < fanwallData.dareme.voteInfo.length; i++) {
+                    const voteInfo = fanwallData.dareme.voteInfo[i];
+                    if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= fanwallData.dareme.reward) return false;
+                }
             }
             for (let i = 0; i < fanwallData.unlocks.length; i++) if (user.id + "" === fanwallData.unlocks[i].unlocker + "") return false;
             return true;

@@ -62,7 +62,7 @@ const DaremeResult = () => {
             setIsWin(resultOptions.filter((option: any) => option.option.win === true).length ? true : false);
         }
     }, [resultOptions]);
-    
+
     return (
         <>
             <div className="title-header">
@@ -211,7 +211,7 @@ const DaremeResult = () => {
                                 <div className="result-button">
                                     {user && dareme.owner._id === user.id ?
                                         <>
-                                            {fanwall && fanwall.writer && fanwall.posted === false ?
+                                            {fanwall && fanwall.writer && fanwall.posted === true ?
                                                 <>
                                                     <div onClick={() => {
                                                         dispatch({ type: SET_FANWALL_INITIAL });
@@ -230,10 +230,10 @@ const DaremeResult = () => {
                                         </> :
                                         <>
                                             <div onClick={() => {
-                                                if (fanwall.fanwall === null || fanwall.fanwall.posted === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
+                                                if (fanwall === null || fanwall.posted === null || (fanwall.writer && fanwall.posted === false)) setIsStay(true);
                                                 else {
                                                     dispatch({ type: SET_FANWALL_INITIAL });
-                                                    navigate(`/dareme/fanwall/detail/${fanwall.fanwall._id}`);
+                                                    navigate(`/dareme/fanwall/detail/${fanwall._id}`);
                                                 }
                                             }}>
                                                 <ContainerBtn text={contexts.DAREME_FINISHED.VIEW_ON_FANWALL} styleType="fill" />

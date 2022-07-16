@@ -37,7 +37,7 @@ const UploadVideo = () => {
                     const imgfile = new File([blob], 'dot.png', blob);
                     const imgFile = Object.assign(imgfile, { preview: url });
                     const state = { ...fanwall, cover: imgFile };
-                    dispatch({ type: SET_FANWALL, payload: state });
+                    dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } });
                     if (fanwallState.itemType === 'dareme') navigate('/dareme/fanwall/post/' + itemId);
                     else navigate('/fundme/fanwall/post/' + itemId);
                 });
@@ -60,7 +60,7 @@ const UploadVideo = () => {
                     const size = video.videoWidth / video.videoHeight;
                     const type = size >= 0.65;
                     const state = { ...fanwall, sizeType: type, video: loadFile };
-                    dispatch({ type: SET_FANWALL, payload: state });
+                    dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } });
                 }
                 video.src = URL.createObjectURL(loadFile);
             } else alert("file size is over 100M");
@@ -110,7 +110,7 @@ const UploadVideo = () => {
                                 className="delete-icon"
                                 onClick={() => {
                                     const state = { ...fanwall, video: null };
-                                    dispatch({ type: SET_FANWALL, payload: state });
+                                    dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } });
                                 }}
                             >
                                 <DeleteIcon color="#BAB6B5" />

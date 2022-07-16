@@ -238,7 +238,7 @@ const ProfileHeader = (props: profileProps) => {
           />
           :
           <>
-            {/* {(daremes.filter((dareme: any) => dareme.finished === true)).length > 0 &&
+            {(daremes.filter((dareme: any) => dareme.finished === true)).length > 0 &&
               <Button
                 handleSubmit={tipping}
                 color="primary"
@@ -246,7 +246,7 @@ const ProfileHeader = (props: profileProps) => {
                 fillStyle="fill"
                 icon={[<TipIcon color="white" />, <TipIcon color="white" />, <TipIcon color="white" />]}
               />
-            } */}
+            }
           </>
         }
       </div>

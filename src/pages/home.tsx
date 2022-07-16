@@ -575,14 +575,11 @@ const Home = () => {
                   goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
                   category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
                   posted={true}
+                  finished={true}
                   fanwallData={fanwall}
                   handleSubmit={() => {
-                    dispatch({ type: SET_FANWALL_INITIAL });
-                    navigate(`/dareme/fanwall/detail/${fanwall.id}`)
-                    // if (fanwall.dareme.goal)
-                    //   navigate(`/fundme/fanwall/detail/${fanwall.id}`)
-                    // else
-                    //   navigate(`/dareme/fanwall/detail/${fanwall.id}`)
+                    if (fanwall.dareme.goal) navigate(`/fundme/fanwall/detail/${fanwall.id}`)
+                    else navigate(`/dareme/fanwall/detail/${fanwall.id}`)
                   }}
                 />
                 <AvatarLink

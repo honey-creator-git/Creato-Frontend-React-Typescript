@@ -42,6 +42,7 @@ const Profile = () => {
   const [hoverState, setHoverState] = useState(false);
   const [selectedTipData, setSelectedTipData] = useState<any>(null);
   const [openTipMessageDlg, setOpenTipMessageDlg] = useState(false);
+  const [openSignin, setOpenSignin] = useState(false);
   const [timerId, setTimerId] = useState<any>(0);
 
   const handleCreateDareMe = () => {
@@ -50,16 +51,21 @@ const Profile = () => {
   };
 
   const openDlg = (index: any) => {
-    setSelectedTipData({
-      username: tips[index].tipper ? tips[index].tipper.name : tips[index].nickname,
-      tip: tips[index].tip,
-      message: tips[index].message,
-      avatars: [
-        authuser[0].avatar.indexOf('uploads') === -1 ? authuser[0].avatar : `${CONSTANT.SERVER_URL}/${authuser[0].avatar}`,
-        tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
-      ]
-    });
-    setOpenTipMessageDlg(true);
+    if (user) {
+      setSelectedTipData({
+        username: tips[index].tipper ? tips[index].tipper.name : tips[index].nickname,
+        tip: tips[index].tip,
+        message: tips[index].message,
+        avatars: [
+          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
+          tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
+        ],
+        ownername: authuser?.name,
+        ownerURL: `${CONSTANT.SERVER_URL}/${authuser?.personalisedUrl}`
+      });
+      setOpenTipMessageDlg(true);
+    }
+    else setOpenSignin(true);
   }
 
   useEffect(() => {
@@ -121,6 +127,22 @@ const Profile = () => {
         wrapExit={() => { setOpenTipMessageDlg(false) }}
         exit={() => { setOpenTipMessageDlg(false) }}
         tipData={selectedTipData}
+      />
+      <Dialog
+        display={openSignin}
+        exit={() => { setOpenSignin(false) }}
+        wrapExit={() => { setOpenSignin(false) }}
+        title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
+        context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
+        buttons={[
+          {
+            text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
+            handleClick: () => {
+              dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
+              navigate('/auth/signin');
+            }
+          }
+        ]}
       />
       <Dialog
         display={openDelPostDlg}
@@ -320,13 +342,16 @@ const Profile = () => {
                           sizeType={fanwall.sizeType}
                           coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
                           title={fanwall.dareme.title}
-                          category={contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
+                          goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
+                          category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
                           posted={true}
+                          finished={true}
                           fanwallData={fanwall}
                           handleSubmit={() => {
                             dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
                             dispatch({ type: SET_FANWALL_INITIAL });
-                            navigate(`/dareme/fanwall/detail/${fanwall.id}`)
+                            if (fanwall.dareme.goal) navigate(`/fundme/fanwall/detail/${fanwall.id}`)
+                            else navigate(`/dareme/fanwall/detail/${fanwall.id}`)
                           }}
                         />
                         <AvatarLink
@@ -367,13 +392,16 @@ const Profile = () => {
                           sizeType={fanwall.sizeType}
                           coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
                           title={fanwall.dareme.title}
-                          category={contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
+                          goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
+                          category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
                           posted={true}
+                          finished={true}
                           fanwallData={fanwall}
                           handleSubmit={() => {
                             dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
                             dispatch({ type: SET_FANWALL_INITIAL });
-                            navigate(`/dareme/fanwall/detail/${fanwall.id}`)
+                            if (fanwall.dareme.goal) navigate(`/fundme/fanwall/detail/${fanwall.id}`)
+                            else navigate(`/dareme/fanwall/detail/${fanwall.id}`)
                           }}
                         />
                         <AvatarLink
