@@ -83,7 +83,6 @@ export const fundmeAction = {
   publishFundme: () => async (dispatch: Dispatch<any>) => {
     api.publishFundme()
       .then((result) => {
-        const { data } = result;
       }).catch((err) => console.log(err));
   },
 
@@ -143,19 +142,6 @@ export const fundmeAction = {
       }).catch((err) => console.log(err));
   },
 
-  //   //-------------------------------------
-  //   getFundmesOngoing: () => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     dispatch({ type: SET_FUNDME_INITIAL });
-  //     api.getFundmesOngoing()
-  //       .then((result) => {
-  //         const { data } = result;
-  //         dispatch({ type: SET_FUNDMES, payload: data.fundmes });
-  //         dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
-  //         dispatch({ type: SET_LOADING_FALSE });
-  //       }).catch((err) => console.log(err));
-  //   },
-
   getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_FUNDME_INITIAL });
@@ -170,56 +156,6 @@ export const fundmeAction = {
       }).catch((err) => console.log(err));
   },
 
-  //   getOptionDetails: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     dispatch({ type: SET_FUNDME_INITIAL });
-  //     api.getOptionDetails(optionId, fundmeId)
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_OPTION, payload: data.option });
-  //           dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //           dispatch({ type: SET_LOADING_FALSE });
-  //         }
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
-  //   supportCreator: (fundmeId: any, optionId: any, donuts: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     api.checkFundMeFinished(fundmeId)
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.finished) navigate(`/fundme/result/${fundmeId}`);
-  //         else {
-  //           api.supportCreator({ fundmeId: fundmeId, optionId: optionId, amount: donuts })
-  //             .then((result) => {
-  //               const { data } = result;
-  //               if (data.success) {
-  //                 dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //                 dispatch({ type: SET_OPTION, payload: data.option });
-  //                 if (data.user) dispatch({ type: SET_USER, payload: data.user });
-  //               }
-  //             }).catch((err) => console.log(err));
-  //         }
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
-  //   checkFundCreatorAndResults: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     api.checkFundMeFinished(fundmeId)
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.finished) navigate(`/fundme/result/${fundmeId}`);
-  //         else navigate(`/fundme/fund/${fundmeId}`);
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
-  //   getFundCreatorDetails: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-  //     api.getFundCreatorDetails(fundmeId)
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.success) dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
   getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getFundmesByPersonalisedUrl({ url: url })
@@ -232,84 +168,6 @@ export const fundmeAction = {
       }).catch((err) => console.log(err));
   },
 
-  //   fundCreator: (fundmeId: any, title: any, amount: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     api.checkFundMeFinished(fundmeId)
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.finished) navigate(`/fundme/result/${fundmeId}`);
-  //         else {
-  //           api.fundCreator({ fundmeId: fundmeId, title: title, amount: amount })
-  //             .then((result) => {
-  //               const { data } = result;
-  //               if (data.success) {
-  //                 const optionId = data.option._id;
-  //                 dispatch({ type: SET_USER, payload: data.user });
-  //                 dispatch({ type: SET_OPTION, payload: data.option });
-  //                 navigate(`/fundme/fund/${fundmeId}/gameon/${optionId}`);
-  //               }
-  //             }).catch((err) => console.log(err));
-  //         }
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
-  //   checkFundMeRequests: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-  //     api.checkFundMeRequests(fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         dispatch({ type: SET_FUNDME_INITIAL });
-  //         if (data.request) navigate(`/fundme/requests/${fundmeId}`);
-  //         else navigate(`/fundme/details/${fundmeId}`);
-  //       }).catch(err => console.log(err));
-  //   },
-
-  //   getFundmeRequests: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-  //     dispatch({ type: SET_LOADING_TRUE });
-  //     dispatch({ type: SET_FUNDME_INITIAL });
-  //     api.getFundmeRequests(fundmeId)
-  //       .then((result) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //           dispatch({ type: SET_LOADING_FALSE });
-  //         }
-  //       }).catch(err => console.log(err));
-  //   },
-
-  //   acceptFundOption: (fundmeId: any, optionId: any) => async (dispatch: Dispatch<any>) => {
-  //     api.acceptFundOption({ optionId: optionId })
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           api.getFundmeRequests(fundmeId)
-  //             .then((result) => {
-  //               const { data } = result;
-  //               if (data.success) {
-  //                 dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //                 dispatch({ type: SET_LOADING_FALSE });
-  //               }
-  //             }).catch(err => console.log(err));
-  //         }
-  //       }).catch((err: any) => console.log(err));
-  //   },
-
-  //   // declineFundOption: (fundmeId: any, optionId: any) => async (dispatch: Dispatch<any>) => {
-  //   //   dispatch({ type: SET_LOADING_TRUE });
-  //   //   api.declineFundOption({ optionId: optionId, fundmeId: fundmeId })
-  //   //     .then((result: any) => {
-  //   //       const { data } = result;
-  //   //       if (data.success) {
-  //   //         api.getFundmeRequests(fundmeId)
-  //   //           .then((result) => {
-  //   //             const { data } = result;
-  //   //             if (data.success) {
-  //   //               dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //   //               dispatch({ type: SET_LOADING_FALSE });
-  //   //             }
-  //   //           }).catch(err => console.log(err));
-  //   //       }
-  //   //     }).catch((err: any) => console.log(err));
-  //   // },
-
   postFanwall: (fundmeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getFanwallByFundMeId(fundmeId)
@@ -320,27 +178,10 @@ export const fundmeAction = {
           dispatch({ type: SET_FANWALL_INITIAL, payload: 'fundme'});
           if (data.fanwall) dispatch({ type: SET_FANWALL, payload: data.fanwall});
           dispatch({ type: SET_LOADING_FALSE });
-          navigate(`/dareme/fanwall/post/${fundmeId}`);
+          navigate(`/fundme/fanwall/post/${fundmeId}`);
         }
       }).catch(err => console.log(err));
   },
-
-  //   winFundOption: (optionId: any, fundmeId: any) => async (dispatch: Dispatch<any>) => {
-  //     api.winFundOption({ optionId: optionId, fundmeId: fundmeId })
-  //       .then((result: any) => {
-  //         const { data } = result;
-  //         if (data.success) {
-  //           api.getFundmeResult(fundmeId)
-  //             .then((result) => {
-  //               const { data } = result;
-  //               if (data.success) {
-  //                 dispatch({ type: SET_FANWALL, payload: data.fanwall });
-  //                 dispatch({ type: SET_FUNDME, payload: data.fundme });
-  //               }
-  //             }).catch((err) => console.log(err));
-  //         }
-  //       }).catch((err: any) => console.log(err));
-  //   },
   
   // ADMIN
   getFundMeList: (search: any) => async (dispatch: Dispatch<any>) => {

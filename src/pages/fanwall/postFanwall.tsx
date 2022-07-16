@@ -139,7 +139,7 @@ const PostFanwall = () => {
                     />
                     <div className="dareme-post-fanwall-videoCardDesktop">
                         <VideoCardDesktop
-                            url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+                            url={`${CONSTANT.SERVER_URL}/${item.teaser}`}
                             sizeType={item.sizeType}
                             coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
                         />
@@ -245,8 +245,9 @@ const PostFanwall = () => {
                                 :
                                 <div onClick={() => {
                                     const state = { ...fanwall, message: message, embedUrl: embedUrl };
-                                    dispatch({ type: SET_FANWALL, payload: state })
-                                    navigate(`/dareme/fanwall/post/${itemId}/upload`);
+                                    dispatch({ type: SET_FANWALL, payload: state });
+                                    if(fanwallState.itemType === 'dareme') navigate(`/dareme/fanwall/post/${itemId}/upload`);
+                                    else navigate(`/fundme/fanwall/post/${itemId}/upload`);
                                 }}>
                                     <ContainerBtn
                                         text={contexts.POSTING_ON_FANWALL.EXCLUSIVE_VIDEO}

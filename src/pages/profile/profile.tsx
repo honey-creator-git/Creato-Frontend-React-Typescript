@@ -55,7 +55,7 @@ const Profile = () => {
       tip: tips[index].tip,
       message: tips[index].message,
       avatars: [
-        user.avatar ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : "",
+        authuser[0].avatar.indexOf('uploads') === -1 ? authuser[0].avatar : `${CONSTANT.SERVER_URL}/${authuser[0].avatar}`,
         tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
       ]
     });

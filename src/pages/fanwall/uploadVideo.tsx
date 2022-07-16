@@ -14,38 +14,38 @@ import "../../assets/styles/dareme/create/uploadVideoStyle.scss";
 const UploadVideo = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { daremeId } = useParams();
+    const { itemId } = useParams();
     const fanwallState = useSelector((state: any) => state.fanwall);
     const fanwall = fanwallState.fanwall;
     const playerRef = useRef<ReactPlayer>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [openHint, setOpenHint] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const contexts = useContext(LanguageContext);
-    const [isSave, setIsSave] = useState(false);
 
     const handleSave = () => {
-        // if (fanwall.cover === null) {
-        //     const video: any = document.getElementById("element")?.firstChild;
-        //     let canvas = document.createElement("canvas") as HTMLCanvasElement;
-        //     let context = canvas.getContext('2d');
-        //     canvas.width = video.videoWidth;
-        //     canvas.height = video.videoHeight;
-        //     context?.drawImage(video, 0, 0);
-        //     let url = canvas.toDataURL('image/png');
-        //     fetch(url)
-        //         .then(res => res.blob())
-        //         .then(blob => {
-        //             const imgfile = new File([blob], 'dot.png', blob);
-        //             const imgFile = Object.assign(imgfile, { preview: url });
-        //             const state = { ...fanwall, cover: imgFile };
-        //             dispatch({ type: SET_FANWALL, payload: state });
-        //             navigate('/dareme/fanwall/post/' + daremeId);
-        //         });
-        // } 
-        // else 
-            setIsSave(true);
-            navigate('/dareme/fanwall/post/' + daremeId);
+        if (fanwall.cover === null) {
+            const video: any = document.getElementById("element")?.firstChild;
+            let canvas = document.createElement("canvas") as HTMLCanvasElement;
+            let context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context?.drawImage(video, 0, 0);
+            let url = canvas.toDataURL('image/png');
+            fetch(url)
+                .then(res => res.blob())
+                .then(blob => {
+                    const imgfile = new File([blob], 'dot.png', blob);
+                    const imgFile = Object.assign(imgfile, { preview: url });
+                    const state = { ...fanwall, cover: imgFile };
+                    dispatch({ type: SET_FANWALL, payload: state });
+                    if (fanwallState.itemType === 'dareme') navigate('/dareme/fanwall/post/' + itemId);
+                    else navigate('/fundme/fanwall/post/' + itemId);
+                });
+        }
+        else {
+            if (fanwallState.itemType === 'dareme') navigate('/dareme/fanwall/post/' + itemId);
+            else navigate('/fundme/fanwall/post/' + itemId);
+        }
     };
 
     const handleUploadVideo = (e: any) => {
@@ -76,7 +76,13 @@ const UploadVideo = () => {
             <div className="title-header">
                 <Title
                     title={contexts.HEADER_TITLE.EXCLUSIVE_VIDEO_UPLOAD}
-                    back={() => { setOpen(true); setIsSave(true) }}
+                    back={() => {
+                        if (fanwall.cover === null && fanwall.video === null) {
+                            if (fanwallState.itemType === 'dareme') navigate('/dareme/fanwall/post/' + itemId);
+                            else navigate('/fundme/fanwall/post/' + itemId);
+                        }
+                        else setOpen(true);
+                    }}
                 />
             </div>
             <div className="upload-Video-wrapper">
@@ -91,7 +97,7 @@ const UploadVideo = () => {
                             text: contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT,
                             handleClick: () => { handleSave() }
                         }
-                        
+
                     ]}
                 />
                 <div className="subtitle">
@@ -132,18 +138,19 @@ const UploadVideo = () => {
                         onChange={handleUploadVideo}
                         hidden
                         accept="video/*"
+                        value=""
                     />
                 </div>
                 {
                     !(fanwall.video) ? (
                         <>
                         </>
-                    ) : 
-                (
-                    <div className="save-btn" onClick={handleSave}>
-                        <ContainerBtn disabled={false} styleType="fill" text="Save" />
-                    </div>
-                )}
+                    ) :
+                        (
+                            <div className="save-btn" onClick={handleSave}>
+                                <ContainerBtn disabled={false} styleType="fill" text="Save" />
+                            </div>
+                        )}
             </div>
         </>
     );

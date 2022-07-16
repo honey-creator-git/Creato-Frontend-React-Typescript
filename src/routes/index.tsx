@@ -18,7 +18,6 @@ import FundUploadVideo from "../pages/fundme/create/uploadVideo";
 import FundmeTitle from "../pages/fundme/create/fundmeTitle";
 import FundmePreview from '../pages/fundme/create/preview';
 import FundCoverImage from '../pages/fundme/create/coverImage';
-import FundCreator from '../pages/fundme/fund/fundCreator';
 import FundmeDetails from '../pages/fundme/fund/fundmeDetails';
 import FundmeRewards from '../pages/fundme/create/rewards';
 import FundmeVoters from '../pages/fundme/fund/fundmeVoters';
@@ -63,8 +62,6 @@ import FundMeTitle from '../pages/admin/fundme/fundMeTitle';
 
 import AdminTransactions from '../pages/admin/transactions/transactions';
 import Error404 from '../pages/error/error404';
-// import PostFanwallFundme from '../pages/fanwall/postFanwallFundme';
-import UploadVideoFundme from '../pages/fanwall/uploadVideoFundme';
 
 import TipDonut from '../pages/tip/tipDonut';
 import TipMethod from '../pages/tip/tipMethod';
@@ -94,7 +91,6 @@ const AppRoutes = () => {
             <Route path="fundme/create/teaser" element={<AuthRoute child={<FundUploadVideo />} routeType="private" />} />
             <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundmeDetails />} />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
-            <Route path="fundme/fund/:fundmeId" element={<AuthRoute child={<FundCreator />} routeType="private" />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
             <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
 
@@ -139,14 +135,14 @@ const AppRoutes = () => {
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
 
             <Route path="dareme/fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
-            <Route path="dareme/fanwall/post/:daremeId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
+            <Route path="dareme/fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
             <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} />
             <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
 
-            {/* <Route path="fanwall/post/:fundmeId" element={<AuthRoute child={<PostFanwallFundme />} routeType="private" />} /> */}
-            <Route path="fundme/fanwall/post/:fundmeId/upload" element={<AuthRoute child={<UploadVideoFundme />} routeType="private" />} />
-            {/* <Route path="dareme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} /> */}
-            {/* <Route path="dareme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} /> */}
+            <Route path="fundme/fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
+            <Route path="fundme/fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
+            <Route path="fundme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetail />} />} />
+            <Route path="fundme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
 
         </Routes>
     );

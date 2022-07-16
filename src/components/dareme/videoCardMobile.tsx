@@ -89,7 +89,7 @@ const VideoCardMobile = (props: any) => {
                 <div className="information">
                     <div className="time-info">
                         <div className="left-time">
-                            {calcTime(time)} {time > 0 && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+                            {calcTime(time)} {!finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
                         </div>
                         <div className="vote-info">
                             <CreatoCoinIcon color="white" />

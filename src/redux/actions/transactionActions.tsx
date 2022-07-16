@@ -24,6 +24,7 @@ export const transactionActions = {
                             fundmeDonuts: data.fundmeDonuts
                         }
                     });
+                    console.log(data.transactions);
                     dispatch({ type: SET_USERS, payload: data.users });
                     dispatch({ type: SET_TRANSACTIONS, payload: data.transactions });
                     dispatch({ type: SET_LOADING_FALSE });

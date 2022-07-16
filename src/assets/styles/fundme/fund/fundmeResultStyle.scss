@@ -2,28 +2,6 @@
   box-sizing: border-box;
   display: flex;
 
-  .scroll-bar {
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: rgba(245, 195, 149, 0.1);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(245, 195, 149, 0.5);
-      border-radius: 10px;
-      transition: 0.2s;
-      width: 12px;
-
-      &:hover {
-        background: #efa058;
-      }
-    }
-  }
-
   .fundme-details-information {
     width: 370px;
 
@@ -75,8 +53,8 @@
     }
 
     .funding-goal {
-      margin-top: 30px;
-      margin-bottom: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
 
       .title {
         margin-left: 15px;
@@ -103,7 +81,7 @@
           height: 13px;
           top: 0px;
           left: 0px;
-          background-image: linear-gradient(to right,#dd4d71 30%, #e48c3c, );
+          background-image: linear-gradient(to right, #dd4d71 30%, #e48c3c, );
           // background-color: #EFA058;
         }
       }
@@ -144,16 +122,6 @@
       line-height: 18px;
       letter-spacing: 0.005em;
       color: #54504E;
-
-      .reward-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #EFA058;
-      }
     }
   }
 

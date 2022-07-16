@@ -10,6 +10,7 @@ import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog";
+import Button from "../../../components/general/button";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, RewardIcon, HotIcon } from "../../../assets/svg";
@@ -26,7 +27,6 @@ const FundmeDetails = () => {
   const loadState = useSelector((state: any) => state.load);
   const userState = useSelector((state: any) => state.auth);
   const fundme = fundmeState.fundme;
-  const [canShow, setCanShow] = useState<any>(null);
   const [isSignIn, setIsSignIn] = useState(false);
   const [isCopyLink, setIsCopyLink] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -48,18 +48,6 @@ const FundmeDetails = () => {
     if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
     if (time > 0) return "1 min";
     else return "Finished";
-  }
-
-  const canShowResult = (dareme: any, user: any) => {
-    if (user) {
-      if (user.id === dareme.owner._id) return true;
-      for (var i = 0; i < dareme.options.length; i++)
-        for (var j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
-          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].donuts >= 50) return true;
-          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].canFree === false) return true;
-        }
-      return false;
-    } else return false;
   }
 
   const fund = (donuts: any) => {
@@ -100,10 +88,6 @@ const FundmeDetails = () => {
     }
     return true;
   }
-
-  useEffect(() => {
-    // if (fundme.owner) setCanShow(canShowResult(fundme, user));
-  }, [fundme]);
 
   return (
     <>
@@ -335,8 +319,17 @@ const FundmeDetails = () => {
               </div>
               <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ marginRight: '20px' }}>
-                  <div className="reward-btn" onClick={() => { setIsReward(true) }}>
-                    <RewardIcon color="white" width="25" height="25" />
+                  <div>
+                    <Button
+                      fillStyle="fill"
+                      color="primary"
+                      icon={[
+                        <RewardIcon color="white" width="25" height="25" />,
+                        <RewardIcon color="white" width="25" height="25" />,
+                        <RewardIcon color="white" width="25" height="25" />
+                      ]}
+                      handleSubmit={() => { setIsReward(true) }}
+                    />
                   </div>
                 </div>
                 <label>Supporting the creator as SuperFan will get you entitled for the reward!</label>

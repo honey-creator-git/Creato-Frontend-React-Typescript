@@ -27,7 +27,6 @@ const AdminTransactions = () => {
         setType(type);
         dispatch({ type: SET_TRANSACTIONS, payload: [] });
         dispatch(transactionActions.getAdminTransactions(type));
-        console.log(transactionList)
     }
 
     const calcColor = (type: any, description: any) => {
@@ -134,7 +133,7 @@ const AdminTransactions = () => {
                         <div className="donuts-type">
                             Total Donuts Circulating: {transactions.adminDonuts ? (transactions.adminDonuts + transactions.userDonuts + transactions.daremeDonuts).toLocaleString() : 0}
                         </div>
-                        <div className="donuts-type">   
+                        <div className="donuts-type">
                             Admin: {transactions.adminDonuts ? transactions.adminDonuts.toLocaleString() : 0}
                         </div>
                         <div className="donuts-type">
@@ -228,24 +227,26 @@ const AdminTransactions = () => {
                                             {transaction.description === 2 && `Purchase - ${transaction.donuts} Donuts`}
                                             {transaction.description === 3 &&
                                                 <>
-                                                    {type === 0 && `${transaction.dareme ? transaction.dareme.title : ''} - Donut x1`}
+                                                    {type === 0 && `${transaction.dareme ? transaction.dareme.title : transaction.fundme ? transaction.fundme.title : ''} - Donut x1`}
                                                     {type === 1 && `Vote Donut x1 for Free`}
                                                 </>
                                             }
-                                            {transaction.description === 4 && <>Earnings from <strong>{transaction.dareme ? transaction.dareme.title : ''}</strong></>}
+                                            {transaction.description === 4 && <>Earnings from <strong>{transaction.from === "DAREME" && transaction.dareme ? transaction.dareme.title : ''}{transaction.from = "FUNDME" && transaction.fundme ? transaction.fundme.title : ''}</strong></>}
                                             {transaction.description === 5 && "Vote as SuperFans"}
-                                            {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "Fund Request")}
-                                            {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : transaction.fundme ? transaction.fundme.title : ""}</strong></>}
+                                            {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "")}
+                                            {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ""}</strong></>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
-                                            {transaction.from === "USER" && `${transaction.user ? transaction.user.name : ''}`}
+                                            {transaction.from === "USER" && (transaction.user ? transaction.user.name : '')}
                                             {transaction.from === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
+                                            {transaction.from === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                                         </td>
-                                        <td className={transaction._id}>
+                                        <td>
                                             {transaction.to === "ADMIN" && "Admin"}
-                                            {transaction.to === "USER" && `${transaction.user ? transaction.user.name : ''}`}
+                                            {transaction.to === "USER" && (transaction.user ? transaction.user.name : '')}
                                             {transaction.to === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
+                                            {transaction.to === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                                         </td>
                                         <td>
                                             <div className="donuts-type">

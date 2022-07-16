@@ -14,7 +14,7 @@ import CategoryBtn from "../../components/general/categoryBtn";
 import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
 import { CreatoCoinIcon, MoreIcon, WinningIcon } from "../../assets/svg";
-import { SET_PREVIOUS_ROUTE ,SET_FANWALL_TYPE} from "../../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_FANWALL_TYPE } from "../../redux/types";
 import "../../assets/styles/fanwall/fanwallDetailsStyle.scss";
 
 const FanwallDetails = () => {
@@ -49,7 +49,7 @@ const FanwallDetails = () => {
   const width = wallet <= interval ? Math.floor(Number(interval) / Number(goal) * 330) : Math.floor(Number(interval) * count / Number(goal) * 330);
 
   const user = userState.user;
-  
+
   const handleUnlock = () => {
     if (user) setIsUnLock(true);
     else setIsSignIn(true);
@@ -62,12 +62,19 @@ const FanwallDetails = () => {
   }
 
   const checkLock = () => {
-    if (user && fanwall.dareme && fanwall.dareme.options) {
+    if (user) {
       if (user.id + "" === fanwall.writer._id + "") return false;
-      const options = fanwall.dareme.options.filter((option: any) => option.option.win === true);
-      for (let i = 0; i < options[0].option.voteInfo.length; i++) {
-        const voteInfo = options[0].option.voteInfo[i];
-        if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+      if (fanwall.dareme && fanwall.dareme.options) {
+        const options = fanwall.dareme.options.filter((option: any) => option.option.win === true);
+        for (let i = 0; i < options[0].option.voteInfo.length; i++) {
+          const voteInfo = options[0].option.voteInfo[i];
+          if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+        }
+      } else if (fanwall.fundme) {
+        for (let i = 0; i < fanwall.fundme.voteInfo.length; i++) {
+          const voteInfo = fanwall.fundme.voteInfo[i];
+          if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= fanwall.fundme.reward) return false;
+        }
       }
       for (let i = 0; i < fanwall.unlocks.length; i++) if (user.id + "" === fanwall.unlocks[i].unlocker + "") return false;
       return true;
@@ -199,7 +206,7 @@ const FanwallDetails = () => {
                 <div className="dareme-deadline">Ended</div>
                 <div className="dareme-donuts">
                   <CreatoCoinIcon color="black" />
-                  <div style={{ width: 'fit-content', marginLeft: '5px', marginRight: '5px' }}>{totalDonuts.toLocaleString()}</div>
+                  <div style={{ width: 'fit-content', marginLeft: '5px', marginRight: '5px' }}>{fanwall.dareme ? totalDonuts.toLocaleString() : fanwall.fundme.wallet.toLocaleString()}</div>
                 </div>
               </div>
               <div className="dareme-title">
@@ -216,8 +223,8 @@ const FanwallDetails = () => {
                     {(user && user.id === fanwall.writer._id) &&
                       <>
                         <div className="list" onClick={() => {
-                          if(fanwall.dareme) dispatch({type:SET_FANWALL_TYPE,payload:'dareme'});
-                          else dispatch({type:SET_FANWALL_TYPE,payload:'fundme'});
+                          if (fanwall.dareme) dispatch({ type: SET_FANWALL_TYPE, payload: 'dareme' });
+                          else dispatch({ type: SET_FANWALL_TYPE, payload: 'fundme' });
                           navigate(`/dareme/fanwall/post/${fanwallId}`);
                         }}>
                           Edit
@@ -247,7 +254,7 @@ const FanwallDetails = () => {
                   handleUnlock={handleUnlock}
                 />
               </div>
-              {(fanwall.writer && goal) &&
+              {(fanwall.writer && fanwall.fundme) &&
                 <div className="funding-goal">
                   <div className="title">
                     <CreatoCoinIcon color="#EFA058" />
@@ -257,7 +264,7 @@ const FanwallDetails = () => {
                     <div className="process-value" style={{ width: wallet < goal ? `${width}px` : '330px' }}></div>
                   </div>
                   <div className="donuts-count">
-                    <span><span className={wallet >= goal ? "over-donuts" : ""}>{wallet.toLocaleString()}</span> / {goal.toLocaleString()} Donuts</span>
+                    <span><span className={fanwall.fundme.wallet >= fanwall.fundme.goal ? "over-donuts" : ""}>{fanwall.fundme.wallet.toLocaleString()}</span> / {fanwall.fundme.goal.toLocaleString()} Donuts</span>
                   </div>
                 </div>
               }
@@ -313,7 +320,10 @@ const FanwallDetails = () => {
                   text="Watch Content"
                   color="primary"
                   shape="rounded"
-                  handleSubmit={() => { navigate('/dareme/fanwall/detail/' + fanwallId + '/content'); }}
+                  handleSubmit={() => {
+                    if (fanwall.dareme) navigate('/dareme/fanwall/detail/' + fanwallId + '/content');
+                    else navigate('/fundme/fanwall/detail/' + fanwallId + '/content');
+                  }}
                 />
               </div>
               <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>
@@ -321,9 +331,12 @@ const FanwallDetails = () => {
                   fillStyle="outline"
                   shape="rounded"
                   width="290px"
-                  text="See DareMe"
+                  text={fanwall.dareme ? "See DareMe" : "See FundMe"}
                   color="primary"
-                  handleSubmit={() => { navigate(`/dareme/result/${fanwall.dareme._id}`) }}
+                  handleSubmit={() => {
+                    if (fanwall.dareme) navigate(`/dareme/result/${fanwall.dareme._id}`)
+                    else navigate(`/fundme/result/${fanwall.fundme._id}`)
+                  }}
                 />
               </div>
             </div>

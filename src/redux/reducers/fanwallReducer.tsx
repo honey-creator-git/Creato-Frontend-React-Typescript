@@ -25,19 +25,13 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
     const { payload = null } = action;
     switch (action.type) {
         case actionTypes.SET_FANWALL:
-            return { ...state, fanwall: payload };
+            return { ...state, fanwall: payload.fanwall, itemType: payload.itemType };
         case actionTypes.SET_FANWALL_WINOPTION:
             return { ...state, winOption: payload };
         case actionTypes.SET_FANWALL_TOPFANS:
             return { ...state, topFuns: payload };
         case actionTypes.SET_FANWALLS:
             state.fanwalls = payload;
-            return { ...state };
-        case actionTypes.SET_FANWALL_GOAL:
-            state.goal = payload;
-            return { ...state };
-        case actionTypes.SET_FANWALL_WALLET:
-            state.wallet = payload;
             return { ...state };
         case actionTypes.SET_FANWALL_TYPE:
             state.itemType = payload;
