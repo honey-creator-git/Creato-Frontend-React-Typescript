@@ -48,7 +48,7 @@ const creatoList = [
 ];
 
 const TipDonut = () => {
-  const user = useSelector((state: any) => state.auth.user);
+  const userState = useSelector((state: any) => state.auth);
   const authuser = useSelector((state: any) => state.auth.users[0]);
   const dlgState = useSelector((state: any) => state.load.dlgState);
   const dispatch = useDispatch();
@@ -64,6 +64,7 @@ const TipDonut = () => {
   const [openDonutsPlan, setOpenDonutsPlan] = useState(false);
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
   const location = useLocation();
+  const user = userState.user;
 
   const tipDonuts = () => {
     if (message === "") setOpenEmptyMsg(true);
@@ -74,9 +75,7 @@ const TipDonut = () => {
     if (user) {
       if (user.wallet < tip) setOpenTopUp(true);
       else dispatch(tipAction.tipUser(1, user.id, authuser?._id, tip, message));
-    } else {
-      setOpenDonutsPlan(true);
-    }
+    } else setOpenDonutsPlan(true);
   }
 
   const check = () => {

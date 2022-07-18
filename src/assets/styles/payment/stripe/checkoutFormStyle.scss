@@ -18,15 +18,11 @@
         left: 50%;
         top: 50%;
         padding: 24px;
-        width: 450px;
+        width: 280px;
         background: #ffffff;
         z-index: 15;
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
-
-        @media (max-width: 879px) {
-            width: 350px;
-        }
 
         .stripe-header {
             display: flex;
@@ -42,7 +38,7 @@
         }
 
         .stripe-letter {
-            margin: 20px auto 40px auto;
+            margin: 20px auto 20px auto;
             display: flex;
             justify-content: center;
             font-style: normal;
@@ -52,12 +48,162 @@
             color: #000000;
         }
 
-        .card-element {
-            margin: 0px 20px;
+        .card-types {
+            display: flex;
+            justify-content: space-between;
+
+            .letter {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+                color: #000000;
+            }
+
+            .card-type {
+                display: flex;
+                align-items: center;
+
+                .card {
+                    margin: 0px 5px;
+                }
+            }
+        }
+
+        .card-number {
+            margin: 5px auto 10px auto;
+
+            .StripeElement {
+                border: 1px solid #E1E0DF;
+                border-radius: 15px;
+                background-color: #E1E0DF;
+                padding-left: 20px;
+            }
+        }
+
+        .card-holder-name {
+            .letter {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+                color: #000000;
+            }
+
+            .holder-name {
+                font-weight: 400;
+                margin-top: 5px;
+                width: 230px;
+                height: 42px;
+                background-color: #E1E0DF;
+                border: 1px solid #E1E0DF;
+                border-radius: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                    width: 190px;
+                    padding: 10px 0px;
+                    border: none;
+                    background-color: #E1E0DF;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #54504E;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .expire-cvv {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+
+            .expire {
+                width: 95px;
+
+                .letter {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #000000;
+                }
+
+                .expire-ele {
+                    margin-top: 5px;
+
+                    .StripeElement {
+                        width: 80px;
+                        border: 1px solid #E1E0DF;
+                        border-radius: 15px;
+                        background-color: #E1E0DF;
+                        padding-left: 10px;
+                    }
+                }
+            }
+
+            .cvv {
+                width: 95px;
+
+                .letter {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #000000;
+                }
+
+                .cvv-ele {
+                    margin-top: 5px;
+
+                    .StripeElement {
+                        width: 80px;
+                        border: 1px solid #E1E0DF;
+                        border-radius: 15px;
+                        background-color: #E1E0DF;
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+
+        .check-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 0px 10px;
+
+            .checkbox {
+                display: flex;
+                justify-content: center;
+
+                .letter {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 14px;
+                    color: #000000;
+                }
+            }
         }
 
         .pay-button {
-            margin-top: 20px;
+            margin-top: 10px;
             width: 100%;
             display: flex;
             justify-content: center;

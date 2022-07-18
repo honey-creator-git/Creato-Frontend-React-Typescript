@@ -5,6 +5,8 @@ const INITIAL_STATE: any = {
     users: [],
     nameExist: false,
     urlExist: false,
+    stripeID: null,
+    cardNum: null,
     profileData: {
         category: [],
         avatarFile: null,
@@ -31,12 +33,18 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_URL_EXIST:
             state.urlExist = payload;
             return { ...state };
+        case actionTypes.SET_STRIPEID:
+            state.stripeID = payload.stripeID;
+            state.cardNum = payload.cardNum;
+            return { ...state };
         case actionTypes.SET_USER_INITIAL: {
             return {
                 user: null,
                 users: [],
                 nameExist: false,
                 urlExist: false,
+                stripeID: null,
+                cardNum: null,
                 profileData: {
                     category: [],
                     avatarFile: null,

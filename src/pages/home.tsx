@@ -15,30 +15,36 @@ import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan";
 import PaymentForm from "../components/stripe/paymentForm";
 import { fanwallAction } from "../redux/actions/fanwallActions";
 import CONSTANT from "../constants/constant";
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_FANWALL_INITIAL } from "../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE } from "../redux/types";
 import { RewardIcon } from "../assets/svg";
 import { fundmeAction } from "../redux/actions/fundmeActions";
+import { paymentAction } from "../redux/actions/paymentActions";
 import "../assets/styles/homeStyle.scss";
 
 const creatoList = [
   {
     property: "popular",
+    donutCount: 500,
+    discountedPercent: 13
+  },
+  {
+    property: "popular",
+    donutCount: 800,
+    discountedPercent: 17
+  },
+  {
+    property: "popular",
+    donutCount: 1000,
+    discountedPercent: 20
+  },
+  {
+    property: "discountedPrice",
     donutCount: 300,
     discountedPercent: 10
   },
   {
-    property: "popular",
-    donutCount: 200,
-    discountedPercent: 8
-  },
-  {
-    property: "discountedPrice",
-    donutCount: 100,
-    discountedPercent: 5
-  },
-  {
     property: "normal",
-    donutCount: 50,
+    donutCount: 30,
     discountedPercent: 0
   },
   {
@@ -48,12 +54,7 @@ const creatoList = [
   },
   {
     property: "normal",
-    donutCount: 200,
-    discountedPercent: 0
-  },
-  {
-    property: "normal",
-    donutCount: 300,
+    donutCount: 180,
     discountedPercent: 0
   }
 ];
@@ -77,9 +78,12 @@ const Home = () => {
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false);
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
+  const [openPayVia, setOpenPayVia] = useState(false);
   const [fanwallId, setFanwallId] = useState("");
-  const [errorText, setErrorText] = useState("")
+  const [errorText, setErrorText] = useState("");
   const user = userState.user;
+  const stripeID = userState.stripeID;
+  const cardNum = userState.cardNum;
   const dlgState = loadState.dlgState;
 
   const buyDonuts = async (creato: any) => {
@@ -91,6 +95,10 @@ const Home = () => {
     window.scrollTo(0, 0);
     dispatch(daremeAction.getDarmesOngoing());
   }, [location, dispatch]);
+
+  useEffect(() => {
+    if (user) dispatch(paymentAction.getStripeID());
+  }, [user]);
 
   useEffect(() => {
     setOpenDonutsPlanDlg(donutPlan);
@@ -238,6 +246,36 @@ const Home = () => {
           }
         ]}
       />
+      <Dialog
+        display={openPayVia}
+        exit={() => {
+          setOpenPayVia(false);
+          setDonutPlan(null);
+        }}
+        wrapExit={() => {
+          setOpenPayVia(false);
+          setDonutPlan(null);
+        }}
+        title={"Confirm"}
+        context={`Pay with saved Card Details:\n\n**** **** **** ${cardNum}`}
+        buttons={[
+          {
+            text: "No",
+            handleClick: () => {
+              setOpenPayVia(false);
+              setOpenPaymentDlg(true);
+            }
+          },
+          {
+            text: "Yes",
+            handleClick: () => {
+              setOpenPayVia(false);
+              dispatch({ type: SET_LOADING_TRUE });
+              dispatch(paymentAction.buyDonuts(null, donutPlan, stripeID, false));
+            }
+          }
+        ]}
+      />
       <DisplayDonutsPlan
         display={openDonutsPlanDlg}
         exit={() => {
@@ -247,7 +285,8 @@ const Home = () => {
         creato={donutPlan}
         handleSubmit={() => {
           setOpenDonutsPlanDlg(false);
-          setOpenPaymentDlg(true);
+          if (stripeID) setOpenPayVia(true);
+          else setOpenPaymentDlg(true);
         }}
       />
       <div className="section">

@@ -43,10 +43,11 @@ const DisplayDonutsPlan = (props: donutsPlan) => {
                 </div>
                 <div className="privacy-policy">
                     <span>
-                        By clicking Checkout, you agree to Creato’s&nbsp; 
-                        <span className="link" onClick={() => { 
-                            window.open("https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713")}}>Terms & Conditions</span>, and 
-                        &nbsp;<span className="link" onClick={() => { window.open("https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33")}}>
+                        By clicking Checkout, you agree to Creato’s&nbsp;
+                        <span className="link" onClick={() => {
+                            window.open("https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713")
+                        }}>Terms & Conditions</span>, and
+                        &nbsp;<span className="link" onClick={() => { window.open("https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33") }}>
                             Privacy Policy</span>, and for our payment processor - Stripe to charge your payment method.
                     </span>
                 </div>

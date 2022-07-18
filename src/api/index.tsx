@@ -55,7 +55,9 @@ export const deleteFanwall = (fanwallId: any) => API.delete(`/api/fanwall/${fanw
 export const getFanwallByDareMeId = (daremeId: any) => API.get(`/api/fanwall/dareme/${daremeId}`);
 export const uploadFanwall = (data: any, config: any) => API.post('/api/fanwall/upload', data, config);
 export const saveFanwall = (data: any) => API.post('/api/fanwall/save', data);
+
 export const buyDonuts = (data: any) => API.post('/api/payment/buy', data);
+export const getStripeID = () => API.get('/api/payment/stripeId');
 
 //notification api
 export const getNotifications = () => API.get('api/notification/get_notifications')
@@ -73,7 +75,7 @@ export const getTransactions = (type: any) => API.get(`/api/transactions/${type}
 export const addAdminDonuts = (data: any) => API.post('/api/transactions/add/adminDonuts', data);
 export const transferDonuts = (data: any) => API.post('/api/transactions/transfer/donuts', data);
 export const getUserLatest5Transactions = () => API.get('/api/transactions/user/latest');
-export const getUserTransactionsByDays = (data: any) => API.post('/api/transactions/user/days', data); 
+export const getUserTransactionsByDays = (data: any) => API.post('/api/transactions/user/days', data);
 
 export const getFundMeList = (data: any) => API.post('/api/fundme/fundmes', data);
 export const setFundMeShow = (data: any, fundmeId: any) => API.post(`/api/fundme/fundmes/${fundmeId}`, data);
@@ -96,10 +98,6 @@ export const getFundMeDetails = (fundmeId: any) => API.get(`/api/fundme/details/
 export const fundCreator = (data: any) => API.post('/api/fundme/fund/creator', data);
 export const getFundmeResult = (fundmeId: any) => API.get(`/api/fundme/result/${fundmeId}`);
 export const getFundmeVoters = (fundmeId: any) => API.get(`/api/fundme/voters/${fundmeId}`);
-// export const getFundCreatorDetails = (fundmeId: any) => API.get(`/api/fundme/fund/${fundmeId}`);
-// export const checkFundMeRequests = (fundmeId: any) => API.get(`/api/fundme/check/requests/${fundmeId}`);
-// export const getFundmeRequests = (fundmeId: any) => API.get(`/api/fundme/requests/${fundmeId}`);
-
 export const getFanwallByFundMeId = (fundmeId: any) => API.get(`/api/fanwall/fundme/${fundmeId}`);
 
 export const tipUser = (data: any) => API.post('/api/tip', data);

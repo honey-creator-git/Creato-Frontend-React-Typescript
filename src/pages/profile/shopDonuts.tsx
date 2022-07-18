@@ -7,7 +7,8 @@ import DisplayDonutsPlan from "../../components/stripe/displayDonutsPlan";
 import PaymentForm from "../../components/stripe/paymentForm";
 import Dialog from "../../components/general/dialog";
 import { LanguageContext } from "../../routes/authRoute";
-import { SET_DIALOG_STATE } from "../../redux/types";
+import { SET_DIALOG_STATE, SET_LOADING_TRUE } from "../../redux/types";
+import { paymentAction } from "../../redux/actions/paymentActions";
 import "../../assets/styles/profile/shopDonutsStyle.scss";
 
 const creatos = [
@@ -27,17 +28,17 @@ const creatos = [
     donutCount: 300,
   },
   {
-    property: "discountedPercent",
+    property: "discountedPrice",
     discountedPercent: 5,
     donutCount: 100,
   },
   {
-    property: "discountedPercent",
+    property: "discountedPrice",
     discountedPercent: 8,
     donutCount: 200,
   },
   {
-    property: 'discountedPercent',
+    property: 'discountedPrice',
     discountedPercent: 10,
     donutCount: 300,
   },
@@ -67,10 +68,14 @@ const ShopDonuts = () => {
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
   const [openTopupDlg, setOpenTopupDlg] = useState(false);
   const [donutPlan, setDonutPlan] = useState<any>(null);
+  const [openPayVia, setOpenPayVia] = useState(false);
+  const contexts = useContext(LanguageContext);
   const user = userState.user;
+  const stripeID = userState.stripeID;
+  const cardNum = userState.cardNum;
   const dlgState = loadState.dlgState;
   const prevRoute = loadState.prevRoute;
-  const contexts = useContext(LanguageContext);
+
 
   useEffect(() => {
     if (dlgState.type === "buyDonut" && dlgState.state === true) {
@@ -87,6 +92,10 @@ const ShopDonuts = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (user) dispatch(paymentAction.getStripeID());
+  }, [user]);
+
   return (
     <div className="shop-donuts">
       <Title title={contexts.HEADER_TITLE.SHOP_DONUTS} back={() => { navigate(prevRoute); }} />
@@ -97,6 +106,36 @@ const ShopDonuts = () => {
           setDonutPlan(null);
         }}
         donutPlan={donutPlan}
+      />
+      <Dialog
+        display={openPayVia}
+        exit={() => {
+          setOpenPayVia(false);
+          setDonutPlan(null);
+        }}
+        wrapExit={() => {
+          setOpenPayVia(false);
+          setDonutPlan(null);
+        }}
+        title={"Confirm"}
+        context={`Pay with saved Card Details:\n\n**** **** **** ${cardNum}`}
+        buttons={[
+          {
+            text: "No",
+            handleClick: () => {
+              setOpenPayVia(false);
+              setOpenPaymentDlg(true);
+            }
+          },
+          {
+            text: "Yes",
+            handleClick: () => {
+              setOpenPayVia(false);
+              dispatch({ type: SET_LOADING_TRUE });
+              dispatch(paymentAction.buyDonuts(null, donutPlan, stripeID, false));
+            }
+          }
+        ]}
       />
       <Dialog
         display={openTopupDlg}
@@ -133,7 +172,8 @@ const ShopDonuts = () => {
         creato={donutPlan}
         handleSubmit={() => {
           setOpenDonutsPlanDlg(false);
-          setOpenPaymentDlg(true);
+          if (stripeID) setOpenPayVia(true);
+          else setOpenPaymentDlg(true);
         }}
       />
       <div className="part">
@@ -153,7 +193,7 @@ const ShopDonuts = () => {
       <div className="part">
         <div className="title">{contexts.SHOP_DONUTS.DISCOUNT}</div>
         <div className="creatos">
-          {creatos.filter((creato) => creato.property === "discountedPercent").map((creato, i) => (
+          {creatos.filter((creato) => creato.property === "discountedPrice").map((creato, i) => (
             <div className="creato" key={i} onClick={() => { setDonutPlan(creato); }}>
               <Creato
                 discountedPercent={creato.discountedPercent}

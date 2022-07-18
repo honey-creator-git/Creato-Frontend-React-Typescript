@@ -17,7 +17,6 @@ export const tipAction = {
     },
 
     tipDonutAsVistor: (token: any, donutPlan: any, tipData: any) => async (dispatch: Dispatch<any>) => {
-        dispatch({ type: SET_LOADING_TRUE });
         api.buyDonutForTip({ token: token, item: donutPlan, nickname: tipData.nickname })
             .then((result: any) => {
                 const { data } = result;
@@ -28,7 +27,10 @@ export const tipAction = {
                             dispatch({ type: SET_LOADING_FALSE });
                             if (data.success) dispatch({ type: SET_DIALOG_STATE, payload: { type: "tipSuccess", state: true } });
                         }).catch((err: any) => console.log(err));
-                }
-            }).catch((err: any) => console.log(err));
+                } else dispatch({ type: SET_DIALOG_STATE, payload: { type: "error", state: true, msg: data.msg } });
+            }).catch((err: any) => {
+                dispatch({ type: SET_LOADING_FALSE });
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "error", state: true, msg: 'Pay processing failed!' } });
+            });
     }
 }
