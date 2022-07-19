@@ -61,7 +61,7 @@
 
       .dare-title {
         margin-top: 10px;
-        height: 56px;
+        height: fit-content;
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
@@ -72,7 +72,6 @@
       .dare-category {
         margin-top: 10px;
       }
-
     }
 
     .dare-btn {
@@ -88,7 +87,7 @@
       line-height: 20px;
       text-align: center;
       color: #000000;
-      margin: 16px 0px
+      margin: 10px 0px
     }
 
     .dare-options {

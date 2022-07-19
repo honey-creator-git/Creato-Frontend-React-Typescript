@@ -199,7 +199,7 @@ const Preview = () => {
               )
             }
           </div>
-          <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setOpenPublishDlg(true) }}>
+          <div className="dare-btn" style={{ marginTop: '20px' }} onClick={() => { setOpenPublishDlg(true) }}>
             <ContainerBtn text={contexts.PUBLISH} styleType="fill" />
           </div>
         </div>

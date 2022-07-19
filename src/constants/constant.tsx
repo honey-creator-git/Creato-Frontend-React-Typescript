@@ -11,7 +11,7 @@ const CONSTANT = {
     // CLIENT_URL: 'https://dev8.creatogether.io',
     SERVER_URL: 'http://localhost:5000',
     CLIENT_URL: 'http://localhost:3000',
-    DARE_TITLE_SUGGESTIONS: [
+    DARE_TITLE_SUGGESTIONS: [ 
         "My dinner on Valentine's Day? 🌹",
         "Who to invite as guest in next video? 📽️",
         "New photography style in 2022? 📸",

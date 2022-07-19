@@ -64,8 +64,6 @@ const SupportCreator = () => {
     }
 
     useEffect(() => {
-        console.log(dareme)
-        console.log(option)
         if (dareme && option)
             for (let i = 0; i < dareme.options.length; i++)
                 if (dareme.options[i].option._id == option._id)
@@ -236,7 +234,7 @@ const SupportCreator = () => {
                                     <div className="support-option">
                                         <DareOption
                                             donuts={option.donuts}
-                                            voters={checkVoted() ? voters : 0}
+                                            voters={checkVoted() ? voters : undefined}
                                             dareTitle={option.title}
                                             username={option.writer.name}
                                             disabled={false}

@@ -12,7 +12,7 @@ const DareOption = (props: any) => {
       : "#F5F5F4";
   const optionHoverBackgroundColor = leading === true ? "#E88C95" : "#F5C395";
   const optionPressedBackgroundColor =
-  leading === true ? "#DE5A67" : "#EFA058";
+    leading === true ? "#DE5A67" : "#EFA058";
 
   const fontColor = leading === true ? "white" : "#54504E";
   const fontHoverColor = leading === true ? "white" : "white";
@@ -34,8 +34,8 @@ const DareOption = (props: any) => {
       state === "hover"
         ? optionHoverBackgroundColor
         : state === "pressed"
-        ? optionPressedBackgroundColor
-        : optionBackgroundColor,
+          ? optionPressedBackgroundColor
+          : optionBackgroundColor,
     display: "flex",
     justifyContent: "space-between",
   };
@@ -62,10 +62,10 @@ const DareOption = (props: any) => {
       disabled === true
         ? "#938D8A"
         : state === "default"
-        ? fontColor
-        : state === "hover"
-        ? fontHoverColor
-        : fontPressedColor,
+          ? fontColor
+          : state === "hover"
+            ? fontHoverColor
+            : fontPressedColor,
   };
 
   const iconStyle = {
@@ -98,7 +98,7 @@ const DareOption = (props: any) => {
       onMouseOver={() => setState("hover")}
       onMouseLeave={() => setState("default")}
       onMouseDown={() => setState("pressed")}
-      onClick={() => { props.handleSubmit()}}
+      onClick={() => { props.handleSubmit() }}
     >
       <div style={optionStyle}>
         <div style={optionFontStyle}>{dareTitle}</div>
@@ -116,9 +116,9 @@ const DareOption = (props: any) => {
       </div>
       <div style={voteStyle}>
         <div style={resultStyle}>
-          {voters !== undefined && (
+          {(voters !== undefined) && (
             <>
-              <CreatoCoinIcon color="#54504E"/>
+              <CreatoCoinIcon color="#54504E" />
               <div
                 style={{
                   padding: "0px 5px",
@@ -129,7 +129,7 @@ const DareOption = (props: any) => {
               >
                 {donuts.toLocaleString()}
               </div>
-              <NoOfPeopleIcon color="#54504E"/>
+              <NoOfPeopleIcon color="#54504E" />
               <div
                 style={{
                   padding: "0px 5px",

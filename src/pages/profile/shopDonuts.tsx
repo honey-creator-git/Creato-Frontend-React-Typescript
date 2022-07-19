@@ -13,34 +13,54 @@ import "../../assets/styles/profile/shopDonutsStyle.scss";
 
 const creatos = [
   {
-    property: "popular",
-    discountedPercent: 5,
-    donutCount: 100,
+    property: "welcome",
+    discountedPercent: 0,
+    donutCount: 120,
+  },
+  {
+    property: "welcome",
+    discountedPercent: 0,
+    donutCount: 360,
   },
   {
     property: "popular",
-    discountedPercent: 8,
-    donutCount: 200,
+    discountedPercent: 13,
+    donutCount: 500,
   },
   {
     property: "popular",
-    discountedPercent: 10,
-    donutCount: 300,
+    discountedPercent: 17,
+    donutCount: 800,
+  },
+  {
+    property: "popular",
+    discountedPercent: 20,
+    donutCount: 1000,
   },
   {
     property: "discountedPrice",
     discountedPercent: 5,
-    donutCount: 100,
+    donutCount: 50,
   },
   {
     property: "discountedPrice",
     discountedPercent: 8,
-    donutCount: 200,
+    donutCount: 100,
   },
   {
     property: 'discountedPrice',
+    discountedPercent: 9,
+    donutCount: 180,
+  },
+  {
+    property: "discountedPrice",
     discountedPercent: 10,
     donutCount: 300,
+  },
+  {
+    property: 'normal',
+    discountedPercent: 0,
+    donutCount: 30,
   },
   {
     property: "normal",
@@ -48,9 +68,14 @@ const creatos = [
     donutCount: 50,
   },
   {
-    property: 'normal',
+    property: "normal",
     discountedPercent: 0,
-    donutCount: 200,
+    donutCount: 100,
+  },
+  {
+    property: "normal",
+    discountedPercent: 0,
+    donutCount: 180,
   },
   {
     property: "normal",
@@ -117,18 +142,18 @@ const ShopDonuts = () => {
           setOpenPayVia(false);
           setDonutPlan(null);
         }}
-        title={"Confirm"}
-        context={`Pay with saved Card Details:\n\n**** **** **** ${cardNum}`}
+        title={contexts.PAYMENT.CONFIRM}
+        context={`${contexts.PAYMENT.PAY_WITH_SAVED_CARD}:\n\n**** **** **** ${cardNum}`}
         buttons={[
           {
-            text: "No",
+            text: contexts.PAYMENT.NO,
             handleClick: () => {
               setOpenPayVia(false);
               setOpenPaymentDlg(true);
             }
           },
           {
-            text: "Yes",
+            text: contexts.PAYMENT.YES,
             handleClick: () => {
               setOpenPayVia(false);
               dispatch({ type: SET_LOADING_TRUE });
@@ -177,9 +202,9 @@ const ShopDonuts = () => {
         }}
       />
       <div className="part">
-        <div className="title">{contexts.SHOP_DONUTS.HOT_DEALS}</div>
+        <div className="title">Welcoming packages:<br />(*Once per new user. Extra Donuts will be credited within 24 hours.)</div>
         <div className="creatos">
-          {creatos.filter((creato) => creato.property === "popular").map((creato, i) => (
+          {creatos.filter((creato) => creato.property === "welcome").map((creato, i) => (
             <div className="creato" key={i} onClick={() => { setDonutPlan(creato); }}>
               <Creato
                 discountedPercent={creato.discountedPercent}
@@ -193,7 +218,7 @@ const ShopDonuts = () => {
       <div className="part">
         <div className="title">{contexts.SHOP_DONUTS.DISCOUNT}</div>
         <div className="creatos">
-          {creatos.filter((creato) => creato.property === "discountedPrice").map((creato, i) => (
+          {creatos.filter((creato) => creato.property === "discountedPrice" || creato.property === "popular").map((creato, i) => (
             <div className="creato" key={i} onClick={() => { setDonutPlan(creato); }}>
               <Creato
                 discountedPercent={creato.discountedPercent}

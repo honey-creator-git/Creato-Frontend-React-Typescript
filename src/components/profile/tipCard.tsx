@@ -35,9 +35,9 @@ const TipCard = (props: any) => {
                 </div>
                 <div className="bottom-info">
                     <div>
-                        <span className="message">{props.message.length > 20 ? props.message.substring(0, 20) : props.message}</span>
+                        <span className="message">{props.message.length > 20 ? `${props.message.substring(0, 20)}...` : props.message}</span>
                     </div>
-                    <div>{props.message === "" ? <></> : <span className="see-more">...see more</span>}</div>
+                    <div>{props.message === "" ? <></> : <span className="see-more">See more</span>}</div>
                 </div>
             </div>
         </div>

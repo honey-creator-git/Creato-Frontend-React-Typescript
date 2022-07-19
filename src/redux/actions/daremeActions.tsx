@@ -118,7 +118,6 @@ export const daremeAction = {
     dispatch({ type: SET_DAREME_DETAIL_INITIAL });
     api.getDareMeDetails(daremeId)
       .then((result) => {
-        console.log(result)
         const { data } = result;
         if (data.success) {
           dispatch({ type: SET_DAREME, payload: data.dareme });
@@ -409,6 +408,6 @@ export const daremeAction = {
           dispatch({ type: SET_ADMIN_OPTIONS, payload: data.options });
           dispatch({ type: SET_LOADING_FALSE });
         }
-      }).catch(err => console.log(err));
+      }).catch((err) => console.log(err));
   }
 }

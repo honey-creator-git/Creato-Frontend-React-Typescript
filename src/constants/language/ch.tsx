@@ -58,7 +58,7 @@ export const CH = {
         CATEGORY: '類別',
         CHANGE_TEASER: '更改預告短片',
         CHOOSE_COVER: '選擇封面',
-        
+
     },
     GENERAL_COMPONENT: {
         MOBILE_VIDEO_CARD: {
@@ -312,7 +312,28 @@ export const CH = {
         STRIPE_ACCOUNT: "Stripe帳戶",
         STRIPE_CONTENT: "用當地銀行賬戶直接收款 \n 不設最低收費",
         BUTTON_CONNECT: "連接",
-        COMING_SOON: "快將推出"
+        COMING_SOON: "快將推出",
+        CHARGE_FIRST_PART: "你將被收取 ",
+        CHARGE_USD: '美元',
+        CHARGE_SECOND_PART: '(包括手續費)',
+        TERM_PRIVACY_FIRST_PART: "繼續結帳即表示您同意 Creato 的",
+        TERMS_CONDITIONS: '條款',
+        TERM_AND: '和',
+        PRIVACY_POLICY: '隱私政策',
+        TERM_PRIVACY_LAST_PART: '，並同意我們的支付處理器 Stripe 對你的付款方式收費。',
+        CHECKOUT: '結帳',
+        ENTER_CARD_DETAIL: '輸入信用卡資料',
+        CARD_NUMBER: '信用卡號碼',
+        CARD_HOLDER_NAME: '信用卡持有人姓名',
+        EXPIRY_DATE: '有效期',
+        CVC: '驗證碼',
+        PAY_WITH_SAVED_CARD: '使用已保存的信用卡資料付款',
+        SAVE_CARD_INFO: '保存信用卡資料用作付款',
+        PAY: '付款',
+        CONFIRM: '付款',
+        YES: '付款',
+        NO: '重新輸入',
+        BUY_DONUTS: '購買甜甜圈'
     },
     HINT: {
         TITLE: {

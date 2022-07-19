@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Creato from "../general/creato";
 import { CloseIcon } from "../../assets/svg";
 import ContainerBtn from "../general/containerBtn";
+import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/payment/stripe/displayDonutsPlanStyle.scss";
 
 interface donutsPlan {
@@ -12,6 +13,7 @@ interface donutsPlan {
 };
 
 const DisplayDonutsPlan = (props: donutsPlan) => {
+    const context = useContext(LanguageContext);
     const [price, setPrice] = useState<Number>(0.0);
 
     useEffect(() => {
@@ -26,7 +28,7 @@ const DisplayDonutsPlan = (props: donutsPlan) => {
         <div className="display-donuts-plan-wrapper" style={props.display ? { visibility: 'visible', opacity: 1 } : {}} onClick={props.exit}>
             <div className="display-donuts-plan" onClick={e => e.stopPropagation()}>
                 <div className="header-part">
-                    <div className="confirm-btn">Confirm</div>
+                    <div className="confirm-btn">{context.PAYMENT.CONFIRM}</div>
                     <div onClick={props.exit}><CloseIcon color="black" /></div>
                 </div>
                 <div className="creato">
@@ -38,23 +40,23 @@ const DisplayDonutsPlan = (props: donutsPlan) => {
                     />
                 </div>
                 <div className="money-to-charge">
-                    <span>You'll be charaged <strong>{price}USD</strong></span>
-                    <span>(Including processing fees)</span>
+                    <span>{context.PAYMENT.CHARGE_FIRST_PART}<strong>${price}{context.PAYMENT.CHARGE_USD}</strong></span>
+                    <span>{context.PAYMENT.CHARGE_SECOND_PART}</span>
                 </div>
                 <div className="privacy-policy">
                     <span>
-                        By clicking Checkout, you agree to Creato’s&nbsp;
+                        {context.PAYMENT.TERM_PRIVACY_FIRST_PART}
                         <span className="link" onClick={() => {
                             window.open("https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713")
-                        }}>Terms & Conditions</span>, and
-                        &nbsp;<span className="link" onClick={() => { window.open("https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33") }}>
-                            Privacy Policy</span>, and for our payment processor - Stripe to charge your payment method.
+                        }}>{context.PAYMENT.TERMS_CONDITIONS}</span>{context.PAYMENT.TERM_AND}
+                        <span className="link" onClick={() => { window.open("https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33") }}>
+                            {context.PAYMENT.PRIVACY_POLICY}</span>{context.PAYMENT.TERM_PRIVACY_LAST_PART}
                     </span>
                 </div>
                 <div className="checkout-btn" onClick={props.handleSubmit}>
                     <ContainerBtn
                         styleType="fill"
-                        text="Checkout"
+                        text={context.PAYMENT.CHECKOUT}
                     />
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -11,11 +11,12 @@ import {
 } from "@stripe/react-stripe-js";
 import ContainerBtn from "../general/containerBtn";
 import CONSTANT from "../../constants/constant";
+import { SET_LOADING_FALSE, SET_LOADING_TRUE } from "../../redux/types";
 import { CloseIcon, VisaCardIcon, VisaCardActiveIcon, MasterCardIcon, MasterCardActiveIcon, AECardIcon, AECardActiveIcon, UnionPayCardIcon, UnionPayCardActiveIcon } from "../../assets/svg";
 import { paymentAction } from "../../redux/actions/paymentActions";
+import { LanguageContext } from "../../routes/authRoute";
 import { tipAction } from "../../redux/actions/tipActions";
 import '../../assets/styles/payment/stripe/checkoutFormStyle.scss';
-import { SET_LOADING_FALSE, SET_LOADING_TRUE } from "../../redux/types";
 
 const stripePromise = loadStripe(CONSTANT.STRIPE_PUBLIC_KEY);
 
@@ -28,17 +29,13 @@ const CheckoutForm = (props: any) => {
     const elements = useElements();
     const checkBoxRef = useRef(null);
     const [saveCheck, setSaveCheck] = useState(false);
+    const [errorToDisplay, setErrorToDisplay] = useState('');
+    const context = useContext(LanguageContext);
 
     const elementStyle = {
         lineHeight: '42px',
         color: '#54504E'
     }
-    //type 
-    //visa 4242 4242 4242 4242
-    //american-express 3742 4545 5400 126
-    //unionpay 6250 9410 0652 8599
-    //mastercard 5425 2334 3010 9903
-    const [errorToDisplay, setErrorToDisplay] = useState('');
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -74,19 +71,19 @@ const CheckoutForm = (props: any) => {
             <div className="stripe-checkout" onClick={e => e.stopPropagation()}>
                 <div className="stripe-header">
                     <div className="header-title">
-                        Buy Donuts
+                        {context.PAYMENT.BUY_DONUTS}
                     </div>
                     <div onClick={props.exit}>
                         <CloseIcon color="black" />
                     </div>
                 </div>
                 <div className="stripe-letter">
-                    <span>Enter your card details.</span>
+                    <span>{context.PAYMENT.ENTER_CARDS_DETAIL}</span>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="card-types">
                         <div className="letter">
-                            <span>Card Number</span>
+                            <span>{context.PAYMENT.CARD_NUMBER}</span>
                         </div>
                         <div className="card-type">
                             <div className="card">{numberInfo && numberInfo.brand === "visa" ? numberInfo.error?.code !== "invalid_number" ? <VisaCardActiveIcon /> : <VisaCardIcon /> : <VisaCardIcon />}</div>
@@ -107,20 +104,20 @@ const CheckoutForm = (props: any) => {
                     </div>
                     <div className="card-holder-name">
                         <div className="letter">
-                            <span>Card holder name</span>
+                            <span>{context.PAYMENT.CARD_HOLDER_NAME}</span>
                         </div>
                         <div className="holder-name">
                             <input
                                 value={holder}
                                 onChange={(e: any) => { setHolder(e.target.value) }}
-                                placeholder="Card holder name"
+                                placeholder={context.PAYMENT.CARD_HOLDER_NAME}
                             />
                         </div>
                     </div>
                     <div className="expire-cvv">
                         <div className="expire">
                             <div className="letter">
-                                Exp date
+                                {context.PAYMENT.EXPIRY_DATE}
                             </div>
                             <div className="expire-ele">
                                 <CardExpiryElement
@@ -134,7 +131,7 @@ const CheckoutForm = (props: any) => {
                         </div>
                         <div className="cvv">
                             <div className="letter">
-                                CVC
+                                {context.PAYMENT.CVC}
                             </div>
                             <div className="cvv-ele">
                                 <CardCvcElement
@@ -151,7 +148,7 @@ const CheckoutForm = (props: any) => {
                         <div className="check-box">
                             <label className="checkbox">
                                 <input type="checkbox" id="save_card" ref={checkBoxRef} checked={saveCheck} onChange={(e) => { setSaveCheck(e.target.checked) }} />
-                                <span className="letter">&nbsp;Save this card for future purchases</span>
+                                <span className="letter">&nbsp;{context.PAYMENT.SAVE_CARD_INFO}</span>
                             </label>
                         </div>
                     }
@@ -160,7 +157,7 @@ const CheckoutForm = (props: any) => {
                     </div>
                     <div className="pay-button">
                         <div style={{ width: '240px' }} onClick={() => { formRef.current.click(); }}>
-                            <ContainerBtn text="Pay" styleType="fill" />
+                            <ContainerBtn text={context.PAYMENT.PAY} styleType="fill" />
                             <input type="submit" hidden ref={formRef} />
                         </div>
                     </div>

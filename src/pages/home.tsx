@@ -256,18 +256,18 @@ const Home = () => {
           setOpenPayVia(false);
           setDonutPlan(null);
         }}
-        title={"Confirm"}
-        context={`Pay with saved Card Details:\n\n**** **** **** ${cardNum}`}
+        title={contexts.PAYMENT.CONFIRM}
+        context={`${contexts.PAYMENT.PAY_WITH_SAVED_CARD}:\n\n**** **** **** ${cardNum}`}
         buttons={[
           {
-            text: "No",
+            text: contexts.PAYMENT.NO,
             handleClick: () => {
               setOpenPayVia(false);
               setOpenPaymentDlg(true);
             }
           },
           {
-            text: "Yes",
+            text: contexts.PAYMENT.YES,
             handleClick: () => {
               setOpenPayVia(false);
               dispatch({ type: SET_LOADING_TRUE });
@@ -294,6 +294,7 @@ const Home = () => {
           <SecondBanner />
         </div>
       </div>
+
       {(daremes.length > 0) &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.DAREME_WITH_MOST_DONUTS}</div>
@@ -338,6 +339,7 @@ const Home = () => {
       }
       <div className="section">
         <div className="title">{contexts.HOME_LETTER.GET_DONUTS_TO_DARE}</div>
+        <div className="see-more" onClick={() => { navigate(`/${user.personalisedUrl}/shop`); }}>See More</div>
         <div className="donuts-list scroll-bar">
           {creatoList.map((creato, i) => (
             <div className="donuts" key={i} onClick={() => {

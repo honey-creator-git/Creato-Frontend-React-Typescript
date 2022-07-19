@@ -16,14 +16,19 @@ import "../../assets/styles/tip/tipDonutStyle.scss";
 
 const creatoList = [
   {
-    property: "discountedPrice",
-    donutCount: 100,
-    discountedPercent: 5
+    property: "popular",
+    donutCount: 500,
+    discountedPercent: 13
   },
   {
-    property: "discountedPrice",
-    donutCount: 200,
-    discountedPercent: 8
+    property: "popular",
+    donutCount: 800,
+    discountedPercent: 17
+  },
+  {
+    property: "popular",
+    donutCount: 1000,
+    discountedPercent: 20
   },
   {
     property: "discountedPrice",
@@ -31,20 +36,20 @@ const creatoList = [
     discountedPercent: 10
   },
   {
-    property: "popular",
+    property: "normal",
+    donutCount: 30,
+    discountedPercent: 0
+  },
+  {
+    property: "normal",
     donutCount: 100,
-    discountedPercent: 5
+    discountedPercent: 0
   },
   {
-    property: "popular",
-    donutCount: 200,
-    discountedPercent: 8
+    property: "normal",
+    donutCount: 180,
+    discountedPercent: 0
   },
-  {
-    property: "popular",
-    donutCount: 300,
-    discountedPercent: 10
-  }
 ];
 
 const TipDonut = () => {
