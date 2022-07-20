@@ -7,6 +7,7 @@ const INITIAL_STATE: any = {
     urlExist: false,
     stripeID: null,
     cardNum: null,
+    lang: 'EN',
     profileData: {
         category: [],
         avatarFile: null,
@@ -37,6 +38,9 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
             state.stripeID = payload.stripeID;
             state.cardNum = payload.cardNum;
             return { ...state };
+        case actionTypes.SET_LANGUAGE:
+            state.lang = payload;
+            return { ...state };
         case actionTypes.SET_USER_INITIAL: {
             return {
                 user: null,
@@ -45,6 +49,7 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
                 urlExist: false,
                 stripeID: null,
                 cardNum: null,
+                lang: 'EN',
                 profileData: {
                     category: [],
                     avatarFile: null,

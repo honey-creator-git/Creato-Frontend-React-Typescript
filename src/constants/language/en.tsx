@@ -4,6 +4,20 @@ export const EN = {
     DAREME_DEADLINE_LIST: ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days"],
     CREATOR_CATEGORY_LIST: ["Artist", "Author", "Blogger", "Fitness Instructor", "Gamer", "Instagram Creator", "Live Streamer", "Musician", "Photographer", "Podcaster", "Tiktok Creator", "Videographer", "YouTuber"],
     FUNDME_DEADLINE_LIST: ["3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days", "11 days", "12 days", "13 days", "14 days"],
+    REVIEW_LETTER: {
+        DONUTS_NUMBER: 'Number of Donuts',
+        DNUTS: 'Donuts',
+        AUDIENCE_LETTER: 'For audience to entitle as a SuperFan.',
+        REWARDS: 'Reward For SuperFans',
+        EXCLUSIVE_CHAT: 'e.g. exclusive chat, signed postcard etc'
+    },
+    FUNDME_REWARDS: [
+        "Behind-the-scene videos 📽️",
+        "Live chat session 🖥️",
+        "Photos I have not released before 📷",
+        "Private Thank-you message 📥",
+        "Limited edition T-shirt 👕👚"
+    ],
     HEADER_TITLE: {
         CREATE_FUNDME: 'Create FundMe',
         CREATE_DAREME: 'Create DareMe',
@@ -38,20 +52,6 @@ export const EN = {
         FUNDME_BODY_LETTER: 'Support my creative content & get rewarded!',
         FUNDME_REWARDS: 'e.g. exclusive chat, signed postcard etc',
     },
-    REVIEW_LETTER: {
-        DONUTS_NUMBER: 'Number of Donuts',
-        DNUTS: 'Donuts',
-        AUDIENCE_LETTER: 'For audience to entitle as a SuperFan.',
-        REWARDS: 'Reward For SuperFans',
-        EXCLUSIVE_CHAT: 'e.g. exclusive chat, signed postcard etc'
-    },
-    FUNDME_REWARDS: [
-        "Behind-the-scene videos 📽️",
-        "Live chat session 🖥️",
-        "Photos I have not released before 📷",
-        "Private Thank-you message 📥",
-        "Limited edition T-shirt 👕👚"
-    ],
     CREATE_FUNDME_LETTER: {
         PERIOD: 'Period',
         TITLE: 'FundMe Title',
@@ -360,7 +360,6 @@ export const EN = {
             FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
             DARE_OPTIONS: 'Start the game with 2 Dare options. ⚖️\n\nOnce the DareMe started, your fans will be able to propose new Dares to you for your consideration. 💭',
             WHAT_IS_TEASER: 'Tell your fans about your ideas 😛\n\nBe concise & fun!\n\nIdeally make it under 20 seconds! 🤳🏻',
-
         }
 
     },

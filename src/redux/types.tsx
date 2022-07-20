@@ -25,6 +25,7 @@ export const SET_URL_EXIST = 'SET_URL_EXIST';
 export const SET_USERS = 'SET_USERS';
 export const SET_USER_INITIAL = 'SET_USER_INITIAL';
 export const SET_STRIPEID = 'SET_STRIPEID';
+export const SET_LANGUAGE = 'SET_LANGUAGE';
 
 export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';
 export const SET_LOADING_FALSE = 'SET_LOADING_FALSE';

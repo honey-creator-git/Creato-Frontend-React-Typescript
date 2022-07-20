@@ -48,7 +48,7 @@ const Button = (props: any) => {
   const normallStyle = {
     cursor: "pointer",
     width: props.width === undefined ? "fit-content" : props.width,
-    height: icon !== undefined ? "24px" : "",
+    // height: icon !== undefined ? "24px" : "",
     background: bgColor === undefined ? (
       color === "primary"
         ? state === "hover"

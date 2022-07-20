@@ -22,8 +22,12 @@ export const CH = {
         CREATE_FUNDME: '創建 FundMe',
         CREATE_DAREME: '創建 DareMe',
         DAREME_TITLE: 'DareMe 標題',
+        FUNDME_TITLE: 'FundMe 標題',
+        FUNDME_RESULT: "FundMe Result",
+        REWARDS_TITLE: 'Rewards',
         DARE_OPTIONS: 'DareMe 選項',
         UPLOAD_TEASER: '上載10秒預告（少於20秒）',
+        UPLOAD_TEASER_FUNDME: 'Upload a teaser video\n(10~15sec is the best!)',
         CHOOSE_COVER: '選擇封面',
         DAREME_DETAILS: 'DareMe 選項',
         SUPPORT_CREATOR: '支持Creator',
@@ -46,19 +50,20 @@ export const CH = {
         DAREME_BODY_LETTER: '誠邀粉絲參與我的內容創作',
         FUNDME_TITLE_LETTER: 'FundMe',
         FUNDME_BODY_LETTER: '支持我的創作點子變為現實',
+        FUNDME_REWARDS: 'e.g. exclusive chat, signed postcard etc',
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: '期限',
+        TITLE: 'FundMe 標題',
         FUNDING_GOAL: '目標',
         GOAL_LETTER: '為內容創作設定一個可實現的甜甜圈目標 \n i.e. 10 甜甜圈 = $1 美元 \n e.g. 3,000 甜甜圈 = ~$2,300 港元 \n e.g. 10,000 甜甜圈 = ~$7,800 港元',
         GOAL_PLACEHOLDER: 'e.g. 8,000 甜甜圈',
         UPLOAD_TEASER_VIDEO: '上載預告短片',
-        PREVIEW: '創建',
-        TITLE: 'FundMe 標題',
+        TEASER_VIDEO_UPLOADED: 'Teaser video uploaded',
         CATEGORY: '類別',
         CHANGE_TEASER: '更改預告短片',
         CHOOSE_COVER: '選擇封面',
-
+        PREVIEW: '創建',
     },
     GENERAL_COMPONENT: {
         MOBILE_VIDEO_CARD: {
@@ -177,6 +182,7 @@ export const CH = {
         EXPLAIN: '邀請觀眾發揮下他們的創意，再把他們的主意注入你的內容！',
         CHOOSE_COVER: '選擇封面',
         SAVE: '儲存',
+        FUNDME_EXPLAIN: 'Tell your fans about this FundMe.\nGet them excited to take part in your content creation!'
     },
     CHOOSE_COVER_LETTER: {
         DONE: '完成'
@@ -253,6 +259,34 @@ export const CH = {
         PRIVACY_POLICIES: '私隱政策',
         CONTACT_US: '聯絡我們'
     },
+    PAYMENT: {
+        PAYMENT_TITLE: "支付方法",
+        STRIPE_ACCOUNT: "Stripe帳戶",
+        STRIPE_CONTENT: "用當地銀行賬戶直接收款 \n 不設最低收費",
+        BUTTON_CONNECT: "連接",
+        COMING_SOON: "快將推出",
+        CHARGE_FIRST_PART: "你將被收取 ",
+        CHARGE_USD: '美元',
+        CHARGE_SECOND_PART: '(包括手續費)',
+        TERM_PRIVACY_FIRST_PART: "繼續結帳即表示您同意 Creato 的",
+        TERMS_CONDITIONS: '條款',
+        TERM_AND: '和',
+        PRIVACY_POLICY: '隱私政策',
+        TERM_PRIVACY_LAST_PART: '，並同意我們的支付處理器 Stripe 對你的付款方式收費。',
+        CHECKOUT: '結帳',
+        ENTER_CARD_DETAIL: '輸入信用卡資料',
+        CARD_NUMBER: '信用卡號碼',
+        CARD_HOLDER_NAME: '信用卡持有人姓名',
+        EXPIRY_DATE: '有效期',
+        CVC: '驗證碼',
+        PAY_WITH_SAVED_CARD: '使用已保存的信用卡資料付款',
+        SAVE_CARD_INFO: '保存信用卡資料用作付款',
+        PAY: '付款',
+        CONFIRM: '付款',
+        YES: '付款',
+        NO: '重新輸入',
+        BUY_DONUTS: '購買甜甜圈'
+    },
     DIALOG: {
         HEADER_TITLE: {
             CONFIRM: '確認:',
@@ -307,40 +341,13 @@ export const CH = {
             CANCEL: '取消'
         },
     },
-    PAYMENT: {
-        PAYMENT_TITLE: "支付方法",
-        STRIPE_ACCOUNT: "Stripe帳戶",
-        STRIPE_CONTENT: "用當地銀行賬戶直接收款 \n 不設最低收費",
-        BUTTON_CONNECT: "連接",
-        COMING_SOON: "快將推出",
-        CHARGE_FIRST_PART: "你將被收取 ",
-        CHARGE_USD: '美元',
-        CHARGE_SECOND_PART: '(包括手續費)',
-        TERM_PRIVACY_FIRST_PART: "繼續結帳即表示您同意 Creato 的",
-        TERMS_CONDITIONS: '條款',
-        TERM_AND: '和',
-        PRIVACY_POLICY: '隱私政策',
-        TERM_PRIVACY_LAST_PART: '，並同意我們的支付處理器 Stripe 對你的付款方式收費。',
-        CHECKOUT: '結帳',
-        ENTER_CARD_DETAIL: '輸入信用卡資料',
-        CARD_NUMBER: '信用卡號碼',
-        CARD_HOLDER_NAME: '信用卡持有人姓名',
-        EXPIRY_DATE: '有效期',
-        CVC: '驗證碼',
-        PAY_WITH_SAVED_CARD: '使用已保存的信用卡資料付款',
-        SAVE_CARD_INFO: '保存信用卡資料用作付款',
-        PAY: '付款',
-        CONFIRM: '付款',
-        YES: '付款',
-        NO: '重新輸入',
-        BUY_DONUTS: '購買甜甜圈'
-    },
     HINT: {
         TITLE: {
-            GOAL: 'Goal',
             WHAT_IS_FUNDME: 'What is a FundMe?',
+            GOAL: 'Goal',
             WHAT_IS_DAREME: '什麼是 DareMe?',
             DAREME_TITLE: '什麼是DareMe 標題?',
+            FUNDME_TITLE: 'FundMe Title?',
             DARE_OPTIONS: '什麼是DareMe 選項?',
             WHAT_IS_TEASER: '什麼是預告?',
         },
@@ -349,9 +356,9 @@ export const CH = {
             WHAT_IS_FUNDME: 'Creato是創作者和粉絲將創作點子變為現實的共創空間, 付費支持的觀眾將獲得創作者提供的獨家獎勵',
             WHAT_IS_DAREME: 'DareMe是您和您的觀眾共同策劃內容創作的地方\n\n與他們分享您的想法，一起 create together 吧！',
             DAREME_TITLE: '簡短描述一下你的想法\n\n幫助粉絲參與您的內容創作 🎨🖌️',
+            FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
             DARE_OPTIONS: '提出兩個 Dare 來開始 DareMe. ⚖️\n\nDareMe 開始後, 您的粉絲將可向您提出新的 Dare 給您考慮. 💭',
             WHAT_IS_TEASER: '分享您的想法給觀眾們 😛\n\n把預告短片在 20 秒內完成! 🤳🏻',
-
         }
     },
     PUBLISH: '發佈'

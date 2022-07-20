@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import decode from "jwt-decode";
@@ -7,11 +7,12 @@ import Button from "../components/general/button";
 import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
 import { authAction } from "../redux/actions/authActions";
-import { CreatoColorIcon, CreatoCoinIcon, AddIcon } from "../assets/svg";
-// import { LanguageContext } from "../routes/authRoute";
+import { CreatoColorIcon, CreatoCoinIcon, AddIcon, LanguageIcon } from "../assets/svg";
+import { LanguageContext } from "../routes/authRoute";
 import CONSTANT from "../constants/constant";
 import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
+import Dialog from "../components/general/dialog";
 
 const useWindowSize = () => {
   const [size, setSize] = useState(0);
@@ -32,10 +33,12 @@ const Header = () => {
   const userState = useSelector((state: any) => state.auth);
   const daremeState = useSelector((state: any) => state.dareme);
   const dareme = daremeState.dareme;
-  // const contexts = useContext(LanguageContext);
+  const contexts = useContext(LanguageContext);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+  const [openLangSelect, setOpenLangSelect] = useState(false);
   const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px";
   const user = userState.user;
+  const lang = userState.lang;
 
   const handleSubmit = () => { navigate("/auth/signin") }
   const handleLogout = () => {
@@ -52,7 +55,7 @@ const Header = () => {
       return false;
     return true;
   }
-  
+
   const gotoHome = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: "createDareMe", state: true } });
     else {
@@ -77,6 +80,10 @@ const Header = () => {
     }
   }
 
+  const setLang = () => {
+    setOpenLangSelect(true);
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("dareme_token");
     if (token) {
@@ -89,6 +96,19 @@ const Header = () => {
   return (
     <div className="header-padding" style={user ? user.role === "ADMIN" ? width > 1010 ? {} : { padding: '87px' } : width > 1010 ? {} : { padding: '60px' } : {}}>
       <div className="header-wrapper">
+        <Dialog 
+          display={openLangSelect}
+          wrapExit={() => { setOpenLangSelect(false) }}
+          exit={() => { setOpenLangSelect(false) }}
+          title="語言/Language"
+          langauge={lang}
+          buttons={[
+            {
+              text: contexts. EDIT_PROFILE_LETTER.SAVE,
+              handleClick: () => {  }
+            }
+          ]}
+        />
         <div className="header">
           <div className="user-header">
             <div className="dare-creator" onClick={gotoHome}>
@@ -137,15 +157,37 @@ const Header = () => {
                 </div>
               </div>
             ) : (
-              <div className="signin-btn">
-                <Button
-                  text="Sign in"
-                  fillStyle="fill"
-                  color="primary"
-                  shape="rounded"
-                  handleSubmit={handleSubmit}
-                />
-              </div>
+              <>
+                <div className="sign-lang-btn">
+                  <div className="lang-btn">
+                    <Button
+                      text={lang === 'EN' ?
+                        width > 880 ? 'English' : 'Eng' :
+                        width > 880 ? ' 繁體中文' : '中文'
+                      }
+                      fillStyle="fill"
+                      color="primary"
+                      shape="rounded"
+                      icon={width > 880 ? [
+                        <LanguageIcon color="white" />,
+                        <LanguageIcon color="white" />,
+                        <LanguageIcon color="white" />
+                      ]
+                        : undefined}
+                      handleSubmit={setLang}
+                    />
+                  </div>
+                  <div>
+                    <Button
+                      text="Sign in"
+                      fillStyle="fill"
+                      color="primary"
+                      shape="rounded"
+                      handleSubmit={handleSubmit}
+                    />
+                  </div>
+                </div>
+              </>
             )}
             {user &&
               <div

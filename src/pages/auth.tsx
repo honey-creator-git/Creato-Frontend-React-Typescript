@@ -25,6 +25,7 @@ const Auth = (props: any) => {
   const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
   const [isHover, setIsHover] = useState(false);
   const [isHover1, setIsHover1] = useState(false);
+  const lang = useSelector((state: any) => state.auth.lang);
   const prevRoute = loadState.prevRoute;
 
   const signupStyle = {
@@ -67,7 +68,8 @@ const Auth = (props: any) => {
       avatar: result.imageUrl,
       email: result.email,
       googleId: result.googleId,
-      browser: browser
+      browser: browser,
+      lang: lang
     });
     if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute));
     else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute));

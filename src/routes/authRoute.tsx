@@ -24,6 +24,7 @@ const AuthRoute = (props: routeProps) => {
     const [contexts, setContexts] = useState(EN);
     const authState = useSelector((state: any) => state.auth);
     const user = authState.user;
+    const language = authState.lang;
     const location = useLocation();
     const token: any = JSON.parse(localStorage.getItem('dareme_token') || '{}');
 
@@ -44,6 +45,13 @@ const AuthRoute = (props: routeProps) => {
             // dispatch(notificationAction.getNotification());
         }
     }, [user]);
+
+    useEffect(() => {
+        if (user === null) {
+            const lang: any = language === 'EN' ? EN : CH;
+            setContexts(lang);
+        }
+    }, [language]);
 
     useEffect(() => {
         if (props.routeType === 'private') {
