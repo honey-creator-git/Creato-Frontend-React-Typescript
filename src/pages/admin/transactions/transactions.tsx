@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom';
 import { transactionActions } from '../../../redux/actions/transactionActions';
 import Button from '../../../components/general/button';
 import TransferDialog from '../../../components/admin/transferDialog';
-import { SET_TRANSACTIONS } from '../../../redux/types';
 import Avatar from '../../../components/general/avatar';
 import { AddIcon, CreatoCoinIcon, TopUpIcon, SearchIcon } from '../../../assets/svg';
 import CONSTANT from '../../../constants/constant';
+import visitorImg from "../../../assets/img/visitor_avatar.png";
 import '../../../assets/styles/admin/transactions/adminTransactionsStyle.scss';
 
 const AdminTransactions = () => {
@@ -25,7 +25,6 @@ const AdminTransactions = () => {
 
     const getTransactionData = (type: any) => {
         setType(type);
-        dispatch({ type: SET_TRANSACTIONS, payload: [] });
         dispatch(transactionActions.getAdminTransactions(type));
     }
 
@@ -42,7 +41,6 @@ const AdminTransactions = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         setType(0);
-        dispatch({ type: SET_TRANSACTIONS, payload: [] });
         dispatch(transactionActions.getAdminTransactions(type));
     }, [location]);
 
@@ -215,8 +213,12 @@ const AdminTransactions = () => {
                                             <td>
                                                 <div>
                                                     <Avatar
-                                                        avatar={transaction?.user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${transaction?.user?.avatar}` : transaction?.user?.avatar}
-                                                        username={transaction?.user?.name}
+                                                        avatar={
+                                                            transaction?.user ?
+                                                                transaction?.user?.avatar.indexOf('uploads') !== -1 ?
+                                                                    `${CONSTANT.SERVER_URL}/${transaction?.user?.avatar}` :
+                                                                    transaction?.user?.avatar : visitorImg}
+                                                        username={transaction?.user ? transaction?.user.name : transaction?.nickname}
                                                         avatarStyle="horizontal"
                                                     />
                                                 </div>
@@ -235,16 +237,25 @@ const AdminTransactions = () => {
                                             {transaction.description === 5 && "Vote as SuperFans"}
                                             {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "")}
                                             {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ""}</strong></>}
+                                            {transaction.description === 8 && <>Tipping Donuts</>}
+                                            {transaction.description === 9 && <>Tipping Donuts</>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
-                                            {transaction.from === "USER" && (transaction.user ? transaction.user.name : '')}
-                                            {transaction.from === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
+                                            {transaction.from === "USER" &&
+                                                <>{transaction.nickname ? transaction.nickname : transaction.user ? transaction.user.name : ''}</>
+                                            }
+                                            {transaction.from === "" && (transaction.dareme ? transaction.dareme.title : '')}
                                             {transaction.from === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                                         </td>
                                         <td>
                                             {transaction.to === "ADMIN" && "Admin"}
-                                            {transaction.to === "USER" && (transaction.user ? transaction.user.name : '')}
+                                            {transaction.to === "USER" &&
+                                                <>{transaction.description === 9 ?
+                                                    transaction.user1 ? transaction.user1.name : ''
+                                                    : transaction.user ? transaction.user.name : ''
+                                                }</>
+                                            }
                                             {transaction.to === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                                             {transaction.to === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                                         </td>

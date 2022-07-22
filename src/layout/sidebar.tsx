@@ -8,12 +8,12 @@ import {
   NoOfPeopleIcon,
   NotificationfillIcon,
   SettingIcon,
-  LightbulbIcon
+  LightbulbIcon,
+  TipIcon
 } from "../assets/svg";
 import "../assets/styles/sidebarStyle.scss";
 
 const NavLink = (props: any) => {
-  // props.to === "/admin" && props.pathname === props.to
   const isActive = props.pathname.indexOf(props.to) !== -1 ? props.to === "/admin" && props.to !== props.pathname ? false : true : false;
 
   useEffect(() => {
@@ -115,6 +115,14 @@ const Sidebar = () => {
           </div>
           <div className="item-letter">
             <span>General - Admin setting</span>
+          </div>
+        </NavLink>
+        <NavLink to="/admin/tipping" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+          <div className="icon">
+            <TipIcon className="icon-svg" color={location.pathname.indexOf('/admin/tipping') !== -1 ? "#EFA058" : hoverPath === "/admin/tipping" ? "#EFA058" : "#A6A29F"} />
+          </div>
+          <div className="item-letter">
+            <span>Tipping</span>
           </div>
         </NavLink>
       </div>

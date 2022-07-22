@@ -16,6 +16,7 @@ export const transactionActions = {
             .then((result) => {
                 const { data } = result;
                 if (data.success) {
+                    dispatch({ type: SET_TRANSACTIONS, payload: [] });
                     dispatch({
                         type: SET_DONUTS_INFO, payload: {
                             adminDonuts: data.adminDonuts,
@@ -24,7 +25,6 @@ export const transactionActions = {
                             fundmeDonuts: data.fundmeDonuts
                         }
                     });
-                    console.log(data.transactions);
                     dispatch({ type: SET_USERS, payload: data.users });
                     dispatch({ type: SET_TRANSACTIONS, payload: data.transactions });
                     dispatch({ type: SET_LOADING_FALSE });

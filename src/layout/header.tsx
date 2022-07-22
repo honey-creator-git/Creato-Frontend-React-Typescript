@@ -96,7 +96,7 @@ const Header = () => {
   return (
     <div className="header-padding" style={user ? user.role === "ADMIN" ? width > 1010 ? {} : { padding: '87px' } : width > 1010 ? {} : { padding: '60px' } : {}}>
       <div className="header-wrapper">
-        <Dialog 
+        <Dialog
           display={openLangSelect}
           wrapExit={() => { setOpenLangSelect(false) }}
           exit={() => { setOpenLangSelect(false) }}
@@ -104,8 +104,8 @@ const Header = () => {
           langauge={lang}
           buttons={[
             {
-              text: contexts. EDIT_PROFILE_LETTER.SAVE,
-              handleClick: () => {  }
+              text: contexts.EDIT_PROFILE_LETTER.SAVE,
+              handleClick: () => { }
             }
           ]}
         />
@@ -162,8 +162,8 @@ const Header = () => {
                   <div className="lang-btn">
                     <Button
                       text={lang === 'EN' ?
-                        width > 880 ? 'English' : 'Eng' :
-                        width > 880 ? ' 繁體中文' : '中文'
+                        width > 880 ? ' 繁體中文' : '中文' :
+                        width > 880 ? 'English' : 'Eng'
                       }
                       fillStyle="fill"
                       color="primary"
@@ -179,7 +179,7 @@ const Header = () => {
                   </div>
                   <div>
                     <Button
-                      text="Sign in"
+                      text={contexts.DIALOG.BUTTON_LETTER.SIGN_IN}
                       fillStyle="fill"
                       color="primary"
                       shape="rounded"

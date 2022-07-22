@@ -59,12 +59,15 @@ import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
 import FundMeList from '../pages/admin/fundme/fundMeList';
 import FundMeDetail from '../pages/admin/fundme/fundMeDetail';
 import FundMeTitle from '../pages/admin/fundme/fundMeTitle';
+import Tipping from '../pages/admin/tip/tipping';
+import TipProfile from '../pages/admin/tip/tipProfile';
 
 import AdminTransactions from '../pages/admin/transactions/transactions';
 import Error404 from '../pages/error/error404';
 
 import TipDonut from '../pages/tip/tipDonut';
 import TipMethod from '../pages/tip/tipMethod';
+import TipEditor from '../pages/admin/tip/tipEditor';
 
 const AppRoutes = () => {
     return (
@@ -131,6 +134,9 @@ const AppRoutes = () => {
             <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
             <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
             <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
+            <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
+            <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
+            <Route path="admin/tipping/profile/:url/:id/edit" element={<AuthRoute child={<TipEditor />} routeType="private" />} />
             <Route path="/not-founder-cover" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
 

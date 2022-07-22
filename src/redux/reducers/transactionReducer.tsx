@@ -8,7 +8,7 @@ const INITIAL_STATE: any = {
     fundmeDonuts: null
 }
 
-const notificationReducer = (state: any = INITIAL_STATE, action: any) => {
+const transactionReducer = (state: any = INITIAL_STATE, action: any) => {
     const { payload = null } = action;
     switch (action.type) {
         case actionTypes.SET_DONUTS_INFO:
@@ -23,4 +23,4 @@ const notificationReducer = (state: any = INITIAL_STATE, action: any) => {
     }
 };
 
-export default notificationReducer;
+export default transactionReducer;

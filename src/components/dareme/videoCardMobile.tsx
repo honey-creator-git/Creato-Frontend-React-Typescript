@@ -24,9 +24,9 @@ const VideoCardMobile = (props: any) => {
         if (finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
         if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
         if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
-        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
+        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
         if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
-        else return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
+        else if(finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
     }
 
     const checkLock = () => {

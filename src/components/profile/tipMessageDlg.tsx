@@ -1,14 +1,14 @@
 import Avatar from "../general/avatar";
 import Button from "../general/button";
-import { CreatoCoinIcon, WhatsappIcon, FacebookIcon, TwitterIcon, CloseIcon } from "../../assets/svg";
+import { CreatoCoinIcon, WhatsappIcon, FacebookIcon, TwitterIcon, CloseIcon, EditIcon } from "../../assets/svg";
 import "../../assets/styles/tip/tipMessageDlgStyle.scss";
 
 const TipMessageDlg = (props: any) => {
-    const { display, wrapExit, tipData, exit } = props;
+    const { display, wrapExit, tipData, exit, admin, editTip } = props;
 
     return (
         <div className="tip-dialog-wrapper" style={display ? { visibility: 'visible', opacity: 1 } : {}} onClick={wrapExit}>
-            <div className="dialog-main" onClick={e => e.stopPropagation()}>
+            <div className="dialog-main" onClick={e => e.stopPropagation()} style={admin ? { width: '450px' } : {}}>
                 {tipData &&
                     <>
                         <div className="avatars-wrapper">
@@ -40,33 +40,37 @@ const TipMessageDlg = (props: any) => {
                                 </span>
                             </div>
                         </div>
-                        <div className="dialog-social">
-                            <div className="link" onClick={() => {
-                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
-                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${tipData.ownerURL}&quote=${text}`, 'sharer');
+                        {admin === undefined &&
+                            <div className="dialog-social">
+                                <div className="link" onClick={() => {
+                                    let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
+                                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${tipData.ownerURL}&quote=${text}`, 'sharer');
 
-                            }}>
-                                <FacebookIcon color="#EFA058" />
+                                }}>
+                                    <FacebookIcon color="#EFA058" />
+                                </div>
+                                <div className="link" onClick={() => {
+                                    let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out%0a${tipData.ownerURL}`;
+                                    window.open(`https://wa.me/?text=${text}`);
+                                }}>
+                                    <WhatsappIcon color="#EFA058" />
+                                </div>
+                                <div className="link" onClick={() => {
+                                    let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
+                                    window.open(`https://twitter.com/share?url=${tipData.ownerURL}&text=${text}`, 'sharer');
+                                }}>
+                                    <TwitterIcon color="#EFA058" />
+                                </div>
                             </div>
-                            <div className="link" onClick={() => {
-                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out%0a${tipData.ownerURL}`;
-                                window.open(`https://wa.me/?text=${text}`);
-                            }}>
-                                <WhatsappIcon color="#EFA058" />
-                            </div>
-                            <div className="link" onClick={() => {
-                                let text = `I have tipped ${tipData.tip} Donuts to ${tipData.ownername} on Creato! Check it out`;
-                                window.open(`https://twitter.com/share?url=${tipData.ownerURL}&text=${text}`, 'sharer');
-                            }}>
-                                <TwitterIcon color="#EFA058" />
-                            </div>
-                        </div>
+                        }
                         {tipData.message !== "" &&
-                            <div className="message-wrapper">
+                            <div className="message-wrapper" style={admin ? { width: '380px', minHeight: '280px' } : { minHeight: '150px' }}>
                                 <div className="text">
-                                    <span>
-                                        {tipData.message}
-                                    </span>
+                                    <textarea
+                                        style={{ outline: 'none', border: 'none', resize: 'none', width: admin ? '355px' : '228px', backgroundColor: '#F5F5F4', height: admin ? '255px' :'130px' }}
+                                        value={tipData.message}
+                                        readOnly
+                                    />
                                 </div>
                             </div>
                         }
@@ -75,16 +79,32 @@ const TipMessageDlg = (props: any) => {
                             <span className="name-text">{tipData.username}</span>
                         </div>
                         <div className="exit-btn">
-                            <Button
-                                fillStyle="fill"
-                                color="primary"
-                                icon={[
-                                    <CloseIcon color="white" />,
-                                    <CloseIcon color="white" />,
-                                    <CloseIcon color="white" />
-                                ]}
-                                handleSubmit={exit}
-                            />
+                            <div>
+                                <Button
+                                    fillStyle="fill"
+                                    color="primary"
+                                    icon={[
+                                        <CloseIcon color="white" />,
+                                        <CloseIcon color="white" />,
+                                        <CloseIcon color="white" />
+                                    ]}
+                                    handleSubmit={exit}
+                                />
+                            </div>
+                            {admin &&
+                                <div style={{ marginLeft: '10px' }}>
+                                    <Button
+                                        fillStyle="fill"
+                                        color="primary"
+                                        icon={[
+                                            <EditIcon color="white" />,
+                                            <EditIcon color="white" />,
+                                            <EditIcon color="white" />
+                                        ]}
+                                        handleSubmit={editTip}
+                                    />
+                                </div>
+                            }
                         </div>
                     </>
                 }

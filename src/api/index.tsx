@@ -76,6 +76,13 @@ export const addAdminDonuts = (data: any) => API.post('/api/transactions/add/adm
 export const transferDonuts = (data: any) => API.post('/api/transactions/transfer/donuts', data);
 export const getUserLatest5Transactions = () => API.get('/api/transactions/user/latest');
 export const getUserTransactionsByDays = (data: any) => API.post('/api/transactions/user/days', data);
+export const getTips = () => API.get('/api/tip/list');
+export const getTipProfile = (url: any) => API.get(`/api/tip/profile/${url}`);
+export const setTipFunction = (data: any) => API.post('/api/tip/profile/tipsetting', data);
+export const changeVisible = (data: any) => API.post('/api/tip/profile/changevisible', data);
+export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
+export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);
+export const deleteTip = (tipId: any) => API.delete(`/api/tip/${tipId}`);
 
 export const getFundMeList = (data: any) => API.post('/api/fundme/fundmes', data);
 export const setFundMeShow = (data: any, fundmeId: any) => API.post(`/api/fundme/fundmes/${fundmeId}`, data);

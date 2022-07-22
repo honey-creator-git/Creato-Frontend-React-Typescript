@@ -143,17 +143,14 @@ const TipDonut = () => {
         />
         <Dialog
           display={openTipSuccess}
-          exit={() => { setOpenTipSuccess(false); }}
-          wrapExit={() => { setOpenTipSuccess(false); }}
+          exit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
+          wrapExit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
           title="Congrats!"
           context="Donuts have been tipped!"
           buttons={[
             {
               text: "Back to profile",
-              handleClick: () => {
-                setOpenTipSuccess(false);
-                navigate(`/${authuser?.personalisedUrl}`);
-              }
+              handleClick: () => { navigate(`/${authuser?.personalisedUrl}`) }
             }
           ]}
           social

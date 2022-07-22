@@ -38,6 +38,7 @@ export const SET_FANWALL_TOPFANS = 'SET_FANWALL_TOPFUNS';
 export const SET_FANWALL_TYPE = 'SET_FANWALL_TYPE';
 
 export const SET_TIPS = 'SET_TIPS';
+export const SET_TIP = 'SET_TIP';
 
 export const SET_PREVIOUS_ROUTE = 'SET_PREVIOUS_ROUTE';
 export const SET_NEXT_ROUTE = 'SET_NEXT_ROUTE';

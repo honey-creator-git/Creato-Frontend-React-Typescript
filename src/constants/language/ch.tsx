@@ -146,12 +146,12 @@ export const CH = {
         URL_ERROR: '專屬Creato網址已存在, 請重新輸入!'
     },
     HOME_LETTER: {
-        DAREME_WITH_MOST_DONUTS: '最多冬甩的 DareMe 🍩',
-        EVERY_TALKING: '熱門 DareMe 💬',
-        NEW_RELEASE: '新創建的 DareMe!!🎉',
-        ONGOING_DAREME: 'DareMe 進行中 🙌🏻',
+        DAREME_WITH_MOST_DONUTS: '最多甜甜圈的 DareMe 和 FundMe🍩',
+        EVERY_TALKING: '熱門 DareMe 和 FundMe💬',
+        NEW_RELEASE: '新創建的 DareMe 和 FundMe!!🎉',
+        ONGOING_DAREME: 'DareMe 和 FundMe 進行中🙌🏻',
         GET_DONUTS_TO_DARE: '購買冬甩支持創作者!',
-        FINISHED_DAREME: '已完成的 DareMe',
+        FINISHED_DAREME: '已完成的 DareMe 和 FundMe',
         POST_ON_FANWALL: 'Fanwall 上的帖子'
     },
     CREATE_DAREME_LETTER: {
