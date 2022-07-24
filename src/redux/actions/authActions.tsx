@@ -131,5 +131,18 @@ export const authAction = {
                 const { data } = result;
                 if (data.success) dispatch({ type: SET_URL_EXIST, payload: data.isExist });
             }).catch(err => console.log(err));
+    },
+
+    setTipFunction: (tipValue: any, userId: any, users: any, index: any) => async (dispatch: Dispatch<any>) => {
+        dispatch({ type: SET_LOADING_TRUE });
+        api.setTipFunction({ tipValue: tipValue, id: userId })
+            .then((result) => {
+                const { data } = result;
+                dispatch({ type: SET_LOADING_FALSE });
+                if (data.success) {
+                    users[index].tipFunction = tipValue;
+                    dispatch({ type: SET_USERS, payload: users });
+                }
+            }).catch(err => console.log(err));
     }
 }

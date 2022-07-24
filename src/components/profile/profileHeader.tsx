@@ -238,7 +238,7 @@ const ProfileHeader = (props: profileProps) => {
           />
           :
           <>
-            {(daremes.filter((dareme: any) => dareme.finished === true)).length > 0 &&
+            {(authuser && authuser.tipFunction) &&
               <Button
                 handleSubmit={tipping}
                 color="primary"

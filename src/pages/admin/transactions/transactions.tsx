@@ -104,7 +104,6 @@ const AdminTransactions = () => {
                                 text="Admin"
                                 fillStyle={type === 0 ? "fill" : "outline"}
                                 color="primary"
-                                shape="rounded"
                                 handleSubmit={() => { getTransactionData(0); }}
                             />
                         </div>
@@ -113,7 +112,6 @@ const AdminTransactions = () => {
                                 text="User"
                                 fillStyle={type === 1 ? "fill" : "outline"}
                                 color="primary"
-                                shape="rounded"
                                 handleSubmit={() => { getTransactionData(1); }}
                             />
                         </div>
@@ -122,7 +120,6 @@ const AdminTransactions = () => {
                                 text="DareMe Wallet"
                                 fillStyle={type === 2 ? "fill" : "outline"}
                                 color="primary"
-                                shape="rounded"
                                 handleSubmit={() => { getTransactionData(2); }}
                             />
                         </div>
@@ -245,7 +242,7 @@ const AdminTransactions = () => {
                                             {transaction.from === "USER" &&
                                                 <>{transaction.nickname ? transaction.nickname : transaction.user ? transaction.user.name : ''}</>
                                             }
-                                            {transaction.from === "" && (transaction.dareme ? transaction.dareme.title : '')}
+                                            {(transaction.from === "" || transaction.from === "DAREME") && (transaction.dareme ? transaction.dareme.title : '')}
                                             {transaction.from === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                                         </td>
                                         <td>

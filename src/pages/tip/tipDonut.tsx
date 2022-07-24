@@ -125,18 +125,18 @@ const TipDonut = () => {
           display={openEmptyMsg}
           exit={() => { setOpenEmptyMsg(false); }}
           wrapExit={() => { setOpenEmptyMsg(false); }}
-          title="Confirm:"
-          context="Proceed without a message to creator?"
+          title={`${contexts.CONFIRM}:`}
+          context={contexts.PROCEED_WITHOUT_MESSAGE_TO_CREATOR}
           buttons={[
             {
-              text: "Yes",
+              text: contexts.YES,
               handleClick: () => {
                 setOpenEmptyMsg(false);
                 tipUser();
               }
             },
             {
-              text: "No",
+              text: contexts.NO,
               handleClick: () => { setOpenEmptyMsg(false) }
             }
           ]}
@@ -145,11 +145,11 @@ const TipDonut = () => {
           display={openTipSuccess}
           exit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
           wrapExit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
-          title="Congrats!"
-          context="Donuts have been tipped!"
+          title={contexts.CONGRATS}
+          context={contexts.DONUTS_HAVE_BEEN_TIPPED}
           buttons={[
             {
-              text: "Back to profile",
+              text: contexts.BACK_TO_PROFILE,
               handleClick: () => { navigate(`/${authuser?.personalisedUrl}`) }
             }
           ]}
@@ -182,8 +182,8 @@ const TipDonut = () => {
           <div className="nickname">
             <Input
               type="input"
-              placeholder="Let them know who you are :)"
-              label="Nickname"
+              placeholder={contexts.LET_THEM_KNOW_WHO_YOU_ARE}
+              label={contexts.NICKNAME}
               wordCount={30}
               title={nickname}
               setTitle={setNickName}
@@ -196,7 +196,7 @@ const TipDonut = () => {
             <label className="letter">{contexts.REVIEW_LETTER.DONUTS_NUMBER}</label>
             <Input
               type="input"
-              placeholder="e.g. 30, 100"
+              placeholder={contexts.EG_30_100}
               isNumber={true}
               title={tip}
               width={150}
@@ -211,8 +211,8 @@ const TipDonut = () => {
         <div className="message">
           <Input
             type="textarea"
-            label={"Say something to support!"}
-            placeholder={"Message to Creators"}
+            label={contexts.SAY_SOMETHING_TO_SUPPORT}
+            placeholder={contexts.MESSAGE_TO_CREATORS}
             wordCount={150}
             title={message}
             setTitle={setMessage}
@@ -221,7 +221,7 @@ const TipDonut = () => {
         </div>
         {!user &&
           <div className="donut-package">
-            <span className="package-title">Pick a Donut package 🍩</span>
+            <span className="package-title">{contexts.PICK_DONUT_PACKAGE}</span>
             <div className="donuts-plan">
               {creatoList.map((creato, i) => (
                 <div className="donuts" key={i} onClick={() => {
@@ -242,7 +242,7 @@ const TipDonut = () => {
       </div>
       <div className="send-btn" onClick={() => { if (check()) tipDonuts() }}>
         <ContainerBtn
-          text={user ? "Send" : "Next"}
+          text={user ? contexts.SEND : contexts.NEXT}
           disabled={!check()}
           styleType="fill"
         />

@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/inputStyle.scss";
+
 
 const Input = (props: any) => {
   const { type, label, wordCount, placeholder, title, setTitle, setFocus, isNumber, isUrl, step, maxnum, minnum, width } = props;
   const [words, setWords] = useState<Number>(0);
+  const contexts = useContext(LanguageContext);
 
   const isCharacterAndNumber = (url: any) => {
     for (let i = 0; i < url.length; i++)
@@ -76,7 +79,7 @@ const Input = (props: any) => {
         </div>
         {wordCount !== undefined ?
           <div className="word-count">
-            ({words}/{wordCount} characters)
+            ({words}/{wordCount} {contexts.CHARACTERS})
           </div>
           :
           <div></div>

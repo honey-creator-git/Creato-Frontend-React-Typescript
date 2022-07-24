@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Avatar from "../general/avatar";
 import { CreatoCoinIcon, MoreIcon, HiddenIcon, VisibleIcon } from "../../assets/svg";
+import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/profile/components/tipCardStyle.scss";
 
 const TipCard = (props: any) => {
     const [clickState, setClickState] = useState(false);
+    const contexts = useContext(LanguageContext);
 
     return (
         <div className="tipcard-wrapper"
@@ -45,7 +47,7 @@ const TipCard = (props: any) => {
                         <span className="message">{props.message.length > 20 ? `${props.message.substring(0, 20)}...` : props.message}</span>
                     </div>
                     <div style={{ display: 'flex' }}>
-                        <div>{props.message === "" ? <></> : <span className="see-more">See more</span>}</div>
+                        <div>{props.message === "" ? <></> : <span className="see-more">{contexts.SEE_MORE}</span>}</div>
                         {props.admin &&
                             <div className="hidden-icon" onClick={props.changeVisible}>
                                 {props.show ? <VisibleIcon color="#7E7875" /> : <HiddenIcon color="#7E7875" />}

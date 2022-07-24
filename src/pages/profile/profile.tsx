@@ -291,7 +291,7 @@ const Profile = () => {
                 <div className="tips">
                   <div className="title">
                     <TipIcon color="#EFA058" />
-                    <p>Donuts Received</p>
+                    <p>{contexts.DONUTS_RECEIVED}</p>
                   </div>
                   <div className="tip-card">
                     {tips.map((tip: any, index: any) => {

@@ -15,7 +15,6 @@ import '../../../assets/styles/admin/tip/adminTipProfileStyle.scss';
 import "../../../assets/styles/profile/components/profileHeaderStyle.scss";
 
 const ProfileHeader = (props: any) => {
-    const navigate = useNavigate();
     const userStore = useSelector((state: any) => state.auth);
     const dispatch = useDispatch();
     const contexts = useContext(LanguageContext);
@@ -23,7 +22,7 @@ const ProfileHeader = (props: any) => {
     const [categoryText, setCategoryText] = useState("");
 
     useEffect(() => {
-        if (authuser && authuser.categories.length) {
+        if (authuser && authuser.categories &&authuser.categories.length) {
             let categories = authuser.categories;
             let texts = ""
             categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 });
@@ -50,7 +49,7 @@ const ProfileHeader = (props: any) => {
                     avatarStyle="horizontal"
                     category={categoryText}
                     username={authuser ? authuser.name : ''}
-                    avatar={authuser ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}` : ''}
+                    avatar={(authuser && authuser.avatar) ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}` : ''}
                 />
             </div>
             <div className="create-btn">

@@ -4,12 +4,14 @@
   display: flex;
 
   .sidebar {
+    position: fixed;
     width: 270px;
   }
 
   .main-body {
     width: calc(100% - 270px);
-    margin: 0px 10px;
+    margin: 0px 10px 0px 280px;
+    min-height: 635px;
     box-shadow: 5px 0px 20px 0px rgba($color: #000000, $alpha: 0.4);
   }
 }

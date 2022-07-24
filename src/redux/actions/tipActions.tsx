@@ -116,5 +116,16 @@ export const tipAction = {
                 dispatch({ type: SET_LOADING_FALSE });
                 if (data.success) navigate(`/admin/tipping/profile/${url}`);
             }).catch(err => console.log(err));
+    },
+
+    getActiveTipUsers: () => async (dispatch: Dispatch<any>) => {
+        dispatch({ type: SET_LOADING_TRUE });
+        dispatch({ type: SET_USERS, payload: [] });
+        api.getActiveTipUsers()
+            .then((result) => {
+                const { data } = result;
+                dispatch({ type: SET_LOADING_FALSE });
+                if (data.success === true) dispatch({ type: SET_USERS, payload: data.users });
+            }).catch(err => console.log(err));
     }
 }

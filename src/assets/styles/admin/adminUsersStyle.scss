@@ -1,6 +1,28 @@
 .admin-users-wrapper {
     padding: 10px 10px;
 
+    .scroll-bar {
+        &::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(245, 195, 149, 0.1);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(245, 195, 149, 0.5);
+            border-radius: 10px;
+            transition: 0.2s;
+            height: 20px;
+
+            &:hover {
+                background: #efa058;
+            }
+        }
+    }
+
     .search-bar {
         display: flex;
         align-items: center;
@@ -31,8 +53,11 @@
     }
 
     .users-data {
+        overflow-x: auto;
+
         .data-table {
             width: 100%;
+            white-space: nowrap;
 
             thead {
                 font-style: normal;
@@ -49,6 +74,7 @@
 
                     th {
                         padding-left: 5px;
+                        padding-right: 5px;
                     }
                 }
             }

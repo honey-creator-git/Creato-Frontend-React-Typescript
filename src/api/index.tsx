@@ -83,6 +83,7 @@ export const changeVisible = (data: any) => API.post('/api/tip/profile/changevis
 export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
 export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);
 export const deleteTip = (tipId: any) => API.delete(`/api/tip/${tipId}`);
+export const getActiveTipUsers = () => API.get('/api/tip/users/tipactive');
 
 export const getFundMeList = (data: any) => API.post('/api/fundme/fundmes', data);
 export const setFundMeShow = (data: any, fundmeId: any) => API.post(`/api/fundme/fundmes/${fundmeId}`, data);
