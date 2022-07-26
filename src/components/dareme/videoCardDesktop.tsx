@@ -33,7 +33,6 @@ const VideoCardDesktop = (props: any) => {
                         ref={playerRef}
                         onProgress={(progress) => {
                             if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-                            if (progress.playedSeconds > 20) playerRef.current?.seekTo(0);
                         }}
                     />
                 }

@@ -78,7 +78,6 @@ const VideoCardMobile = (props: any) => {
                             playsinline={true}
                             onProgress={(progress) => {
                                 if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-                                if (posted !== true) if (progress.playedSeconds > 20) playerRef.current?.seekTo(0);
                             }}
                         />
                         <div className="mute-icon" onClick={(e) => {

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Title from "../../components/general/title";
 import Avatar from "../../components/general/avatar";
 import Input from "../../components/general/input";
@@ -13,6 +13,7 @@ import { LanguageContext } from "../../routes/authRoute";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
 import "../../assets/styles/tip/tipDonutStyle.scss";
+import { authAction } from "../../redux/actions/authActions";
 
 const creatoList = [
   {
@@ -53,6 +54,7 @@ const creatoList = [
 ];
 
 const TipDonut = () => {
+  const { creatorLink } = useParams();
   const userState = useSelector((state: any) => state.auth);
   const authuser = useSelector((state: any) => state.auth.users[0]);
   const dlgState = useSelector((state: any) => state.load.dlgState);
@@ -99,154 +101,157 @@ const TipDonut = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+    dispatch(authAction.getUserFromUrl(creatorLink));
     setOpenTipSuccess(false);
   }, [location]);
 
   return (
     <div className="tip-donuts">
       <Title title="Tip Donuts" back={() => { navigate(`/${authuser?.personalisedUrl}`) }} />
-      <div className="tip-donuts-body">
-        <DisplayDonutsPlan
-          display={openDonutsPlan}
-          exit={() => { setOpenDonutsPlan(false) }}
-          creato={creatoList[selectedIndex]}
-          handleSubmit={() => {
-            setOpenDonutsPlan(false);
-            setOpenPaymentDlg(true);
-          }}
-        />
-        <PaymentForm
-          tipData={{ nickname: nickname, message: message, user: authuser?._id }}
-          display={openPaymentDlg}
-          exit={() => { setOpenPaymentDlg(false) }}
-          donutPlan={creatoList[selectedIndex]}
-        />
-        <Dialog
-          display={openEmptyMsg}
-          exit={() => { setOpenEmptyMsg(false); }}
-          wrapExit={() => { setOpenEmptyMsg(false); }}
-          title={`${contexts.CONFIRM}:`}
-          context={contexts.PROCEED_WITHOUT_MESSAGE_TO_CREATOR}
-          buttons={[
-            {
-              text: contexts.YES,
-              handleClick: () => {
-                setOpenEmptyMsg(false);
-                tipUser();
-              }
-            },
-            {
-              text: contexts.NO,
-              handleClick: () => { setOpenEmptyMsg(false) }
-            }
-          ]}
-        />
-        <Dialog
-          display={openTipSuccess}
-          exit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
-          wrapExit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
-          title={contexts.CONGRATS}
-          context={contexts.DONUTS_HAVE_BEEN_TIPPED}
-          buttons={[
-            {
-              text: contexts.BACK_TO_PROFILE,
-              handleClick: () => { navigate(`/${authuser?.personalisedUrl}`) }
-            }
-          ]}
-          social
-        />
-        <Dialog
-          display={openTopUp}
-          exit={() => { setOpenTopUp(false); }}
-          wrapExit={() => { setOpenTopUp(false); }}
-          title={contexts.DIALOG.HEADER_TITLE.TOP_UP_NOW}
-          context={contexts.DIALOG.BODY_LETTER.TOP_UP_NOW}
-          buttons={[
-            {
-              text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
-              handleClick: () => {
-                dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}/tip` });
-                navigate(`/${user.personalisedUrl}/shop`);
-              }
-            }
-          ]}
-        />
-        <div className="user-avatar">
-          <Avatar
-            size="web"
-            username={authuser?.name}
-            avatar={authuser?.avatar}
+      {authuser &&
+        <div className="tip-donuts-body">
+          <DisplayDonutsPlan
+            display={openDonutsPlan}
+            exit={() => { setOpenDonutsPlan(false) }}
+            creato={creatoList[selectedIndex]}
+            handleSubmit={() => {
+              setOpenDonutsPlan(false);
+              setOpenPaymentDlg(true);
+            }}
           />
-        </div>
-        {!user &&
-          <div className="nickname">
-            <Input
-              type="input"
-              placeholder={contexts.LET_THEM_KNOW_WHO_YOU_ARE}
-              label={contexts.NICKNAME}
-              wordCount={30}
-              title={nickname}
-              setTitle={setNickName}
-              setFocus={() => { }}
+          <PaymentForm
+            tipData={{ nickname: nickname, message: message, user: authuser?._id }}
+            display={openPaymentDlg}
+            exit={() => { setOpenPaymentDlg(false) }}
+            donutPlan={creatoList[selectedIndex]}
+          />
+          <Dialog
+            display={openEmptyMsg}
+            exit={() => { setOpenEmptyMsg(false); }}
+            wrapExit={() => { setOpenEmptyMsg(false); }}
+            title={`${contexts.CONFIRM}:`}
+            context={contexts.PROCEED_WITHOUT_MESSAGE_TO_CREATOR}
+            buttons={[
+              {
+                text: contexts.YES,
+                handleClick: () => {
+                  setOpenEmptyMsg(false);
+                  tipUser();
+                }
+              },
+              {
+                text: contexts.NO,
+                handleClick: () => { setOpenEmptyMsg(false) }
+              }
+            ]}
+          />
+          <Dialog
+            display={openTipSuccess}
+            exit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
+            wrapExit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
+            title={contexts.CONGRATS}
+            context={contexts.DONUTS_HAVE_BEEN_TIPPED}
+            buttons={[
+              {
+                text: contexts.BACK_TO_PROFILE,
+                handleClick: () => { navigate(`/${authuser?.personalisedUrl}`) }
+              }
+            ]}
+            social
+          />
+          <Dialog
+            display={openTopUp}
+            exit={() => { setOpenTopUp(false); }}
+            wrapExit={() => { setOpenTopUp(false); }}
+            title={contexts.DIALOG.HEADER_TITLE.TOP_UP_NOW}
+            context={contexts.DIALOG.BODY_LETTER.TOP_UP_NOW}
+            buttons={[
+              {
+                text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
+                handleClick: () => {
+                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}/tip` });
+                  navigate(`/${user.personalisedUrl}/shop`);
+                }
+              }
+            ]}
+          />
+          <div className="user-avatar">
+            <Avatar
+              size="web"
+              username={authuser?.name}
+              avatar={authuser?.avatar}
             />
           </div>
-        }
-        {user &&
-          <div className="donuts-number">
-            <label className="letter">{contexts.REVIEW_LETTER.DONUTS_NUMBER}</label>
-            <Input
-              type="input"
-              placeholder={contexts.EG_30_100}
-              isNumber={true}
-              title={tip}
-              width={150}
-              minnum={0}
-              maxnum={99999999}
-              step={1}
-              setTitle={setTip}
-              setFocus={() => { }}
-            />
-          </div>
-        }
-        <div className="message">
-          <Input
-            type="textarea"
-            label={contexts.SAY_SOMETHING_TO_SUPPORT}
-            placeholder={contexts.MESSAGE_TO_CREATORS}
-            wordCount={150}
-            title={message}
-            setTitle={setMessage}
-            setFocus={() => { }}
-          />
-        </div>
-        {!user &&
-          <div className="donut-package">
-            <span className="package-title">{contexts.PICK_DONUT_PACKAGE}</span>
-            <div className="donuts-plan">
-              {creatoList.map((creato, i) => (
-                <div className="donuts" key={i} onClick={() => {
-                  setTip(creato.donutCount);
-                  setSelectedIndex(i);
-                }}>
-                  <Creato
-                    discountedPercent={creato.discountedPercent}
-                    donutCount={creato.donutCount}
-                    property={creato.property}
-                    selected={selectedIndex === i ? true : false}
-                  />
-                </div>
-              ))}
+          {!user &&
+            <div className="nickname">
+              <Input
+                type="input"
+                placeholder={contexts.LET_THEM_KNOW_WHO_YOU_ARE}
+                label={contexts.NICKNAME}
+                wordCount={30}
+                title={nickname}
+                setTitle={setNickName}
+                setFocus={() => { }}
+              />
             </div>
+          }
+          {user &&
+            <div className="donuts-number">
+              <label className="letter">{contexts.REVIEW_LETTER.DONUTS_NUMBER}</label>
+              <Input
+                type="input"
+                placeholder={contexts.EG_30_100}
+                isNumber={true}
+                title={tip}
+                width={150}
+                minnum={0}
+                maxnum={99999999}
+                step={1}
+                setTitle={setTip}
+                setFocus={() => { }}
+              />
+            </div>
+          }
+          <div className="message">
+            <Input
+              type="textarea"
+              label={contexts.SAY_SOMETHING_TO_SUPPORT}
+              placeholder={contexts.MESSAGE_TO_CREATORS}
+              wordCount={150}
+              title={message}
+              setTitle={setMessage}
+              setFocus={() => { }}
+            />
           </div>
-        }
-      </div>
-      <div className="send-btn" onClick={() => { if (check()) tipDonuts() }}>
-        <ContainerBtn
-          text={user ? contexts.SEND : contexts.NEXT}
-          disabled={!check()}
-          styleType="fill"
-        />
-      </div>
+          {!user &&
+            <div className="donut-package">
+              <span className="package-title">{contexts.PICK_DONUT_PACKAGE}</span>
+              <div className="donuts-plan">
+                {creatoList.map((creato, i) => (
+                  <div className="donuts" key={i} onClick={() => {
+                    setTip(creato.donutCount);
+                    setSelectedIndex(i);
+                  }}>
+                    <Creato
+                      discountedPercent={creato.discountedPercent}
+                      donutCount={creato.donutCount}
+                      property={creato.property}
+                      selected={selectedIndex === i ? true : false}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          }
+          <div className="send-btn" onClick={() => { if (check()) tipDonuts() }}>
+            <ContainerBtn
+              text={user ? contexts.SEND : contexts.NEXT}
+              disabled={!check()}
+              styleType="fill"
+            />
+          </div>
+        </div>
+      }
     </div>
   )
 }

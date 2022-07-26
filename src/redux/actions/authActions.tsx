@@ -144,5 +144,16 @@ export const authAction = {
                     dispatch({ type: SET_USERS, payload: users });
                 }
             }).catch(err => console.log(err));
+    },
+
+    getUserFromUrl: (url: any) => async (dispatch: Dispatch<any>) => {
+        dispatch({ type: SET_LOADING_TRUE });
+        dispatch({ type: SET_USERS, payload: [] });
+        api.getUserFromUrl({ url: url })
+            .then((result) => {
+                const { data } = result;
+                dispatch({ type: SET_LOADING_FALSE });
+                if (data.success) dispatch({ type: SET_USERS, payload: data.user });
+            }).catch(err => console.log(err));
     }
 }

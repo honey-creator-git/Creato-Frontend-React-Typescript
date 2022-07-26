@@ -21,6 +21,7 @@ export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar
 export const saveProfileInfo = (data: any) => API.post('/api/auth/profile/save', data);
 export const getExistName = (data: any) => API.post('/api/auth/exist_name', data);
 export const getExistURL = (data: any) => API.post('/api/auth/exist_url', data);
+export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', data);
 
 export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);
 //Dareme API

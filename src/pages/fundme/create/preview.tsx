@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { daremeAction } from "../../../redux/actions/daremeActions";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import VideoCardMobile from "../../../components/dareme/videoCardMobile";

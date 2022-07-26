@@ -30,7 +30,7 @@ const AdminTransactions = () => {
 
     const calcColor = (type: any, description: any) => {
         if (type === 0) {
-            if (description === 1 || description === 4 || description === 5) return true;
+            if (description === 1 || description === 4 || description === 5 || description === 8) return true;
             else return false;
         } else if (type === 1) {
             if (description === 2 || description === 4 || description === 7) return true;
