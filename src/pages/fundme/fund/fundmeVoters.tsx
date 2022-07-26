@@ -16,9 +16,9 @@ const FundmeVoters = () => {
     const { fundmeId } = useParams();
     const contexts = useContext(LanguageContext);
     const fundmeState = useSelector((state: any) => state.fundme);
-    
+
     const votes = fundmeState.votes;
-    
+
     const [resultVotes, setResultVotes] = useState<Array<any>>([]);
 
 
@@ -26,19 +26,19 @@ const FundmeVoters = () => {
         window.scrollTo(0, 0);
         dispatch(fundmeAction.getFundmeVoters(fundmeId));
     }, [location]);
-    
+
     useEffect(() => {
-        if(votes && votes.length > 0) {
-            setResultVotes(votes)
+        if (votes && votes.length > 0) {
+            setResultVotes(votes.sort((first: any, second: any) => { return first.donuts < second.donuts ? 1 : first.donuts > second.donuts ? -1 : 0 }))
         }
     }, [votes]);
+
     return (
         <>
             <div className="title-header">
                 <Title
                     title={"Voters"}
                     back={() => { dispatch(fundmeAction.checkDetailsAndResults(fundmeId, navigate)) }}
-                    // back={() => { navigate(`/fundme/details/${fundmeId}`) }}
                 />
             </div>
             <div className="dareme-voters">

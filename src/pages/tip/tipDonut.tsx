@@ -12,8 +12,10 @@ import PaymentForm from "../../components/stripe/paymentForm";
 import { LanguageContext } from "../../routes/authRoute";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
-import "../../assets/styles/tip/tipDonutStyle.scss";
 import { authAction } from "../../redux/actions/authActions";
+import CONSTANT from "../../constants/constant";
+import TippingGif from '../../assets/img/tipping-gif.gif';
+import "../../assets/styles/tip/tipDonutStyle.scss";
 
 const creatoList = [
   {
@@ -70,6 +72,7 @@ const TipDonut = () => {
   const [openTipSuccess, setOpenTipSuccess] = useState(false);
   const [openDonutsPlan, setOpenDonutsPlan] = useState(false);
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
+  const [tippingGif, setTippingGif] = useState(false);
   const location = useLocation();
   const user = userState.user;
 
@@ -95,6 +98,7 @@ const TipDonut = () => {
     if (dlgState.type === "tipSuccess" && dlgState.state === true) {
       setOpenTipSuccess(true);
       setOpenPaymentDlg(false);
+      setTippingGif(true);
     }
   }, [dlgState]);
 
@@ -103,6 +107,7 @@ const TipDonut = () => {
     dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
     dispatch(authAction.getUserFromUrl(creatorLink));
     setOpenTipSuccess(false);
+    setTippingGif(false);
   }, [location]);
 
   return (
@@ -119,6 +124,11 @@ const TipDonut = () => {
               setOpenPaymentDlg(true);
             }}
           />
+          {tippingGif &&
+            <div className="tipping-gif">
+              <img src={TippingGif} />
+            </div>
+          }
           <PaymentForm
             tipData={{ nickname: nickname, message: message, user: authuser?._id }}
             display={openPaymentDlg}
@@ -179,7 +189,7 @@ const TipDonut = () => {
             <Avatar
               size="web"
               username={authuser?.name}
-              avatar={authuser?.avatar}
+              avatar={authuser?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${authuser?.avatar}` : authuser?.avatar}
             />
           </div>
           {!user &&
