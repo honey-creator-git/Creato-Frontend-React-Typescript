@@ -95,6 +95,10 @@ const TipDonut = () => {
   }
 
   useEffect(() => {
+    if(tippingGif) setTimeout(() => { setTippingGif(false) }, 8500);
+  }, [tippingGif]);
+
+  useEffect(() => {
     if (dlgState.type === "tipSuccess" && dlgState.state === true) {
       setOpenTipSuccess(true);
       setOpenPaymentDlg(false);

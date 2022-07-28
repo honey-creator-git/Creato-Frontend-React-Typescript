@@ -55,8 +55,9 @@ const ProfileWallet = () => {
     if (!res) setMoreInfo(res);
   }, [res]);
 
-  const calcColor = (description: any) => {
+  const calcColor = (description: any, to: any) => {
     if (description === 2 || description === 3 || description === 4 || description === 7) return true;
+    if (description === 9 && user.id === to) return true;
     else return false;
   }
 
@@ -181,7 +182,7 @@ const ProfileWallet = () => {
                 }}>
                   {contexts.WALLET_LETTER.FIRST_DAYS}
                 </div>
-                <div className="list" onClick={() => { 
+                <div className="list" onClick={() => {
                   setMoreInfo(false);
                   dispatch({ type: SET_TRANSACTIONS, payload: [] });
                   dispatch(transactionActions.getUserTransactionsByDays(60));
@@ -189,7 +190,7 @@ const ProfileWallet = () => {
                 }}>
                   {contexts.WALLET_LETTER.SECOND_DAYS}
                 </div>
-                <div className="list" onClick={() => { 
+                <div className="list" onClick={() => {
                   setMoreInfo(false);
                   dispatch({ type: SET_TRANSACTIONS, payload: [] });
                   dispatch(transactionActions.getUserTransactionsByDays(0));
@@ -219,8 +220,8 @@ const ProfileWallet = () => {
                 transactions.map((transaction: any, index: any) => (
                   <div className="row" key={index}>
                     <div className="col1">
-                      <CreatoCoinIcon color={calcColor(transaction?.description) ? "#27AE60" : "#AE0000"} />
-                      <div style={calcColor(transaction?.description) ? { color: "#27AE60" } : { color: "#AE0000" }} >{transaction.description === 3 ? 0 : (transaction.donuts).toLocaleString()}</div>
+                      <CreatoCoinIcon color={calcColor(transaction?.description, transaction?.user1) ? "#27AE60" : "#AE0000"} />
+                      <div style={calcColor(transaction?.description, transaction?.user1) ? { color: "#27AE60" } : { color: "#AE0000" }} >{transaction.description === 3 ? 0 : (transaction.donuts).toLocaleString()}</div>
                     </div>
                     <div className="col2">
                       <div>
@@ -230,6 +231,8 @@ const ProfileWallet = () => {
                         {transaction.description === 5 && "Vote as SuperFans"}
                         {transaction.description === 6 && "Dare Request"}
                         {transaction.description === 7 && "Donuts Refund"}
+                        {(transaction.description === 9 || transaction.description === 8) && "Tipping Donuts"}
+                        {transaction.description === 10 && "Unlock Exclusive Content"}
                       </div>
                     </div>
                     <div className="col3">

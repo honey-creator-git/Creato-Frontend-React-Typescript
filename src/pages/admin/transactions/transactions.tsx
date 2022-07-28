@@ -28,10 +28,11 @@ const AdminTransactions = () => {
         dispatch(transactionActions.getAdminTransactions(type));
     }
 
-    const calcColor = (type: any, description: any) => {
+    const calcColor = (type: any, description: any, receiver: any) => {
         if (type === 0) {
             if (description === 1 || description === 4 || description === 5 || description === 8) return true;
-            else return false;
+            if (description === 10 && receiver === "ADMIN") return true;
+            return false;
         } else if (type === 1) {
             if (description === 2 || description === 4 || description === 7) return true;
             else return false;
@@ -234,8 +235,8 @@ const AdminTransactions = () => {
                                             {transaction.description === 5 && "Vote as SuperFans"}
                                             {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "")}
                                             {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ""}</strong></>}
-                                            {transaction.description === 8 && <>Tipping Donuts</>}
-                                            {transaction.description === 9 && <>Tipping Donuts</>}
+                                            {(transaction.description === 8 || transaction.description === 9) && <>Tipping Donuts</>}
+                                            {transaction.description === 10 && <>Unlock Exclusive Content</>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
@@ -248,7 +249,7 @@ const AdminTransactions = () => {
                                         <td>
                                             {transaction.to === "ADMIN" && "Admin"}
                                             {transaction.to === "USER" &&
-                                                <>{transaction.description === 9 ?
+                                                <>{(transaction.description === 9 || transaction.description == 10) ?
                                                     transaction.user1 ? transaction.user1.name : ''
                                                     : transaction.user ? transaction.user.name : ''
                                                 }</>
@@ -258,8 +259,8 @@ const AdminTransactions = () => {
                                         </td>
                                         <td>
                                             <div className="donuts-type">
-                                                <CreatoCoinIcon color={calcColor(type, transaction.description) ? "#27AE60" : "#AE0000"} />
-                                                <span style={calcColor(type, transaction.description) ? { color: '#27AE60' } : { color: '#AE0000' }}>
+                                                <CreatoCoinIcon color={calcColor(type, transaction.description, transaction.to) ? "#27AE60" : "#AE0000"} />
+                                                <span style={calcColor(type, transaction.description, transaction.to) ? { color: '#27AE60' } : { color: '#AE0000' }}>
                                                     {(transaction.donuts || 0).toLocaleString()}
                                                 </span>
                                             </div>

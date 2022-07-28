@@ -161,8 +161,8 @@ const FanwallDetails = () => {
                   text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
                   handleClick: () => {
                     if (user.wallet >= 500) {
-                      dispatch(fanwallAction.unlockFanwall(fanwallId));
                       setIsUnLock(false);
+                      dispatch(fanwallAction.unlockFanwall(fanwallId));
                     } else {
                       setIsUnLock(false);
                       setIsTopUp(true);

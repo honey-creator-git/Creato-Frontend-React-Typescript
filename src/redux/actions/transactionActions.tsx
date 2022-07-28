@@ -9,6 +9,20 @@ import {
     SET_TRANSACTIONS
 } from "../types";
 
+//Transaction Types
+/*
+Description 1: Added Donuts
+Description 2: Purchase Donuts
+Description 3: Vote Donuts Free
+Description 4: Earnings From DareMe/FudnMe
+Description 5: Vote as SupeFan
+Description 6: Dare Request
+Description 7: Refund of Donuts
+Description 8: Tipping Donuts User - Admin
+Description 9: Tipping Donuts User - User
+Description 10: Unlock Exclusive Content
+*/
+
 export const transactionActions = {
     getAdminTransactions: (type: any) => async (dispatch: Dispatch<any>) => {
         dispatch({ type: SET_LOADING_TRUE });

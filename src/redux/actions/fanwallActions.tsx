@@ -107,11 +107,11 @@ export const fanwallAction = {
         api.unlockFanwall({ fanwallId: fanwallId })
             .then((result) => {
                 const { data } = result;
+                dispatch({ type: SET_LOADING_FALSE });
                 if (data.success) {
                     dispatch({ type: SET_FANWALL, payload: { fanwall: data.fanwall, itemType: data.fanwall.fundme ? 'fundme' : 'dareme' } });
                     dispatch({ type: SET_USER, payload: data.user });
                 }
-                dispatch({ type: SET_LOADING_FALSE });
             }).catch(err => console.log(err));
     },
 

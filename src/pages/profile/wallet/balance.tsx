@@ -10,14 +10,15 @@ const Balance = () => {
   const location = useLocation();
   const user = useSelector((state: any) => state.auth.user);
   const transactions = useSelector((state: any) => state.transaction.transactions);
-  const calcColor = (description: any) => {
+  const calcColor = (description: any, to: any) => {
     if (description === 2 || description === 3 || description === 4 || description === 7) return true;
+    if (description === 9 && user.id === to) return true;
     else return false;
   }
-  
+
   let total = 0;
-  transactions.forEach((transaction: any) => { 
-    if(calcColor(transaction.description)) total += transaction.donuts ;
+  transactions.forEach((transaction: any) => {
+    if (calcColor(transaction.description, transaction.user1)) total += transaction.donuts;
     else total -= transaction.donuts;
   });
 
@@ -44,8 +45,8 @@ const Balance = () => {
               transactions.map((transaction: any, index: any) => (
                 <div className="row" key={index}>
                   <div className="col1">
-                    <CreatoCoinIcon color={calcColor(transaction?.description) ? "#27AE60" : "#AE0000"} />
-                    <div style={calcColor(transaction?.description) ? { color: "#27AE60" } : { color: "#AE0000" }} >{transaction.description === 3 ? 0 : (transaction.donuts).toLocaleString()}</div>
+                    <CreatoCoinIcon color={calcColor(transaction?.description, transaction?.user1) ? "#27AE60" : "#AE0000"} />
+                    <div style={calcColor(transaction?.description, transaction?.user1) ? { color: "#27AE60" } : { color: "#AE0000" }} >{transaction.description === 3 ? 0 : (transaction.donuts).toLocaleString()}</div>
                   </div>
                   <div className="col2">
                     <div>
@@ -55,6 +56,8 @@ const Balance = () => {
                       {transaction.description === 5 && "Vote as SuperFans"}
                       {transaction.description === 6 && "Dare Request"}
                       {transaction.description === 7 && "Donuts Refund"}
+                      {(transaction.description === 9 || transaction.description === 8) && "Tipping Donuts"}
+                      {transaction.description === 10 && "Unlock Exclusive Content"}
                     </div>
                   </div>
                   <div className="col3">
