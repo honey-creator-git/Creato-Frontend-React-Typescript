@@ -25,7 +25,6 @@ const SideMenu = (props: any) => {
   const userState = useSelector((state: any) => state.auth);
   const user = userState.user;
   const dareme = daremeState.dareme;
-  const { newNotification } = useSelector((state: any) => state.notification)
 
   const isDaremeData = () => {
     if ((dareme.teaser === null && daremeState.teaserFile === null)
@@ -111,8 +110,8 @@ const SideMenu = (props: any) => {
         </div>
         <div className="list" onClick={handleNotifications} >
           <div className="icon" style={{ paddingLeft: '4px' }}>
-            <NotificationfillIcon color="black" />
-            {newNotification && <NotificationwithCircleIcon color="black" />}
+            {user?.new_notification ? <NotificationwithCircleIcon color="black" />
+              : <NotificationfillIcon color="black" />}
           </div>
           <p>{contexts.SIDE_MENU.NOTIFICATION}</p>
         </div>

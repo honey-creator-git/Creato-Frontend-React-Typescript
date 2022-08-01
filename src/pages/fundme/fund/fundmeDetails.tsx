@@ -99,7 +99,7 @@ const FundmeDetails = () => {
           ownerId={fundme?.owner?._id}
         />
       </div>
-      {fundme.owner &&
+      {(fundme.owner && fundme.owner.avatar) &&
         <>
           <Dialog
             display={isFree}

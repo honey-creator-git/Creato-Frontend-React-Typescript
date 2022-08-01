@@ -1,0 +1,88 @@
+.notification-new-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+
+    .navigation-button {
+        position: absolute;
+        display: flex;
+    }
+
+    .add-new-button {
+        position: absolute;
+        right: 10px;
+    }
+
+    .new-header {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #EFA058;
+        margin: 10px;
+    }
+
+    .new-body {
+        max-width: 550px;
+        margin: 50px auto;
+
+        $primary-color: #efa058;
+
+        .select-option-wrapper {
+            margin: 10px;
+            width: 350px;
+            display: flex;
+            justify-content: space-between;
+
+            .input {
+                .label {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 20px;
+                    letter-spacing: 0.05em;
+                    color: #000000;
+                }
+
+                .input-field {
+                    &:hover {
+                        border-color: $primary-color;
+                    }
+
+                    &:hover input::placeholder {
+                        color: $primary-color;
+                    }
+
+                    &:focus-within {
+                        border-color: #54504e;
+                    }
+
+                    width: 100%;
+                    height: fit-content;
+                    background: #ffffff;
+                    border: 1px solid #54504e;
+                    box-sizing: border-box;
+                    border-radius: 15px;
+                    padding: 3px 16px;
+
+                    select {
+                        width: 300px;
+                        border: 0px;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 20px;
+                        color: #54504e;
+                        height: 40px;
+                        padding: 0;
+                    }
+
+                    select:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}

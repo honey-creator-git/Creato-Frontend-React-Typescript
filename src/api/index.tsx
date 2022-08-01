@@ -60,11 +60,6 @@ export const saveFanwall = (data: any) => API.post('/api/fanwall/save', data);
 export const buyDonuts = (data: any) => API.post('/api/payment/buy', data);
 export const getStripeID = () => API.get('/api/payment/stripeId');
 
-//notification api
-export const getNotifications = () => API.get('api/notification/get_notifications')
-export const readNotification = (data: any) => API.post('/api/notification/read_notification', data);
-export const subscribeUser = (id: any) => API.post(`/api/notification/subscribe_user/${id}`);
-
 //ADMIN API
 export const getUsersList = (data: any) => API.post('/api/auth/users', data);
 export const getDareMeList = (data: any) => API.post('/api/dareme/daremes', data);
@@ -85,6 +80,18 @@ export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
 export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);
 export const deleteTip = (tipId: any) => API.delete(`/api/tip/${tipId}`);
 export const getActiveTipUsers = () => API.get('/api/tip/users/tipactive');
+
+///Notification API////
+export const getNotificationSetting = () => API.get('/api/notification/setting');
+export const addNotificationSetting = (data: any) => API.post('/api/notification/setting', data);
+export const getNotificationType = () => API.get('/api/notification/type');
+export const addNotificationType = (data: any) => API.post('/api/notification/type', data);
+export const setNotificationAuto = (data: any) => API.put('/api/notification/type', data);
+export const subscribeUser = (id: any) => API.post(`/api/notification/subscribe_user/${id}`);
+export const setNotification = () => API.get('/api/notification/set');
+export const getNotifications = () => API.get('/api/notification');
+export const readNotification = (data: any) => API.post('/api/notification/read', data);
+export const getNotificationHistory = () => API.get('/api/notification/history');
 
 export const getFundMeList = (data: any) => API.post('/api/fundme/fundmes', data);
 export const setFundMeShow = (data: any, fundmeId: any) => API.post(`/api/fundme/fundmes/${fundmeId}`, data);

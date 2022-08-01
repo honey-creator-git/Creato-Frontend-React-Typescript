@@ -69,6 +69,12 @@ import TipDonut from '../pages/tip/tipDonut';
 import TipMethod from '../pages/tip/tipMethod';
 import TipEditor from '../pages/admin/tip/tipEditor';
 
+////// ADMIN NOTIFICATIONS /////////
+import Notifications from '../pages/admin/notification/notifications';
+import NotificationSetting from '../pages/admin/notification/notificationSetting';
+import NotificationNew from '../pages/admin/notification/notificationNew';
+import NotificationHistory from '../pages/admin/notification/notificationHistory';
+
 const AppRoutes = () => {
     return (
         <Routes>
@@ -137,6 +143,10 @@ const AppRoutes = () => {
             <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
             <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
             <Route path="admin/tipping/profile/:url/:id/edit" element={<AuthRoute child={<TipEditor />} routeType="private" />} />
+            <Route path="admin/notifications" element={<AuthRoute child={<Notifications />} routeType="private" />} />
+            <Route path="admin/notifications/new" element={<AuthRoute child={<NotificationNew />} routeType="private" />} />
+            <Route path="admin/notifications/setting" element={<AuthRoute child={<NotificationSetting />} routeType="private" />} />
+            <Route path="admin/notifications/history" element={<AuthRoute child={<NotificationHistory />} routeType="private" />} />
             <Route path="/not-founder-cover" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
 

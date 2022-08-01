@@ -39,7 +39,6 @@ const Preview = () => {
     setOpenPublishDlg(false);
     setIsCopied(false);
     SaveDareInfo();
-    dispatch(notificationAction.getNotification());
   };
 
   useEffect(() => {

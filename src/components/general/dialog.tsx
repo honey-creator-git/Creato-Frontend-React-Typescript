@@ -102,7 +102,7 @@ const Dialog = (props: any) => {
                 {subcontext &&
                     <>
                         <div className="dialog-subcontext-top-header">
-                            <span style={{ whiteSpace: 'pre-line' }}>🎉 You’ve earned 30 Donuts!</span>
+                            <span style={{ whiteSpace: 'pre-line' }}>🎉 You’ve earned 10 Donuts!</span>
                         </div>
                         <div className="dialog-subcontext-header">
                             <span style={{ whiteSpace: 'pre-line' }}>You can now:</span>

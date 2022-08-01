@@ -59,6 +59,7 @@ const Input = (props: any) => {
           {
             type === "textarea" ?
               <textarea
+              style={{ width: width ? `${width - 32}px` : '288px' }}
                 placeholder={placeholder}
                 onChange={onChange}
                 value={title}

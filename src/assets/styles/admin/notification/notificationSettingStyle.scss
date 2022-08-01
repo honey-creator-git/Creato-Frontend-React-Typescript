@@ -1,0 +1,60 @@
+.notification-setting-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+
+    .navigation-button {
+        position: absolute;
+        display: flex;
+    }
+
+    .add-new-button {
+        position: absolute;
+        right: 10px;
+    }
+
+    .setting-header {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #EFA058;
+        margin: 10px;
+    }
+
+    .setting-body {
+        max-width: 880px;
+        margin: 50px auto;
+
+        .setting-section {
+            margin: 15px 0px;
+
+            .title {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 28px;
+                color: #000000;
+                margin-bottom: 10px;
+            }
+
+            .categories {
+                display: flex;
+                flex-wrap: wrap;
+
+                .category {
+                    margin: 2px;
+                }
+
+                .add-button {
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}

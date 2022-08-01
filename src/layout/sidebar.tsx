@@ -95,7 +95,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/admin/notifications" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <NotificationfillIcon className="icon-svg" color={activePath === '/admin/notifications' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/notifications" ? "#EFA058" : "#A6A29F"} />
+            <NotificationfillIcon className="icon-svg" color={location.pathname.indexOf('/admin/notifications') !== -1 ? "#EFA058" : hoverPath === "/admin/notifications" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>Notifications</span>

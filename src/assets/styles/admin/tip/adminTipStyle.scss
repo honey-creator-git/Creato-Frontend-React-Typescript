@@ -1,6 +1,6 @@
 .admin-tip-wrapper {
-    box-sizing: border-box;
     position: relative;
+    box-sizing: border-box;
     padding: 10px;
     height: 100%;
 
@@ -19,10 +19,9 @@
     }
 
     .change-btns {
-        top: 80px;
-        position: fixed;
+        top: 10px;
+        position: absolute;
         display: flex;
-
     }
 
     table,
@@ -34,6 +33,7 @@
     }
 
     .tip-data {
+        margin-top: 10px;
         display: flex;
         justify-content: center;
 

@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import decode from "jwt-decode";
 import { authAction } from "../redux/actions/authActions";
+import { notificationAction } from '../redux/actions/notificationAction';
 import { EN, CH } from "../constants/language";
 import { SET_USER } from '../redux/types';
 import Layout from '../layout/layout';
 import Layout1 from "../layout/layout1";
 import socketIOClient from "socket.io-client";
-import CONSTANT from '../constants/constant'
+import CONSTANT from '../constants/constant';
 
 interface routeProps {
     child: any;
@@ -39,10 +40,7 @@ const AuthRoute = (props: routeProps) => {
             setContexts(lang);
             socket.emit('connected', user.email, user.role);
             socket.on("wallet_change", (donuts: any) => walletChange(donuts));
-            // socket.on("create_notification", () => {
-            //     dispatch(notificationAction.getNotification())
-            // });
-            // dispatch(notificationAction.getNotification());
+            socket.on("create_notification", () => dispatch(notificationAction.setNotification()));
         }
     }, [user]);
 

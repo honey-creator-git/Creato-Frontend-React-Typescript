@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import decode from "jwt-decode";
@@ -7,7 +7,6 @@ import Header from "./header";
 import Loading from "../components/general/loading";
 import { authAction } from "../redux/actions/authActions";
 import "../assets/styles/layout/layoutStyle.scss";
-import { useEffect, useState, useContext } from "react";
 
 const Layout = (props: any) => {
   const dispatch = useDispatch();

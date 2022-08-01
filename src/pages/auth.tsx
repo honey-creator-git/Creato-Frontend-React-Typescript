@@ -139,7 +139,7 @@ const Auth = (props: any) => {
             <h4>Sign up to enjoy: </h4>
             <br />
             <ul>
-              <li>✅ 30 donuts for free (~$3USD)</li>
+              <li>✅ 10 donuts for free (~$3USD)</li>
               <li>✅ Support & create with Creators</li>
               <li>✅ A private space for fans & creators</li>
             </ul>
