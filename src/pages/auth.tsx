@@ -166,7 +166,7 @@ const Auth = (props: any) => {
             onFailure={responseGoogleError}
             cookiePolicy={"single_host_origin"}
           />
-          <FacebookLogin
+          {/* <FacebookLogin
             appId={CONSTANT.FACEBOOK_APP_ID}
             autoLoad={false}
             fields="name,email,picture"
@@ -177,7 +177,7 @@ const Auth = (props: any) => {
                 <FacebookIcon color="#EFA058" />
               </div>
             )}
-          />
+          /> */}
           {/* <div className="icon">
             <AppleIcon color="#EFA058" />
           </div> */}

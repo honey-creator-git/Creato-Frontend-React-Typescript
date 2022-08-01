@@ -47,7 +47,7 @@ const FundMeDetails = () => {
             } else alert("The file size is over 30M");
         }
     };
-    
+
     const calc = (time: any) => {
         if (time > 1) return Math.ceil(time) + " days";
         if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
@@ -60,7 +60,7 @@ const FundMeDetails = () => {
         window.scrollTo(0, 0);
         dispatch(fundmeAction.getFundmeDetails(fundmeId));
     }, [location]);
-    
+
     return (
         <div className="admin-dareme-detail-wrapper" onClick={() => { setOpenCategoryMenu(false); }}>
             <Title title="FundMe Details"
@@ -159,7 +159,7 @@ const FundMeDetails = () => {
                         </div>
                     </div>
                     <div className="visible-icon" onClick={() => { dispatch(fundmeAction.setFundMeShow(!fundme.show, fundme._id, fundme)) }}>
-                        {fundme.show ? <HiddenIcon color="#EFA058" /> : <VisibleIcon color="#EFA058" /> }
+                        {fundme.show ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}
                     </div>
                     <div className="save-button" onClick={() => {
                         let title = fundmeState.title ? fundmeState.title : fundme.title;

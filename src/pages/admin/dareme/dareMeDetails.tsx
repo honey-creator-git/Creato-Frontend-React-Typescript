@@ -48,7 +48,7 @@ const DareMeDetails = () => {
             } else alert("The file size is over 30M");
         }
     };
-    
+
     const calc = (time: any) => {
         if (time > 1) return Math.ceil(time) + " days";
         if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
@@ -61,7 +61,7 @@ const DareMeDetails = () => {
         window.scrollTo(0, 0);
         dispatch(daremeAction.getDaremeDetails(daremeId));
     }, [location]);
-    
+
     return (
         <div className="admin-dareme-detail-wrapper" onClick={() => { setOpenCategoryMenu(false); }}>
             <Title title="DareMe Details"
@@ -187,7 +187,7 @@ const DareMeDetails = () => {
                         </div>
                     </div>
                     <div className="visible-icon" onClick={() => { dispatch(daremeAction.setDareMeShow(!dareme.show, dareme._id, dareme)) }}>
-                        {dareme.show ? <HiddenIcon color="#EFA058" /> : <VisibleIcon color="#EFA058" /> }
+                        {dareme.show ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}
                     </div>
                     <div className="save-button" onClick={() => {
                         let title = daremeState.title ? daremeState.title : dareme.title;

@@ -7,13 +7,10 @@ import {
   SET_LOADING_FALSE,
   SET_FANWALL,
   SET_FANWALL_INITIAL,
-  // SET_OPTION,
   SET_USERS,
   SET_USER,
-  // SET_FANWALLS,
   SET_FUNDME_DETAIL_INITIAL,
   SET_FUNDME_VOTES,
-  // SET_ADMIN_OPTIONS
 } from "../types";
 import * as api from "../../api";
 

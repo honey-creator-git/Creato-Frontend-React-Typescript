@@ -87,9 +87,7 @@ const SupportCreator = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log(option)
         dispatch(daremeAction.getOptionDetails(optionId, daremeId));
-
     }, [location, dispatch, optionId]);
 
     return (

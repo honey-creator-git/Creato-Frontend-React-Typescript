@@ -136,6 +136,7 @@ const Header = () => {
                 <CreatoCoinIcon color="black" />
                 <p>{user.wallet.toLocaleString()}</p>
                 <div className="avatar" onClick={showSideMenu}>
+                  {user.new_notification && <div className="red-dot"></div>}
                   <Avatar
                     size="small"
                     style="horizontal"

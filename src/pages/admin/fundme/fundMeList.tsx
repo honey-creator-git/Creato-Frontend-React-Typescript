@@ -22,7 +22,6 @@ const FundMeList = () => {
         if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
         if (time > 0) return "1 min";
         else return "Ended";    
-
     }
     
     useEffect(() => {   
@@ -48,7 +47,7 @@ const FundMeList = () => {
                             <th>Username</th>
                             <th>Owner Category</th>
                             <th>Donuts</th>
-                            <th style={{ paddingLeft: '18px' }}>DareMe Title</th>
+                            <th style={{ paddingLeft: '18px' }}>FundMe Title</th>
                             <th>Category</th>
                         </tr>
                     </thead>

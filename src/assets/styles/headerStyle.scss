@@ -91,6 +91,18 @@
           .avatar {
             position: relative;
             padding-left: 10px;
+
+            .red-dot {
+              z-index: 5;
+              position: absolute;
+              right: 2px;
+              top: 1px;
+              background-color: #D94E27;
+              border: #D94E27;
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+            }
           }
 
           .sideMeun {
