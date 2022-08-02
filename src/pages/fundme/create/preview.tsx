@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
@@ -12,24 +12,27 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, HotIcon, RewardIcon } from '../../../assets/svg';
-import { SET_TEASER_FILE1, SET_COVER_FILE1 } from "../../../redux/types";
+import { SET_TEASER_FILE1, SET_COVER_FILE1, SET_DIALOG_STATE } from "../../../redux/types";
+import CreateFundMeGif from '../../../assets/img/create_fundme.gif';
 import "../../../assets/styles/fundme/create/previewStyle.scss";
 
 const FundmePreview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const contexts = useContext(LanguageContext);
   const fundmeStore = useSelector((state: any) => state.fundme);
   const userState = useSelector((state: any) => state.auth);
+  const dlgState = useSelector((state: any) => state.load.dlgState);
   const fundState = fundmeStore.fundme;
   const [openPublishDlg, setOpenPublishDlg] = useState<boolean>(false);
   const [openCopyLink, setOpenCopyLink] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [createFundmeGif, setCreateFundmeGif] = useState(false);
   const user = userState.user;
 
   const SaveFundInfo = () => {
     dispatch(fundmeAction.publishFundme());
-    setOpenCopyLink(true);
   };
 
   const onPublish = () => {
@@ -38,7 +41,21 @@ const FundmePreview = () => {
     SaveFundInfo();
   };
 
-  useEffect(() => { window.scrollTo(0, 0) }, [])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } });
+  }, [location]);
+
+  useEffect(() => {
+    if (dlgState.type === 'create_fundme' && dlgState.state === true) {
+      setOpenCopyLink(true);
+      setCreateFundmeGif(true);
+    }
+  }, [dlgState]);
+
+  useEffect(() => {
+    if(createFundmeGif) setTimeout(() => { setCreateFundmeGif(false) }, 3000);
+  }, [createFundmeGif]);
 
   return (
     <>
@@ -96,6 +113,11 @@ const FundmePreview = () => {
         ownerName={user.name}
       />
       <div className="preview-wrapper">
+        {createFundmeGif &&
+          <div className="create-fundme-gif">
+            <img src={CreateFundMeGif} />
+          </div>
+        }
         <div className="preview-desktop-videoCardDesktop">
           <VideoCardDesktop
             url={fundState.teaser ? `${CONSTANT.SERVER_URL}/${fundState.teaser}` : ""}

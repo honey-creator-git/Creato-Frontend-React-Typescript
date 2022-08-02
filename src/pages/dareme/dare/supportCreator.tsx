@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { daremeAction } from "../../../redux/actions/daremeActions";
-import { SET_DAREME_INITIAL, SET_CURRENT_DAREME } from "../../../redux/types";
+import { SET_DAREME_INITIAL, SET_CURRENT_DAREME, SET_DIALOG_STATE } from "../../../redux/types";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import AvatarLink from "../../../components/dareme/avatarLink";
 import Title from "../../../components/general/title";
@@ -13,6 +13,8 @@ import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
 import { HotIcon } from "../../../assets/svg";
+import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
+import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
 import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss';
 
 const SupportCreator = () => {
@@ -22,6 +24,7 @@ const SupportCreator = () => {
     const dispatch = useDispatch();
     const daremeState = useSelector((state: any) => state.dareme);
     const userState = useSelector((state: any) => state.auth);
+    const dlgState = useSelector((state: any) => state.load.dlgState);
     const [isTopUp, setIsTopUp] = useState(false);
     const [isFree, setIsFree] = useState(false);
     const [isSuperFan, setIsSuperFan] = useState(false);
@@ -31,6 +34,8 @@ const SupportCreator = () => {
     const [isSignIn, setIsSignIn] = useState(false);
     const [type, setType] = useState(0);
     const [voters, setVoters] = useState(0);
+    const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false);
+    const [voteSuperfanGif, setVoteSuperfanGif] = useState(false);
     const option = daremeState.option;
     const dareme = daremeState.dareme;
     const user = userState.user;
@@ -63,15 +68,7 @@ const SupportCreator = () => {
         return true;
     }
 
-    useEffect(() => {
-        if (dareme && option)
-            for (let i = 0; i < dareme.options.length; i++)
-                if (dareme.options[i].option._id == option._id)
-                    setVoters(dareme.options[i].option.voters)
-    })
-
     const checkVoted = () => {
-
         if (dareme.options && user) {
             for (let i = 0; i < dareme.options.length; i++)
                 for (let j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
@@ -86,9 +83,35 @@ const SupportCreator = () => {
     }
 
     useEffect(() => {
+        if (dareme && option)
+            for (let i = 0; i < dareme.options.length; i++)
+                if (dareme.options[i].option._id == option._id)
+                    setVoters(dareme.options[i].option.voters)
+    })
+
+    useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(daremeAction.getOptionDetails(optionId, daremeId));
+        dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
     }, [location, dispatch, optionId]);
+
+    useEffect(() => {
+        if (dlgState.type === 'vote_non_superfan' && dlgState.state === true) {
+            setIsCopyLink(true)
+            setVoteNonSuperfanGif(true)
+        } else if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
+            setIsCopyLink(true)
+            setVoteSuperfanGif(true)
+        }
+    }, [dlgState]);
+
+    useEffect(() => {
+        if (voteNonSuperfanGif) setTimeout(() => { setVoteNonSuperfanGif(false) }, 4000);
+    }, [voteNonSuperfanGif]);
+
+    useEffect(() => {
+        if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500);
+    }, [voteSuperfanGif]);
 
     return (
         <>
@@ -145,7 +168,6 @@ const SupportCreator = () => {
                                 handleClick: () => {
                                     dispatch(daremeAction.supportCreator(daremeId, optionId, 1, navigate));
                                     setIsFree(false);
-                                    setIsCopyLink(true);
                                     setIsCopied(false);
                                 }
                             }
@@ -165,9 +187,8 @@ const SupportCreator = () => {
                             {
                                 text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
                                 handleClick: () => {
-                                    setIsSuperFan(false);
                                     dispatch(daremeAction.supportCreator(daremeId, optionId, 50, navigate));
-                                    setIsCopyLink(true);
+                                    setIsSuperFan(false);
                                     setIsCopied(false);
                                 }
                             }
@@ -180,8 +201,18 @@ const SupportCreator = () => {
                             dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
                             user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
                         ] : []}
-                        exit={() => { setIsCopyLink(false) }}
-                        wrapExit={() => { setIsCopyLink(false) }}
+                        exit={() => { 
+                            setIsCopyLink(false); 
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } }) 
+                            setVoteNonSuperfanGif(false);
+                            setVoteSuperfanGif(false);    
+                        }}
+                        wrapExit={() => { 
+                            setIsCopyLink(false); 
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } }) 
+                            setVoteNonSuperfanGif(false);
+                            setVoteSuperfanGif(false);
+                        }}
                         context={contexts.DIALOG.BODY_LETTER.HAVE_DARED + dareme.owner.name + contexts.DIALOG.BODY_LETTER.ON_PART + dareme.title}
                         buttons={[
                             {
@@ -212,6 +243,16 @@ const SupportCreator = () => {
                         ]}
                     />
                     <div className="dareme-support">
+                        {voteNonSuperfanGif &&
+                            <div className="vote-gif">
+                                <img src={VoteNonSuperfanGif} />
+                            </div>
+                        }
+                        {voteSuperfanGif &&
+                            <div className="vote-gif">
+                                <img src={VoteSuperfanGif} />
+                            </div>
+                        }
                         <div className="dareme-support-videoCardDesktop">
                             <VideoCardDesktop
                                 url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}

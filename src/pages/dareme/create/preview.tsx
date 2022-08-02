@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { daremeAction } from "../../../redux/actions/daremeActions";
-import { notificationAction } from "../../../redux/actions/notificationAction"
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import VideoCardMobile from "../../../components/dareme/videoCardMobile";
 import AvatarLink from "../../../components/dareme/avatarLink";
@@ -14,7 +13,8 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon } from '../../../assets/svg';
-import { SET_TEASER_FILE, SET_COVER_FILE } from "../../../redux/types";
+import { SET_TEASER_FILE, SET_COVER_FILE, SET_DIALOG_STATE } from "../../../redux/types";
+import CreateDaremeGif from '../../../assets/img/create_dareme.gif';
 import "../../../assets/styles/dareme/create/previewStyle.scss";
 
 const Preview = () => {
@@ -23,16 +23,17 @@ const Preview = () => {
   const contexts = useContext(LanguageContext);
   const daremeStore = useSelector((state: any) => state.dareme);
   const userState = useSelector((state: any) => state.auth);
+  const dlgState = useSelector((state: any) => state.load.dlgState);
   const dareState = daremeStore.dareme;
   const [openPublishDlg, setOpenPublishDlg] = useState<boolean>(false);
   const [openCopyLink, setOpenCopyLink] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [createDaremeGif, setCreateDaremeGif] = useState(false);
   const user = userState.user;
   const [options, setOptions] = useState<Array<any>>([]);
 
   const SaveDareInfo = () => {
     dispatch(daremeAction.publishDareme());
-    setOpenCopyLink(true);
   };
 
   const onPublish = () => {
@@ -43,7 +44,19 @@ const Preview = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } });
   }, []);
+
+  useEffect(() => {
+    if (dlgState.type === 'create_dareme' && dlgState.state === true) {
+      setOpenCopyLink(true);
+      setCreateDaremeGif(true);
+    }
+  }, [dlgState]);
+
+  useEffect(() => {
+    if (createDaremeGif) setTimeout(() => { setCreateDaremeGif(false) }, 5500);
+  }, [createDaremeGif]);
 
   useEffect(() => {
     const tempOptions = [
@@ -120,6 +133,11 @@ const Preview = () => {
         ownerName={user.name}
       />
       <div className="preview-wrapper">
+        {createDaremeGif &&
+          <div className="create-dareme-gif">
+            <img src={CreateDaremeGif} />
+          </div>
+        }
         <div className="preview-desktop-videoCardDesktop">
           <VideoCardDesktop
             url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}

@@ -22,7 +22,7 @@ export const LanguageContext = createContext<any>(null);
 const AuthRoute = (props: routeProps) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [contexts, setContexts] = useState(EN);
+    const [contexts, setContexts] = useState(CH);
     const authState = useSelector((state: any) => state.auth);
     const user = authState.user;
     const language = authState.lang;

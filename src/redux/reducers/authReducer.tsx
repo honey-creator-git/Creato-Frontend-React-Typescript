@@ -7,7 +7,7 @@ const INITIAL_STATE: any = {
     urlExist: false,
     stripeID: null,
     cardNum: null,
-    lang: 'EN',
+    lang: 'CH',
     profileData: {
         category: [],
         avatarFile: null,

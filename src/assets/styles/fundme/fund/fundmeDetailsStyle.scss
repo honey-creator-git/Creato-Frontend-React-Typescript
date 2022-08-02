@@ -1,6 +1,16 @@
 .fundme-details {
   box-sizing: border-box;
   display: flex;
+  position: relative;
+
+  .vote-gif {
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    position: absolute;
+    pointer-events: none;
+  }
 
   .fundme-details-information {
     width: 370px;

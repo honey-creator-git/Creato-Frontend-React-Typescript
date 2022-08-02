@@ -40,7 +40,7 @@ const DareCreator = () => {
     const dareCreator = () => {
         if (amount !== "" && optionTitle !== "") {
             if (Number(amount) > user.wallet) setOpenTopup(true);
-            else if (Number(amount) < 50) alert("You need at least 50 donuts.");
+            else if (Number(amount) < 10) alert("You need at least 10 donuts.");
             else setOpenDare(true);
         }
     }

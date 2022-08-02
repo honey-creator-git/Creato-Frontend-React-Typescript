@@ -14,7 +14,9 @@ import Button from "../../../components/general/button";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, RewardIcon, HotIcon } from "../../../assets/svg";
-import { SET_CURRENT_FUNDME, SET_PREVIOUS_ROUTE } from "../../../redux/types";
+import { SET_CURRENT_FUNDME, SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../../redux/types";
+import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
+import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
 import "../../../assets/styles/fundme/fund/fundmeDetailsStyle.scss";
 
 const FundmeDetails = () => {
@@ -26,6 +28,7 @@ const FundmeDetails = () => {
   const fundmeState = useSelector((state: any) => state.fundme);
   const loadState = useSelector((state: any) => state.load);
   const userState = useSelector((state: any) => state.auth);
+  const dlgState = useSelector((state: any) => state.load.dlgState);
   const fundme = fundmeState.fundme;
   const [isSignIn, setIsSignIn] = useState(false);
   const [isCopyLink, setIsCopyLink] = useState(false);
@@ -37,17 +40,20 @@ const FundmeDetails = () => {
   const [isFundCopyLink, setIsFundCopyLink] = useState(false);
   const [type, setType] = useState(0);
   const [isOneFree, setIsOneFree] = useState(false);
+  const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false);
+  const [voteSuperfanGif, setVoteSuperfanGif] = useState(false);
   const user = userState.user;
   const interval = fundme.goal ? (Number(fundme.goal) / 20).toFixed(1) : 0;
   const count = fundme.goal ? Number(Math.floor(Number(fundme.wallet) / Number(interval))) : 0;
   const width = fundme.wallet <= interval ? Math.floor(Number(interval) / Number(fundme.goal) * 330) : Math.floor(Number(interval) * count / Number(fundme.goal) * 330);
 
   const calcTime = (time: any) => {
-    if (time > 1) return Math.ceil(time) + " days";
-    if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
-    if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
-    if (time > 0) return "1 min";
-    else return "Finished";
+    if (fundme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
+    if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
+    if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
+    if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
+    if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
+    else if (fundme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
   }
 
   const fund = (donuts: any) => {
@@ -77,6 +83,7 @@ const FundmeDetails = () => {
     window.scrollTo(0, 0);
     dispatch(fundmeAction.getFundmeDetails(fundmeId));
     dispatch({ type: SET_CURRENT_FUNDME, payload: null });
+    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
   }, [location]);
 
   const checkCanFree = () => {
@@ -89,11 +96,29 @@ const FundmeDetails = () => {
     return true;
   }
 
+  useEffect(() => {
+    if (dlgState.type === 'vote_non_superfan' && dlgState.state === true) {
+      setIsFundCopyLink(true);
+      setVoteNonSuperfanGif(true)
+    } else if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
+      setIsFundCopyLink(true);
+      setVoteSuperfanGif(true)
+    }
+  }, [dlgState]);
+
+  useEffect(() => {
+    if (voteNonSuperfanGif) setTimeout(() => { setVoteNonSuperfanGif(false) }, 4000);
+  }, [voteNonSuperfanGif]);
+
+  useEffect(() => {
+    if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500);
+  }, [voteSuperfanGif]);
+
   return (
     <>
       <div className="title-header">
         <Title
-          title={"FundMe Details"}
+          title={contexts.FUNDME_LETTER.FUNDME_DETAIL}
           back={() => { navigate(loadState.prevRoute); }}
           voters={() => { navigate(`/fundme/${fundmeId}/voters`) }}
           ownerId={fundme?.owner?._id}
@@ -113,7 +138,6 @@ const FundmeDetails = () => {
                 handleClick: () => {
                   setIsFree(false);
                   dispatch(fundmeAction.checkFundAndResults(fundmeId, 1, navigate));
-                  setIsFundCopyLink(true);
                   setIsCopied(false);
                 }
               }
@@ -135,7 +159,6 @@ const FundmeDetails = () => {
                 handleClick: () => {
                   setIsSuperFan(false);
                   dispatch(fundmeAction.checkFundAndResults(fundmeId, fundme.reward, navigate));
-                  setIsFundCopyLink(true);
                   setIsCopied(false);
                 }
               }
@@ -148,8 +171,18 @@ const FundmeDetails = () => {
               fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
               user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
             ] : []}
-            exit={() => { setIsFundCopyLink(false) }}
-            wrapExit={() => { setIsFundCopyLink(false) }}
+            exit={() => {
+              setIsFundCopyLink(false);
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+              setVoteNonSuperfanGif(false);
+              setVoteSuperfanGif(false);
+            }}
+            wrapExit={() => {
+              setIsFundCopyLink(false);
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+              setVoteNonSuperfanGif(false);
+              setVoteSuperfanGif(false);
+            }}
             context={`Congrats!\n${fundme.owner.name} received your Donut support!`}
             buttons={[
               {
@@ -246,6 +279,16 @@ const FundmeDetails = () => {
             context={`${fundme?.rewardText}\n\n`}
           />
           <div className="fundme-details">
+            {voteNonSuperfanGif &&
+              <div className="vote-gif">
+                <img src={VoteNonSuperfanGif} />
+              </div>
+            }
+            {voteSuperfanGif &&
+              <div className="vote-gif">
+                <img src={VoteSuperfanGif} />
+              </div>
+            }
             <div className="fundme-details-videoCardDesktop">
               <VideoCardDesktop
                 url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
@@ -285,7 +328,7 @@ const FundmeDetails = () => {
               <div className="desktop-header-info">
                 <div className="time-info">
                   <div className="left-time">
-                    {calcTime(fundme.time)} {fundme.time > 0 && "left"}
+                    {calcTime(fundme.time)} {!fundme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
                   </div>
                   <div className="vote-info">
                     <CreatoCoinIcon color="black" />
@@ -317,7 +360,7 @@ const FundmeDetails = () => {
                   icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
                 />
               </div>
-              <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingRight: '20px' }}>
                 <div style={{ marginRight: '20px' }}>
                   <div>
                     <Button
@@ -332,7 +375,7 @@ const FundmeDetails = () => {
                     />
                   </div>
                 </div>
-                <label>Supporting the creator as SuperFan will get you entitled for the reward!</label>
+                <label>{contexts.FUNDME_LETTER.DETAIL_SUPERFAN_LETTER}</label>
               </div>
               <div className="dare-btn" onClick={() => {
                 if (checkCanFree()) fund(1);
@@ -345,8 +388,8 @@ const FundmeDetails = () => {
                 />
               </div>
               <div className="below-text">
-                Supporting the creator for Free!<br />
-                This 1 Donut will be donated by Creato!
+                {contexts.FUNDME_LETTER.DETAIL_FREE_LETTER}<br />
+                {contexts.FUNDME_LETTER.DONUTED_BY_CREATOR}
               </div>
             </div>
           </div>

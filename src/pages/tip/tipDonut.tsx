@@ -14,7 +14,7 @@ import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
 import { authAction } from "../../redux/actions/authActions";
 import CONSTANT from "../../constants/constant";
-import TippingGif from '../../assets/img/tipping-gif.gif';
+import TippingGif from '../../assets/img/tipping.gif';
 import "../../assets/styles/tip/tipDonutStyle.scss";
 
 const creatoList = [

@@ -4,6 +4,12 @@ export const EN = {
     DAREME_DEADLINE_LIST: ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days"],
     CREATOR_CATEGORY_LIST: ["Artist", "Author", "Blogger", "Fitness Instructor", "Gamer", "Instagram Creator", "Live Streamer", "Musician", "Photographer", "Podcaster", "Tiktok Creator", "Videographer", "YouTuber"],
     FUNDME_DEADLINE_LIST: ["3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days", "11 days", "12 days", "13 days", "14 days"],
+    FUNDME_LETTER: {
+        DETAIL_SUPERFAN_LETTER: 'Supporting the creator as SuperFan will get you entitled for the reward!',
+        DETAIL_FREE_LETTER: 'Supporting the creator for Free!',
+        DONUTED_BY_CREATOR: 'This 1 Donut will be donated by Creato!',
+        FUNDME_DETAIL: 'Fundme Details'
+    },
     REVIEW_LETTER: {
         DONUTS_NUMBER: 'Number of Donuts',
         DNUTS: 'Donuts',
@@ -234,8 +240,8 @@ export const EN = {
         TELL_ABOUT_IDEA: 'Tell them about your ideas!',
         SUPPORT_WITH_DONUTS: 'Support with donuts! 🍩',
         WHAT_DO_YOU_PROPOSE: 'What do you propose..?',
-        EX_50DONUTS: 'e.g. 50 donuts',
-        DARE_LETTER: 'Support with at least 50 donuts ($5 USD).\n\nYou’re welcome to give more support to creators!\n\nIt is only non-refundable when creators accepted your Dare!',
+        EX_50DONUTS: 'e.g. 10 donuts',
+        DARE_LETTER: 'Support with at least 10 donuts ($1 USD).\n\nYou’re welcome to give more support to creators!\n\nIt is only non-refundable when creators accepted your Dare!',
         DARE_CREATOR_BTN: 'Dare creator now!',
     },
     DAREME_FINISHED: {

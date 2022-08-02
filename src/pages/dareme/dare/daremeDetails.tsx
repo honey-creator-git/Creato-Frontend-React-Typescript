@@ -33,13 +33,14 @@ const DaremeDetails = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [isDareDisable, setIsDareDisable] = useState(false);
   const user = userState.user;
-  
+
   const calcTime = (time: any) => {
-    if (time > 1) return Math.ceil(time) + " days";
-    if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
-    if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
-    if (time > 0) return "1 min";
-    else return "Finished";
+    if (dareme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
+    if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
+    if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
+    if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
+    if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
+    else if(dareme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
   }
 
   const canShowResult = (dareme: any, user: any) => {
@@ -53,7 +54,7 @@ const DaremeDetails = () => {
       return false;
     } else return false;
   }
-  
+
   const dareCreator = (user: any) => {
     if (user) {
       dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
@@ -93,14 +94,14 @@ const DaremeDetails = () => {
   return (
     <>
       <div className="title-header">
-        <Title 
-          title={contexts.HEADER_TITLE.DAREME_DETAILS} 
-          back={() => { navigate(loadState.prevRoute); }} 
+        <Title
+          title={contexts.HEADER_TITLE.DAREME_DETAILS}
+          back={() => { navigate(loadState.prevRoute); }}
           voters={() => { navigate(`/dareme/${daremeId}/voters`) }}
           ownerId={dareme?.owner?._id}
         />
       </div>
-      {(resultOptions.length > 0 && dareme.owner) && 
+      {(resultOptions.length > 0 && dareme.owner) &&
         <>
           <Dialog
             display={isSignIn}
@@ -111,9 +112,9 @@ const DaremeDetails = () => {
             buttons={[
               {
                 text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                handleClick: () => { 
-                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/details/${daremeId}`});
-                  navigate('/auth/signin'); 
+                handleClick: () => {
+                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/details/${daremeId}` });
+                  navigate('/auth/signin');
                 }
               }
             ]}
@@ -188,7 +189,7 @@ const DaremeDetails = () => {
               <div className="desktop-header-info">
                 <div className="time-info">
                   <div className="left-time">
-                    {calcTime(dareme.time)} {dareme.time > 0 && "left"}
+                    {calcTime(dareme.time)} {!dareme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
                   </div>
                   <div className="vote-info">
                     <CreatoCoinIcon color="black" />
@@ -209,7 +210,7 @@ const DaremeDetails = () => {
                       icon={[<NotificationwithCircleIcon color="white" circleColor="white" />, <NotificationwithCircleIcon color="white" circleColor="white" />]}
                     />
                   </div>
-                  : 
+                  :
                   <div onClick={() => { dareCreator(user); }}>
                     <ContainerBtn
                       // disabled={dareme.time < 1 ? true : false}

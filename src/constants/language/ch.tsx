@@ -4,6 +4,12 @@ export const CH = {
     DAREME_DEADLINE_LIST: ["1 日", "2 日", "3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日"],
     CREATOR_CATEGORY_LIST: ["藝人", "作家", "Blogger", "健身教練", "Gamer", "Instagram Creator", "直播主", "音樂人", "攝影師", "播客", "Tiktok Creator", "影片製作者", "YouTuber"],
     FUNDME_DEADLINE_LIST: ["3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日", "11 日", "12 日", "13 日", "14 日"],
+    FUNDME_LETTER: {
+        DETAIL_SUPERFAN_LETTER: '以 SuperFan 身份支持創作者將獲得獎勵!',
+        DETAIL_FREE_LETTER: '免費支持創作者!',
+        DONUTED_BY_CREATOR: '1個甜甜圈由Creato代為送出!',
+        FUNDME_DETAIL: 'FundMe 選項'
+    },
     REVIEW_LETTER: {
         DONUTS_NUMBER: '甜甜圈數量',
         DNUTS: '甜甜圈',
@@ -234,8 +240,8 @@ export const CH = {
         TELL_ABOUT_IDEA: '你想挑戰Creator什麼!',
         SUPPORT_WITH_DONUTS: '用冬甩支持 🍩',
         WHAT_DO_YOU_PROPOSE: '你的點子是..?',
-        EX_50DONUTS: 'e.g. 50 冬甩',
-        DARE_LETTER: '最少支持50個冬甩 ($5 美金)! 如果Creator沒有接受你的挑戰，全部冬甩將會退回你的帳戶。',
+        EX_50DONUTS: 'e.g. 10 冬甩',
+        DARE_LETTER: '最少支持10個冬甩 ($1 美金)! 如果Creator沒有接受你的挑戰，全部冬甩將會退回你的帳戶。',
         DARE_CREATOR_BTN: '挑戰 Creator!'
     },
     DAREME_FINISHED: {

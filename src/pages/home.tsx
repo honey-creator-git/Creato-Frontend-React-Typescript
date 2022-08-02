@@ -122,6 +122,17 @@ const Home = () => {
     }
   }, [dlgState]);
 
+  const shuffleArray = (array: any) => {
+    const newArr = array.slice()
+    for (let i = newArr.length - 1; i > 0; i--) {
+      const rand = Math.floor(Math.random() * (i + 1));
+      [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+    }
+    return newArr;
+  }
+
+  shuffleArray(daremes)
+
   return (
     <div className="home-wrapper">
       <PaymentForm
@@ -294,14 +305,11 @@ const Home = () => {
           <SecondBanner />
         </div>
       </div>
-
       {(daremes.length > 0) &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.DAREME_WITH_MOST_DONUTS}</div>
           <div className="daremes scroll-bar">
-            {daremes.sort((first: any, second: any) => {
-              return first.donuts < second.donuts ? 1 : first.donuts > second.donuts ? -1 : first.date > second.date ? 1 : first.date < second.date ? -1 : 0;
-            }).map((dareme: any, i: any) => (
+            {shuffleArray(daremes).map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}

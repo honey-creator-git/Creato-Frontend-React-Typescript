@@ -13,7 +13,8 @@ import {
   SET_FANWALLS,
   SET_DAREME_DETAIL_INITIAL,
   SET_ADMIN_OPTIONS,
-  SET_VOTER_COUNT
+  SET_VOTER_COUNT,
+  SET_DIALOG_STATE
 } from "../types";
 import * as api from "../../api";
 
@@ -69,7 +70,8 @@ export const daremeAction = {
   publishDareme: () => async (dispatch: Dispatch<any>) => {
     api.publishDareme()
       .then((result) => {
-        // const { data } = result;
+        const { data } = result;
+        if (data.success) dispatch({ type: SET_DIALOG_STATE, payload: { type: "create_dareme", state: true } })
       }).catch((err) => console.log(err));
   },
 
@@ -173,6 +175,8 @@ export const daremeAction = {
             .then((result) => {
               const { data } = result;
               if (data.success) {
+                if (donuts === 1) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
+                else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
                 dispatch({ type: SET_DAREME, payload: data.dareme });
                 dispatch({ type: SET_OPTION, payload: data.option });
                 if (data.user) dispatch({ type: SET_USER, payload: data.user });

@@ -11,6 +11,7 @@ import {
   SET_USER,
   SET_FUNDME_DETAIL_INITIAL,
   SET_FUNDME_VOTES,
+  SET_DIALOG_STATE,
 } from "../types";
 import * as api from "../../api";
 
@@ -80,6 +81,8 @@ export const fundmeAction = {
   publishFundme: () => async (dispatch: Dispatch<any>) => {
     api.publishFundme()
       .then((result) => {
+        const { data } = result;
+        if (data.success) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'create_fundme', state: true } })
       }).catch((err) => console.log(err));
   },
 
@@ -118,6 +121,8 @@ export const fundmeAction = {
             .then((result: any) => {
               const { data } = result;
               if (data.success) {
+                if (donuts === 1) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
+                else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
                 dispatch({ type: SET_LOADING_FALSE });
                 dispatch({ type: SET_FUNDME, payload: data.fundme });
                 if (data.user) dispatch({ type: SET_USER, payload: data.user });
