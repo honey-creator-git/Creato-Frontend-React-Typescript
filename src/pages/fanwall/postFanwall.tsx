@@ -143,26 +143,13 @@ const PostFanwall = () => {
                             sizeType={item.sizeType}
                             coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
                         />
-                        {fanwallState.itemType === 'dareme' &&
-                            <AvatarLink
-                                username={item.owner.name}
-                                avatar={item.owner.avatar}
-                                ownerId={item.owner._id}
-                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
-                                itemId={item._id}
-                            />
-                        }
-                        {
-                            fanwallState.itemType === 'fundme' &&
-                            <AvatarLink
-                                username={item.owner.name}
-                                avatar={item.owner.avatar}
-                                ownerId={item.owner._id}
-                                handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
-                                itemId={item._id}
-                            />
-                        }
-
+                        <AvatarLink
+                            username={item.owner.name}
+                            avatar={item.owner.avatar}
+                            ownerId={item.owner._id}
+                            handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
+                            itemId={item._id}
+                        />
                     </div>
                     <div className="dare-post-fanwall-info scroll-bar">
                         <div className="dare-post-fanwall-main">

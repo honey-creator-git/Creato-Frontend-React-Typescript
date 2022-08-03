@@ -132,6 +132,7 @@
 
     .users {
       display: flex;
+      justify-content: center;
       padding: 16px 0 7px 0;
       flex-direction: row;
       overflow-x: scroll;

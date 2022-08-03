@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
+import { daremeAction } from "../../../redux/actions/daremeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import AvatarLink from "../../../components/dareme/avatarLink";
 import VideoCardMobile from "../../../components/dareme/videoCardMobile";
@@ -88,7 +89,7 @@ const FundmeResult = () => {
                                 avatar={fundme.owner.avatar}
                                 username={fundme.owner.name}
                                 ownerId={fundme.owner._id}
-                                handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
+                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
                                 daremeId={fundme._id}
                                 isFundme={true}
                             />
@@ -109,7 +110,7 @@ const FundmeResult = () => {
                                     avatar={fundme.owner.avatar}
                                     username={fundme.owner.name}
                                     ownerId={fundme.owner._id}
-                                    handleAvatar={() => { dispatch(fundmeAction.getFundmesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
+                                    handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
                                     daremeId={fundme._id}
                                     isFundme={true}
                                 />
@@ -132,13 +133,13 @@ const FundmeResult = () => {
                             <div className="funding-goal">
                                 <div className="title">
                                     <CreatoCoinIcon color="#EFA058" />
-                                    <label>{fundme.wallet < fundme.goal ? "Goal" : "Goal Reached!"}</label>
+                                    <label>{fundme.wallet < fundme.goal ? contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL : contexts.CREATE_FUNDME_LETTER.GOAL_REACHED}</label>
                                 </div>
                                 <div className="process-bar">
                                     <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${width}px` : '330px' }}></div>
                                 </div>
                                 <div className="donuts-count">
-                                    <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} Donuts</span>
+                                    <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
                                 </div>
                             </div>
                             <div className="result-button">
@@ -156,7 +157,7 @@ const FundmeResult = () => {
                                             :
                                             <>
                                                 <div className="dare-btn" onClick={() => { dispatch(fundmeAction.postFanwall(fundme._id, navigate)); }}>
-                                                    <ContainerBtn text="Post on Fanwall" styleType="fill" />
+                                                    <ContainerBtn text={contexts.DAREME_FINISHED.POST_ON_FANWALL} styleType="fill" />
                                                 </div>
                                             </>
                                         }
@@ -182,7 +183,7 @@ const FundmeResult = () => {
                                     icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
                                 />
                             </div>
-                            <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '20px' }}>
                                 <div style={{ marginRight: '20px' }}>
                                     <div>
                                         <Button
@@ -197,7 +198,7 @@ const FundmeResult = () => {
                                         />
                                     </div>
                                 </div>
-                                <label>Supporting the creator as SuperFan will get you entitled for the reward!</label>
+                                <label>{contexts.FUNDME_LETTER.DETAIL_SUPERFAN_LETTER}</label>
                             </div>
                             <div className="dare-btn">
                                 <ContainerBtn
@@ -207,8 +208,8 @@ const FundmeResult = () => {
                                 />
                             </div>
                             <div className="below-text">
-                                Supporting the creator for Free!<br />
-                                This 1 Donut will be donated by Creato!
+                                {contexts.FUNDME_LETTER.DETAIL_FREE_LETTER}<br />
+                                {contexts.FUNDME_LETTER.DONUTED_BY_CREATOR}
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ import FirstBanner from "../components/banner/firstBanner";
 import SecondBanner from "../components/banner/secondBanner";
 import Dialog from "../components/general/dialog";
 import CategoryBtn from "../components/general/categoryBtn";
-// import Avatar from "../components/Avatar";
+import Avatar from "../components/general/avatar";
 import Creato from "../components/general/creato";
 import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan";
 import PaymentForm from "../components/stripe/paymentForm";
@@ -82,6 +82,7 @@ const Home = () => {
   const [fanwallId, setFanwallId] = useState("");
   const [errorText, setErrorText] = useState("");
   const user = userState.user;
+  const users = userState.users;
   const stripeID = userState.stripeID;
   const cardNum = userState.cardNum;
   const dlgState = loadState.dlgState;
@@ -89,6 +90,15 @@ const Home = () => {
   const buyDonuts = async (creato: any) => {
     if (user) { await setDonutPlan(creato); }
     else setOpenSigninDlg(true);
+  }
+
+  const showCategories = (categories: any) => {
+    let category = '';
+    categories.map((cate: any, index: any) => {
+      category += contexts.CREATOR_CATEGORY_LIST[cate];
+      if(index !== categories.length - 1) category += '/';
+    });
+    return category;
   }
 
   useEffect(() => {
@@ -121,17 +131,6 @@ const Home = () => {
       }
     }
   }, [dlgState]);
-
-  const shuffleArray = (array: any) => {
-    const newArr = array.slice()
-    for (let i = newArr.length - 1; i > 0; i--) {
-      const rand = Math.floor(Math.random() * (i + 1));
-      [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
-    }
-    return newArr;
-  }
-
-  shuffleArray(daremes)
 
   return (
     <div className="home-wrapper">
@@ -309,7 +308,7 @@ const Home = () => {
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.DAREME_WITH_MOST_DONUTS}</div>
           <div className="daremes scroll-bar">
-            {shuffleArray(daremes).map((dareme: any, i: any) => (
+            {daremes.map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
                 <VideoCardMobile
                   url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
@@ -402,6 +401,45 @@ const Home = () => {
               </div>
             ))
             }
+          </div>
+        </div>
+      }
+      {users.length > 0 &&
+        <div className="section">
+          <div className="title">
+            {contexts.HOME_LETTER.CREATORS_YOU_LIKE}<span></span>
+          </div>
+          {/* <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+          }}
+        >
+          <div className="search-icon">
+            <SearchIcon color="#EFA058" width="30px" height="30px" />
+          </div>
+          <div className="categories scroll-bar" style={{ paddingLeft: "60px" }}>
+            {contexts.CREATOR_CATEGORY_LIST.map((category: any, i: any) => (
+              <div className="category" key={i}>
+                <CategoryBtn text={category} color="primary" />
+              </div>
+            ))}
+          </div>
+        </div> */}
+          <div className="users scroll-bar">
+            {users.map((user: any, i: any) => (
+              <div className="user" key={i} onClick={() => { navigate(`/${user.personalisedUrl}`) }}>
+                <Avatar
+                  avatar={user.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user.avatar}` : user.avatar}
+                  size="web"
+                  style="vertical"
+                  category={showCategories(user.categories)}
+                  username={user.name}
+                />
+              </div>
+            ))}
           </div>
         </div>
       }
@@ -510,47 +548,6 @@ const Home = () => {
           </div>
         </div>
       }
-      {/* <div className="section">
-        <div className="title">
-          Creators you might like<span>see more</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
-          <div className="search-icon">
-            <SearchIcon color="#EFA058" width="30px" height="30px" />
-          </div>
-          <div className="categories scroll-bar" style={{ paddingLeft: "60px" }}>
-            {contexts.CREATOR_CATEGORY_LIST.map((category: any, i: any) => (
-              <div className="category" key={i}>
-                <CategoryBtn text={category} color="primary" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="users scroll-bar"> */}
-      {/* { users.length ? users.map((user: any, i: any) => (
-            <div className="user" key={i} onClick={() => {
-              dispatch({type: SET_USER_INITIAL});
-              dispatch({type: SET_DAREME_INITIAL});
-              navigate(`/${user.personalisedUrl}`);
-            }}>
-              <Avatar
-                avatar={user.avatar}
-                size="web"
-                style="vertical"
-                category="travel/lifestyle/fitness"
-                username={user.name}
-              />
-            </div>
-          )): '' } */}
-      {/* </div> */}
-      {/*  </div> */}
       {(daremes.length > 0 && daremes.filter((dareme: any) => (dareme.finished === true && dareme.fanwall === false)).length > 0) &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.FINISHED_DAREME}</div>

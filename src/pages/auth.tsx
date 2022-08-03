@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import CONSTANT from "../constants/constant";
 import Dialog from "../components/general/dialog";
+import { LanguageContext } from "../routes/authRoute";
 import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons";
 import { authAction } from "../redux/actions/authActions";
 import "../assets/styles/signupStyle.scss";
@@ -27,6 +28,7 @@ const Auth = (props: any) => {
   const [isHover1, setIsHover1] = useState(false);
   const lang = useSelector((state: any) => state.auth.lang);
   const prevRoute = loadState.prevRoute;
+  const contexts = useContext(LanguageContext);
 
   const signupStyle = {
     fontWeight: "bold",
@@ -79,23 +81,23 @@ const Auth = (props: any) => {
 
   };
 
-  const responseFacebook = (response: any) => {
-    console.log(response)
-    let browser = "";
-    if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
-    else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
-    else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
+  // const responseFacebook = (response: any) => {
+  //   console.log(response)
+  //   let browser = "";
+  //   if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
+  //   else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
+  //   else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
 
-    const userData = ({
-      name: response.name,
-      avatar: response.picture.data.url,
-      email: response.email,
-      facebookId: response.id,
-      browser: browser
-    });
-    if (props.isSignin) dispatch(authAction.facebookSigninUser(userData, navigate, prevRoute));
-    else dispatch(authAction.facebookSignupUser(userData, navigate, prevRoute));
-  }
+  //   const userData = ({
+  //     name: response.name,
+  //     avatar: response.picture.data.url,
+  //     email: response.email,
+  //     facebookId: response.id,
+  //     browser: browser
+  //   });
+  //   if (props.isSignin) dispatch(authAction.facebookSigninUser(userData, navigate, prevRoute));
+  //   else dispatch(authAction.facebookSignupUser(userData, navigate, prevRoute));
+  // }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,22 +138,22 @@ const Auth = (props: any) => {
       <div className="signup-wrapper">
         {props.isSignin === false ? (
           <div>
-            <h4>Sign up to enjoy: </h4>
+            <h4>{contexts.AUTH_LETTER.SIGN_UP_TO_ENJOY}</h4>
             <br />
             <ul>
-              <li>✅ 10 donuts for free (~$3USD)</li>
-              <li>✅ Support & create with Creators</li>
-              <li>✅ A private space for fans & creators</li>
+              <li>{contexts.AUTH_LETTER.SIGN_UP_LETTER1}</li>
+              <li>{contexts.AUTH_LETTER.SIGN_UP_LETTER2}</li>
+              <li>{contexts.AUTH_LETTER.SIGN_UP_LETTER3}</li>
             </ul>
             <br />
-            <h2>Sign up with:</h2>
+            <h2>{contexts.AUTH_LETTER.SIGN_UP_WITH}</h2>
           </div>
         ) : (
           <h2>
-            Welcome Back!
+            {contexts.AUTH_LETTER.WELCOME_BACK}
             <br />
             <br />
-            Login With:
+            {contexts.AUTH_LETTER.LOGIN_WITH}
           </h2>
         )}
         <div className="icons">
@@ -183,31 +185,30 @@ const Auth = (props: any) => {
           </div> */}
         </div>
         {props.isSignin === false ? (
-          <p>By signing up, you agree to our
+          <p>{contexts.AUTH_LETTER.BY_SIGN_UP}
             <a
               onMouseOver={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
               style={aStyle}
-              href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target="_blank"> terms</a> and <a onMouseOver={() => setIsHover1(true)}
+              href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
                 onMouseLeave={() => setIsHover1(false)}
-                style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">privacy policy</a>.</p>
+                style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
         ) : (
           <div
             style={{
               display: "flex",
             }}
           >
-            <p>No account yet?</p>&nbsp;
+            <p>{contexts.AUTH_LETTER.NEW_CREATO}</p>
             <p
               onMouseOver={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
               onClick={() => navigate('/auth/signup')}
               style={signupStyle}
             >
-              &nbsp;Sign up&nbsp;
+              {contexts.AUTH_LETTER.SIGN_UP}
             </p>
-            &nbsp;
-            <p>now!</p>
+            <p>{contexts.AUTH_LETTER.NOW}</p>
           </div>
         )}
       </div>

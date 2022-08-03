@@ -7,7 +7,6 @@ import {
   SET_LOADING_FALSE,
   SET_FANWALL,
   SET_FANWALL_INITIAL,
-  SET_USERS,
   SET_USER,
   SET_FUNDME_DETAIL_INITIAL,
   SET_FUNDME_VOTES,
@@ -155,18 +154,6 @@ export const fundmeAction = {
           dispatch({ type: SET_FUNDME, payload: data.fundme });
           dispatch({ type: SET_LOADING_FALSE });
         }
-      }).catch((err) => console.log(err));
-  },
-
-  getFundmesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    api.getFundmesByPersonalisedUrl({ url: url })
-      .then((result) => {
-        const { data } = result;
-        dispatch({ type: SET_FUNDMES, payload: data.fundmes });
-        dispatch({ type: SET_USERS, payload: [data.user] });
-        dispatch({ type: SET_LOADING_FALSE });
-        navigate(`/${url}`);
       }).catch((err) => console.log(err));
   },
 

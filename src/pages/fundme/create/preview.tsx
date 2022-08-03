@@ -61,7 +61,7 @@ const FundmePreview = () => {
     <>
       <div className="title-header">
         <Title
-          title="Preview Fundme"
+          title={contexts.CREATE_FUNDME_LETTER.PREVIEW}
           back={() => {
             dispatch({ type: SET_TEASER_FILE1, payload: null });
             dispatch({ type: SET_COVER_FILE1, payload: null });
@@ -136,7 +136,7 @@ const FundmePreview = () => {
           <div className="desktop-header-info">
             <div className="time-info">
               <div className="left-time">
-                {fundState.deadline} days left
+                {fundState.deadline} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
               </div>
               <div className="vote-info">
                 <CreatoCoinIcon color="black" />
@@ -171,13 +171,13 @@ const FundmePreview = () => {
           <div className="funding-goal">
             <div className="title">
               <CreatoCoinIcon color="#EFA058" />
-              <label>Goal</label>
+              <label>{contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL}</label>
             </div>
             <div className="process-bar">
               <div className="process-value" style={{ width: '16.5px' }}></div>
             </div>
             <div className="donuts-count">
-              <span>0 / {fundState.goal.toLocaleString()} Donuts</span>
+              <span>0 / {fundState.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
             </div>
           </div>
           <div className="dare-btn">
@@ -188,13 +188,13 @@ const FundmePreview = () => {
               icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
             />
           </div>
-          <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '20px' }}>
             <div style={{ marginRight: '20px' }}>
               <div className="reward-btn">
                 <RewardIcon color="white" width="25" height="25" />
               </div>
             </div>
-            <label>Supporting the creator as SuperFan will get you entitled for the reward!</label>
+            <label>{contexts.FUNDME_LETTER.DETAIL_SUPERFAN_LETTER}</label>
           </div>
           <div className="dare-btn">
             <ContainerBtn
@@ -204,11 +204,11 @@ const FundmePreview = () => {
             />
           </div>
           <div className="below-text">
-            Supporting the creator for Free!<br />
-            This 1 Donut will be donated by Creato!
+            {contexts.FUNDME_LETTER.DETAIL_FREE_LETTER}<br />
+            {contexts.FUNDME_LETTER.DONUTED_BY_CREATOR}
           </div>
           <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setOpenPublishDlg(true) }}>
-            <ContainerBtn text='Publish' styleType="fill" />
+            <ContainerBtn text={contexts.GENERAL_LETTER.PUBLISH} styleType="fill" />
           </div>
         </div>
       </div>

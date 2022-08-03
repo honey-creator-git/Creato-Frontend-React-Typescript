@@ -329,7 +329,7 @@ const CreateFundme = () => {
                                     {fundmeState.title ? (
                                         <Button
                                             handleSubmit={() => { navigate("/fundme/create/title") }}
-                                            text={`${fundmeState.title.substring(0, 40)}${fundmeState.title.length > 40 ? "..." : ""}`}
+                                            text={`${fundmeState.title.substring(0, 15)}${fundmeState.title.length > 15 ? "..." : ""}`}
                                             icon={[<EditIcon color="white" />, <EditIcon color="white" />, <EditIcon color="white" />]}
                                             fillStyle="fill"
                                             color="primary"
@@ -492,7 +492,7 @@ const CreateFundme = () => {
                                 {fundmeState.title ? (
                                     <Button
                                         handleSubmit={() => navigate("/fundme/create/title")}
-                                        text={`${fundmeState.title.substring(0, 40)}${fundmeState.title.length > 40 ? "..." : ""
+                                        text={`${fundmeState.title.substring(0, 15)}${fundmeState.title.length > 15 ? "..." : ""
                                             }`}
                                         icon={[
                                             <EditIcon color="white" />,

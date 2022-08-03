@@ -118,7 +118,7 @@ const FundmeDetails = () => {
     <>
       <div className="title-header">
         <Title
-          title={contexts.FUNDME_LETTER.FUNDME_DETAIL}
+          title={contexts.HEADER_TITLE.FUNDME_DETAIL}
           back={() => { navigate(loadState.prevRoute); }}
           voters={() => { navigate(`/fundme/${fundmeId}/voters`) }}
           ownerId={fundme?.owner?._id}
@@ -343,13 +343,13 @@ const FundmeDetails = () => {
               <div className="funding-goal">
                 <div className="title">
                   <CreatoCoinIcon color="#EFA058" />
-                  <label>{fundme.wallet < fundme.goal ? "Goal" : "Goal Reached!"}</label>
+                  <label>{fundme.wallet < fundme.goal ? contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL : contexts.CREATE_FUNDME_LETTER.GOAL_REACHED}</label>
                 </div>
                 <div className="process-bar">
                   <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${width}px` : '330px' }}></div>
                 </div>
                 <div className="donuts-count">
-                  <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} Donuts</span>
+                  <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
                 </div>
               </div>
               <div className="dare-btn" onClick={() => { fund(fundme.reward) }}>

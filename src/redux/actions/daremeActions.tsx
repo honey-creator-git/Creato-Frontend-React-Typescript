@@ -94,13 +94,17 @@ export const daremeAction = {
   getDarmesOngoing: () => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     dispatch({ type: SET_DAREME_INITIAL });
+    dispatch({ type: SET_USERS, payload: [] });
     dispatch({ type: SET_FANWALL_INITIAL });
     api.getDaremesOngoing()
       .then((result) => {
         const { data } = result;
-        dispatch({ type: SET_DAREMES, payload: data.daremes });
-        dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
-        dispatch({ type: SET_LOADING_FALSE });
+        if (data.success) {
+          dispatch({ type: SET_DAREMES, payload: data.daremes });
+          dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
+          dispatch({ type: SET_USERS, payload: data.users });
+          dispatch({ type: SET_LOADING_FALSE });
+        }
       }).catch((err) => console.log(err));
   },
 

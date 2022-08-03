@@ -6,13 +6,14 @@ import ContainerBtn from "../components/general/containerBtn";
 import Button from "../components/general/button";
 import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
+import Dialog from "../components/general/dialog";
 import { authAction } from "../redux/actions/authActions";
 import { CreatoColorIcon, CreatoCoinIcon, AddIcon, LanguageIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import CONSTANT from "../constants/constant";
 import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
-import Dialog from "../components/general/dialog";
+
 
 const useWindowSize = () => {
   const [size, setSize] = useState(0);
@@ -128,7 +129,7 @@ const Header = () => {
                       <ContainerBtn
                         icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
                         styleType="fill"
-                        text={"Create"}
+                        text={contexts.GENERAL_LETTER.CREATE}
                       />
                     </div>
                   </>
@@ -213,7 +214,7 @@ const Header = () => {
                 <ContainerBtn
                   icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
                   styleType="fill"
-                  text={"Create"}
+                  text={contexts.GENERAL_LETTER.CREATE}
                 />
               </div>
             </>

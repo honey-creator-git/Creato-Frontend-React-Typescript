@@ -156,7 +156,7 @@ const Preview = () => {
           <div className="desktop-header-info">
             <div className="time-info">
               <div className="left-time">
-                {dareState.deadline} days left
+                {dareState.deadline} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
               </div>
               <div className="vote-info">
                 <CreatoCoinIcon color="black" />
