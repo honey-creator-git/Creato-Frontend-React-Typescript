@@ -10,9 +10,10 @@ import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
+import Gif from "../../../components/general/gif";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
-import { CreatoCoinIcon } from '../../../assets/svg';
+import { CreatoCoinIcon, RewardIcon } from '../../../assets/svg';
 import { SET_TEASER_FILE, SET_COVER_FILE, SET_DIALOG_STATE } from "../../../redux/types";
 import CreateDaremeGif from '../../../assets/img/create_dareme.gif';
 import "../../../assets/styles/dareme/create/previewStyle.scss";
@@ -81,8 +82,11 @@ const Preview = () => {
   return (
     <>
       <div className="title-header">
+        {createDaremeGif &&
+          <Gif gif={CreateDaremeGif} />
+        }
         <Title
-          title="Preview"
+          title={contexts.CREATE_FUNDME_LETTER.PREVIEW}
           back={() => {
             dispatch({ type: SET_TEASER_FILE, payload: null });
             dispatch({ type: SET_COVER_FILE, payload: null });
@@ -132,37 +136,18 @@ const Preview = () => {
         daremeId={dareState._id}
         ownerName={user.name}
       />
-      <div className="preview-wrapper">
-        {createDaremeGif &&
-          <div className="create-dareme-gif">
-            <img src={CreateDaremeGif} />
-          </div>
-        }
-        <div className="preview-desktop-videoCardDesktop">
-          <VideoCardDesktop
-            url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}
-            sizeType={dareState.sizeType}
-            coverImage={dareState.cover ? `${CONSTANT.SERVER_URL}/${dareState.cover}` : ""}
-          />
-          <AvatarLink
-            username={user.name}
-            avatar={user.avatar}
-            ownerId={user.id}
-            handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
-            daremeId={dareState._id}
-          />
-        </div>
-        <div className="preview-information">
-          <div className="desktop-header-info">
-            <div className="time-info">
-              <div className="left-time">
-                {dareState.deadline} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
-              </div>
-              <div className="vote-info">
-                <CreatoCoinIcon color="black" />
-                <span>0</span>
-              </div>
+      <div className="preview-dareme-wrapper">
+        <div className="desktop-header-info">
+          <div className="time-info">
+            <div className="left-time">
+              {dareState.deadline} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS} {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
             </div>
+            <div className="vote-info">
+              <CreatoCoinIcon color="black" />
+              <span>0</span>
+            </div>
+          </div>
+          <div className="title-category">
             <div className="dare-title">
               <span>{dareState.title}</span>
             </div>
@@ -170,55 +155,94 @@ const Preview = () => {
               <CategoryBtn text={contexts.DAREME_CATEGORY_LIST[dareState.category - 1]} color="primary" />
             </div>
           </div>
-          <div className="preview-videoCardMobile">
-            <VideoCardMobile
+        </div>
+        <div className="main-body">
+          <div className="preview-desktop-videoCardDesktop">
+            <VideoCardDesktop
               url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}
-              donuts={0}
-              category={contexts.DAREME_CATEGORY_LIST[dareState.category - 1]}
-              time={dareState.deadline}
-              title={dareState.title}
               sizeType={dareState.sizeType}
               coverImage={dareState.cover ? `${CONSTANT.SERVER_URL}/${dareState.cover}` : ""}
-              handleSubmit={() => { }}
             />
             <AvatarLink
               username={user.name}
               avatar={user.avatar}
               ownerId={user.id}
               handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+              daremeId={dareState._id}
             />
           </div>
-          <div className="dare-creator">
-            <div className="dare-btn">
-              <div>
+          <div className="preview-information">
+            <div className="preview-videoCardMobile">
+              <VideoCardMobile
+                url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}
+                donuts={0}
+                category={contexts.DAREME_CATEGORY_LIST[dareState.category - 1]}
+                time={dareState.deadline}
+                title={dareState.title}
+                sizeType={dareState.sizeType}
+                coverImage={dareState.cover ? `${CONSTANT.SERVER_URL}/${dareState.cover}` : ""}
+                handleSubmit={() => { }}
+              />
+              <AvatarLink
+                username={user.name}
+                avatar={user.avatar}
+                ownerId={user.id}
+                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+              />
+            </div>
+            <div className="dare-creator">
+              <div className="dare-btn" style={{ marginTop: '30px' }}>
                 <ContainerBtn
                   disabled={false}
-                  styleType="fill"
-                  text="Dare Creator"
+                  styleType="outline"
+                  text={'See SuperFan Reward'}
+                  icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
                 />
               </div>
+              <div className="select-dare-option">
+                <span></span>Select dare option<span></span>
+              </div>
+              <div className="dare-btn">
+                <div>
+                  <ContainerBtn
+                    disabled={false}
+                    styleType="fill"
+                    text={contexts.DAREME_DETAILS.HAVE_IDEA}
+                  />
+                </div>
+              </div>
+              <div className="or-style">or</div>
             </div>
-            <div className="or-style">or</div>
+            <div className="dare-options">
+              {
+                options.map((option: any, index: any) =>
+                  <div className="dare-option" key={index}>
+                    <DareOption
+                      leading={false}
+                      donuts={option.donuts}
+                      canVote={option.canVote}
+                      dareTitle={option.option}
+                      username={option.owner}
+                      disabled={false}
+                      handleSubmit={() => { }}
+                    />
+                  </div>
+                )
+              }
+            </div>
           </div>
-          <div className="dare-options">
-            {
-              options.map((option: any, index: any) =>
-                <DareOption
-                  key={index}
-                  leading={false}
-                  donuts={option.donuts}
-                  canVote={option.canVote}
-                  dareTitle={option.option}
-                  username={option.owner}
-                  disabled={false}
-                  handleSubmit={() => { }}
-                />
-              )
-            }
-          </div>
-          <div className="dare-btn" style={{ marginTop: '20px' }} onClick={() => { setOpenPublishDlg(true) }}>
-            <ContainerBtn text={contexts.PUBLISH} styleType="fill" />
-          </div>
+        </div>
+      </div>
+      <div className="publish-back">
+        <div className="back-btn" onClick={() => {
+          dispatch({ type: SET_TEASER_FILE, payload: null });
+          dispatch({ type: SET_COVER_FILE, payload: null });
+          navigate("/dareme/create");
+        }}>
+          <ContainerBtn text={'Back to edit mode'} styleType="outline" />
+        </div>
+        <div className="publish-btn" onClick={() => { setOpenPublishDlg(true) }}>
+          <ContainerBtn text={contexts.PUBLISH} styleType="fill" />
         </div>
       </div>
     </>

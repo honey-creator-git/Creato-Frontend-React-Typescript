@@ -43,6 +43,20 @@ const FundmeResult = () => {
         dispatch(fundmeAction.getFundmeResult(fundmeId));
     }, [location]);
 
+    const calcTime = (time: any) => {
+        if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
+        if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
+        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
+        if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
+
+        const passTime = Math.abs(time);
+        if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+    }
+
     return (
         <>
             <div className="title-header">
@@ -78,8 +92,8 @@ const FundmeResult = () => {
                             icon: <SpreadIcon color="#EFA058" width="60px" height="60px" />
                         }}
                     />
-                    <div className="fundme-details">
-                        <div className="fundme-details-videoCardDesktop">
+                    <div className="fundme-result">
+                        <div className="fundme-result-videoCardDesktop">
                             <VideoCardDesktop
                                 url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
                                 sizeType={fundme.sizeType}
@@ -94,13 +108,13 @@ const FundmeResult = () => {
                                 isFundme={true}
                             />
                         </div>
-                        <div className="fundme-details-information">
-                            <div className="fundme-details-videoCardMobile">
+                        <div className="fundme-result-information">
+                            <div className="fundme-result-videoCardMobile">
                                 <VideoCardMobile
                                     url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
                                     title={fundme.title}
                                     time={fundme.time}
-                                    isFinished={fundme.finished}
+                                    finished={fundme.finished}
                                     donuts={fundme.wallet}
                                     category={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]}
                                     sizeType={fundme.sizeType}
@@ -118,7 +132,7 @@ const FundmeResult = () => {
                             <div className="desktop-header-info">
                                 <div className="time-info">
                                     <div className="left-time">
-                                        {contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED}
+                                    {fundme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED} {calcTime(fundme.time)} {!fundme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
                                     </div>
                                     <div className="vote-info">
                                         <CreatoCoinIcon color="black" />
@@ -174,42 +188,14 @@ const FundmeResult = () => {
                                         </div>
                                     </>
                                 }
-                            </div>
-                            <div className="dare-btn">
-                                <ContainerBtn
-                                    disabled={true}
-                                    styleType="fill"
-                                    text={`${fundme.reward} Donuts (SuperFan!)`}
-                                    icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
-                                />
-                            </div>
-                            <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '20px' }}>
-                                <div style={{ marginRight: '20px' }}>
-                                    <div>
-                                        <Button
-                                            fillStyle="fill"
-                                            color="primary"
-                                            icon={[
-                                                <RewardIcon color="white" width="25" height="25" />,
-                                                <RewardIcon color="white" width="25" height="25" />,
-                                                <RewardIcon color="white" width="25" height="25" />
-                                            ]}
-                                            handleSubmit={() => { setIsReward(true) }}
-                                        />
-                                    </div>
+                                <div className="dare-btn" style={{ marginTop: '30px' }} onClick={() => { setIsReward(true) }}>
+                                    <ContainerBtn
+                                        disabled={false}
+                                        styleType="outline"
+                                        text={'See SuperFan Reward'}
+                                        icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
+                                    />
                                 </div>
-                                <label>{contexts.FUNDME_LETTER.DETAIL_SUPERFAN_LETTER}</label>
-                            </div>
-                            <div className="dare-btn">
-                                <ContainerBtn
-                                    disabled={true}
-                                    styleType="outline"
-                                    text="1 Donut (Free!)"
-                                />
-                            </div>
-                            <div className="below-text">
-                                {contexts.FUNDME_LETTER.DETAIL_FREE_LETTER}<br />
-                                {contexts.FUNDME_LETTER.DONUTED_BY_CREATOR}
                             </div>
                         </div>
                     </div>

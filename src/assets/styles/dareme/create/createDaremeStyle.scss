@@ -164,7 +164,6 @@
 
         .deadline {
           position: relative;
-          width: 119px;
 
           .drop-down-lists {
             position: absolute;
@@ -207,7 +206,7 @@
         }
 
         .dare-options {
-          margin-top: 30px;
+          margin-top: 50px;
 
           .dare-option {
             margin-top: 25px;
@@ -255,14 +254,34 @@
           }
         }
 
-        .prev-btn {
-          position: absolute;
-          width: 100%;
-          bottom: 10px;
+        .reward-btn {
+          margin-top: 25px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }
+
+    .preview-clear {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+
+      .clear-btn {
+        width: 330px;
+        margin-right: 20px;
+      }
+
+      .prev-btn {
+        width: 330px;
+      }
+    }
   }
+
 
   .create-dareme-mobile {
     width: 100%;
@@ -329,10 +348,22 @@
       }
 
       .deadline {
-        width: 119px;
+        width: 320px;
         position: absolute;
         top: 10px;
         left: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .reward-btn {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
 
       .dareme-title {

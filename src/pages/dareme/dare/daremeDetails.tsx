@@ -12,7 +12,7 @@ import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
-import { CreatoCoinIcon, NotificationwithCircleIcon } from "../../../assets/svg";
+import { CreatoCoinIcon, NotificationwithCircleIcon, RewardIcon } from "../../../assets/svg";
 import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE } from "../../../redux/types";
 import "../../../assets/styles/dareme/dare/daremeDetailsStyle.scss";
 
@@ -32,6 +32,7 @@ const DaremeDetails = () => {
   const [isCopyLink, setIsCopyLink] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [isDareDisable, setIsDareDisable] = useState(false);
+  const [isReward, setIsReward] = useState(false);
   const user = userState.user;
 
   const calcTime = (time: any) => {
@@ -40,7 +41,7 @@ const DaremeDetails = () => {
     if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
     if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
     if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
-    else if(dareme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
+    else if (dareme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
   }
 
   const canShowResult = (dareme: any, user: any) => {
@@ -56,11 +57,8 @@ const DaremeDetails = () => {
   }
 
   const dareCreator = (user: any) => {
-    if (user) {
-      dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
-      // // if (dareme.time > 1) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
-      // // else setIsDareDisable(true);
-    } else setIsSignIn(true);
+    if (user) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
+    else setIsSignIn(true);
   }
 
   const supportCreator = (user: any, daremeId: any, optionId: any) => {
@@ -103,6 +101,19 @@ const DaremeDetails = () => {
       </div>
       {(resultOptions.length > 0 && dareme.owner) &&
         <>
+          <Dialog
+            display={isReward}
+            exit={() => { setIsReward(false) }}
+            wrapExit={() => { setIsReward(false) }}
+            subTitle={dareme.rewardText}
+            icon={
+              {
+                pos: 1,
+                icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+              }
+            }
+            context={'Supporting the creator as SuperFan will get you entitled for the reward!'}
+          />
           <Dialog
             display={isSignIn}
             exit={() => { setIsSignIn(false) }}
@@ -152,29 +163,27 @@ const DaremeDetails = () => {
             ]}
           />
           <div className="dareme-details">
-            <div className="dareme-details-videoCardDesktop">
-              <VideoCardDesktop
-                url={CONSTANT.SERVER_URL + "/" + dareme.teaser}
-                sizeType={dareme.sizeType}
-                coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-              />
-              <AvatarLink
-                avatar={dareme.owner.avatar}
-                username={dareme.owner.name}
-                ownerId={dareme.owner._id}
-                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
-                daremeId={dareme._id}
-              />
+            <div className="desktop-header-info">
+              <div className="time-info">
+                <div className="left-time">
+                  {calcTime(dareme.time)} {!dareme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+                </div>
+                <div className="vote-info">
+                  <CreatoCoinIcon color="black" />
+                  <span>{dareme.donuts}</span>
+                </div>
+              </div>
+              <div className="title-category">
+                <div className="dare-title">{dareme.title}</div>
+                <div className="dare-category">
+                  <CategoryBtn text={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]} color="primary" />
+                </div>
+              </div>
             </div>
-            <div className="dareme-details-information">
-              <div className="dareme-details-videoCardMobile">
-                <VideoCardMobile
+            <div className="main-body">
+              <div className="dareme-details-videoCardDesktop">
+                <VideoCardDesktop
                   url={CONSTANT.SERVER_URL + "/" + dareme.teaser}
-                  title={dareme.title}
-                  time={dareme.time}
-                  isFinished={dareme.finished}
-                  donuts={dareme.donuts}
-                  category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                   sizeType={dareme.sizeType}
                   coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
                 />
@@ -186,58 +195,75 @@ const DaremeDetails = () => {
                   daremeId={dareme._id}
                 />
               </div>
-              <div className="desktop-header-info">
-                <div className="time-info">
-                  <div className="left-time">
-                    {calcTime(dareme.time)} {!dareme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
-                  </div>
-                  <div className="vote-info">
-                    <CreatoCoinIcon color="black" />
-                    <span>{dareme.donuts}</span>
-                  </div>
+              <div className="dareme-details-information">
+                <div className="dareme-details-videoCardMobile">
+                  <VideoCardMobile
+                    url={CONSTANT.SERVER_URL + "/" + dareme.teaser}
+                    title={dareme.title}
+                    time={dareme.time}
+                    isFinished={dareme.finished}
+                    donuts={dareme.donuts}
+                    category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                    sizeType={dareme.sizeType}
+                    coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                  />
+                  <AvatarLink
+                    avatar={dareme.owner.avatar}
+                    username={dareme.owner.name}
+                    ownerId={dareme.owner._id}
+                    handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                    daremeId={dareme._id}
+                  />
                 </div>
-                <div className="dare-title">{dareme.title}</div>
-                <div className="dare-category">
-                  <CategoryBtn text={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]} color="primary" />
+                <div className="dare-btn" style={{ marginTop: '20px' }} onClick={() => { setIsReward(true) }}>
+                  <ContainerBtn
+                    disabled={false}
+                    styleType="outline"
+                    text={'See SuperFan Reward'}
+                    icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
+                  />
                 </div>
-              </div>
-              <div className="dare-btn">
-                {(user && user.id === dareme.owner._id) ?
-                  <div onClick={() => { dispatch(daremeAction.checkDareMeRequests(dareme._id, navigate)); }}>
-                    <ContainerBtn
-                      styleType="fill"
-                      text={contexts.DAREME_DETAILS.SEE_REQUESTS}
-                      icon={[<NotificationwithCircleIcon color="white" circleColor="white" />, <NotificationwithCircleIcon color="white" circleColor="white" />]}
-                    />
-                  </div>
-                  :
-                  <div onClick={() => { dareCreator(user); }}>
-                    <ContainerBtn
-                      // disabled={dareme.time < 1 ? true : false}
-                      styleType="fill"
-                      text={contexts.DAREME_DETAILS.HAVE_IDEA}
-                    />
-                  </div>
-                }
-              </div>
-              <div className="or-style">or</div>
-              <div className="dare-options scroll-bar">
-                {
-                  resultOptions.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
-                    <div className="dare-option" key={index}>
-                      <DareOption
-                        dareTitle={option.option.title}
-                        donuts={option.option.donuts}
-                        voters={canShow ? option.option.voters : undefined}
-                        canVote={true}
-                        disabled={false}
-                        username={option.option.writer.name}
-                        leading={index !== 0 ? false : canShow}
-                        handleSubmit={() => { supportCreator(user, dareme._id, option.option._id); }}
+                <div className="select-dare-option">
+                  <span></span>Select dare option<span></span>
+                </div>
+                <div className="dare-btn">
+                  {(user && user.id === dareme.owner._id) ?
+                    <div onClick={() => { dispatch(daremeAction.checkDareMeRequests(dareme._id, navigate)); }}>
+                      <ContainerBtn
+                        styleType="fill"
+                        text={contexts.DAREME_DETAILS.SEE_REQUESTS}
+                        icon={[<NotificationwithCircleIcon color="white" circleColor="white" />, <NotificationwithCircleIcon color="white" circleColor="white" />]}
                       />
                     </div>
-                  ))
-                }
+                    :
+                    <div onClick={() => { dareCreator(user); }}>
+                      <ContainerBtn
+                        // disabled={dareme.time < 1 ? true : false}
+                        styleType="fill"
+                        text={contexts.DAREME_DETAILS.HAVE_IDEA}
+                      />
+                    </div>
+                  }
+                </div>
+                <div className="or-style">or</div>
+                <div className="dare-options scroll-bar">
+                  {
+                    resultOptions.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
+                      <div className="dare-option" key={index}>
+                        <DareOption
+                          dareTitle={option.option.title}
+                          donuts={option.option.donuts}
+                          voters={canShow ? option.option.voters : undefined}
+                          canVote={true}
+                          disabled={false}
+                          username={option.option.writer.name}
+                          leading={index !== 0 ? false : canShow}
+                          handleSubmit={() => { supportCreator(user, dareme._id, option.option._id); }}
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog";
 import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
+import Gif from "../../../components/general/gif";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, HotIcon, RewardIcon } from '../../../assets/svg';
@@ -54,12 +55,15 @@ const FundmePreview = () => {
   }, [dlgState]);
 
   useEffect(() => {
-    if(createFundmeGif) setTimeout(() => { setCreateFundmeGif(false) }, 3000);
+    if (createFundmeGif) setTimeout(() => { setCreateFundmeGif(false) }, 3000);
   }, [createFundmeGif]);
 
   return (
     <>
       <div className="title-header">
+        {createFundmeGif &&
+          <Gif gif={CreateFundMeGif} />
+        }
         <Title
           title={contexts.CREATE_FUNDME_LETTER.PREVIEW}
           back={() => {
@@ -113,11 +117,6 @@ const FundmePreview = () => {
         ownerName={user.name}
       />
       <div className="preview-wrapper">
-        {createFundmeGif &&
-          <div className="create-fundme-gif">
-            <img src={CreateFundMeGif} />
-          </div>
-        }
         <div className="preview-desktop-videoCardDesktop">
           <VideoCardDesktop
             url={fundState.teaser ? `${CONSTANT.SERVER_URL}/${fundState.teaser}` : ""}

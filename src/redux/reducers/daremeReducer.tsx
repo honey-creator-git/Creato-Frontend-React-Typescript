@@ -9,6 +9,8 @@ const INITIAL_STATE: any = {
         teaser: null,
         cover: null,
         options: [],
+        reward: null,
+        rewardText: null,
         published: null,
         sizeType: null,
         coverIndex: -1
@@ -38,6 +40,8 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
                     category: null,
                     teaser: null,
                     options: [],
+                    reward: null,
+                    rewardText: null,
                     published: false,
                     cover: null,
                     sizeType: null,
@@ -52,7 +56,7 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
                 options: [],
                 daremes: []
             };
-        case actionTypes.SET_DAREME_DETAIL_INITIAL: 
+        case actionTypes.SET_DAREME_DETAIL_INITIAL:
             state.dareme = {
                 owner: null,
                 title: null,
@@ -60,6 +64,8 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
                 category: null,
                 teaser: null,
                 options: [],
+                reward: null,
+                rewardText: null,
                 published: false,
                 cover: null,
                 sizeType: null,

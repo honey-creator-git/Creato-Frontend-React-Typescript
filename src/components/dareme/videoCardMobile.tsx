@@ -21,12 +21,17 @@ const VideoCardMobile = (props: any) => {
     const width = donuts < interval ? Math.floor(Number(interval) / Number(goal) * 262) : Math.floor(Number(interval) * count / Number(goal) * 262);
 
     const calcTime = (time: any) => {
-        if (finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
         if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
         if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
         if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
         if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
-        else if(finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
+
+        const passTime = Math.abs(time);
+        if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
     }
 
     const checkLock = () => {
@@ -37,12 +42,16 @@ const VideoCardMobile = (props: any) => {
                 const options = fanwallData.dareme.options.filter((option: any) => option.option.win === true);
                 for (let i = 0; i < options[0].option.voteInfo.length; i++) {
                     const voteInfo = options[0].option.voteInfo[i];
-                    if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+                    if ((voteInfo.voter + "" === user.id + "") && voteInfo?.superfan === true) return false;
+                    if (fanwallData.dareme.reward) { }
+                    else {
+                        if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+                    }
                 }
             } else if (fanwallData.dareme && fanwallData.dareme.options === null) {
                 for (let i = 0; i < fanwallData.dareme.voteInfo.length; i++) {
                     const voteInfo = fanwallData.dareme.voteInfo[i];
-                    if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= fanwallData.dareme.reward) return false;
+                    if ((voteInfo.voter + "" === user.id + "") && voteInfo?.superfan === true) return false;
                 }
             }
             for (let i = 0; i < fanwallData.unlocks.length; i++) if (user.id + "" === fanwallData.unlocks[i].unlocker + "") return false;
@@ -96,7 +105,7 @@ const VideoCardMobile = (props: any) => {
                 <div className="information">
                     <div className="time-info">
                         <div className="left-time">
-                            {calcTime(time)} {!finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+                            {finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED} {calcTime(time)} {!finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
                         </div>
                         <div className="vote-info">
                             <CreatoCoinIcon color="white" />

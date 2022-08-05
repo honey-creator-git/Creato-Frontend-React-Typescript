@@ -13,7 +13,7 @@ import CONSTANT from "../../../constants/constant";
 import Hint from "../../../components/general/hint";
 import { SET_COVER_FILE, SET_DAREME, SET_DIALOG_STATE, SET_TEASER_FILE } from "../../../redux/types";
 import { LanguageContext } from "../../../routes/authRoute";
-import { AddIcon, EditIcon, PlayIcon } from "../../../assets/svg";
+import { AddIcon, EditIcon, PlayIcon, RewardIcon } from "../../../assets/svg";
 import "../../../assets/styles/dareme/create/createDaremeStyle.scss";
 
 const useWindowSize = () => {
@@ -88,6 +88,8 @@ const CreateDareme = () => {
   };
 
   const Preview = () => {
+    if (daremeState.reward === null) return false;
+    if (daremeState.rewardText === null) return false;
     if (daremeState.title === null) return false;
     if (daremeState.deadline === null) return false;
     if (daremeState.category === null) return false;
@@ -145,15 +147,18 @@ const CreateDareme = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.CREATE_DAREME} back={() => {
-          if ((daremeState.teaser === null && daremeStore.teaserFile === null)
-            && daremeState.deadline === null
-            && daremeState.category === null
-            && daremeState.title === null
-            && (daremeState.options.length === 0 || (daremeState.options.length > 0 && daremeState.options[0].option.title === null && daremeState.options[1].option.title === null)))
-            navigate(prevRoute);
-          else setOpen(true);
-        }} hint={() => { setOpenHint(true); }} erase={() => { setOpenErase(true); }} />
+        <Title title={contexts.HEADER_TITLE.CREATE_DAREME}
+          back={() => {
+            if ((daremeState.teaser === null && daremeStore.teaserFile === null)
+              && daremeState.deadline === null
+              && daremeState.category === null
+              && daremeState.title === null
+              && (daremeState.options.length === 0 || (daremeState.options.length > 0 && daremeState.options[0].option.title === null && daremeState.options[1].option.title === null)))
+              navigate(prevRoute);
+            else setOpen(true);
+          }}
+          hint={() => { setOpenHint(true); }}
+        />
       </div>
       <div className="create-dareme-wrapper" onClick={() => {
         setOpenCategoryMenu(false);
@@ -281,12 +286,12 @@ const CreateDareme = () => {
               </div>
               <div className="options">
                 <div className="deadline">
-                  {daremeState.deadline ? (
-                    <div style={{ width: 'fit-content' }} onClick={(e) => {
-                      e.stopPropagation();
-                      setOpenDeadlineMenu(!openDeadlineMenu);
-                      setOpenCategoryMenu(false);
-                    }}>
+                  <div style={{ width: 'fit-content' }} onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenDeadlineMenu(!openDeadlineMenu);
+                    setOpenCategoryMenu(false);
+                  }}>
+                    {daremeState.deadline ? (
                       <Button
                         text={contexts.DAREME_DEADLINE_LIST[daremeState.deadline - 1]}
                         icon={[
@@ -296,14 +301,7 @@ const CreateDareme = () => {
                         ]}
                         fillStyle="outline"
                         bgColor="#059669"
-                      />
-                    </div>
-                  ) : (
-                    <div style={{ width: 'fit-content' }} onClick={(e) => {
-                      e.stopPropagation();
-                      setOpenDeadlineMenu(!openDeadlineMenu);
-                      setOpenCategoryMenu(false);
-                    }}>
+                      />) : (
                       <Button
                         shape="pill"
                         color="primary"
@@ -315,8 +313,8 @@ const CreateDareme = () => {
                         ]}
                         fillStyle="outline"
                       />
-                    </div>
-                  )}
+                    )}
+                  </div>
                   <div
                     className="drop-down-lists"
                     style={{
@@ -405,6 +403,12 @@ const CreateDareme = () => {
                     ))}
                   </div>
                 </div>
+                <div className="reward-btn"
+                  style={(daremeState.reward !== null && daremeState.rewardText !== null) ? { backgroundColor: '#059669' } : { backgroundColor: 'white', border: '1px solid #EFA058' }}
+                  onClick={() => { navigate('/dareme/create/rewards') }}
+                >
+                  <RewardIcon color={(daremeState.reward !== null && daremeState.rewardText !== null) ? "white" : "#EFA058"} width="25" height="25" />
+                </div>
                 <div className="dare-options">
                   <div
                     className="dare-option"
@@ -456,17 +460,22 @@ const CreateDareme = () => {
                     />
                   </div>
                 </div>
-                <div
-                  className="prev-btn"
-                  onClick={() => {
-                    if (prevBtn) {
-                      if ((daremeStore.coverFile === null && daremeState.cover === null) || (daremeStore.coverFile === null && daremeState.cover !== null && daremeStore.teaserFile !== null)) getFirstFrame(1);
-                      else dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, "/dareme/preview"));
-                    }
-                  }}
-                >
-                  <ContainerBtn text={contexts.CREATE_DAREME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
-                </div>
+              </div>
+            </div>
+            <div className="preview-clear">
+              <div className="clear-btn" onClick={() => { setOpenErase(true) }}>
+                <ContainerBtn text='Clear all' styleType="clear" />
+              </div>
+              <div
+                className="prev-btn"
+                onClick={() => {
+                  if (prevBtn) {
+                    if ((daremeStore.coverFile === null && daremeState.cover === null) || (daremeStore.coverFile === null && daremeState.cover !== null && daremeStore.teaserFile !== null)) getFirstFrame(1);
+                    else dispatch(daremeAction.saveDareme(daremeState, daremeStore.teaserFile, daremeStore.coverFile, navigate, "/dareme/preview"));
+                  }
+                }}
+              >
+                <ContainerBtn text={contexts.CREATE_DAREME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
               </div>
             </div>
           </div>
@@ -510,32 +519,40 @@ const CreateDareme = () => {
                 </div>
               }
               <div className="deadline">
-                {daremeState.deadline ? (
-                  <Button
-                    handleSubmit={handledeadlineDlgOpen}
-                    text={contexts.DAREME_DEADLINE_LIST[daremeState.deadline - 1]}
-                    icon={[
-                      <EditIcon color="white" />,
-                      <EditIcon color="white" />,
-                      <EditIcon color="white" />,
-                    ]}
-                    fillStyle="outline"
-                    bgColor="#059669"
-                  />
-                ) : (
-                  <Button
-                    handleSubmit={handledeadlineDlgOpen}
-                    shape="pill"
-                    color="primary"
-                    text={contexts.CREATE_DAREME_LETTER.DEADLINE}
-                    icon={[
-                      <AddIcon color="#EFA058" />,
-                      <AddIcon color="white" />,
-                      <AddIcon color="white" />,
-                    ]}
-                    fillStyle="outline"
-                  />
-                )}
+                <div>
+                  {daremeState.deadline ? (
+                    <Button
+                      handleSubmit={handledeadlineDlgOpen}
+                      text={contexts.DAREME_DEADLINE_LIST[daremeState.deadline - 1]}
+                      icon={[
+                        <EditIcon color="white" />,
+                        <EditIcon color="white" />,
+                        <EditIcon color="white" />,
+                      ]}
+                      fillStyle="outline"
+                      bgColor="#059669"
+                    />
+                  ) : (
+                    <Button
+                      handleSubmit={handledeadlineDlgOpen}
+                      shape="pill"
+                      color="primary"
+                      text={contexts.CREATE_DAREME_LETTER.DEADLINE}
+                      icon={[
+                        <AddIcon color="#EFA058" />,
+                        <AddIcon color="white" />,
+                        <AddIcon color="white" />,
+                      ]}
+                      fillStyle="outline"
+                    />
+                  )}
+                </div>
+                <div className="reward-btn"
+                  style={(daremeState.reward !== null && daremeState.rewardText !== null) ? { backgroundColor: '#059669' } : { backgroundColor: 'white', border: '1px solid #EFA058' }}
+                  onClick={() => { navigate('/dareme/create/rewards') }}
+                >
+                  <RewardIcon color={(daremeState.reward !== null && daremeState.rewardText !== null) ? "white" : "#EFA058"} width="25" height="25" />
+                </div>
               </div>
               <div className="dareme-title">
                 {daremeState.title ? (
@@ -635,6 +652,9 @@ const CreateDareme = () => {
                   handleSubmit={() => { }}
                 />
               </div>
+            </div>
+            <div className="prev-btn" onClick={() => { setOpenErase(true) }}>
+              <ContainerBtn text='Clear all' styleType="clear" />
             </div>
             <div
               className="prev-btn"

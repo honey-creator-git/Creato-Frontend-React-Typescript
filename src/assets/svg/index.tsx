@@ -1331,3 +1331,9 @@ export const UnionPayCardActiveIcon = () => (
   </svg>
 );
 
+export const HelpIcon = () => (
+  <svg style={{ cursor: 'pointer' }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 18V17.9648M12 13.5V12C13.6806 12 15 10.6677 15 9C15 7.33227 13.3749 6 12 6C10.5 6 9.66993 6.58373 9 7.5M22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12Z" stroke="#EFA058" strokeWidth="3" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);
+

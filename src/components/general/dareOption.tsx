@@ -106,7 +106,7 @@ const DareOption = (props: any) => {
           <div style={iconStyle}>
             {disabled === true ? (
               <Dare1Icon color="#938D8A" />
-            ) : state === "default" && leading == false ? (
+            ) : state === "default" && leading === false ? (
               <Dare1Icon color="#EFA058" />
             ) : (
               <Dare1Icon color="white" />

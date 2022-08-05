@@ -2,17 +2,17 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { daremeAction } from "../../../redux/actions/daremeActions";
-import { SET_DAREME_INITIAL, SET_CURRENT_DAREME, SET_DIALOG_STATE } from "../../../redux/types";
+import { SET_DAREME_INITIAL, SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import AvatarLink from "../../../components/dareme/avatarLink";
 import Title from "../../../components/general/title";
 import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
 import ContainerBtn from "../../../components/general/containerBtn";
+import Gif from "../../../components/general/gif";
 import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
-import { HotIcon } from "../../../assets/svg";
+import { HotIcon, LightbulbIcon } from "../../../assets/svg";
 import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
 import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
 import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss';
@@ -49,8 +49,17 @@ const SupportCreator = () => {
         else {
             if (amount > user.wallet) setIsTopUp(true);
             else {
-                setIsSuperFan(true);
-                setType(1);
+                if (dareme.reward) {
+                    if (amount === dareme.reward) {
+                        setIsSuperFan(true);
+                        setType(1);
+                    }
+                } else {
+                    if (amount === 50) {
+                        setIsSuperFan(true);
+                        setType(1);
+                    }
+                }
             }
         }
     }
@@ -87,7 +96,7 @@ const SupportCreator = () => {
             for (let i = 0; i < dareme.options.length; i++)
                 if (dareme.options[i].option._id == option._id)
                     setVoters(dareme.options[i].option.voters)
-    })
+    }, [dareme, option]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -114,9 +123,15 @@ const SupportCreator = () => {
     }, [voteSuperfanGif]);
 
     return (
-        <>
+        <div>
+            {voteNonSuperfanGif &&
+                <Gif gif={VoteNonSuperfanGif} />
+            }
+            {voteSuperfanGif &&
+                <Gif gif={VoteSuperfanGif} />
+            }
             <div className="title-header">
-                <Title title={contexts.HEADER_TITLE.SUPPORT_CREATOR} back={() => {
+                <Title title={contexts.HEADER_TITLE.DAREME_OPTION} back={() => {
                     dispatch({ type: SET_DAREME_INITIAL });
                     navigate(`/dareme/details/${daremeId}`);
                 }} />
@@ -182,12 +197,12 @@ const SupportCreator = () => {
                         ]}
                         exit={() => { setIsSuperFan(false) }}
                         wrapExit={() => { setIsSuperFan(false) }}
-                        context={contexts.DIALOG.BODY_LETTER.VOTE_SUPER + option.title}
+                        context={(dareme.reward ? dareme.reward : '50') + contexts.DIALOG.BODY_LETTER.VOTE_SUPER + option.title}
                         buttons={[
                             {
                                 text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
                                 handleClick: () => {
-                                    dispatch(daremeAction.supportCreator(daremeId, optionId, 50, navigate));
+                                    dispatch(daremeAction.supportCreator(daremeId, optionId, dareme.reward ? dareme.reward : 50, navigate));
                                     setIsSuperFan(false);
                                     setIsCopied(false);
                                 }
@@ -201,15 +216,15 @@ const SupportCreator = () => {
                             dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
                             user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
                         ] : []}
-                        exit={() => { 
-                            setIsCopyLink(false); 
-                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } }) 
+                        exit={() => {
+                            setIsCopyLink(false);
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
                             setVoteNonSuperfanGif(false);
-                            setVoteSuperfanGif(false);    
+                            setVoteSuperfanGif(false);
                         }}
-                        wrapExit={() => { 
-                            setIsCopyLink(false); 
-                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } }) 
+                        wrapExit={() => {
+                            setIsCopyLink(false);
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
                             setVoteNonSuperfanGif(false);
                             setVoteSuperfanGif(false);
                         }}
@@ -243,16 +258,6 @@ const SupportCreator = () => {
                         ]}
                     />
                     <div className="dareme-support">
-                        {voteNonSuperfanGif &&
-                            <div className="vote-gif">
-                                <img src={VoteNonSuperfanGif} />
-                            </div>
-                        }
-                        {voteSuperfanGif &&
-                            <div className="vote-gif">
-                                <img src={VoteSuperfanGif} />
-                            </div>
-                        }
                         <div className="dareme-support-videoCardDesktop">
                             <VideoCardDesktop
                                 url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
@@ -270,6 +275,9 @@ const SupportCreator = () => {
                         <div>
                             <div className="dareme-support-information">
                                 <div className="dareme-support-fun">
+                                    <div className="header-choosen">
+                                        You have chosen:
+                                    </div>
                                     <div className="support-option">
                                         <DareOption
                                             donuts={option.donuts}
@@ -278,7 +286,12 @@ const SupportCreator = () => {
                                             username={option.writer.name}
                                             disabled={false}
                                             handleSubmit={() => { }}
+                                            canVote={true}
+                                            leading={false}
                                         />
+                                    </div>
+                                    <div className="number-of-donuts">
+                                        <span></span>Number of Donuts<span></span>
                                     </div>
                                     <div className="support-fun" onClick={() => {
                                         if (user) {
@@ -288,42 +301,52 @@ const SupportCreator = () => {
                                     }}>
                                         <ContainerBtn text={contexts.SUPPORT_CREATOR.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
                                     </div>
+                                    <div className="support-letter">
+                                        <span>Donut x1:</span>
+                                    </div>
+                                    <div className="support-explain">
+                                        <span>
+                                            Supporting the creator for Free! This 1 Donut will be donated by Creato!
+                                        </span>
+                                    </div>
                                     <div className="support-fun" onClick={() => {
-                                        if (user) showDlg(50);
+                                        if (user) showDlg(dareme.reward ? dareme.reward : 50);
                                         else setIsSignIn(true);
                                     }}>
-                                        <ContainerBtn text={contexts.SUPPORT_CREATOR.SUPER_SUPPORT} styleType="fill"
+                                        <ContainerBtn text={`Donut x${dareme.reward ? dareme.reward : 50} (SuperFan!)`} styleType="fill"
                                             icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
                                         />
                                     </div>
-                                </div>
-                            </div>
-                            <div className="support-letters">
-                                <div className="support-big-letter">
-                                    <span>{contexts.SUPPORT_CREATOR.HOW_IT_WORKS}</span>
-                                </div>
-                                <div className="support-small-letter">
-                                    <span>{contexts.SUPPORT_CREATOR.DONUT_FREE}</span>
-                                </div>
-                                <div className="support-explain">
-                                    <span>
-                                        {contexts.SUPPORT_CREATOR.DONUT_FREE_LETTER}
-                                    </span>
-                                </div>
-                                <div className="support-small-letter">
-                                    <span>{contexts.SUPPORT_CREATOR.DONUT_SUPER}</span>
-                                </div>
-                                <div className="support-explain">
-                                    <span>
-                                        {contexts.SUPPORT_CREATOR.DONUT_SUPER_LETTER}
-                                    </span>
+                                    <div className="support-letter">
+                                        <span>SuperFans:</span>
+                                    </div>
+                                    <div className="support-explain">
+                                        <span>
+                                            Support creators by giving specific amount of donut and get exclusive content.
+                                        </span>
+                                    </div>
+                                    <div className="support-fun" onClick={() => {
+                                        navigate('/dareme/' + daremeId + '/support/' + optionId + '/wish')
+                                    }}>
+                                        <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
+                                            icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
+                                        />
+                                    </div>
+                                    <div className="support-letter">
+                                        <span></span>
+                                    </div>
+                                    <div className="support-explain">
+                                        <span>
+                                            Support any number of Donuts as you wish!
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </>
             }
-        </>
+        </div>
     );
 }
 

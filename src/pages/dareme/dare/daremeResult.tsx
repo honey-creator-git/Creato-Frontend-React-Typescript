@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { daremeAction } from "../../../redux/actions/daremeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
+import VideoCardMobile from "../../../components/dareme/videoCardMobile";
 import AvatarLink from "../../../components/dareme/avatarLink";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
@@ -62,6 +63,20 @@ const DaremeResult = () => {
             setIsWin(resultOptions.filter((option: any) => option.option.win === true).length ? true : false);
         }
     }, [resultOptions]);
+
+    const calcTime = (time: any) => {
+        if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
+        if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
+        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
+        if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
+
+        const passTime = Math.abs(time);
+        if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if (passTime > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+    }
 
     return (
         <>
@@ -138,9 +153,31 @@ const DaremeResult = () => {
                         />
                     </div>
                     <div className="dareme-result-information">
+                        <div className="dareme-result-videoCardMobile">
+                            <VideoCardMobile
+                                url={CONSTANT.SERVER_URL + "/" + dareme.teaser}
+                                title={dareme.title}
+                                time={dareme.time}
+                                finished={dareme.finished}
+                                donuts={totalDonuts}
+                                category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
+                                sizeType={dareme.sizeType}
+                                coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                            />
+                            <AvatarLink
+                                avatar={dareme.owner.avatar}
+                                username={dareme.owner.name}
+                                ownerId={dareme.owner._id}
+                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                                daremeId={dareme._id}
+                                isFundme={true}
+                            />
+                        </div>
                         <div className="desktop-header-info">
                             <div className="time-info">
-                                <div className="left-time">{contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED}</div>
+                                <div className="left-time">
+                                    {dareme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED} {calcTime(dareme.time)} {!dareme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+                                </div>
                                 <div className="vote-info">
                                     <CreatoCoinIcon color="black" />
                                     <span>{totalDonuts !== null ? totalDonuts.toLocaleString() : ''}</span>

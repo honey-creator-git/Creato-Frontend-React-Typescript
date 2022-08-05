@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { CloseIcon, LightbulbIcon } from "../../assets/svg";
+import { CloseIcon, HelpIcon } from "../../assets/svg";
 import "../../assets/styles/hintStyle.scss";
 
 const useWindowSize = () => {
@@ -17,12 +17,12 @@ const useWindowSize = () => {
 const Hint = (props: any) => {
   const size = useWindowSize();
   const user = useSelector((state: any) => state.auth.user);
-  const { color, context, title, open, exit } = props;
+  const { context, title, open, exit } = props;
   const addingVal = (user && user.role === "ADMIN") ? 55 : 0;
   const height = size >= 880 ? 72 : 120 + addingVal;
   const Style = {
     right: open === true ? "0px" : "-336px",
-    backgroundColor: color,
+    backgroundColor: '#EFA058',
     top: `${height}px`,
   };
 
@@ -32,7 +32,7 @@ const Hint = (props: any) => {
         <div className="top">
           <div className="hint-title">
             <div className="hint-icon">
-              <LightbulbIcon color={color} />
+              <HelpIcon />
             </div>
             <div className="title">{title}</div>
           </div>

@@ -1,51 +1,42 @@
-.preview-wrapper {
+.preview-dareme-wrapper {
   box-sizing: border-box;
-  display: flex;
   position: relative;
 
-  .create-dareme-gif {
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    z-index: 10;
-    position: absolute;
-    pointer-events: none;
-  }
+  .desktop-header-info {
+    width: 100%;
+    margin: 0 auto 10px auto;
 
-  .preview-information {
-    width: 370px;
+    .time-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .desktop-header-info {
-      width: 340px;
-      margin: 0 auto;
+      .left-time {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 18px;
+        color: #E17253;
+      }
 
-      .time-info {
+      .vote-info {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: bold;
+        color: black;
 
-        .left-time {
-          font-style: normal;
-          font-weight: bold;
-          font-size: 16px;
-          line-height: 18px;
-          color: #E17253;
-        }
-
-        .vote-info {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: bold;
-          color: black;
-
-          span {
-            width: fit-content;
-            margin: auto 5px;
-          }
+        span {
+          width: fit-content;
+          margin: auto 5px;
         }
       }
+    }
+
+    .title-category {
+      display: flex;
+      justify-content: space-between;
 
       .dare-title {
         margin-top: 10px;
@@ -60,32 +51,63 @@
       .dare-category {
         margin-top: 10px;
       }
-
     }
+  }
 
-    .dare-btn {
-      width: 330px;
-      margin: 0px auto;
-      margin-top: 20px;
-    }
+  .main-body {
+    display: flex;
 
-    .or-style {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
-      text-align: center;
-      color: #000000;
-      margin: 16px 0px
-    }
+    .preview-information {
+      width: 370px;
 
-    .dare-options {
-      width: 340px;
-      margin: 0 auto;
-      box-sizing: border-box;
+      .dare-btn {
+        width: 330px;
+        margin: 0px auto;
+        margin-top: 20px;
+      }
 
-      .dare-option {
-        margin: 0px 2px 5px 5px;
+      .select-dare-option {
+        width: 270px;
+        margin: 30px auto;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #BAB6B5;
+
+        span {
+          margin-top: 10px;
+          width: 60px;
+          border: 1px solid #BAB6B5;
+          border-left: 0px;
+          border-bottom: 0px;
+          border-right: 0px;
+        }
+      }
+
+      .or-style {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+      }
+
+      .dare-options {
+        width: 340px;
+        margin: 10px auto;
+        box-sizing: border-box;
+
+        .dare-option {
+          margin: 15px 2px 15px 5px;
+        }
       }
     }
   }
@@ -97,49 +119,82 @@
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 40px;
-    justify-content: space-between;
 
-    .preview-desktop-videoCardDesktop {
-      width: 370px;
-      display: block;
+    .main-body {
+      width: 100%;
+      justify-content: space-between;
+
+      .preview-desktop-videoCardDesktop {
+        width: 370px;
+        display: block;
+      }
+
+      .preview-videoCardMobile {
+        display: none;
+      }
+
+      .dare-creator {
+        display: block;
+      }
     }
-
-    .preview-videoCardMobile {
-      display: none;
-    }
-
-    .dare-creator {
-      display: block;
-    }
-
   }
 
   @media (max-width: 879px) {
-    justify-content: center;
-
-    .preview-desktop-videoCardDesktop {
-      display: none;
-    }
-
     .desktop-header-info {
       display: none;
     }
 
-    .preview-videoCardMobile {
-      width: 340px;
-      margin: 10px auto 10px auto;
-      display: block;
+    .main-body {
+      justify-content: center;
+
+      .preview-desktop-videoCardDesktop {
+        display: none;
+      }
+
+      .desktop-header-info {
+        display: none;
+      }
+
+      .preview-videoCardMobile {
+        width: 340px;
+        margin: 10px auto 10px auto;
+        display: block;
+      }
+
+      .dare-options {
+        background: #ffffff;
+      }
+    }
+  }
+}
+
+.publish-back {
+  margin-top: 20px;
+
+  .back-btn {
+    width: 330px;
+  }
+
+  .publish-btn {
+    width: 330px;
+  }
+
+  @media (min-width: 880px) {
+    display: flex;
+    justify-content: center;
+
+    .publish-btn {
+      margin-left: 20px;
+    }
+  }
+
+  @media (max-width: 879px) {
+    .back-btn {
+      margin: 0px auto;
     }
 
-    .dare-creator {
-      display: none;
-    }
-
-    .dare-options {
-      background: #ffffff;
-      padding: 10px;
-      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-      border-radius: 5px;
+    .publish-btn {
+      margin: 15px auto 0px auto;
     }
   }
 }

@@ -9,6 +9,7 @@ import ContainerBtn from "../../components/general/containerBtn";
 import Creato from "../../components/general/creato";
 import DisplayDonutsPlan from "../../components/stripe/displayDonutsPlan";
 import PaymentForm from "../../components/stripe/paymentForm";
+import Gif from "../../components/general/gif";
 import { LanguageContext } from "../../routes/authRoute";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
@@ -95,7 +96,7 @@ const TipDonut = () => {
   }
 
   useEffect(() => {
-    if(tippingGif) setTimeout(() => { setTippingGif(false) }, 8500);
+    if (tippingGif) setTimeout(() => { setTippingGif(false) }, 8500);
   }, [tippingGif]);
 
   useEffect(() => {
@@ -117,6 +118,9 @@ const TipDonut = () => {
   return (
     <div className="tip-donuts">
       <Title title="Tip Donuts" back={() => { navigate(`/${authuser?.personalisedUrl}`) }} />
+      {tippingGif &&
+        <Gif gif={TippingGif} />
+      }
       {authuser &&
         <div className="tip-donuts-body">
           <DisplayDonutsPlan
@@ -128,11 +132,6 @@ const TipDonut = () => {
               setOpenPaymentDlg(true);
             }}
           />
-          {tippingGif &&
-            <div className="tipping-gif">
-              <img src={TippingGif} />
-            </div>
-          }
           <PaymentForm
             tipData={{ nickname: nickname, message: message, user: authuser?._id }}
             display={openPaymentDlg}

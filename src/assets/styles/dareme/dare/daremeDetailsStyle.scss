@@ -1,6 +1,5 @@
 .dareme-details {
   box-sizing: border-box;
-  display: flex;
 
   .scroll-bar {
     &::-webkit-scrollbar {
@@ -24,40 +23,41 @@
     }
   }
 
-  .dareme-details-information {
-    width: 370px;
+  .desktop-header-info {
+    width: 100%;
+    margin: 0 auto 10px auto;
 
-    .desktop-header-info {
-      width: 340px;
-      margin: 0 auto;
+    .time-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      .time-info {
+      .left-time {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 18px;
+        color: #E17253;
+      }
+
+      .vote-info {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: bold;
+        color: black;
 
-        .left-time {
-          font-style: normal;
-          font-weight: bold;
-          font-size: 16px;
-          line-height: 18px;
-          color: #E17253;
-        }
-
-        .vote-info {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: bold;
-          color: black;
-
-          span {
-            width: fit-content;
-            margin: auto 5px;
-          }
+        span {
+          width: fit-content;
+          margin: auto 5px;
         }
       }
+    }
+
+    .title-category {
+      display: flex;
+      justify-content: space-between;
 
       .dare-title {
         margin-top: 10px;
@@ -70,33 +70,65 @@
       }
 
       .dare-category {
+        margin-left: 260px;
         margin-top: 10px;
       }
     }
+  }
 
-    .dare-btn {
-      width: 330px;
-      margin: 0px auto;
-      margin-top: 20px;
-    }
+  .main-body {
+    display: flex;
 
-    .or-style {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
-      text-align: center;
-      color: #000000;
-      margin: 10px 0px
-    }
+    .dareme-details-information {
+      width: 370px;
 
-    .dare-options {
-      width: 340px;
-      margin: 0 auto;
-      overflow-y: scroll;
+      .dare-btn {
+        width: 330px;
+        margin: 0px auto;
+        margin-top: 20px;
+      }
 
-      .dare-option {
-        margin: 0px 2px 5px 5px;
+      .select-dare-option {
+        width: 270px;
+        margin: 20px auto;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #BAB6B5;
+
+        span {
+          margin-top: 10px;
+          width: 60px;
+          border: 1px solid #BAB6B5;
+          border-left: 0px;
+          border-bottom: 0px;
+          border-right: 0px;
+        }
+      }
+
+      .or-style {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+        margin: 15px 0px
+      }
+
+      .dare-options {
+        width: 340px;
+        margin: 0 auto;
+        overflow-y: scroll;
+
+        .dare-option {
+          margin: 0px 2px 5px 5px;
+        }
       }
     }
   }
@@ -108,41 +140,50 @@
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 40px;
-    justify-content: space-between;
 
-    .dareme-details-videoCardDesktop {
-      width: 370px;
-      display: block;
-    }
+    .main-body {
+      justify-content: space-between;
 
-    .dareme-details-videoCardMobile {
-      display: none;
-    }
+      .dareme-details-videoCardDesktop {
+        width: 370px;
+        display: block;
+      }
 
-    .dare-options {
-      max-height: 300px;
+      .dareme-details-videoCardMobile {
+        display: none;
+      }
+
+      .dare-options {
+        max-height: 330px;
+      }
     }
   }
 
   @media (max-width: 879px) {
-    justify-content: center;
-
-    .dareme-details-videoCardDesktop {
-      display: none;
-    }
-
-    .dareme-details-videoCardMobile {
-      width: 340px;
-      margin: 0 auto;
-      display: block;
-    }
-
     .desktop-header-info {
       display: none;
     }
 
-    .dare-options {
-      max-height: 400px;
+    .main-body {
+      justify-content: center;
+
+      .dareme-details-videoCardDesktop {
+        display: none;
+      }
+
+      .dareme-details-videoCardMobile {
+        width: 340px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .desktop-header-info {
+        display: none;
+      }
+
+      .dare-options {
+        max-height: 400px;
+      }
     }
   }
 }

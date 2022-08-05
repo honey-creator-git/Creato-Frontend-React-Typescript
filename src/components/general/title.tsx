@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BackIcon, LightbulbIcon, EraseIcon, DeleteIcon, NoOfPeopleIcon } from "../../assets/svg";
+import { BackIcon, HelpIcon, EraseIcon, DeleteIcon, NoOfPeopleIcon } from "../../assets/svg";
 
 const Title = (props: any) => {
   const { title, hint, back, erase, del, voters, ownerId } = props;
@@ -41,9 +41,9 @@ const Title = (props: any) => {
         </div>
         <div onClick={props.hint}>
           {hint === undefined ?
-            <>{del === true ? <DeleteIcon color="white" /> : <LightbulbIcon color="white" />}</>
+            <>{del === true ? <DeleteIcon color="white" /> : <span>&nbsp;</span>}</>
             :
-            <>{del === true ? <DeleteIcon color="#EFA058" /> : <LightbulbIcon color="#059669" />}</>
+            <>{del === true ? <DeleteIcon color="#EFA058" /> : <HelpIcon />}</>
           }
         </div>
         {(voters !== undefined && (ownerId === user?.id || user?.role === "ADMIN")) &&

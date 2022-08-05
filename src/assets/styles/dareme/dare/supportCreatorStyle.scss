@@ -3,15 +3,6 @@
     display: flex;
     position: relative;
 
-    .vote-gif {
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        z-index: 10;
-        position: absolute;
-        pointer-events: none;
-    }
-
     .scroll-bar {
         &::-webkit-scrollbar {
             width: 8px;
@@ -37,6 +28,41 @@
     .dareme-support-information {
         width: 370px;
 
+        .header-choosen {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 22px;
+            line-height: 26px;
+            text-align: center;
+            letter-spacing: 0.02em;
+            color: #54504E;
+            margin-bottom: 20px;
+        }
+
+        .number-of-donuts {
+            width: 280px;
+            margin: 10px auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #BAB6B5;
+
+            span {
+                margin-top: 10px;
+                width: 60px;
+                border: 1px solid #BAB6B5;
+                border-left: 0px;
+                border-bottom: 0px;
+                border-right: 0px;
+            }
+        }
+
         .dareme-support-fun {
             width: 340px;
             margin: 0 auto;
@@ -50,37 +76,27 @@
                 margin: 0 auto;
                 margin-top: 20px;
             }
-        }
-    }
 
-    .support-letters {
-        width: 265px;
-        margin: 50px auto 0px auto;
+            .support-letter {
+                margin-top: 15px;
+                margin-left: 10px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 16px;
+                color: #54504E;
+            }
 
-
-        .support-big-letter {
-            font-style: normal;
-            font-weight: 800;
-            font-size: 22px;
-            line-height: 26px;
-            letter-spacing: 0.02em;
-        }
-
-        .support-small-letter {
-            margin-top: 15px;
-            font-weight: 600;
-            font-style: normal;
-            font-size: 18px;
-            line-height: 22px;
-            color: #54504E;
-        }
-
-        .support-explain {
-            font-weight: 400;
-            font-style: normal;
-            font-size: 16px;
-            line-height: 20px;
-            color: #54504E;
+            .support-explain {
+                margin-left: 10px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 14px;
+                color: #54504E;
+            }
         }
     }
 

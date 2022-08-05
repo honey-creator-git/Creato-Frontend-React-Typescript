@@ -14,21 +14,22 @@ const ContainerBtn = (props: containerBtnProps) => {
   const text = props.text;
   const icon = props.icon;
 
-  const backgroundColor = 
+  const backgroundColor =
     props.disabled === true
       ? "#E1E0DF"
       : style === "fill"
-      ? "#EFA058"
-      : "white";
+        ? "#EFA058"
+        : style === "clear" ? '#FBE5D1'
+          : "white";
   const backgroundHoverColor = "#F5C395";
   const backgroundPressedColor = "#EA8426";
 
-  const fontColor = 
-   props.disabled === true
+  const fontColor =
+    props.disabled === true
       ? "#938D8A"
       : style === "fill"
-      ? "white"
-      : "#EFA058";
+        ? "white"
+        : "#EFA058";
 
   const disabledStyle = {
     cursor: "not-allowed",
@@ -48,18 +49,18 @@ const ContainerBtn = (props: containerBtnProps) => {
     width: "100%",
     height: "50px",
     backgroundColor: props.bgColor !== undefined ? props.bgColor :
-      ( status === "default"
+      (status === "default"
         ? backgroundColor
         : status === "hover"
-        ? backgroundHoverColor
-        : backgroundPressedColor ),
+          ? backgroundHoverColor
+          : backgroundPressedColor),
     color: props.bgColor !== undefined ? 'white' : (status === "default" ? fontColor : "white"),
     border: props.bgColor !== undefined ? `1px solid ${props.bgColor}` :
       (status === "default"
-        ? "1px solid #EFA058"
+        ? style !== 'clear' ? "1px solid #EFA058" : "1px solid #FBE5D1"
         : status === "hover"
-        ? `1px solid ${backgroundHoverColor}`
-        : `1px solid ${backgroundPressedColor}`) ,
+          ? `1px solid ${backgroundHoverColor}`
+          : `1px solid ${backgroundPressedColor}`),
     borderRadius: "10px",
     display: "flex",
     justifyContent: "center",
@@ -104,8 +105,8 @@ const ContainerBtn = (props: containerBtnProps) => {
             {style === undefined
               ? icon[0]
               : status === "default"
-              ? icon[0]
-              : icon[1]}
+                ? icon[0]
+                : icon[1]}
           </div>
         )}
         {text}

@@ -3,15 +3,6 @@
   display: flex;
   position: relative;
 
-  .create-fundme-gif {
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    z-index: 10;
-    position: absolute;
-    pointer-events: none;
-  }
-
   .preview-information {
     width: 370px;
 

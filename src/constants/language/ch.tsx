@@ -32,7 +32,7 @@ export const CH = {
         UPLOAD_TEASER_FUNDME: 'Upload a teaser video\n(10~15sec is the best!)',
         CHOOSE_COVER: '選擇封面',
         DAREME_DETAILS: 'DareMe 選項',
-        SUPPORT_CREATOR: '支持Creator',
+        DAREME_OPTION: 'DareMe option',
         DARE_CREATOR: '挑戰 Creator! 💪🏻',
         DARE_REQUEST: '你的挑戰',
         DAREME_RESULT: 'DareMe 結果',
@@ -45,7 +45,8 @@ export const CH = {
         NOTIFICATIONS: '通知',
         INVITE_FRIENDS: '邀請朋友',
         SETTINGS: '設定',
-        LANGUAGE: '語言'
+        LANGUAGE: '語言',
+        DONUTS_YOU_LIKE: 'Donuts As You Like',
     },
     GENERAL_LETTER: {
         CREATE: '創建',
@@ -139,10 +140,17 @@ export const CH = {
             VIEW_POST: '查看帖子',
             ENDED: '已完結',
             LEFT: '剩餘',
+            MONTHS: ' 個月',
+            MONTH: ' 個月',
+            WEEKS: ' 星期',
+            WEEK: ' 星期',
             MINS: ' 分鐘',
             MIN: ' 分鐘',
             HOURS: ' 小時',
-            DAYS: ' 天'
+            HOUR: ' 小時',
+            DAYS: ' 天',
+            DAY: ' 天',
+            AGO: '',
         },
         CREATO: {
             SAVE: '省了'
@@ -368,7 +376,7 @@ export const CH = {
             SIGN_IN_NOW: '挑戰你最喜愛的Creator！',
             TOP_UP_NOW: '您需要更多冬甩來支持創作者！',
             VOTE_FREE: '1個冬甩投\n',
-            VOTE_SUPER: '50個冬甩投:\n',
+            VOTE_SUPER: '個冬甩投:\n',
             USED_FREE: '這個DareMe的免費冬甩已用 :)\n\n請用你的冬甩支持創作者!',
             HAVE_DARED: '恭喜! 你已成功支持\n',
             ON_PART: '的',

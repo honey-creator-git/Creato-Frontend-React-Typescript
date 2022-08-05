@@ -67,12 +67,16 @@ const FanwallDetails = () => {
         const options = fanwall.dareme.options.filter((option: any) => option.option.win === true);
         for (let i = 0; i < options[0].option.voteInfo.length; i++) {
           const voteInfo = options[0].option.voteInfo[i];
-          if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+          if ((voteInfo.voter + "" === user.id + "") && voteInfo?.superfan === true) return false;
+          if (fanwall.dareme.reward) { }
+          else {
+            if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= 50) return false;
+          }
         }
       } else if (fanwall.fundme) {
         for (let i = 0; i < fanwall.fundme.voteInfo.length; i++) {
           const voteInfo = fanwall.fundme.voteInfo[i];
-          if ((voteInfo.voter + "" === user.id + "") && voteInfo.donuts >= fanwall.fundme.reward) return false;
+          if ((voteInfo.voter + "" === user.id + "") && voteInfo?.superfan === true) return false;
         }
       }
       for (let i = 0; i < fanwall.unlocks.length; i++) if (user.id + "" === fanwall.unlocks[i].unlocker + "") return false;

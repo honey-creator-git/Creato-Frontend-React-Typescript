@@ -10,10 +10,10 @@ import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog";
-import Button from "../../../components/general/button";
+import Gif from "../../../components/general/gif";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
-import { CreatoCoinIcon, RewardIcon, HotIcon } from "../../../assets/svg";
+import { CreatoCoinIcon, RewardIcon, HotIcon, LightbulbIcon } from "../../../assets/svg";
 import { SET_CURRENT_FUNDME, SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../../redux/types";
 import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
 import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
@@ -115,7 +115,13 @@ const FundmeDetails = () => {
   }, [voteSuperfanGif]);
 
   return (
-    <>
+    <div>
+      {voteNonSuperfanGif &&
+        <Gif gif={VoteNonSuperfanGif} />
+      }
+      {voteSuperfanGif &&
+        <Gif gif={VoteSuperfanGif} />
+      }
       <div className="title-header">
         <Title
           title={contexts.HEADER_TITLE.FUNDME_DETAIL}
@@ -279,40 +285,27 @@ const FundmeDetails = () => {
             context={`${fundme?.rewardText}\n\n`}
           />
           <div className="fundme-details">
-            {voteNonSuperfanGif &&
-              <div className="vote-gif">
-                <img src={VoteNonSuperfanGif} />
+            <div className="desktop-header-info">
+              <div className="time-info">
+                <div className="left-time">
+                  {calcTime(fundme.time)} {!fundme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+                </div>
+                <div className="vote-info">
+                  <CreatoCoinIcon color="black" />
+                  <span>{fundme.wallet}</span>
+                </div>
               </div>
-            }
-            {voteSuperfanGif &&
-              <div className="vote-gif">
-                <img src={VoteSuperfanGif} />
+              <div className="title-category">
+                <div className="dare-title">{fundme.title}</div>
+                <div className="dare-category">
+                  <CategoryBtn text={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]} color="primary" />
+                </div>
               </div>
-            }
-            <div className="fundme-details-videoCardDesktop">
-              <VideoCardDesktop
-                url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
-                sizeType={fundme.sizeType}
-                coverImage={fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
-              />
-              <AvatarLink
-                avatar={fundme.owner.avatar}
-                username={fundme.owner.name}
-                ownerId={fundme.owner._id}
-                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
-                daremeId={fundme._id}
-                isFundme={true}
-              />
             </div>
-            <div className="fundme-details-information">
-              <div className="fundme-details-videoCardMobile">
-                <VideoCardMobile
+            <div className="main-body">
+              <div className="fundme-details-videoCardDesktop">
+                <VideoCardDesktop
                   url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
-                  title={fundme.title}
-                  time={fundme.time}
-                  isFinished={fundme.finished}
-                  donuts={fundme.wallet}
-                  category={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]}
                   sizeType={fundme.sizeType}
                   coverImage={fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
                 />
@@ -325,77 +318,100 @@ const FundmeDetails = () => {
                   isFundme={true}
                 />
               </div>
-              <div className="desktop-header-info">
-                <div className="time-info">
-                  <div className="left-time">
-                    {calcTime(fundme.time)} {!fundme.finished && contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.LEFT}
+              <div className="fundme-details-information">
+                <div className="fundme-details-videoCardMobile">
+                  <VideoCardMobile
+                    url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                    title={fundme.title}
+                    time={fundme.time}
+                    isFinished={fundme.finished}
+                    donuts={fundme.wallet}
+                    category={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]}
+                    sizeType={fundme.sizeType}
+                    coverImage={fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
+                  />
+                  <AvatarLink
+                    avatar={fundme.owner.avatar}
+                    username={fundme.owner.name}
+                    ownerId={fundme.owner._id}
+                    handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
+                    daremeId={fundme._id}
+                    isFundme={true}
+                  />
+                </div>
+                <div className="funding-goal">
+                  <div className="title">
+                    <CreatoCoinIcon color="#EFA058" />
+                    <label>{fundme.wallet < fundme.goal ? contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL : contexts.CREATE_FUNDME_LETTER.GOAL_REACHED}</label>
                   </div>
-                  <div className="vote-info">
-                    <CreatoCoinIcon color="black" />
-                    <span>{fundme.wallet}</span>
+                  <div className="process-bar">
+                    <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${width}px` : '330px' }}></div>
+                  </div>
+                  <div className="donuts-count">
+                    <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
                   </div>
                 </div>
-                <div className="dare-title">{fundme.title}</div>
-                <div className="dare-category">
-                  <CategoryBtn text={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]} color="primary" />
-                </div>
-              </div>
-              <div className="funding-goal">
-                <div className="title">
-                  <CreatoCoinIcon color="#EFA058" />
-                  <label>{fundme.wallet < fundme.goal ? contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL : contexts.CREATE_FUNDME_LETTER.GOAL_REACHED}</label>
-                </div>
-                <div className="process-bar">
-                  <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${width}px` : '330px' }}></div>
-                </div>
-                <div className="donuts-count">
-                  <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
-                </div>
-              </div>
-              <div className="dare-btn" onClick={() => { fund(fundme.reward) }}>
-                <ContainerBtn
-                  disabled={false}
-                  styleType="fill"
-                  text={`${fundme.reward} Donuts (SuperFan!)`}
-                  icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
-                />
-              </div>
-              <div className="below-text" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingRight: '20px' }}>
-                <div style={{ marginRight: '20px' }}>
-                  <div>
-                    <Button
-                      fillStyle="fill"
-                      color="primary"
-                      icon={[
-                        <RewardIcon color="white" width="25" height="25" />,
-                        <RewardIcon color="white" width="25" height="25" />,
-                        <RewardIcon color="white" width="25" height="25" />
-                      ]}
-                      handleSubmit={() => { setIsReward(true) }}
+                <div className="dareme-support-fun">
+                  <div className="see-superfan-reward" onClick={() => { setIsReward(true) }}>
+                    <ContainerBtn
+                      disabled={false}
+                      styleType="outline"
+                      text={'See SuperFan Reward'}
+                      icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
                     />
                   </div>
+                  <div className="number-of-donuts">
+                    <span></span>Number of Donuts<span></span>
+                  </div>
+                  <div className="support-fun" onClick={() => {
+                    if (checkCanFree()) fund(1);
+                    else setIsOneFree(true);
+                  }}>
+                    <ContainerBtn text={contexts.SUPPORT_CREATOR.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
+                  </div>
+                  <div className="support-letter">
+                    <span>Donut x1:</span>
+                  </div>
+                  <div className="support-explain">
+                    <span>
+                      Supporting the creator for Free! This 1 Donut will be donated by Creato!
+                    </span>
+                  </div>
+                  <div className="support-fun" onClick={() => {
+                    fund(fundme.reward)
+                  }}>
+                    <ContainerBtn text={`Donut x${fundme.reward} (SuperFan!)`} styleType="fill"
+                      icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
+                    />
+                  </div>
+                  <div className="support-letter">
+                    <span>SuperFans:</span>
+                  </div>
+                  <div className="support-explain">
+                    <span>
+                      Support creators by giving specific amount of donut and get exclusive content.
+                    </span>
+                  </div>
+                  <div className="support-fun" onClick={() => { navigate('/fundme/details/' + fundmeId + '/wish') }}>
+                    <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
+                      icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
+                    />
+                  </div>
+                  <div className="support-letter">
+                    <span></span>
+                  </div>
+                  <div className="support-explain">
+                    <span>
+                      Support any number of Donuts as you wish!
+                    </span>
+                  </div>
                 </div>
-                <label>{contexts.FUNDME_LETTER.DETAIL_SUPERFAN_LETTER}</label>
-              </div>
-              <div className="dare-btn" onClick={() => {
-                if (checkCanFree()) fund(1);
-                else setIsOneFree(true);
-              }}>
-                <ContainerBtn
-                  disabled={!checkCanFree()}
-                  styleType="outline"
-                  text="1 Donut (Free!)"
-                />
-              </div>
-              <div className="below-text">
-                {contexts.FUNDME_LETTER.DETAIL_FREE_LETTER}<br />
-                {contexts.FUNDME_LETTER.DONUTED_BY_CREATOR}
               </div>
             </div>
           </div>
         </>
       }
-    </>
+    </div>
   );
 };
 

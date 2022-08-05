@@ -1,8 +1,8 @@
-.fundme-details {
+.fundme-result {
   box-sizing: border-box;
   display: flex;
 
-  .fundme-details-information {
+  .fundme-result-information {
     width: 370px;
 
     .desktop-header-info {
@@ -134,12 +134,12 @@
     padding: 40px;
     justify-content: space-between;
 
-    .fundme-details-videoCardDesktop {
+    .fundme-result-videoCardDesktop {
       width: 370px;
       display: block;
     }
 
-    .fundme-details-videoCardMobile {
+    .fundme-result-videoCardMobile {
       display: none;
     }
   }
@@ -147,11 +147,11 @@
   @media (max-width: 879px) {
     justify-content: center;
 
-    .fundme-details-videoCardDesktop {
+    .fundme-result-videoCardDesktop {
       display: none;
     }
 
-    .fundme-details-videoCardMobile {
+    .fundme-result-videoCardMobile {
       width: 340px;
       margin: 0 auto;
       display: block;

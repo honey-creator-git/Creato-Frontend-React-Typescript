@@ -15,7 +15,7 @@ import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan";
 import PaymentForm from "../components/stripe/paymentForm";
 import { fanwallAction } from "../redux/actions/fanwallActions";
 import CONSTANT from "../constants/constant";
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE } from "../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE, SET_USERS } from "../redux/types";
 import { RewardIcon } from "../assets/svg";
 import { fundmeAction } from "../redux/actions/fundmeActions";
 import { paymentAction } from "../redux/actions/paymentActions";
@@ -96,7 +96,7 @@ const Home = () => {
     let category = '';
     categories.map((cate: any, index: any) => {
       category += contexts.CREATOR_CATEGORY_LIST[cate];
-      if(index !== categories.length - 1) category += '/';
+      if (index !== categories.length - 1) category += '/';
     });
     return category;
   }
@@ -430,7 +430,10 @@ const Home = () => {
         </div> */}
           <div className="users scroll-bar">
             {users.map((user: any, i: any) => (
-              <div className="user" key={i} onClick={() => { navigate(`/${user.personalisedUrl}`) }}>
+              <div className="user" key={i} onClick={() => {
+                dispatch({ type: SET_USERS, payload: [] })
+                navigate(`/${user.personalisedUrl}`)
+              }}>
                 <Avatar
                   avatar={user.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user.avatar}` : user.avatar}
                   size="web"
