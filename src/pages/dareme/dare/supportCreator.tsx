@@ -326,7 +326,8 @@ const SupportCreator = () => {
                                         </span>
                                     </div>
                                     <div className="support-fun" onClick={() => {
-                                        navigate('/dareme/' + daremeId + '/support/' + optionId + '/wish')
+                                        if (user) navigate('/dareme/' + daremeId + '/support/' + optionId + '/wish')
+                                        else setIsSignIn(true)
                                     }}>
                                         <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
                                             icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}

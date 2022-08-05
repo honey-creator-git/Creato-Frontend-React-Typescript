@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import CategoryBtn from '../../../components/general/categoryBtn';
 import Button from '../../../components/general/button';
 import { AddIcon } from '../../../assets/svg';
+import { SET_NOTIFICATION_LIST } from '../../../redux/types';
 import { notificationAction } from '../../../redux/actions/notificationAction';
 import NotificationSettingDialog from '../../../components/admin/notificationSettingDialog';
 import '../../../assets/styles/admin/notification/notificationSettingStyle.scss';
@@ -57,7 +58,10 @@ const NotificationSetting = () => {
                     <Button text="Notification" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications') }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
-                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications/history') }} />
+                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => {
+                        navigate('/admin/notifications/history');
+                        dispatch({ type: SET_NOTIFICATION_LIST, payload: [] });
+                    }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
                     <Button text="Setting" fillStyle="fill" color="primary" handleSubmit={() => { navigate('/admin/notifications/setting') }} />

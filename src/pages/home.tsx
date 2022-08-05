@@ -432,14 +432,14 @@ const Home = () => {
             {users.map((user: any, i: any) => (
               <div className="user" key={i} onClick={() => {
                 dispatch({ type: SET_USERS, payload: [] })
-                navigate(`/${user.personalisedUrl}`)
+                navigate(`/${user?.personalisedUrl}`)
               }}>
                 <Avatar
-                  avatar={user.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user.avatar}` : user.avatar}
+                  avatar={user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user?.avatar}` : user?.avatar}
                   size="web"
                   style="vertical"
-                  category={showCategories(user.categories)}
-                  username={user.name}
+                  category={showCategories(user?.categories)}
+                  username={user?.name}
                 />
               </div>
             ))}

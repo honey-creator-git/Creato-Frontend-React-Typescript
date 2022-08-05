@@ -392,7 +392,14 @@ const FundmeDetails = () => {
                       Support creators by giving specific amount of donut and get exclusive content.
                     </span>
                   </div>
-                  <div className="support-fun" onClick={() => { navigate('/fundme/details/' + fundmeId + '/wish') }}>
+                  <div className="support-fun" onClick={() => {
+                    if (user) {
+                      if (user.id === fundme.owner._id) {
+                        setIsCopied(false);
+                        setIsCopyLink(true);
+                      } else navigate('/fundme/details/' + fundmeId + '/wish')
+                    } else setIsSignIn(true)
+                  }}>
                     <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
                       icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
                     />

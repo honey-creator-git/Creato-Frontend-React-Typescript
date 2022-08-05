@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../../components/general/button';
 import Input from '../../../components/general/input';
 import ToggleButton from '../../../components/admin/ToggleButton';
+import { SET_NOTIFICATION_LIST } from '../../../redux/types';
 import { notificationAction } from '../../../redux/actions/notificationAction';
 import '../../../assets/styles/admin/notification/notificationNewStyle.scss';
 
@@ -44,7 +45,10 @@ const NotificationNew = () => {
                     <Button text="Notification" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications') }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
-                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications/history') }} />
+                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => { 
+                        navigate('/admin/notifications/history') 
+                        dispatch({ type: SET_NOTIFICATION_LIST, payload: [] });
+                    }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
                     <Button text="Setting" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications/setting') }} />

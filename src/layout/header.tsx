@@ -11,7 +11,7 @@ import { authAction } from "../redux/actions/authActions";
 import { CreatoColorIcon, CreatoCoinIcon, AddIcon, LanguageIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import CONSTANT from "../constants/constant";
-import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../redux/types";
+import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
 
 
@@ -60,6 +60,7 @@ const Header = () => {
   const gotoHome = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: "createDareMe", state: true } });
     else {
+      dispatch({ type: SET_USERS, payload: [] });
       dispatch({ type: SET_DAREMES, payload: [] });
       navigate("/");
     }

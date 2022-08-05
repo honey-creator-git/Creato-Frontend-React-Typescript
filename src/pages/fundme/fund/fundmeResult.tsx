@@ -10,7 +10,6 @@ import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import Dialog from "../../../components/general/dialog";
-import Button from "../../../components/general/button";
 import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { CreatoCoinIcon, RewardIcon, HotIcon, SpreadIcon } from "../../../assets/svg";

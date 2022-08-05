@@ -5,6 +5,7 @@ import Button from '../../../components/general/button';
 import { AddIcon, EditIcon } from '../../../assets/svg';
 import { notificationAction } from '../../../redux/actions/notificationAction';
 import ToggleButton from '../../../components/admin/ToggleButton';
+import { SET_NOTIFICATION_LIST } from '../../../redux/types';
 import '../../../assets/styles/admin/notification/notificationsStyle.scss';
 
 const Notifications = () => {
@@ -25,7 +26,10 @@ const Notifications = () => {
                     <Button text="Notification" fillStyle="fill" color="primary" handleSubmit={() => { navigate('/admin/notifications') }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
-                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications/history') }} />
+                    <Button text="Notification History" fillStyle="outline" color="primary" handleSubmit={() => { 
+                        navigate('/admin/notifications/history');
+                        dispatch({ type: SET_NOTIFICATION_LIST, payload: [] });
+                    }} />
                 </div>
                 <div style={{ marginRight: '5px' }}>
                     <Button text="Setting" fillStyle="outline" color="primary" handleSubmit={() => { navigate('/admin/notifications/setting') }} />

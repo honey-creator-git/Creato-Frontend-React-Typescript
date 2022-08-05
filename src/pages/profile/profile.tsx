@@ -31,7 +31,6 @@ const Profile = () => {
   const daremes = daremeStore.daremes;
   const tips = fanwallState.tips;
   const fanwalls = fanwallState.fanwalls;
-  console.log(userStore.users)
   const authuser = userStore.users.length ? userStore.users[0] : null;
   const [isSame, setIsSame] = useState(false);
   const [viewType, setViewType] = useState(0);

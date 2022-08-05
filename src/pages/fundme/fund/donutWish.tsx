@@ -26,7 +26,6 @@ const DonutWish = () => {
     const dlgState = useSelector((state: any) => state.load.dlgState);
     const fundme = fundmeState.fundme;
     const [donuts, setDonuts] = useState('');
-    const [isSignIn, setIsSignIn] = useState(false);
     const [isTopUp, setIsTopUp] = useState(false);
     const [isCopyLink, setIsCopyLink] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
@@ -47,7 +46,7 @@ const DonutWish = () => {
                 if (amount < fundme.reward) setIsNonSuperfan(true);
                 else setIsSuperFan(true);
             }
-        } else setIsSignIn(true);
+        }
     }
 
     useEffect(() => {
@@ -89,23 +88,6 @@ const DonutWish = () => {
             </div>
             {fundme.owner &&
                 <div className="donut-wish-wrapper">
-                    <Dialog
-                        display={isSignIn}
-                        exit={() => { setIsSignIn(false) }}
-                        wrapExit={() => { setIsSignIn(false) }}
-                        title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-                        context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-                        buttons={[
-                            {
-                                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                                handleClick: () => {
-                                    dispatch({ type: SET_CURRENT_FUNDME, payload: fundmeId });
-                                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/fundme/details/${fundmeId}/wish` });
-                                    navigate('/auth/signin');
-                                }
-                            }
-                        ]}
-                    />
                     <Dialog
                         display={isTopUp}
                         title={contexts.DIALOG.HEADER_TITLE.TOP_UP_NOW}

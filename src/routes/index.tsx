@@ -104,7 +104,7 @@ const AppRoutes = () => {
             <Route path="fundme/preview" element={<AuthRoute child={<FundmePreview />} routeType="private" />} />
             <Route path="fundme/create/teaser" element={<AuthRoute child={<FundUploadVideo />} routeType="private" />} />
             <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundmeDetails />} />} />
-            <Route path="fundme/details/:fundmeId/wish" element={<AuthRoute child={<FundmeDonutWish />} />} />
+            <Route path="fundme/details/:fundmeId/wish" element={<AuthRoute child={<FundmeDonutWish />} routeType="private" />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
             <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
             <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
@@ -130,7 +130,7 @@ const AppRoutes = () => {
             <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DaremeDetails />} />} />
             <Route path="dareme/:daremeId/voters" element={<AuthRoute child={<DaremeVoters />} routeType="private" />} />
             <Route path="dareme/:daremeId/support/:optionId" element={<AuthRoute child={<SupportCreator />} />} />
-            <Route path="dareme/:daremeId/support/:optionId/wish" element={<AuthRoute child={<DaremeDonutWish />} />} />
+            <Route path="dareme/:daremeId/support/:optionId/wish" element={<AuthRoute child={<DaremeDonutWish />} routeType="private" />} />
             <Route path="dareme/result/:daremeId" element={<AuthRoute child={<DaremeResult />} />} />
             <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
             <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />

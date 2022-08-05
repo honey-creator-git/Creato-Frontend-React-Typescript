@@ -28,7 +28,6 @@ const DonutWish = () => {
     const dareme = daremeState.dareme;
     const [voters, setVoters] = useState(0);
     const [donuts, setDonuts] = useState('');
-    const [isSignIn, setIsSignIn] = useState(false);
     const [isTopUp, setIsTopUp] = useState(false);
     const [isCopyLink, setIsCopyLink] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
@@ -60,7 +59,7 @@ const DonutWish = () => {
                 if (amount < dareme.reward) setIsNonSuperfan(true);
                 else setIsSuperFan(true);
             }
-        } else setIsSignIn(true);
+        }
     }
 
     useEffect(() => {
@@ -108,22 +107,6 @@ const DonutWish = () => {
             </div>
             {(dareme.owner && option) &&
                 <div className="donut-wish-wrapper">
-                    <Dialog
-                        display={isSignIn}
-                        exit={() => { setIsSignIn(false) }}
-                        wrapExit={() => { setIsSignIn(false) }}
-                        title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-                        context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-                        buttons={[
-                            {
-                                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                                handleClick: () => {
-                                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/details/${daremeId}` });
-                                    navigate('/auth/signin');
-                                }
-                            }
-                        ]}
-                    />
                     <Dialog
                         display={isTopUp}
                         title={contexts.DIALOG.HEADER_TITLE.TOP_UP_NOW}
