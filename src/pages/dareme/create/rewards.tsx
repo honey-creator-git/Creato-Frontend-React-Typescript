@@ -22,12 +22,16 @@ const DaremeRewards = () => {
   const [title, setTitle] = useState<string>(daremeState.rewardText ? daremeState.rewardText : "");
   const [reward, setReward] = useState(daremeState.reward ? daremeState.reward : 10);
   const [open, setOpen] = useState<boolean>(false);
+  const [openSet, setOpenSet] = useState(false)
   const categoris: string[] = contexts.FUNDME_REWARDS;
 
   const handleSave = () => {
-    const state = { ...daremeState, rewardText: title === "" ? null : title, reward: reward };
-    dispatch({ type: SET_DAREME, payload: state });
-    navigate("/dareme/create");
+    if(Number(reward) === 1) setOpenSet(true)
+    else {
+      const state = { ...daremeState, rewardText: title === "" ? null : title, reward: reward };
+      dispatch({ type: SET_DAREME, payload: state });
+      navigate("/dareme/create");
+    }
   };
 
   useEffect(() => { window.scrollTo(0, 0) }, []);
@@ -47,6 +51,13 @@ const DaremeRewards = () => {
         />
       </div>
       <div className="dareme-title-wrapper">
+        <Dialog
+          display={openSet}
+          title="Oops!"
+          exit={() => { setOpenSet(false) }}
+          wrapExit={() => { setOpenSet(false) }}
+          context={"At least 2 Donuts for SuperFans.🍩"}
+        />
         <Dialog
           display={open}
           title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
@@ -82,7 +93,7 @@ const DaremeRewards = () => {
             isNumber={true}
             title={reward}
             width={150}
-            minnum={10}
+            minnum={1}
             maxnum={100000000}
             step={1}
             setTitle={setReward}

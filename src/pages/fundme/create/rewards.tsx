@@ -21,13 +21,17 @@ const FundmeRewards = () => {
   const [openHint, setOpenHint] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(fundmeState.rewardText ? fundmeState.rewardText : "");
   const [reward, setReward] = useState(fundmeState.reward ? fundmeState.reward : 10);
+  const [openSet, setOpenSet] = useState(false)
   const [open, setOpen] = useState<boolean>(false);
   const categoris: string[] = contexts.FUNDME_REWARDS;
 
   const handleSave = () => {
-    const state = { ...fundmeState, rewardText: title === "" ? null : title, reward: reward };
-    dispatch({ type: SET_FUNDME, payload: state });
-    navigate("/fundme/create");
+    if (Number(reward) === 1) setOpenSet(true)
+    else {
+      const state = { ...fundmeState, rewardText: title === "" ? null : title, reward: reward };
+      dispatch({ type: SET_FUNDME, payload: state });
+      navigate("/fundme/create");
+    }
   };
 
   useEffect(() => { window.scrollTo(0, 0) }, []);
@@ -47,6 +51,13 @@ const FundmeRewards = () => {
         />
       </div>
       <div className="dareme-title-wrapper">
+        <Dialog
+          display={openSet}
+          title="Oops!"
+          exit={() => { setOpenSet(false) }}
+          wrapExit={() => { setOpenSet(false) }}
+          context={"At least 2 Donuts for SuperFans.🍩"}
+        />
         <Dialog
           display={open}
           title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
@@ -82,7 +93,7 @@ const FundmeRewards = () => {
             isNumber={true}
             title={reward}
             width={150}
-            minnum={0}
+            minnum={1}
             maxnum={100000}
             step={1}
             setTitle={setReward}

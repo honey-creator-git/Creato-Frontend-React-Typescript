@@ -33,6 +33,7 @@ const DonutWish = () => {
     const [isCopied, setIsCopied] = useState(false);
     const [isNonSuperfan, setIsNonSuperfan] = useState(false);
     const [isSuperFan, setIsSuperFan] = useState(false);
+    const [openSet, setOpenSet] = useState(false)
     const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false);
     const [voteSuperfanGif, setVoteSuperfanGif] = useState(false);
     const contexts = useContext(LanguageContext);
@@ -54,10 +55,13 @@ const DonutWish = () => {
     const supportCreator = () => {
         const amount = Number(donuts);
         if (user) {
-            if (amount > user.wallet) setIsTopUp(true);
+            if (amount === 1) setOpenSet(true)
             else {
-                if (amount < dareme.reward) setIsNonSuperfan(true);
-                else setIsSuperFan(true);
+                if (amount > user.wallet) setIsTopUp(true);
+                else {
+                    if (amount < dareme.reward) setIsNonSuperfan(true);
+                    else setIsSuperFan(true);
+                }
             }
         }
     }
@@ -107,6 +111,13 @@ const DonutWish = () => {
             </div>
             {(dareme.owner && option) &&
                 <div className="donut-wish-wrapper">
+                    <Dialog
+                        display={openSet}
+                        title="Oops!"
+                        exit={() => { setOpenSet(false) }}
+                        wrapExit={() => { setOpenSet(false) }}
+                        context={"Minimum is 2 Donuts to support them!🍩"}
+                    />
                     <Dialog
                         display={isTopUp}
                         title={contexts.DIALOG.HEADER_TITLE.TOP_UP_NOW}
@@ -234,7 +245,7 @@ const DonutWish = () => {
                                 isNumber={true}
                                 title={donuts}
                                 width={150}
-                                minnum={2}
+                                minnum={1}
                                 maxnum={99999999}
                                 step={1}
                                 setTitle={setDonuts}

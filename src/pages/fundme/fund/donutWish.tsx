@@ -33,6 +33,7 @@ const DonutWish = () => {
     const [isSuperFan, setIsSuperFan] = useState(false);
     const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false);
     const [voteSuperfanGif, setVoteSuperfanGif] = useState(false);
+    const [openSet, setOpenSet] = useState(false)
     const contexts = useContext(LanguageContext);
     const interval = fundme.goal ? (Number(fundme.goal) / 20).toFixed(1) : 0;
     const count = fundme.goal ? Number(Math.floor(Number(fundme.wallet) / Number(interval))) : 0;
@@ -41,10 +42,14 @@ const DonutWish = () => {
     const supportCreator = () => {
         const amount = Number(donuts);
         if (user) {
-            if (amount > user.wallet) setIsTopUp(true);
+            if (amount === 1) setOpenSet(true)
             else {
-                if (amount < fundme.reward) setIsNonSuperfan(true);
-                else setIsSuperFan(true);
+                if (amount > user.wallet) setIsTopUp(true);
+                else {
+                    if (amount < fundme.reward) setIsNonSuperfan(true);
+
+                    else setIsSuperFan(true);
+                }
             }
         }
     }
@@ -103,6 +108,13 @@ const DonutWish = () => {
                                 }
                             }
                         ]}
+                    />
+                    <Dialog
+                        display={openSet}
+                        title="Oops!"
+                        exit={() => { setOpenSet(false) }}
+                        wrapExit={() => { setOpenSet(false) }}
+                        context={"Minimum is 2 Donuts to support them!🍩"}
                     />
                     <Dialog
                         display={isNonSuperfan}
