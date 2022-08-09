@@ -136,7 +136,8 @@ const ProfileWallet = () => {
                 </div>
                 {user &&
                   <div className="number">
-                    {(user.wallet).toLocaleString()} <span>{`(~$${(user.wallet / 10.0).toLocaleString()}USD)`}</span>
+                    <div>{(user.wallet).toLocaleString()}</div>
+                    <div><span>{`($${(user.wallet / 10.0).toLocaleString()}USD)`}</span></div>
                   </div>
                 }
               </div>

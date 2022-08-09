@@ -327,6 +327,7 @@ export const CH = {
     PAYMENT: {
         PAYMENT_TITLE: "支付方法",
         STRIPE_ACCOUNT: "Stripe帳戶",
+        PAYONEER: 'Payoneer',
         STRIPE_CONTENT: "用當地銀行賬戶直接收款 \n 不設最低收費",
         BUTTON_CONNECT: "連接",
         COMING_SOON: "快將推出",

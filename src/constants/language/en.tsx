@@ -327,6 +327,7 @@ export const EN = {
     PAYMENT: {
         PAYMENT_TITLE: "Payment",
         STRIPE_ACCOUNT: "Stripe account",
+        PAYONEER: 'Payoneer',
         STRIPE_CONTENT: "Get paid direcly to local bank account \n No min. charge",
         BUTTON_CONNECT: "Connect",
         COMING_SOON: "Coming soon",
