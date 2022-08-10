@@ -107,14 +107,14 @@ const DaremeDetails = () => {
             display={isReward}
             exit={() => { setIsReward(false) }}
             wrapExit={() => { setIsReward(false) }}
-            subTitle={dareme.rewardText}
+            subTitle={"SuperFans Only 🎊"}
             icon={
               {
                 pos: 1,
                 icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
               }
             }
-            context={'Supporting the creator as SuperFan will get you entitled for the reward!'}
+            context={`${dareme?.rewardText}\n\n`}
           />
           <Dialog
             display={isSignIn}

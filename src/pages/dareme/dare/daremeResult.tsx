@@ -31,17 +31,21 @@ const DaremeResult = () => {
     const dareme = daremeState.dareme;
     const refundDonuts = daremeState.refundDonuts
     const fanwall = fanwallState.fanwall;
-    const [totalDonuts, setTotalDonuts] = useState(0);
-    const [resultOptions, setResultOptions] = useState<Array<any>>([]);
-    const [maxOption, setMaxOption] = useState<any>(null);
-    const [isWin, setIsWin] = useState(false);
-    const [isStay, setIsStay] = useState(false);
-    const [isWinOptionDlg, setIsWinOptionDlg] = useState(false);
-    const [winOptionId, setWinOptionId] = useState(false);
-    const [optionTitle, setOptionTitle] = useState("");
-    const [isCopyLinkDlg, setIsCopyLinkDlg] = useState(false);
-    const [isCopied, setIsCopied] = useState(false);
+    const [totalDonuts, setTotalDonuts] = useState(0)
+    const [resultOptions, setResultOptions] = useState<Array<any>>([])
+    const [maxOption, setMaxOption] = useState<any>(null)
+    const [isWin, setIsWin] = useState(false)
+    const [isStay, setIsStay] = useState(false)
+    const [isWinOptionDlg, setIsWinOptionDlg] = useState(false)
+    const [winOptionId, setWinOptionId] = useState(false)
+    const [optionTitle, setOptionTitle] = useState("")
+    const [isCopyLinkDlg, setIsCopyLinkDlg] = useState(false)
+    const [isCopied, setIsCopied] = useState(false)
     const [refund, setRefund] = useState(false)
+    const [isRefund, setIsRefund] = useState(false)
+    const [isMyDonuts, setIsMyDonuts] = useState(false)
+    const [isSupport, setIsSupport] = useState(false)
+    const [isCopyLink, setIsCopyLink] = useState(false)
     const user = userState.user;
 
     useEffect(() => {
@@ -93,7 +97,7 @@ const DaremeResult = () => {
             <div className="title-header">
                 <Title
                     title={contexts.HEADER_TITLE.DAREME_RESULT}
-                    back={() => { navigate(loadState.prevRoute); }}
+                    back={() => { navigate(loadState.prevRoute) }}
                     voters={() => { navigate(`/dareme/${daremeId}/voters`) }}
                     ownerId={dareme?.owner?._id}
                 />
@@ -101,16 +105,126 @@ const DaremeResult = () => {
             {(maxOption && dareme.owner) &&
                 <div className="dareme-result">
                     <RefundDlg
+                        confirm={true}
+                        display={isSupport}
+                        wrapExit={() => { setIsSupport(false) }}
+                        exit={() => { setIsSupport(false) }}
+                        title={'Confirm:'}
+                        dareme={dareme}
+                        refund={refundDonuts ? refundDonuts : 0}
+                        buttons={[
+                            {
+                                text: 'Back',
+                                handleClick: () => {
+                                    setIsSupport(false)
+                                    setRefund(true)
+                                }
+                            },
+                            {
+                                text: 'Send',
+                                handleClick: () => {
+                                    setIsCopied(false)
+                                    setIsSupport(false)
+                                    setIsCopyLink(true)
+                                    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+                                    dispatch(daremeAction.supportRefund(daremeId))
+                                }
+                            }
+                        ]}
+                    />
+                    <RefundDlg
                         display={refund}
-                        wrapExit={() => { 
+                        wrapExit={() => {
                             setRefund(false)
-                            dispatch({type: SET_DIALOG_STATE, payload: {type: '', state: false }})
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
                         }}
                         exit={() => {
                             setRefund(false)
-                            dispatch({type: SET_DIALOG_STATE, payload: {type: '', state: false }})
+                            dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
                         }}
                         title={'Winning Dare:'}
+                        dareme={dareme}
+                        refund={refundDonuts ? refundDonuts : 0}
+                        buttons={[
+                            {
+                                text: 'No',
+                                handleClick: () => {
+                                    setRefund(false)
+                                    setIsRefund(true)
+                                }
+                            },
+                            {
+                                text: 'Yes',
+                                handleClick: () => {
+                                    setRefund(false)
+                                    setIsSupport(true)
+                                }
+                            }
+                        ]}
+                    />
+                    <Dialog
+                        display={isRefund}
+                        wrapExit={() => { setIsRefund(false); }}
+                        exit={() => { setIsRefund(false); }}
+                        title={'Confirm:'}
+                        context={'Donuts will be refunded to you.'}
+                        buttons={[
+                            {
+                                text: 'No',
+                                handleClick: () => {
+                                    setIsRefund(false)
+                                }
+                            },
+                            {
+                                text: 'Yes',
+                                handleClick: () => {
+                                    setIsRefund(false)
+                                    setIsMyDonuts(true)
+                                    dispatch(daremeAction.refundDonuts(refundDonuts, daremeId))
+                                }
+                            }
+                        ]}
+                    />
+                    <Dialog
+                        display={isCopyLink}
+                        title={'I supported:'}
+                        avatars={[
+                            dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
+                            user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+                        ]}
+                        exit={() => { setIsCopyLink(false) }}
+                        wrapExit={() => { setIsCopyLink(false) }}
+                        context={`Congratulations! You have supported ${dareme.owner.name} on ${dareme.title}`}
+                        buttons={[
+                            {
+                                text: isCopied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
+                                handleClick: () => {
+                                    navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/result/${daremeId}`);
+                                    setIsCopied(true);
+                                }
+                            }
+                        ]}
+                        social
+                        ownerName={dareme.owner.name}
+                        daremeId={daremeId}
+                        shareType={"vote"}
+                        daremeTitle={dareme.title}
+                    />
+                    <Dialog
+                        display={isMyDonuts}
+                        wrapExit={() => { setIsMyDonuts(false); }}
+                        exit={() => { setIsMyDonuts(false); }}
+                        title={'Confirm:'}
+                        context={`${refundDonuts} Donuts has been returned to you.`}
+                        buttons={[
+                            {
+                                text: 'Check My Donuts',
+                                handleClick: () => {
+                                    setIsMyDonuts(false)
+                                    navigate(`/${user.personalisedUrl}/wallet`)
+                                }
+                            }
+                        ]}
                     />
                     <Dialog
                         display={isStay}

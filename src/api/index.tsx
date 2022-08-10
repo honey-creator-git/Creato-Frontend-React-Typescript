@@ -48,6 +48,8 @@ export const declineDareOption = (data: any) => API.post('/api/dareme/decline', 
 export const winDareOption = (data: any) => API.post('/api/dareme/win/option', data);
 export const getDaremeOptions = (daremeId: any) => API.get(`/api/dareme/${daremeId}/options`);
 export const checkRefundPossible = (daremeId: any) => API.get(`/api/dareme/${daremeId}/refund_possible`)
+export const refundDonuts = (data: any, daremeId: any) => API.post(`/api/dareme/${daremeId}/refund_donuts`, data)
+export const supportRefund = (daremeId: any) => API.get(`/api/dareme/${daremeId}/support_refund`)
 
 export const getPostDetail = (data: any) => API.get(`/api/fanwall/getById/${data}`);
 export const getFanwallsByPersonalisedUrl = (data: any) => API.post('/api/fanwall/personalUrl', data);

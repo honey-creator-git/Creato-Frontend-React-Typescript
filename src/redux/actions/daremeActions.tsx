@@ -430,6 +430,26 @@ export const daremeAction = {
             dispatch({ type: SET_REFUND_DONUTS, payload: donuts })
           }
         }
-      })
+      }).catch(err => console.log(err))
+  },
+
+  refundDonuts: (donuts: any, daremeId: any) => async (dispatch: Dispatch<any>) => {
+    api.refundDonuts({ donuts: donuts }, daremeId)
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          dispatch({ type: SET_USER, payload: data.user })
+        }
+      }).catch(err => console.log(err))
+  },
+
+  supportRefund: (daremeId: any) => async (dispatch: Dispatch<any>) => {
+    api.supportRefund(daremeId)
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          console.log("Success")
+        }
+      }).catch(err => console.log(err))
   }
 }
