@@ -46,12 +46,14 @@ const DaremeDetails = () => {
 
   const canShowResult = (dareme: any, user: any) => {
     if (user) {
-      if (user.id === dareme.owner._id) return true;
-      for (var i = 0; i < dareme.options.length; i++)
+      if (user.id === dareme.owner._id) return true
+      for (var i = 0; i < dareme.options.length; i++) {
+        if (dareme.options[i].option.writer._id === user.id) return true
         for (var j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
-          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].donuts >= 50) return true;
-          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].canFree === false) return true;
+          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].donuts >= 50) return true
+          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].canFree === false) return true
         }
+      }
       return false;
     } else return false;
   }

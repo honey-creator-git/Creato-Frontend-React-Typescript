@@ -79,13 +79,13 @@ const SupportCreator = () => {
 
     const checkVoted = () => {
         if (dareme.options && user) {
-            for (let i = 0; i < dareme.options.length; i++)
+            for (let i = 0; i < dareme.options.length; i++) {
+                if (dareme.options[i].option.writer._id === user.id) return true
                 for (let j = 0; j < dareme.options[i].option.voteInfo.length; j++) {
-                    if (user.id === dareme.options[i].option.voteInfo[j].voter) {
-                        if (dareme.options[i].option.voteInfo[j].donuts === 50) return true;
-                        if (dareme.options[i].option.voteInfo[j].canFree === false) return true;
-                    }
+                    if (user.id === dareme.options[i].option.voteInfo[j].voter)
+                        if (dareme.options[i].option.voteInfo[j].donuts > 0) return true;
                 }
+            }
             return false;
         }
         return false;
@@ -94,7 +94,7 @@ const SupportCreator = () => {
     useEffect(() => {
         if (dareme && option)
             for (let i = 0; i < dareme.options.length; i++)
-                if (dareme.options[i].option._id == option._id)
+                if (dareme.options[i].option._id === option._id)
                     setVoters(dareme.options[i].option.voters)
     }, [dareme, option]);
 
@@ -102,7 +102,7 @@ const SupportCreator = () => {
         window.scrollTo(0, 0);
         dispatch(daremeAction.getOptionDetails(optionId, daremeId));
         dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
-    }, [location, dispatch, optionId]);
+    }, [location, dispatch, optionId, daremeId]);
 
     useEffect(() => {
         if (dlgState.type === 'vote_non_superfan' && dlgState.state === true) {

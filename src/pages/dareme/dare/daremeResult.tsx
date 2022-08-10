@@ -10,10 +10,11 @@ import ContainerBtn from "../../../components/general/containerBtn";
 import DareOption from "../../../components/general/dareOption";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import Dialog from "../../../components/general/dialog";
+import RefundDlg from "../../../components/dareme/refundDlg";
 import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { CreatoCoinIcon, SpreadIcon } from "../../../assets/svg";
-import { SET_FANWALL_INITIAL } from "../../../redux/types";
+import { SET_FANWALL_INITIAL, SET_DIALOG_STATE } from "../../../redux/types";
 import "../../../assets/styles/dareme/dare/daremeResultStyle.scss";
 
 const DaremeResult = () => {
@@ -26,7 +27,9 @@ const DaremeResult = () => {
     const loadState = useSelector((state: any) => state.load);
     const fanwallState = useSelector((state: any) => state.fanwall);
     const userState = useSelector((state: any) => state.auth);
+    const dlgState = useSelector((state: any) => state.load.dlgState)
     const dareme = daremeState.dareme;
+    const refundDonuts = daremeState.refundDonuts
     const fanwall = fanwallState.fanwall;
     const [totalDonuts, setTotalDonuts] = useState(0);
     const [resultOptions, setResultOptions] = useState<Array<any>>([]);
@@ -38,6 +41,7 @@ const DaremeResult = () => {
     const [optionTitle, setOptionTitle] = useState("");
     const [isCopyLinkDlg, setIsCopyLinkDlg] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
+    const [refund, setRefund] = useState(false)
     const user = userState.user;
 
     useEffect(() => {
@@ -64,18 +68,24 @@ const DaremeResult = () => {
         }
     }, [resultOptions]);
 
+    useEffect(() => {
+        if (dlgState.state) {
+            if (dlgState.type === 'refund_donuts') setRefund(true)
+        }
+    }, [dlgState])
+
     const calcTime = (time: any) => {
-        if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS;
-        if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS;
-        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS;
-        if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN;
+        if (time > 1) return Math.ceil(time) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS
+        if ((time * 24) > 1) return Math.ceil(time * 24) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS
+        if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS
+        if (time > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN
 
         const passTime = Math.abs(time);
-        if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
-        if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
-        if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
-        if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
-        if (passTime > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+        if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO
+        if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO
+        if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO
+        if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO
+        if (passTime > 0) return "1" + contexts.GERNAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO
     }
 
     return (
@@ -90,6 +100,18 @@ const DaremeResult = () => {
             </div>
             {(maxOption && dareme.owner) &&
                 <div className="dareme-result">
+                    <RefundDlg
+                        display={refund}
+                        wrapExit={() => { 
+                            setRefund(false)
+                            dispatch({type: SET_DIALOG_STATE, payload: {type: '', state: false }})
+                        }}
+                        exit={() => {
+                            setRefund(false)
+                            dispatch({type: SET_DIALOG_STATE, payload: {type: '', state: false }})
+                        }}
+                        title={'Winning Dare:'}
+                    />
                     <Dialog
                         display={isStay}
                         wrapExit={() => { setIsStay(false); }}

@@ -47,6 +47,7 @@ export const acceptDareOption = (data: any) => API.post('/api/dareme/accept', da
 export const declineDareOption = (data: any) => API.post('/api/dareme/decline', data);
 export const winDareOption = (data: any) => API.post('/api/dareme/win/option', data);
 export const getDaremeOptions = (daremeId: any) => API.get(`/api/dareme/${daremeId}/options`);
+export const checkRefundPossible = (daremeId: any) => API.get(`/api/dareme/${daremeId}/refund_possible`)
 
 export const getPostDetail = (data: any) => API.get(`/api/fanwall/getById/${data}`);
 export const getFanwallsByPersonalisedUrl = (data: any) => API.post('/api/fanwall/personalUrl', data);

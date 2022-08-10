@@ -25,7 +25,7 @@ const DaremeVoters = () => {
         window.scrollTo(0, 0);
         dispatch(daremeAction.getDaremeOptions(daremeId));
         dispatch({ type: SET_ADMIN_OPTIONS, payload: null });
-    }, [location]);
+    }, [location, dispatch, daremeId]);
 
     useEffect(() => {
         if (options && options.length > 0) {

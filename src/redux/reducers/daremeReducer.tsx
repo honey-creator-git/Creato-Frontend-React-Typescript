@@ -23,7 +23,8 @@ const INITIAL_STATE: any = {
     title: null,
     options: [],
     daremes: [],
-    voterCount: 0
+    voterCount: 0,
+    refundDonuts: null,
 }
 
 const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -98,6 +99,9 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state };
         case actionTypes.SET_VOTER_COUNT:
             state.voterCount = payload;
+            return { ...state };
+        case actionTypes.SET_REFUND_DONUTS:
+            state.refundDonuts = payload;
             return { ...state };
         default:
             return state;

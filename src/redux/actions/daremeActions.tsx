@@ -14,7 +14,8 @@ import {
   SET_DAREME_DETAIL_INITIAL,
   SET_ADMIN_OPTIONS,
   SET_VOTER_COUNT,
-  SET_DIALOG_STATE
+  SET_DIALOG_STATE,
+  SET_REFUND_DONUTS
 } from "../types";
 import * as api from "../../api";
 
@@ -417,5 +418,18 @@ export const daremeAction = {
           dispatch({ type: SET_LOADING_FALSE });
         }
       }).catch((err) => console.log(err));
+  },
+
+  refundOrNot: (donuts: any, daremeId: any) => async (dispatch: Dispatch<any>) => {
+    api.checkRefundPossible(daremeId)
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          if (data.refund) {
+            dispatch({ type: SET_DIALOG_STATE, payload: { type: 'refund_donuts', state: true } })
+            dispatch({ type: SET_REFUND_DONUTS, payload: donuts })
+          }
+        }
+      })
   }
 }
