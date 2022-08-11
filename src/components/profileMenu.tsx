@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom"
+
 const ProfileMenu = (props: any) => {
+  const { url } = props
+  const navigate = useNavigate()
+
   const style = {
     profileMenu: {
       display: "flex",
@@ -37,10 +42,10 @@ const ProfileMenu = (props: any) => {
   };
   return (
     <div style={style.profileMenu}>
-      <div style={style.dareme} onClick={() => props.setViewType(0)}>
+      <div style={style.dareme} onClick={() => { navigate(`/${url}`) }}>
         DareMe & FundMe
       </div>
-      <div style={style.fanWall} onClick={() => props.setViewType(1)}>
+      <div style={style.fanWall} onClick={() => { navigate(`/${url}/fanwall`) }}>
         Fan Wall
       </div>
     </div>

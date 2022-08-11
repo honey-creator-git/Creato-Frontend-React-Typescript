@@ -30,9 +30,7 @@ const GeneralSetting = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.SETTINGS} back={() => {
-          dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate));
-        }} />
+        <Title title={contexts.HEADER_TITLE.SETTINGS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
       </div>
       <div className="setting-general">
         <div className="settings">

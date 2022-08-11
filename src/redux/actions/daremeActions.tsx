@@ -208,7 +208,7 @@ export const daremeAction = {
       }).catch((err: any) => console.log(err));
   },
 
-  getDaremesByPersonalisedUrl: (url: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+  getDaremesByPersonalisedUrl: (url: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getDaremesByPersonalisedUrl({ url: url })
       .then((result) => {
@@ -217,7 +217,6 @@ export const daremeAction = {
         dispatch({ type: SET_USERS, payload: [data.user] });
         dispatch({ type: SET_VOTER_COUNT, payload: data.voterCount })
         dispatch({ type: SET_LOADING_FALSE });
-        navigate(`/${url}`);
       }).catch((err) => console.log(err));
   },
 

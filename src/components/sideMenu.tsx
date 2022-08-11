@@ -47,7 +47,7 @@ const SideMenu = (props: any) => {
 
   const handleProfile = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
-    else dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate));
+    else navigate(`/${user.personalisedUrl}`)
     props.setOpen(false);
   };
   const handleWallet = () => {

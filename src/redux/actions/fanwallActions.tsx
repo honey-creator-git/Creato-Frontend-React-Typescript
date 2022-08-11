@@ -10,7 +10,8 @@ import {
     SET_USER,
     SET_FUNDME,
     SET_DAREME,
-    SET_TIPS
+    SET_TIPS,
+    SET_USERS
 } from "../types";
 import * as api from "../../api";
 
@@ -85,9 +86,10 @@ export const fanwallAction = {
             .then((result: any) => {
                 const { data } = result;
                 if (data.success) {
-                    dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
-                    dispatch({ type: SET_TIPS, payload: data.tips });
-                    dispatch({ type: SET_LOADING_FALSE });
+                    dispatch({ type: SET_LOADING_FALSE })
+                    dispatch({ type: SET_FANWALLS, payload: data.fanwalls })
+                    dispatch({ type: SET_TIPS, payload: data.tips })
+                    dispatch({ type: SET_USERS, payload: [data.user] })
                 }
             }).catch((err: any) => console.log(err));
     },

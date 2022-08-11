@@ -147,7 +147,7 @@ const PostFanwall = () => {
                             username={item.owner.name}
                             avatar={item.owner.avatar}
                             ownerId={item.owner._id}
-                            handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(item.owner.personalisedUrl, navigate)); }}
+                            handleAvatar={() => { navigate(`/${item.owner.personalisedUrl}`) }}
                             itemId={item._id}
                         />
                     </div>

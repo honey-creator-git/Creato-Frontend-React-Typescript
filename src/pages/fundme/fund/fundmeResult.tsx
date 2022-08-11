@@ -102,7 +102,7 @@ const FundmeResult = () => {
                                 avatar={fundme.owner.avatar}
                                 username={fundme.owner.name}
                                 ownerId={fundme.owner._id}
-                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
+                                handleAvatar={() => { navigate(`/${fundme.owner.personalisedUrl}`) }}
                                 daremeId={fundme._id}
                                 isFundme={true}
                             />
@@ -123,7 +123,7 @@ const FundmeResult = () => {
                                     avatar={fundme.owner.avatar}
                                     username={fundme.owner.name}
                                     ownerId={fundme.owner._id}
-                                    handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fundme.owner.personalisedUrl, navigate)); }}
+                                    handleAvatar={() => { navigate(`/${fundme.owner.personalisedUrl}`) }}
                                     daremeId={fundme._id}
                                     isFundme={true}
                                 />

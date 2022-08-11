@@ -207,7 +207,7 @@ const FanwallDetails = () => {
                   username={fanwall.writer.name}
                   handleLike={handleLike}
                   isLiked={(user && fanwall.likes.filter((like: any) => (like.liker + "" === user.id + "")).length > 0) ? true : false}
-                  handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate)); }}
+                  handleAvatar={() => { navigate(`/${fanwall.writer.personalisedUrl}`) }}
                 />
               </div>
             </div>

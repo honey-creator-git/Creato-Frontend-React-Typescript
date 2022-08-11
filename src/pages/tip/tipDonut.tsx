@@ -160,14 +160,14 @@ const TipDonut = () => {
           />
           <Dialog
             display={openTipSuccess}
-            exit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
-            wrapExit={() => { navigate(`/${authuser?.personalisedUrl}`) }}
+            exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
+            wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             title={contexts.CONGRATS}
             context={contexts.DONUTS_HAVE_BEEN_TIPPED}
             buttons={[
               {
                 text: contexts.BACK_TO_PROFILE,
-                handleClick: () => { navigate(`/${authuser?.personalisedUrl}`) }
+                handleClick: () => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }
               }
             ]}
             social

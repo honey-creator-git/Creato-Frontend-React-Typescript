@@ -167,7 +167,7 @@ const Preview = () => {
               username={user.name}
               avatar={user.avatar}
               ownerId={user.id}
-              handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+              handleAvatar={() => { navigate(`/${user.personalisedUrl}`) }}
               daremeId={dareState._id}
             />
           </div>
@@ -187,7 +187,7 @@ const Preview = () => {
                 username={user.name}
                 avatar={user.avatar}
                 ownerId={user.id}
-                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }}
+                handleAvatar={() => { navigate(`/${user.personalisedUrl}`) }}
               />
             </div>
             <div className="dare-creator">

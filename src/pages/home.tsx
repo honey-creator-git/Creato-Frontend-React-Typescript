@@ -333,9 +333,7 @@ const Home = () => {
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
                   isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -393,9 +391,7 @@ const Home = () => {
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
                   isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -484,9 +480,7 @@ const Home = () => {
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
                   isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -540,9 +534,7 @@ const Home = () => {
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
                   isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -591,9 +583,7 @@ const Home = () => {
                   avatar={dareme.owner.avatar}
                   ownerId={dareme.owner._id}
                   isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                   daremeId={dareme.id}
                 />
               </div>
@@ -634,9 +624,7 @@ const Home = () => {
                 <AvatarLink
                   username={fanwall.writer.name}
                   avatar={fanwall.writer.avatar}
-                  handleAvatar={() => {
-                    dispatch(daremeAction.getDaremesByPersonalisedUrl(fanwall.writer.personalisedUrl, navigate));
-                  }}
+                  handleAvatar={() => { navigate(`/${fanwall.writer.personalisedUrl}`) }}
                   ownerId={fanwall.writer._id}
                   url={"/"}
                   delData={() => {

@@ -26,6 +26,7 @@ import FundmeResult from '../pages/fundme/fund/fundmeResult';
 import FundmeDonutWish from '../pages/fundme/fund/donutWish';
 
 import Profile from '../pages/profile/profile';
+import ProfileFanwall from '../pages/profile/profileFanwall';
 import ProfileEdit from '../pages/profile/edit/profileEdit';
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet';
@@ -110,6 +111,7 @@ const AppRoutes = () => {
             <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
 
             <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
+            <Route path="/:creatorLink/fanwall" element={<AuthRoute child={<ProfileFanwall />} />} />
             <Route path="users/:userId/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
             <Route path="users/:userId/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
 

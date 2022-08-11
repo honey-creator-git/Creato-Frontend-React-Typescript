@@ -121,7 +121,7 @@ const DareCreator = () => {
                                 avatar={dareme.owner.avatar}
                                 username={dareme.owner.name}
                                 ownerId={dareme.owner._id}
-                                handleAvatar={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(dareme.owner.personalisedUrl, navigate)); }}
+                                handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                                 daremeId={dareme._id}
                             />
                         </div>

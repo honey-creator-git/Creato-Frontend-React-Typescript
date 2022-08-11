@@ -70,7 +70,7 @@ const ProfileWallet = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.MY_DONUTS} back={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }} />
+        <Title title={contexts.HEADER_TITLE.MY_DONUTS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
       </div>
       <div className="profile-wallet">
         <Dialog

@@ -40,7 +40,7 @@ const ProfileNotifications = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.NOTIFICATIONS} back={() => { dispatch(daremeAction.getDaremesByPersonalisedUrl(user.personalisedUrl, navigate)); }} />
+        <Title title={contexts.HEADER_TITLE.NOTIFICATIONS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
       </div>
       <div className="profile-notifications">
         {notifications.filter((notification: any) => notification.read === false).length !== 0 &&
