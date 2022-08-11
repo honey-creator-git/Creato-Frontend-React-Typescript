@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { MoreIcon, PayoneerIcon, StripeIcon } from "../../../assets/svg";
 import { LanguageContext } from "../../../routes/authRoute";
 import { useContext } from 'react';
@@ -9,17 +9,37 @@ import Title from "../../../components/general/title";
 import Dialog from "../../../components/general/dialog";
 import { SpreadIcon } from "../../../assets/svg";
 import CONSTANT from "../../../constants/constant";
+import { paymentAction } from "../../../redux/actions/paymentActions";
 import "../../../assets/styles/profile/paymentStyle.scss";
 
 const Payment = () => {
-  const navigate = useNavigate();
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const payment = useSelector((state: any) => state.auth.payment)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const code = searchParams.get("code")
   const [openSoon, setOpenSoon] = useState(false)
-  const user = useSelector((state: any) => state.auth.user);
-  const contexts = useContext(LanguageContext);
+  const contexts = useContext(LanguageContext)
 
   const connectStripe = () => {
-    window.open(`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${CONSTANT.CLIENT_ID}&scope=read_write`, "_blank")
+    window.open(`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${CONSTANT.CLIENT_ID}&scope=read_write`, '_self')
   }
+
+  const disConnectStripe = () => {
+    dispatch(paymentAction.disconnectStripe(CONSTANT.CLIENT_ID, navigate))
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    dispatch(paymentAction.getPaymentInfo())
+  }, [location])
+
+  useEffect(() => {
+    if (code) {
+      dispatch(paymentAction.connectStripe(code, navigate))
+    }
+  }, [code])
 
   return (
     <>
@@ -50,7 +70,12 @@ const Payment = () => {
           <div className="subtitle">
             {contexts.PAYMENT.STRIPE_CONTENT}
           </div>
-          <div style={{ width: '100%' }} onClick={() => { connectStripe() }}><ContainerBtn styleType="fill" text={contexts.PAYMENT.BUTTON_CONNECT} /></div>
+          <div style={{ width: '100%' }} onClick={() => {
+            if (payment?.stripe) disConnectStripe()
+            else connectStripe()
+          }}>
+            <ContainerBtn styleType="fill" text={payment?.stripe ? 'Disconnect' : contexts.PAYMENT.BUTTON_CONNECT} />
+          </div>
         </div>
         <div className="content">
           <div className="top">

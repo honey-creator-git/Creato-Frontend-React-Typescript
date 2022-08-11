@@ -4,7 +4,9 @@ import {
   SET_DIALOG_STATE,
   SET_LOADING_FALSE,
   SET_USER,
-  SET_STRIPEID
+  SET_STRIPEID,
+  SET_PAYMENT,
+  SET_LOADING_TRUE
 } from "../types";
 
 export const paymentAction = {
@@ -29,5 +31,37 @@ export const paymentAction = {
         const { data } = result;
         if (data.success) dispatch({ type: SET_STRIPEID, payload: { stripeID: data.stripeID, cardNum: data.cardNum } });
       }).catch((err) => console.log(err));
+  },
+
+  connectStripe: (code: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    api.connectStripe({ auth: code })
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          dispatch({ type: SET_LOADING_FALSE })
+          navigate('/myaccount/setting/payment')
+        }
+      }).catch((err) => console.log(err))
+  },
+
+  disconnectStripe: (clientId: any,navigate: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    api.disconnectStripe({ clientId: clientId })
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          dispatch({ type: SET_LOADING_FALSE })
+          navigate('/myaccount/setting/payment')
+        }
+      }).catch((err) => console.log(err))
+  },
+
+  getPaymentInfo: () => async (dispatch: Dispatch<any>) => {
+    api.getPaymentInfo()
+      .then((result) => {
+        const { data } = result
+        if (data.success) dispatch({ type: SET_PAYMENT, payload: data.payment })
+      }).catch((err) => console.log(err))
   }
 }

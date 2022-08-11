@@ -62,6 +62,9 @@ export const saveFanwall = (data: any) => API.post('/api/fanwall/save', data);
 
 export const buyDonuts = (data: any) => API.post('/api/payment/buy', data);
 export const getStripeID = () => API.get('/api/payment/stripeId');
+export const connectStripe = (data: any) => API.post('/api/payment/connect_stripe', data)
+export const disconnectStripe = (data: any) => API.post('/api/payment/disconnect_stripe', data)
+export const getPaymentInfo = () => API.get('/api/payment/payment_info')
 
 //ADMIN API
 export const getUsersList = (data: any) => API.post('/api/auth/users', data);
