@@ -11,7 +11,7 @@ import TipCard from "../../components/profile/tipCard";
 import TipMessageDlg from "../../components/profile/tipMessageDlg";
 import { RewardIcon, TipIcon, ExpandIcon, RetrieveIcon } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
-import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE } from "../../redux/types";
+import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE, SET_TIPID } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
 import visitorImg from "../../assets/img/visitor_avatar.png";
 import "../../assets/styles/profile/profileStyle.scss";
@@ -25,6 +25,7 @@ const ProfileFanwall = () => {
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userStore = useSelector((state: any) => state.auth);
   const tips = fanwallState.tips;
+  const tipId = fanwallState.tipId
   const fanwalls = fanwallState.fanwalls;
   const authuser = userStore.users.length ? userStore.users[0] : null;
   const [isSame, setIsSame] = useState(false);
@@ -107,14 +108,38 @@ const ProfileFanwall = () => {
     }
   }, [authuser, user]);
 
+  useEffect(() => {
+    if (tipId && tips.length > 0) {
+      const tip = tips.filter((t: any) => t._id === tipId)
+      setSelectedTipData({
+        username: tip[0].tipper ? tip[0].tipper.name : tip[0].nickname,
+        tip: tip[0].tip,
+        message: tip[0].message,
+        avatars: [
+          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
+          tip[0].tipper ? tip[0].tipper.avatar.indexOf('uploads') === -1 ? tip[0].tipper.avatar : `${CONSTANT.SERVER_URL}/${tip[0].tipper.avatar}` : visitorImg
+        ],
+        ownername: authuser?.name,
+        ownerURL: `${CONSTANT.SERVER_URL}/${authuser?.personalisedUrl}`
+      })
+      setOpenTipMessageDlg(true);
+    }
+  }, [tipId, tips])
+
   return (
     <div className="profile-wrapper">
       {authuser !== null &&
         <>
           <TipMessageDlg
             display={openTipMessageDlg}
-            wrapExit={() => { setOpenTipMessageDlg(false) }}
-            exit={() => { setOpenTipMessageDlg(false) }}
+            wrapExit={() => {
+              setOpenTipMessageDlg(false)
+              dispatch({ type: SET_TIPID, payload: null })
+            }}
+            exit={() => {
+              setOpenTipMessageDlg(false)
+              dispatch({ type: SET_TIPID, payload: null })
+            }}
             tipData={selectedTipData}
           />
           <Dialog

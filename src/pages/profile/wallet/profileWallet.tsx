@@ -2,9 +2,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { daremeAction } from "../../../redux/actions/daremeActions";
 import {
-  ArrowDownIcon,
   BalanceIcon,
   CreatoCoinIcon,
   MoneyIcon,
@@ -65,7 +63,7 @@ const ProfileWallet = () => {
     window.scrollTo(0, 0);
     dispatch({ type: SET_TRANSACTIONS, payload: [] });
     dispatch(transactionActions.getUserLatest5Transactions());
-  }, [location]);
+  }, [location, dispatch]);
 
   return (
     <>

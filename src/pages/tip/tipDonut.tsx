@@ -113,7 +113,7 @@ const TipDonut = () => {
     dispatch(authAction.getUserFromUrl(creatorLink));
     setOpenTipSuccess(false);
     setTippingGif(false);
-  }, [location]);
+  }, [location, dispatch, creatorLink]);
 
   return (
     <div className="tip-donuts">

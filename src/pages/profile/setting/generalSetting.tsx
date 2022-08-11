@@ -8,12 +8,11 @@ import {
   NoOfPeopleIcon,
 } from "../../../assets/svg";
 import Title from "../../../components/general/title";
-import { daremeAction } from "../../../redux/actions/daremeActions";
 import { WalletIcon } from "../../../constants/awesomeIcons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LanguageContext } from "../../../routes/authRoute";
-import "../../../assets/styles/profile/generalSettingStyle.scss";
 import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
+import "../../../assets/styles/profile/generalSettingStyle.scss";
 
 const GeneralSetting = () => {
   const navigate = useNavigate();

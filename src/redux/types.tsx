@@ -63,3 +63,4 @@ export const SET_TRANSACTIONS = "SET_TRANSACTIONS";
 
 export const SET_OPTION_LOGS = "SET_OPTION_LOGS";
 export const SET_REFUND_DONUTS = "SET_REFUND_DONUTS";
+export const SET_TIPID = 'SET_TIPID'

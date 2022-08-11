@@ -12,6 +12,7 @@ const INITIAL_STATE: any = {
         cover: null,
         posted: null,
     },
+    tipId: null,
     tip: null,
     tips: [],
     winOption: null,
@@ -33,16 +34,19 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state, topFuns: payload };
         case actionTypes.SET_FANWALLS:
             state.fanwalls = payload;
-            return { ...state };
+            return { ...state }
         case actionTypes.SET_FANWALL_TYPE:
             state.itemType = payload;
-            return { ...state };
+            return { ...state }
         case actionTypes.SET_TIPS:
             state.tips = payload;
-            return { ...state };
+            return { ...state }
         case actionTypes.SET_TIP:
             state.tip = payload;
-            return { ...state };
+            return { ...state }
+        case actionTypes.SET_TIPID:
+            state.tipId = payload
+            return { ...state }
         case actionTypes.SET_FANWALL_INITIAL:
             return {
                 fanwall: {
@@ -56,6 +60,7 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
                     posted: null,
                     cover: null,
                 },
+                tipId: null,
                 tip: null,
                 tips: [],
                 winOption: null,

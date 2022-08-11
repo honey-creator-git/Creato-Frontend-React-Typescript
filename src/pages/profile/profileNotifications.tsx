@@ -8,6 +8,7 @@ import { notificationAction } from "../../redux/actions/notificationAction";
 import Avatar from "../../components/general/avatar";
 import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
+import { SET_TIPID, SET_TIPS } from "../../redux/types";
 import '../../assets/styles/profile/profileNotificationsStyle.scss';
 
 const ProfileNotifications = () => {
@@ -19,16 +20,21 @@ const ProfileNotifications = () => {
   const notifications = useSelector((state: any) => state.notification.list);
   const contexts = useContext(LanguageContext);
 
-  const handleClick = (itemId: any, notificationId: any, sectionInfo: any, read: any, readCount: any, index: any, donuts: any) => {
+  const handleClick = (itemId: any, notificationId: any, sectionInfo: any, read: any, readCount: any, index: any, donuts: any, tip: any) => {
     const section = sectionInfo.section
     if (!read) dispatch(notificationAction.readNotification(notificationId, readCount - 1));
     if (section === "Create DareMe" || section === 'Ongoing DareMe') navigate(`/dareme/details/${itemId}`);
     else if (section === 'Create FundMe' || section === 'Ongoing FundMe') navigate(`/fundme/details/${itemId}`);
     else if (section === 'Finished DareMe') {
-      if(sectionInfo.info[index].recipient === 'Voter of Non Winning Dares') {
-        dispatch(daremeAction.refundOrNot(donuts,itemId))
-      }
+      if (sectionInfo.info[index].recipient === 'Voter of Non Winning Dares') dispatch(daremeAction.refundOrNot(donuts, itemId))
       navigate(`/dareme/result/${itemId}`)
+    } else if (section === 'Tipping') {
+      const trigger = sectionInfo.info[index].trigger
+      if (trigger === 'After make tipping sucessfully' || trigger === 'After received Donuts from tipping') {
+        dispatch({ type: SET_TIPID, payload: tip._id })
+        dispatch({ type: SET_TIPS, payload: [] })
+        navigate(`/${tip.user.personalisedUrl}/fanwall`)
+      }
     }
   }
 
@@ -53,7 +59,8 @@ const ProfileNotifications = () => {
                     handleClick(
                       notification.dareme ? notification.dareme._id : notification.fundme ? notification.fundme._id : '',
                       notification.id, notification.section, notification.read,
-                      notifications.filter((notification: any) => notification.read === false).length, notification.index, notification.donuts)
+                      notifications.filter((notification: any) => notification.read === false).length, notification.index, notification.donuts,
+                      notification.tip)
                   }}>
                     <div className="content">
                       {notification.sender?.avatar && notification.sender.role === "USER" ?
@@ -84,7 +91,8 @@ const ProfileNotifications = () => {
                       handleClick(
                         notification.dareme ? notification.dareme._id : notification.fundme ? notification.fundme._id : '',
                         notification.id, notification.section, notification.read,
-                        notifications.filter((notification: any) => notification.read === false).length, notification.index, notification.donuts)
+                        notifications.filter((notification: any) => notification.read === false).length, notification.index, notification.donuts,
+                        notification.tip)
                     }}>
                       <div className="content">
                         {notification.sender?.avatar && notification.sender.role === "USER" ?

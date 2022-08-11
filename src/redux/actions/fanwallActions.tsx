@@ -81,7 +81,8 @@ export const fanwallAction = {
 
     getFanwallsByPersonalUrl: (data: any) => async (dispatch: Dispatch<any>) => {
         dispatch({ type: SET_LOADING_TRUE });
-        dispatch({ type: SET_FANWALL_INITIAL });
+        dispatch({ type: SET_FANWALLS, payload: [] })
+        dispatch({ type: SET_TIPS, payload: [] })
         api.getFanwallsByPersonalisedUrl({ url: data })
             .then((result: any) => {
                 const { data } = result;
