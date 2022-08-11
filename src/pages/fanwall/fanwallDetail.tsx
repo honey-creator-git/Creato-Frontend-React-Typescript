@@ -186,7 +186,7 @@ const FanwallDetails = () => {
                   text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
                   handleClick: () => {
                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/fanwall/detail/${fanwallId}` });
-                    navigate(`/${user.personalisedUrl}/shop`);
+                    navigate(`/myaccount/shop`);
                   }
                 }
               ]}

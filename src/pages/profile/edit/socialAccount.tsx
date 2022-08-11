@@ -23,7 +23,7 @@ const Socialaccount = () => {
   return (
     <>
       <div className="title-header">
-        <Title title="Social Accounts" back={() => { navigate(`/users/${user.id}/edit`) }} />
+        <Title title="Social Accounts" back={() => { navigate(`/myaccount/edit`) }} />
       </div>
       <div className="socialaccount-wrapper">
         <div className="socialaccounts">

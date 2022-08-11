@@ -8,6 +8,7 @@ import ContainerBtn from "../../../components/general/containerBtn";
 import Title from "../../../components/general/title";
 import Dialog from "../../../components/general/dialog";
 import { SpreadIcon } from "../../../assets/svg";
+import CONSTANT from "../../../constants/constant";
 import "../../../assets/styles/profile/paymentStyle.scss";
 
 const Payment = () => {
@@ -16,10 +17,14 @@ const Payment = () => {
   const user = useSelector((state: any) => state.auth.user);
   const contexts = useContext(LanguageContext);
 
+  const connectStripe = () => {
+    window.open(`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${CONSTANT.CLIENT_ID}&scope=read_write`, "_blank")
+  }
+
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.PAYMENT.PAYMENT_TITLE} back={() => navigate(`/users/${user.id}/setting`)} />
+        <Title title={contexts.PAYMENT.PAYMENT_TITLE} back={() => navigate(`/myaccount/setting`)} />
       </div>
       <div className="payment-wrapper">
         <Dialog
@@ -45,7 +50,7 @@ const Payment = () => {
           <div className="subtitle">
             {contexts.PAYMENT.STRIPE_CONTENT}
           </div>
-          <div style={{ width: '100%' }} onClick={() => { setOpenSoon(true) }}><ContainerBtn styleType="fill" text={contexts.PAYMENT.BUTTON_CONNECT} /></div>
+          <div style={{ width: '100%' }} onClick={() => { connectStripe() }}><ContainerBtn styleType="fill" text={contexts.PAYMENT.BUTTON_CONNECT} /></div>
         </div>
         <div className="content">
           <div className="top">

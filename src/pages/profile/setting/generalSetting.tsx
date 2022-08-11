@@ -35,7 +35,7 @@ const GeneralSetting = () => {
         <div className="settings">
           <div
             className="setting"
-            onClick={() => navigate(`/users/${user.id}/setting/invitefriends`)}
+            onClick={() => navigate(`/myaccount/setting/invitefriends`)}
           >
             <div className="part">
               <NoOfPeopleIcon color="black" />
@@ -45,7 +45,7 @@ const GeneralSetting = () => {
           </div>
           <div
             className="setting"
-            onClick={() => navigate(`/users/${user.id}/setting/payment`)}
+            onClick={() => navigate(`/myaccount/setting/payment`)}
           >
             <div className="part">
               <WalletIcon color="black" />
@@ -56,8 +56,8 @@ const GeneralSetting = () => {
           <div
             className="setting"
             onClick={() => {
-              dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/users/${user.id}/setting` });
-              navigate(`/users/${user.id}/setting/language`)
+              dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/myaccount/setting` });
+              navigate(`/myaccount/setting/language`)
             }}
           >
             <div className="part">

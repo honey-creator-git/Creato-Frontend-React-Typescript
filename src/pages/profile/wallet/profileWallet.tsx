@@ -108,8 +108,8 @@ const ProfileWallet = () => {
                   shape="rounded"
                   text={contexts.WALLET_LETTER.TOP_UP}
                   handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user.personalisedUrl}/wallet` });
-                    navigate(`/${user.personalisedUrl}/shop`);
+                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/myaccount/wallet` });
+                    navigate(`/myaccount/shop`);
                   }}
                 />
               </div>
@@ -152,7 +152,7 @@ const ProfileWallet = () => {
               </div>
             </div>
           </div>
-          <div className="bottom-btn" onClick={() => { navigate(`/users/${user.id}/setting/invitefriends`); }}>
+          <div className="bottom-btn" onClick={() => { navigate(`/myaccount/setting/invitefriends`); }}>
             <ContainerBtn
               styleType="fill"
               text={contexts.WALLET_LETTER.INVITE_FRIENDS}
@@ -177,7 +177,7 @@ const ProfileWallet = () => {
                   setMoreInfo(false);
                   dispatch({ type: SET_TRANSACTIONS, payload: [] });
                   dispatch(transactionActions.getUserTransactionsByDays(30));
-                  navigate(`/${user.personalisedUrl}/wallet/donuts-transactions`);
+                  navigate(`/myaccount/wallet/donuts-transactions`);
                 }}>
                   {contexts.WALLET_LETTER.FIRST_DAYS}
                 </div>
@@ -185,7 +185,7 @@ const ProfileWallet = () => {
                   setMoreInfo(false);
                   dispatch({ type: SET_TRANSACTIONS, payload: [] });
                   dispatch(transactionActions.getUserTransactionsByDays(60));
-                  navigate(`/${user.personalisedUrl}/wallet/donuts-transactions`);
+                  navigate(`/myaccount/wallet/donuts-transactions`);
                 }}>
                   {contexts.WALLET_LETTER.SECOND_DAYS}
                 </div>
@@ -193,7 +193,7 @@ const ProfileWallet = () => {
                   setMoreInfo(false);
                   dispatch({ type: SET_TRANSACTIONS, payload: [] });
                   dispatch(transactionActions.getUserTransactionsByDays(0));
-                  navigate(`/${user.personalisedUrl}/wallet/donuts-transactions`);
+                  navigate(`/myaccount/wallet/donuts-transactions`);
                 }}>
                   {contexts.WALLET_LETTER.ALL_DAYS}
                 </div>

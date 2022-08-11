@@ -32,7 +32,7 @@ const Categories = () => {
   const handleSave = () => {
     const state = { ...profile, category: categories }
     dispatch({ type: SET_PROFILE_DATA, payload: state });
-    navigate(`/users/${authState.user?.id}/edit`);
+    navigate(`/myaccount/edit`);
   }
 
   const includeCategory = (index: any) => {
@@ -54,7 +54,7 @@ const Categories = () => {
   return (
     <>
       <div className="title-header">
-        <Title title="Choose categories" back={() => navigate(`/users/${authState.user?.id}/edit`)} />
+        <Title title="Choose categories" back={() => navigate(`/myaccount/edit`)} />
       </div>
       <div className="categories-wrapper">
         <div className="description">

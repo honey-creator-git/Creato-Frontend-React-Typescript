@@ -183,7 +183,7 @@ const TipDonut = () => {
                 text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
                 handleClick: () => {
                   dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}/tip` });
-                  navigate(`/${user.personalisedUrl}/shop`);
+                  navigate(`/myaccount/shop`);
                 }
               }
             ]}

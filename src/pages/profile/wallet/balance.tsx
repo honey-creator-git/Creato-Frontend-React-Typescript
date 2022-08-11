@@ -29,7 +29,7 @@ const Balance = () => {
   return (
     <>
       <div className="title-header">
-        <Title title="Balance History" back={() => navigate(`/${user.personalisedUrl}/wallet`)} />
+        <Title title="Balance History" back={() => navigate(`/myaccount/wallet`)} />
       </div>
       <div className="balance-wrapper">
         <div className="table">

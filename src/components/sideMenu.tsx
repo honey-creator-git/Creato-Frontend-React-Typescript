@@ -52,29 +52,29 @@ const SideMenu = (props: any) => {
   };
   const handleWallet = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
-    else navigate(`/${user.personalisedUrl}/wallet`);
+    else navigate(`/myaccount/wallet`);
     props.setOpen(false);
   };
   const handleShop = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
-    else navigate(`/${user.personalisedUrl}/shop`);
+    else navigate(`/myaccount/shop`);
     props.setOpen(false);
   };
   const handleNotifications = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
-    else navigate(`/${user.personalisedUrl}/notifications`);
+    else navigate(`/notifications`);
     props.setOpen(false);
   };
   const handleSetting = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
-    else navigate(`/users/${user.id}/setting`);
+    else navigate(`/myaccount/setting`);
     props.setOpen(false);
   };
   const handleLanguage = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
     else {
       dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname });
-      navigate(`/users/${user.id}/setting/language`);
+      navigate(`/myaccount/setting/language`);
     }
     props.setOpen(false);
   };

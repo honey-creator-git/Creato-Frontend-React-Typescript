@@ -67,7 +67,7 @@ const Earning = () => {
   lists.map((list) => (total += list.amount));
   return (
     <div className="wallet-earning">
-      <Title title="Earning from DareMe" back={()=>navigate("/profile/wallet")}/>
+      <Title title="Earning from DareMe" back={()=>navigate("/myaccount/wallet")}/>
       <div className="table">
         <div className="header">
           <div className="row">

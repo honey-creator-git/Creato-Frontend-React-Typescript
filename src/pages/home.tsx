@@ -344,7 +344,7 @@ const Home = () => {
       }
       <div className="section">
         <div className="title">{contexts.HOME_LETTER.GET_DONUTS_TO_DARE}</div>
-        <div className="see-more" onClick={() => { navigate(`/${user.personalisedUrl}/shop`); }}>See More</div>
+        <div className="see-more" onClick={() => { navigate(`/myaccount/shop`); }}>See More</div>
         <div className="donuts-list scroll-bar">
           {creatoList.map((creato, i) => (
             <div className="donuts" key={i} onClick={() => {

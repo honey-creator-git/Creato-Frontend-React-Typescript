@@ -112,22 +112,19 @@ const AppRoutes = () => {
 
             <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
             <Route path="/:creatorLink/fanwall" element={<AuthRoute child={<ProfileFanwall />} />} />
-            <Route path="users/:userId/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
-            <Route path="users/:userId/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
 
-            <Route path="/:creatorLink/edit/socialaccount" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
-            <Route path="/:creatorLink/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
-            <Route path="/:creatorLink/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
-            <Route path="/:creatoLink/shop" element={<AuthRoute child={<ShopDonuts />} routeType="private" />} />
-            <Route path="/:creatoLink/notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
-
-            <Route path="users/:userId/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
-            <Route path="users/:userId/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />
-
-            <Route path="profile/wallet/earning" element={<AuthRoute child={<Earning />} routeType="private" />} />
-
-            <Route path="users/:userId/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
-            <Route path="users/:userId/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
+            <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
+            <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
+            <Route path="myaccount/edit/socialaccount" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+            <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
+            <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
+            <Route path="myaccount/wallet/earning" element={<AuthRoute child={<Earning />} routeType="private" />} />
+            <Route path="myaccount/shop" element={<AuthRoute child={<ShopDonuts />} routeType="private" />} />
+            <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
+            <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />
+            <Route path="myaccount/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
+            <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
+            <Route path="notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
 
             <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DaremeDetails />} />} />
             <Route path="dareme/:daremeId/voters" element={<AuthRoute child={<DaremeVoters />} routeType="private" />} />

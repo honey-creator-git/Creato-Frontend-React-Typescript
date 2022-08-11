@@ -233,7 +233,7 @@ const FundmeDetails = () => {
                 handleClick: () => {
                   dispatch({ type: SET_CURRENT_FUNDME, payload: fundmeId });
                   dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/fundme/details/${fundmeId}` });
-                  navigate(`/${user.personalisedUrl}/shop`);
+                  navigate(`/myaccount/shop`);
                 }
               }
             ]}

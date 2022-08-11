@@ -166,7 +166,7 @@ const SupportCreator = () => {
                                 handleClick: () => {
                                     dispatch({ type: SET_CURRENT_DAREME, payload: daremeId });
                                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/${daremeId}/support/${optionId}` });
-                                    navigate(`/${user.personalisedUrl}/shop`);
+                                    navigate(`/myaccount/shop`);
                                 }
                             }
                         ]}

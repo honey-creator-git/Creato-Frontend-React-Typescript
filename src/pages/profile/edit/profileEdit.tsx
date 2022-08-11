@@ -154,7 +154,7 @@ const ProfileEdit = () => {
           onClick={() => {
             const state = { ...profile, displayName: displayName, creatoUrl: creatoURL };
             dispatch({ type: SET_PROFILE_DATA, payload: state });
-            navigate(`/users/${user?.id}id/edit/categories`);
+            navigate(`/myaccount/edit/categories`);
           }}
         >
           <ContainerBtn styleType="outline" text={contexts.EDIT_PROFILE_LETTER.CATEGORIES} />

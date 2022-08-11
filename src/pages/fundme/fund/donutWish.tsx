@@ -104,7 +104,7 @@ const DonutWish = () => {
                                 text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
                                 handleClick: () => {
                                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/fundme/details/${fundmeId}/wish` });
-                                    navigate(`/${user.personalisedUrl}/shop`);
+                                    navigate(`/myaccount/shop`);
                                 }
                             }
                         ]}

@@ -21,7 +21,7 @@ const Invitefriends = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.INVITE_FRIENDS} back={() => navigate(`/users/${user.id}/setting`)} />
+        <Title title={contexts.HEADER_TITLE.INVITE_FRIENDS} back={() => navigate(`/myaccount/setting`)} />
       </div>
       <div className="invite-friends">
         <div className="title">

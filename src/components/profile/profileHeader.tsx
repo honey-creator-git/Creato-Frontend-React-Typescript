@@ -204,7 +204,7 @@ const ProfileHeader = (props: profileProps) => {
                   creatoUrl: `www.creatogether.io/${user?.personalisedUrl}`
                 }
               });
-              navigate(`/users/${user.id}/edit`);
+              navigate(`/myaccount/edit`);
             }
           }}>
             <EditIcon color="#E17253" />
