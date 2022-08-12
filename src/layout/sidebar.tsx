@@ -63,7 +63,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/admin/fanwalls" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <RewardIcon className="icon-svg" color={activePath === '/admin/fanwalls' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/fanwalls" ? "#EFA058" : "#A6A29F"} />
+            <RewardIcon className="icon-svg" color={location.pathname.indexOf('/admin/fanwalls') !== -1 ? "#EFA058" : hoverPath === "/admin/fanwalls" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>Fanwall</span>

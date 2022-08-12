@@ -20,6 +20,7 @@ import { RewardIcon } from "../assets/svg";
 import { fundmeAction } from "../redux/actions/fundmeActions";
 import { paymentAction } from "../redux/actions/paymentActions";
 import "../assets/styles/homeStyle.scss";
+import WelcomeDlg from "../components/general/welcomeDlg";
 
 const creatoList = [
   {
@@ -76,6 +77,7 @@ const Home = () => {
   const [openTopupDlg, setOpenTopupDlg] = useState(false);
   const [openErrorDlg, setOpenErrorDlg] = useState(false);
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false);
+  const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
   const [openPayVia, setOpenPayVia] = useState(false);
@@ -129,11 +131,33 @@ const Home = () => {
         setOpenErrorDlg(true);
         setErrorText(dlgState.msg);
       }
+    } else if (dlgState.type === 'welcome2') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg2(true)
+      }
     }
   }, [dlgState]);
 
   return (
     <div className="home-wrapper">
+      <WelcomeDlg
+        display={openWelcomeDlg2}
+        exit={() => { 
+          setOpenWelcomeDlg2(false) 
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+        }}
+        wrapExit={() => { 
+          setOpenWelcomeDlg2(false) 
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+        }}
+        buttons={[{
+          text: 'Go',
+          handleClick: () => { 
+            setOpenWelcomeDlg2(false) 
+            dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+          }
+        }]}
+      />
       <PaymentForm
         display={openPaymentDlg}
         exit={() => {
@@ -606,33 +630,33 @@ const Home = () => {
             {fanwalls.map((fanwall: any, index: any) => (
               <div className="dareme" key={index}>
                 <VideoCardMobile
-                  donuts={fanwall.dareme.donuts}
-                  url={`${CONSTANT.SERVER_URL}/${fanwall.video}`}
-                  title={fanwall.dareme.title}
-                  sizeType={fanwall.sizeType}
-                  coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
-                  goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
-                  category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
+                  donuts={fanwall?.dareme?.donuts ? fanwall?.dareme?.donuts : 0 }
+                  url={`${CONSTANT.SERVER_URL}/${fanwall?.video}`}
+                  title={fanwall?.dareme?.title}
+                  sizeType={fanwall?.sizeType}
+                  coverImage={fanwall?.cover ? `${CONSTANT.SERVER_URL}/${fanwall?.cover}` : ""}
+                  goal={fanwall?.dareme?.goal ? fanwall?.dareme?.goal : null}
+                  category={fanwall?.dareme?.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall?.dareme?.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall?.dareme?.category - 1]}
                   posted={true}
                   finished={true}
                   fanwallData={fanwall}
                   handleSubmit={() => {
-                    if (fanwall.dareme.goal) navigate(`/fundme/fanwall/detail/${fanwall.id}`)
-                    else navigate(`/dareme/fanwall/detail/${fanwall.id}`)
+                    if (fanwall?.dareme?.goal) navigate(`/fundme/fanwall/detail/${fanwall?.id}`)
+                    else navigate(`/dareme/fanwall/detail/${fanwall?.id}`)
                   }}
                 />
                 <AvatarLink
-                  username={fanwall.writer.name}
-                  avatar={fanwall.writer.avatar}
-                  handleAvatar={() => { navigate(`/${fanwall.writer.personalisedUrl}`) }}
-                  ownerId={fanwall.writer._id}
+                  username={fanwall?.writer?.name}
+                  avatar={fanwall?.writer?.avatar ? fanwall?.writer?.avatar : ''}
+                  handleAvatar={() => { navigate(`/${fanwall?.writer?.personalisedUrl}`) }}
+                  ownerId={fanwall?.writer?._id}
                   url={"/"}
                   delData={() => {
-                    setFanwallId(fanwall.id);
+                    setFanwallId(fanwall?.id);
                     setOpenDelPostDlg(true);
                   }}
                   isFanwall={true}
-                  daremeId={fanwall.id}
+                  daremeId={fanwall?.id}
                 />
               </div>
             ))

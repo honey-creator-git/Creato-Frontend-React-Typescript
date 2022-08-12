@@ -69,7 +69,7 @@ export const getPaymentInfo = () => API.get('/api/payment/payment_info')
 //ADMIN API
 export const getUsersList = (data: any) => API.post('/api/auth/users', data);
 export const getDareMeList = (data: any) => API.post('/api/dareme/daremes', data);
-export const setDareMeShow = (data: any, daremeId: any) => API.post(`/api/dareme/daremes/${daremeId}`, data);
+export const setDareMeShow = (data: any, daremeId: any) => API.post(`/api/dareme/daremes/${daremeId}`, data)
 export const deleteDareMe = (daremeId: any) => API.delete(`/api/dareme/daremes/${daremeId}`);
 export const updateDareMe = (daremeId: any, daremeData: any) => API.put(`/api/dareme/daremes/${daremeId}`, daremeData);
 export const deleteOption = (daremeId: any, optionId: any) => API.delete(`/api/dareme/daremes/${daremeId}/options/${optionId}`);
@@ -85,7 +85,8 @@ export const changeVisible = (data: any) => API.post('/api/tip/profile/changevis
 export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
 export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);
 export const deleteTip = (tipId: any) => API.delete(`/api/tip/${tipId}`);
-export const getActiveTipUsers = () => API.get('/api/tip/users/tipactive');
+export const getActiveTipUsers = () => API.get('/api/tip/users/tipactive')
+export const getFanwallList = () => API.get('/api/fanwall/fanwalls') 
 
 ///Notification API////
 export const getNotificationSetting = () => API.get('/api/notification/setting');

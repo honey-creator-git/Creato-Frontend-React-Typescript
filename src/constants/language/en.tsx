@@ -90,6 +90,15 @@ export const EN = {
         REWARDS: 'Reward For SuperFans',
         EXCLUSIVE_CHAT: 'e.g. exclusive chat, signed postcard etc'
     },
+    WELCOME_DLG: {
+      TITLE: 'Welcome back!',
+      SUBTITLE: '🎉 Tip Donuts to Creator is now live!',
+      HOW_IT_WORKS: 'How it works:',
+      LINE1: '1. Go to Creator’s profile',
+      LINE2: '2. Click the Tip Icon (as shown above)',
+      LINE3: '3. Visitors can also Tip Donuts to Creators!',
+      LINE4: '4. Enjoy!🍩🎊',
+    },
     FUNDME_REWARDS: [
         "Behind-the-scene videos 📽️",
         "Live chat session 🖥️",

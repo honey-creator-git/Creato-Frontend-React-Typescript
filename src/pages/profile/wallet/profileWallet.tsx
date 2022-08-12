@@ -243,7 +243,7 @@ const ProfileWallet = () => {
             </div>
           </div>
         </div>
-        <div className="connect-strip-account">
+        {/* <div className="connect-strip-account">
           <div className="header">
             <StripeIcon />
             <div className="title">Connect Stripe account</div>
@@ -258,7 +258,7 @@ const ProfileWallet = () => {
           }}>
             <ContainerBtn text={contexts.WALLET_LETTER.CONNECT} styleType="outline" />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

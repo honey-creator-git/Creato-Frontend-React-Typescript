@@ -90,6 +90,15 @@ export const CH = {
         REWARDS: '給超級粉絲的獎勵',
         EXCLUSIVE_CHAT: 'e.g. 獨家聊天、簽名明信片等'
     },
+    WELCOME_DLG: {
+        TITLE: '歡迎回來Creato!',
+        SUBTITLE: '🎉 贊助甜甜圈 正式推出！',
+        HOW_IT_WORKS: ' 如何使用:',
+        LINE1: '1. 去創作者的Profile業面',
+        LINE2: '2. 找尋『贊助甜甜圈』的圖標',
+        LINE3: '3. 訪客也可以贊助甜甜圈的!',
+        LINE4: '4. 請慢用! 🍩🎊',
+    },
     FUNDME_REWARDS: [
         "獨家幕後影片 📽️",
         "實時聊天 🖥️",

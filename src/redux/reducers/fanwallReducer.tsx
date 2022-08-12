@@ -12,6 +12,9 @@ const INITIAL_STATE: any = {
         cover: null,
         posted: null,
     },
+    videoFile: null,
+    videoSizeType: null,
+    coverFile: null,
     tipId: null,
     tip: null,
     tips: [],
@@ -47,6 +50,15 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_TIPID:
             state.tipId = payload
             return { ...state }
+        case actionTypes.SET_FANWALL_VIDEOFILE:
+            state.videoFile = payload
+            return { ...state }
+        case actionTypes.SET_FANWALL_VIDEO_SIZETYPE:
+            state.videoSizeType = payload
+            return { ...state }
+        case actionTypes.SET_FANWALL_COVERFILE:
+            state.coverFile = payload
+            return { ...state }
         case actionTypes.SET_FANWALL_INITIAL:
             return {
                 fanwall: {
@@ -60,6 +72,9 @@ const fanwallReducer = (state: any = INITIAL_STATE, action: any) => {
                     posted: null,
                     cover: null,
                 },
+                videoFile: null,
+                videoSizeType: null,
+                coverFile: null,
                 tipId: null,
                 tip: null,
                 tips: [],

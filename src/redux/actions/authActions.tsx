@@ -16,6 +16,10 @@ export const authAction = {
                 localStorage.clear();
                 localStorage.setItem('dareme_token', JSON.stringify(data.token));
                 dispatch({ type: SET_USER, payload: data.user });
+                if (data.firstLogin === false) {
+                    dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } });
+                    navigate("/");
+                }
                 if (data.new) {
                     dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
                     navigate("/");
@@ -30,6 +34,10 @@ export const authAction = {
                 localStorage.clear();
                 localStorage.setItem('dareme_token', JSON.stringify(data.token));
                 dispatch({ type: SET_USER, payload: data.user });
+                if (data.firstLogin === false) {
+                    dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } });
+                    navigate("/");
+                }
                 if (data.new) {
                     dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
                     navigate("/");

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fanwallAction } from "../../redux/actions/fanwallActions";
-import { daremeAction } from "../../redux/actions/daremeActions";
 import FanwallVideoCard from "../../components/fanwall/videoCardFanwall";
 import FawnallLike from "../../components/fanwall/fanwallLike";
 import DareOption from "../../components/general/dareOption";
