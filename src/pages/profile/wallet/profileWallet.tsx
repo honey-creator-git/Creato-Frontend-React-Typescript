@@ -14,9 +14,11 @@ import Dialog from "../../../components/general/dialog";
 import Button from "../../../components/general/button";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
+import PayoutDonuts from "../../../components/stripe/payoutDonuts";
 import { LanguageContext } from "../../../routes/authRoute";
 import { SET_PREVIOUS_ROUTE, SET_TRANSACTIONS } from "../../../redux/types";
 import { transactionActions } from "../../../redux/actions/transactionActions";
+import { paymentAction } from "../../../redux/actions/paymentActions";
 import "../../../assets/styles/profile/profileWalletStyle.scss";
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -47,7 +49,10 @@ const ProfileWallet = () => {
   const [moreInfo, setMoreInfo] = useState(false);
   const wrapRef = useRef<any>(null);
   const contexts = useContext(LanguageContext);
+  const [amount, setAmount] = useState('')
+  const [stripePayout, setStripePayout] = useState(false)
   const res = useOutsideAlerter(wrapRef, moreInfo);
+  const [payout, setPayout] = useState(false)
 
   useEffect(() => {
     if (!res) setMoreInfo(res);
@@ -55,7 +60,7 @@ const ProfileWallet = () => {
 
   const calcColor = (description: any, to: any) => {
     if (description === 2 || description === 3 || description === 4 || description === 7) return true;
-    if (description === 9 && user.id === to) return true;
+    if (description === 9 && user?.id === to) return true;
     else return false;
   }
 
@@ -71,6 +76,26 @@ const ProfileWallet = () => {
         <Title title={contexts.HEADER_TITLE.MY_DONUTS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
       </div>
       <div className="profile-wallet">
+        <PayoutDonuts 
+          display={stripePayout}
+          exit={() => { setStripePayout(false) }}
+          wrapExit={() => { setStripePayout(false) }}
+          amount={amount}
+          maxnum={Math.floor(user?.wallet / 10.0) * 10}
+          setAmount={setAmount}
+          buttons={[
+            {
+              text: 'Payout',
+              handleClick: () => {
+                if(Number(amount) > (Math.floor(user?.wallet / 10.0) * 10)) alert('Payout error')
+                else {
+                  setStripePayout(false)
+                  dispatch(paymentAction.stripePayout(Number(amount)))
+                }
+              }
+            }
+          ]}
+        />
         <Dialog
           display={openConnectStripe}
           wrapExit={() => { setOpenConnectStripe(false); }}
@@ -80,6 +105,29 @@ const ProfileWallet = () => {
             pos: 0,
             icon: <SpreadIcon color="#EFA058" width="60px" height="60px" />
           }}
+        />
+        <Dialog
+          display={payout}
+          title="Payout"
+          exit={() => { setPayout(false) }}
+          wrapExit={() => { setPayout(false) }}
+          context="Please select payout method"
+          buttons={[
+            {
+              text: 'Stripe',
+              handleClick: () => {
+                setPayout(false)
+                setStripePayout(true)
+              }
+            },
+            {
+              text: 'Fill a Form',
+              handleClick: () => {
+                setPayout(false)
+                window.open("https://www.creatogether.app/altpayout", '_blank')
+              }
+            }
+          ]}
         />
         <div className="donuts">
           <div className="total">
@@ -145,9 +193,7 @@ const ProfileWallet = () => {
                   fillStyle="outline"
                   shape="rounded"
                   text={contexts.WALLET_LETTER.CASH_OUT}
-                  handleSubmit={() => {
-                    window.open("https://www.creatogether.app/altpayout", '_blank');
-                  }}
+                  handleSubmit={() => { setPayout(true) }}
                 />
               </div>
             </div>

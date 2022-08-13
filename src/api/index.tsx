@@ -65,6 +65,7 @@ export const getStripeID = () => API.get('/api/payment/stripeId');
 export const connectStripe = (data: any) => API.post('/api/payment/connect_stripe', data)
 export const disconnectStripe = (data: any) => API.post('/api/payment/disconnect_stripe', data)
 export const getPaymentInfo = () => API.get('/api/payment/payment_info')
+export const stripePayout = (data: any) => API.post('/api/payment/payout/stripe', data)
 
 //ADMIN API
 export const getUsersList = (data: any) => API.post('/api/auth/users', data);

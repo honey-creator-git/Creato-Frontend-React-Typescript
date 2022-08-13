@@ -63,5 +63,17 @@ export const paymentAction = {
         const { data } = result
         if (data.success) dispatch({ type: SET_PAYMENT, payload: data.payment })
       }).catch((err) => console.log(err))
+  },
+
+  stripePayout: (donuts: any) => async (dispatch: Dispatch<any>) => {
+    api.stripePayout({ donuts: donuts })
+      .then((result) => {
+        const { data } = result
+        if(data.success) {
+          alert("Success")
+        } else {
+          alert("Failed " + data.message)
+        }
+      }).catch(err => console.log(err))
   }
 }
