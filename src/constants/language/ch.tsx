@@ -425,6 +425,7 @@ export const CH = {
             FUNDME_TITLE: 'FundMe Title?',
             DARE_OPTIONS: '什麼是DareMe 選項?',
             WHAT_IS_TEASER: '什麼是預告?',
+            WHAT_IS_SUPERFAN: '什麼是獎勵超級粉絲?',
         },
         BODY_LETTER: {
             GOAL: '為創作目標設置一個甜甜圈金額。即使目標尚未實現，您仍將收到您的甜甜圈 \n i.e. 10 甜甜圈 = $1 美元',
@@ -434,6 +435,7 @@ export const CH = {
             FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
             DARE_OPTIONS: '提出兩個 Dare 來開始 DareMe. ⚖️\n\nDareMe 開始後, 您的粉絲將可向您提出新的 Dare 給您考慮. 💭',
             WHAT_IS_TEASER: '分享您的想法給觀眾們 😛\n\n把預告短片在 20 秒內完成! 🤳🏻',
+            WHAT_IS_SUPERFAN: '超級粉絲 (SuperFan) 是在你的創作過程中全心全意支持你的人。\n\n為您的觀眾設置一個甜甜圈數量，使其成為超級粉絲並享受您的獨家內容和體驗！',
         }
     },
     PUBLISH: '發佈'

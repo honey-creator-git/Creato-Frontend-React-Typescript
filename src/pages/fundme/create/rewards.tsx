@@ -47,7 +47,7 @@ const FundmeRewards = () => {
               else setOpen(true);
             } else navigate("/fundme/create");
           }}
-          hint={() => { }}
+          hint={() => { setOpenHint(true) }}
         />
       </div>
       <div className="dareme-title-wrapper">
@@ -79,8 +79,8 @@ const FundmeRewards = () => {
           open={openHint}
           exit={() => { setOpenHint(false); }}
           color="#059669"
-          title={contexts.HINT.TITLE.FUNDME_TITLE}
-          context={contexts.HINT.BODY_LETTER.FUNDME_TITLE}
+          title={contexts.HINT.TITLE.WHAT_IS_SUPERFAN}
+          context={contexts.HINT.BODY_LETTER.WHAT_IS_SUPERFAN}
         />
         <div className="headerSet">
           <HotIcon color="#EFA058" />

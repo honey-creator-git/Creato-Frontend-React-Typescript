@@ -426,6 +426,7 @@ export const EN = {
             FUNDME_TITLE: 'FundMe Title?',
             DARE_OPTIONS: 'Dare options?',
             WHAT_IS_TEASER: 'What is a teaser video?',
+            WHAT_IS_SUPERFAN: 'What is SuperFan?',
         },
         BODY_LETTER: {
             GOAL: 'Set a Donut amount for funding goal. You will still receive your funding even though the goal has not been met.\n\n10 Donuts = ~$1 USD',
@@ -435,6 +436,7 @@ export const EN = {
             FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
             DARE_OPTIONS: 'Start the game with 2 Dare options. ⚖️\n\nOnce the DareMe started, your fans will be able to propose new Dares to you for your consideration. 💭',
             WHAT_IS_TEASER: 'Tell your fans about your ideas 😛\n\nBe concise & fun!\n\nIdeally make it under 20 seconds! 🤳🏻',
+            WHAT_IS_SUPERFAN: 'SuperFan is whoever that will support you wholeheartedly in your creation journey.\n\nSet a Donut amount for your audience to become SuperFans & enjoy your exclusive content & experience!',
         }
 
     },
