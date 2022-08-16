@@ -57,10 +57,16 @@ const DonutWish = () => {
         if (user) {
             if (amount === 1) setOpenSet(true)
             else {
-                if (amount > user.wallet) setIsTopUp(true);
+                if (amount > user.wallet) setIsTopUp(true)
                 else {
-                    if (amount < dareme.reward) setIsNonSuperfan(true);
-                    else setIsSuperFan(true);
+                    if (dareme.reward) {
+                        if (amount < dareme.reward) setIsNonSuperfan(true)
+                        else setIsSuperFan(true)
+                    }
+                    else {
+                        if (amount < 50) setIsNonSuperfan(true)
+                        else setIsSuperFan(true)
+                    }
                 }
             }
         }

@@ -46,9 +46,8 @@ const DonutWish = () => {
             else {
                 if (amount > user.wallet) setIsTopUp(true);
                 else {
-                    if (amount < fundme.reward) setIsNonSuperfan(true);
-
-                    else setIsSuperFan(true);
+                    if (amount < fundme.reward) setIsNonSuperfan(true)
+                    else setIsSuperFan(true)
                 }
             }
         }
@@ -80,12 +79,8 @@ const DonutWish = () => {
 
     return (
         <>
-            {voteNonSuperfanGif &&
-                <Gif gif={VoteNonSuperfanGif} />
-            }
-            {voteSuperfanGif &&
-                <Gif gif={VoteSuperfanGif} />
-            }
+            {voteNonSuperfanGif && <Gif gif={VoteNonSuperfanGif} />}
+            {voteSuperfanGif && <Gif gif={VoteSuperfanGif} />}
             <div className="title-header">
                 <Title title={contexts.HEADER_TITLE.DONUTS_YOU_LIKE} back={() => {
                     dispatch(fundmeAction.checkDetailsAndResults(fundmeId, navigate));
@@ -227,7 +222,7 @@ const DonutWish = () => {
                                 isNumber={true}
                                 title={donuts}
                                 width={150}
-                                minnum={2}
+                                minnum={1}
                                 maxnum={99999999}
                                 step={1}
                                 setTitle={setDonuts}

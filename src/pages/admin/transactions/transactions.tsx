@@ -237,6 +237,7 @@ const AdminTransactions = () => {
                                             {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ""}</strong></>}
                                             {(transaction.description === 8 || transaction.description === 9) && <>Tipping Donuts</>}
                                             {transaction.description === 10 && <>Unlock Exclusive Content</>}
+                                            {transaction.description === 11 && <>Vote as non-SuperFans</>}
                                         </td>
                                         <td>
                                             {transaction.from === "ADMIN" && "Admin"}
