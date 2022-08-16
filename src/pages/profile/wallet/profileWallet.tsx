@@ -193,7 +193,10 @@ const ProfileWallet = () => {
                   fillStyle="outline"
                   shape="rounded"
                   text={contexts.WALLET_LETTER.CASH_OUT}
-                  handleSubmit={() => { setPayout(true) }}
+                  handleSubmit={() => { 
+                    // setPayout(true) 
+                    setOpenConnectStripe(true)
+                  }}
                 />
               </div>
             </div>

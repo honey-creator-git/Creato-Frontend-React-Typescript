@@ -71,8 +71,8 @@ const Payment = () => {
             {contexts.PAYMENT.STRIPE_CONTENT}
           </div>
           <div style={{ width: '100%' }} onClick={() => {
-            if (payment?.stripe) disConnectStripe()
-            else connectStripe()
+            // if (payment?.stripe) disConnectStripe()
+            // else connectStripe()
           }}>
             <ContainerBtn styleType="fill" text={payment?.stripe ? 'Disconnect' : contexts.PAYMENT.BUTTON_CONNECT} />
           </div>
