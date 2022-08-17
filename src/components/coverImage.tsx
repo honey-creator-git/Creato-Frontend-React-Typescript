@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, /*useLayoutEffect,*/ useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import Dialog from "../components/general/dialog";
@@ -24,17 +24,20 @@ import "../assets/styles/dareme/create/coverImageStyle.scss";
 const CoverImage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation()
     const loadState = useSelector((state: any) => state.load)
     const daremeState = useSelector((state: any) => state.dareme)
+    const fundmeState = useSelector((state: any) => state.fundme)
     const dareme = daremeState.dareme
-    const item = dareme
+    const fundme = fundmeState.fundme
+    const [item, setItem] = useState<any>(null)
     const contexts = useContext(LanguageContext)
     const [open, setOpen] = useState<boolean>(false)
     const [thumbNumber, setThumbNumber] = useState(0)
     const [seekCnt, setSeekCnt] = useState(0)
     const [duration, setDuration] = useState<any>(null)
     const [teaserFileFromURL, setTeaserFileFromURL] = useState<any>(null)
-    const [selectedIndex, setSelectedIndex] = useState(item.coverIndex ? item.coverIndex : -1);
+    const [selectedIndex, setSelectedIndex] = useState(item ? item.coverIndex ? item.coverIndex : -1 : -1);
     const [videoThumb, setVideoThumb] = useState("")
     // const width = useWindowSize()
     const [thumbnails, setThumbnails] = useState<any>([])
@@ -52,6 +55,14 @@ const CoverImage = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+        if (location.pathname !== '') {
+            if (location.pathname.indexOf('dareme') !== -1) setItem(dareme)
+            else if (location.pathname.indexOf('fundme') !== -1) setItem(fundme)
+        }
+    }, [location, dareme, fundme])
+
+    useEffect(() => {
         if (duration > 0) {
             if (duration > 10) setThumbNumber(20);
             else setThumbNumber(10);
@@ -59,18 +70,19 @@ const CoverImage = () => {
     }, [duration]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        if (item.teaser && loadState.videoFile === null) {
-            fetch(`${CONSTANT.SERVER_URL}/${item.teaser}`)
-                .then(res => res.blob())
-                .then(blob => {
-                    const extension = item.teaser.slice(-3)
-                    const file = new File([blob], `VIDEO.${extension}`, blob)
-                    const teaserFile = Object.assign(file, { preview: URL.createObjectURL(file) })
-                    setTeaserFileFromURL(teaserFile)
-                })
+        if (item && item.teaser) {
+            if (item.teaser && loadState.videoFile === null) {
+                fetch(`${CONSTANT.SERVER_URL}/${item.teaser}`)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const extension = item.teaser.slice(-3)
+                        const file = new File([blob], `VIDEO.${extension}`, blob)
+                        const teaserFile = Object.assign(file, { preview: URL.createObjectURL(file) })
+                        setTeaserFileFromURL(teaserFile)
+                    })
+            }
         }
-    }, [])
+    }, [item])
 
     useEffect(() => {
         if (thumbNumber > 0) {
@@ -105,89 +117,91 @@ const CoverImage = () => {
                     }}
                 />
             </div>
-            <div className="cover-image-wrapper">
-                <Dialog
-                    title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
-                    display={open}
-                    wrapExit={() => { setOpen(false); }}
-                    exit={() => { setOpen(false); }}
-                    context={contexts.DIALOG.BODY_LETTER.SAVE_DRAFT}
-                    buttons={[
-                        {
-                            text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
-                            handleClick: () => {
-                                // const url = width > 880 ? "/dareme/create" : "/dareme/create/teaser";
-                                const url = loadState.prevRoute
-                                if (selectedIndex !== item.coverIndex) {
-                                    fetch(thumbnails[selectedIndex])
-                                        .then(res => res.blob())
-                                        .then(blob => {
-                                            const file = new File([blob], 'dot.png', blob)
-                                            const imageFile = Object.assign(file, { preview: thumbnails[selectedIndex] })
-                                            dispatch({ type: SET_COVERINDEX, payload: selectedIndex })
-                                            dispatch({ type: SET_COVERFILE, payload: imageFile })
-                                            navigate(url)
-                                        })
-                                } else navigate(url)
+            {item &&
+                <div className="cover-image-wrapper">
+                    <Dialog
+                        title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
+                        display={open}
+                        wrapExit={() => { setOpen(false); }}
+                        exit={() => { setOpen(false); }}
+                        context={contexts.DIALOG.BODY_LETTER.SAVE_DRAFT}
+                        buttons={[
+                            {
+                                text: `${contexts.DIALOG.BUTTON_LETTER.SAVE_DRAFT}`,
+                                handleClick: () => {
+                                    // const url = width > 880 ? "/dareme/create" : "/dareme/create/teaser";
+                                    const url = loadState.prevRoute
+                                    if (selectedIndex !== item.coverIndex) {
+                                        fetch(thumbnails[selectedIndex])
+                                            .then(res => res.blob())
+                                            .then(blob => {
+                                                const file = new File([blob], 'dot.png', blob)
+                                                const imageFile = Object.assign(file, { preview: thumbnails[selectedIndex] })
+                                                dispatch({ type: SET_COVERINDEX, payload: selectedIndex })
+                                                dispatch({ type: SET_COVERFILE, payload: imageFile })
+                                                navigate(url)
+                                            })
+                                    } else navigate(url)
+                                }
                             }
-                        }
-                    ]}
-                />
-                <div className="video-wrapper">
-                    <video
-                        poster={videoThumb}
-                        style={loadState.sizeType ? loadState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }
-                            : item.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }}
-                        src={loadState.videoFile ? loadState.videoFile?.preview : item.teaser ? teaserFileFromURL?.preview : ""}
+                        ]}
                     />
-                </div>
-                <ReactPlayer
-                    hidden
-                    id="element"
-                    ref={playerRef}
-                    url={loadState.videoFile ? loadState.videoFile?.preview : item.teaser ? teaserFileFromURL?.preview : ""}
-                    onReady={() => { setDuration(playerRef.current?.getDuration()) }}
-                    onSeek={() => { if (seekCnt <= thumbNumber) setSeekCnt(seekCnt + 1); }}
-                />
-                <div className="thumbnail-wrapper scroll-bar">
-                    {thumbnails.map((item: any, index: any) => {
-                        return (
-                            <div className="second-thumb-wrapper" key={index}>
-                                <div className={`thumbnail-item ${(selectedIndex === index || index === item.coverIndex) ? 'active' : ''}`}>
-                                    <img
-                                        src={item}
-                                        style={{ height: '100%', cursor: "pointer" }}
-                                        alt="Item"
-                                        onClick={() => {
-                                            setVideoThumb(item);
-                                            setSelectedIndex(index);
-                                        }}
-                                    />
+                    <div className="video-wrapper">
+                        <video
+                            poster={videoThumb}
+                            style={loadState.sizeType ? loadState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }
+                                : item.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }}
+                            src={loadState.videoFile ? loadState.videoFile?.preview : item.teaser ? teaserFileFromURL?.preview : ""}
+                        />
+                    </div>
+                    <ReactPlayer
+                        hidden
+                        id="element"
+                        ref={playerRef}
+                        url={loadState.videoFile ? loadState.videoFile?.preview : item.teaser ? teaserFileFromURL?.preview : ""}
+                        onReady={() => { setDuration(playerRef.current?.getDuration()) }}
+                        onSeek={() => { if (seekCnt <= thumbNumber) setSeekCnt(seekCnt + 1); }}
+                    />
+                    <div className="thumbnail-wrapper scroll-bar">
+                        {thumbnails.map((item: any, index: any) => {
+                            return (
+                                <div className="second-thumb-wrapper" key={index}>
+                                    <div className={`thumbnail-item ${(selectedIndex === index || index === item.coverIndex) ? 'active' : ''}`}>
+                                        <img
+                                            src={item}
+                                            style={{ height: '100%', cursor: "pointer" }}
+                                            alt="Item"
+                                            onClick={() => {
+                                                setVideoThumb(item);
+                                                setSelectedIndex(index);
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
+                    <div className="btn-done" onClick={() => {
+                        if (selectedIndex !== -1) {
+                            // const url = width > 880 ? "/dareme/create" : "/dareme/create/teaser";
+                            const url = loadState.prevRoute
+                            if (selectedIndex !== item.coverIndex) {
+                                fetch(thumbnails[selectedIndex])
+                                    .then(res => res.blob())
+                                    .then(blob => {
+                                        const file = new File([blob], 'dot.png', blob)
+                                        const imageFile = Object.assign(file, { preview: thumbnails[selectedIndex] })
+                                        dispatch({ type: SET_COVERINDEX, payload: selectedIndex })
+                                        dispatch({ type: SET_COVERFILE, payload: imageFile })
+                                        navigate(url)
+                                    });
+                            } else navigate(url)
+                        } else alert("Please select Cover Image");
+                    }}>
+                        <ContainerBtn text={contexts.CHOOSE_COVER_LETTER.DONE} styleType="fill" />
+                    </div>
                 </div>
-                <div className="btn-done" onClick={() => {
-                    if (selectedIndex !== -1) {
-                        // const url = width > 880 ? "/dareme/create" : "/dareme/create/teaser";
-                        const url = loadState.prevRoute
-                        if (selectedIndex !== item.coverIndex) {
-                            fetch(thumbnails[selectedIndex])
-                                .then(res => res.blob())
-                                .then(blob => {
-                                    const file = new File([blob], 'dot.png', blob)
-                                    const imageFile = Object.assign(file, { preview: thumbnails[selectedIndex] })
-                                    dispatch({ type: SET_COVERINDEX, payload: selectedIndex })
-                                    dispatch({ type: SET_COVERFILE, payload: imageFile })
-                                    navigate(url)
-                                });
-                        } else navigate(url)
-                    } else alert("Please select Cover Image");
-                }}>
-                    <ContainerBtn text={contexts.CHOOSE_COVER_LETTER.DONE} styleType="fill" />
-                </div>
-            </div>
+            }
         </div>
     );
 };

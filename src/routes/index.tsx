@@ -62,7 +62,7 @@ import AdminDaremeDetail from '../pages/admin/dareme/AdminDaremeDetail';
 import DareMeTitile from '../pages/admin/dareme/dareMeTitle';
 import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
 import FundMeList from '../pages/admin/fundme/fundMeList';
-import FundMeDetail from '../pages/admin/fundme/fundMeDetail';
+import AdminFundmeDetail from '../pages/admin/fundme/AdminFundmeDetail';
 import FundMeTitle from '../pages/admin/fundme/fundMeTitle';
 import Tipping from '../pages/admin/tip/tipping';
 import TipProfile from '../pages/admin/tip/tipProfile';
@@ -149,9 +149,10 @@ const AppRoutes = () => {
       <Route path="admin/daremes/details/:daremeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
       <Route path="admin/fundmes" element={<AuthRoute child={<FundMeList />} routeType="private" />} />
-      <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<FundMeDetail />} routeType="private" />} />
+      <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<AdminFundmeDetail />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
+      <Route path="admin/fundmes/details/:fundmeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
       <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
       <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
       <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
@@ -174,8 +175,6 @@ const AppRoutes = () => {
       <Route path="fundme/fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
       <Route path="fundme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetails />} />} />
       <Route path="fundme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
-
-
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />

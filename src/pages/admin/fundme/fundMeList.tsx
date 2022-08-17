@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import { HiddenIcon, SearchIcon } from "../../../assets/svg";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
+import { SET_COVERFILE, SET_COVERINDEX, SET_PREVIOUS_ROUTE, SET_SIZETYPE, SET_VIDEOFILE } from "../../../redux/types";
 import "../../../assets/styles/admin/dareme/adminDareMeListStyle.scss";
 
 const FundMeList = () => {
@@ -21,15 +21,15 @@ const FundMeList = () => {
         if ((time * 24) > 1) return Math.ceil(time * 24) + " hours";
         if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
         if (time > 0) return "1 min";
-        else return "Ended";    
+        else return "Ended";
     }
-    
-    useEffect(() => {   
+
+    useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(fundmeAction.getFundMeList(""));
-        
+
     }, [location]);
-    
+
     return (
         <div className="admin-daremes-wrapper">
             <div className="search-bar">
@@ -64,12 +64,16 @@ const FundMeList = () => {
                                 </td>
                                 <td>{fundme.wallet}</td>
                                 <td onClick={() => {
+                                    dispatch({ type: SET_COVERFILE, payload: null })
+                                    dispatch({ type: SET_VIDEOFILE, payload: null })
+                                    dispatch({ type: SET_SIZETYPE, payload: null })
+                                    dispatch({ type: SET_COVERINDEX, payload: -1 })
                                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/admin/fundmes' });
                                     navigate('/admin/fundmes/details/' + fundme.id);
                                 }}>
                                     <div className="dareme-title">
                                         {!fundme.show && <HiddenIcon color="#efa058" />}
-                                        <div style={ fundme.show ? { marginLeft: '26px' } : { marginLeft: '2px' } } >{fundme.title}</div>
+                                        <div style={fundme.show ? { marginLeft: '26px' } : { marginLeft: '2px' }} >{fundme.title}</div>
                                     </div>
                                 </td>
                                 <td>{contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]}</td>

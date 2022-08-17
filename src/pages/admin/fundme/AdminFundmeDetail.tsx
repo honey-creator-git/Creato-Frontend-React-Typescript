@@ -11,17 +11,18 @@ import Dialog from "../../../components/general/dialog";
 import CONSTANT from "../../../constants/constant";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_ADMIN_CATEGORY, SET_ADMIN_TEASER_SIZE_TYPE, SET_TEASER_FILE1, SET_COVER_FILE1 } from "../../../redux/types";
+import { SET_ADMIN_CATEGORY, SET_VIDEOFILE, SET_SIZETYPE, SET_COVER_FILE1, SET_PREVIOUS_ROUTE } from "../../../redux/types";
 import { VisibleIcon, HiddenIcon, DeleteIcon } from "../../../assets/svg";
 import "../../../assets/styles/admin/dareme/adminDareMeDetailStyle.scss";
 
-const FundMeDetails = () => {
+const AdminFundmeDetail = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const { fundmeId } = useParams();
     const contexts = useContext(LanguageContext);
-    const fundmeState = useSelector((state: any) => state.fundme);
+    const fundmeState = useSelector((state: any) => state.fundme)
+    const loadState = useSelector((state: any) => state.load)
     const [isOpenDeleteDlg, setIsOpenDeleteDlg] = useState(false);
     const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -40,8 +41,8 @@ const FundMeDetails = () => {
                     window.URL.revokeObjectURL(video.src);
                     const size = video.videoWidth / video.videoHeight;
                     const type = size >= 0.65;
-                    dispatch({ type: SET_ADMIN_TEASER_SIZE_TYPE, payload: type });
-                    dispatch({ type: SET_TEASER_FILE1, payload: loadFile });
+                    dispatch({ type: SET_SIZETYPE, payload: type })
+                    dispatch({ type: SET_VIDEOFILE, payload: loadFile })
                 }
                 video.src = URL.createObjectURL(loadFile);
             } else alert("The file size is over 30M");
@@ -54,6 +55,36 @@ const FundMeDetails = () => {
         if ((time * 24 * 60) > 1) return Math.ceil(time * 24 * 60) + " mins";
         if (time > 0) return "1 min";
         else return "Ended";
+    }
+
+    const saveFundme = () => {
+        let title = fundmeState.title ? fundmeState.title : fundme.title
+        let category = fundmeState.category ? fundmeState.category : fundme.category
+        let videoFile = loadState.videoFile ? loadState.videoFile : null
+        let coverFile = loadState.coverFile ? loadState.coverFile : null
+        let sizeType = loadState.sizeType ? loadState.sizeType : fundme.sizeType
+        if (videoFile && coverFile === null) {
+            const video: any = document.getElementById("element")?.firstChild
+            let canvas = document.createElement("canvas") as HTMLCanvasElement
+            let context = canvas.getContext('2d')
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            context?.drawImage(video, 0, 0)
+            let url = canvas.toDataURL('image/png')
+            fetch(url)
+                .then(res => res.blob())
+                .then(blob => {
+                    const file = new File([blob], 'dot.png', blob);
+                    const imageFile = Object.assign(file, { preview: url })
+                    dispatch(fundmeAction.updateFundMe(fundmeId, {
+                        title: title, category: category, teaserFile: videoFile, coverFile: imageFile, sizeType: sizeType
+                    }, navigate))
+                });
+        } else {
+            dispatch(fundmeAction.updateFundMe(fundmeId, {
+                title: title, category: category, teaserFile: videoFile, coverFile: coverFile, sizeType: sizeType
+            }, navigate));
+        }
     }
 
     useEffect(() => {
@@ -90,17 +121,22 @@ const FundMeDetails = () => {
                     <div className="dareme-detail">
                         <div className="dareme-detail-videocard">
                             <VideoCardDesktop
-                                url={fundmeState.teaserFile ? fundmeState.teaserFile.preview : CONSTANT.SERVER_URL + "/" + fundme.teaser}
-                                sizeType={fundmeState.teaserSizeType !== null ? fundmeState.teaserSizeType : fundme.sizeType}
-                                coverImage={fundmeState.coverFile ? fundmeState.coverFile.preview : fundmeState.teaserFile ? "" : fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
+                                url={loadState.videoFile ? loadState.videoFile.preview : CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                                sizeType={loadState.sizeType ? loadState.sizeType : fundme.sizeType}
+                                coverImage={loadState.coverFile ? loadState.coverFile.preview :
+                                    loadState.videoFile ? "" : fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
                             />
                             <ReactPlayer
                                 id="element"
                                 hidden
-                                url={fundmeState.teaserFile ? fundmeState.teaserFile.preview : ""}
+                                url={loadState.videoFile ? loadState.videoFile.preview : ""}
                             />
                             <div className="change-teaser-btn">
-                                <Button text="Change teaser" shape="rounded" fillStyle="fill" color="primary" width="100%" handleSubmit={() => { fileInputRef.current?.click() }} />
+                                <div><Button text="Change teaser" shape="rounded" fillStyle="fill" color="primary" width="100%" handleSubmit={() => { fileInputRef.current?.click() }} /></div>
+                                <div style={{ marginTop: '5px' }}><Button text="Select Cover" shape="rounded" fillStyle="fill" color="primary" width="100%" handleSubmit={() => {
+                                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/admin/fundmes/details/${fundmeId}/` })
+                                    navigate(`/admin/fundmes/details/${fundmeId}/cover`)
+                                }} /></div>
                             </div>
                             <input
                                 type="file"
@@ -161,35 +197,7 @@ const FundMeDetails = () => {
                     <div className="visible-icon" onClick={() => { dispatch(fundmeAction.setFundMeShow(!fundme.show, fundme._id, fundme)) }}>
                         {fundme.show ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}
                     </div>
-                    <div className="save-button" onClick={() => {
-                        let title = fundmeState.title ? fundmeState.title : fundme.title;
-                        let category = fundmeState.category ? fundmeState.category : fundme.category;
-                        let teaserFile = fundmeState.teaserFile ? fundmeState.teaserFile : null;
-                        let coverFile = fundmeState.coverFile ? fundmeState.coverFile : null;
-                        if (teaserFile) {
-                            const video: any = document.getElementById("element")?.firstChild;
-                            let canvas = document.createElement("canvas") as HTMLCanvasElement;
-                            let context = canvas.getContext('2d');
-                            canvas.width = video.videoWidth;
-                            canvas.height = video.videoHeight;
-                            context?.drawImage(video, 0, 0);
-                            let url = canvas.toDataURL('image/png');
-                            fetch(url)
-                                .then(res => res.blob())
-                                .then(blob => {
-                                    const file = new File([blob], 'dot.png', blob);
-                                    const imageFile = Object.assign(file, { preview: url });
-                                    dispatch({ type: SET_COVER_FILE1, payload: imageFile });
-                                    dispatch(fundmeAction.updateFundMe(fundmeId, {
-                                        title: title, category: category, teaserFile: teaserFile, coverFile: imageFile, teaserType: fundmeState.teaserSizeType
-                                    }, navigate));
-                                });
-                        } else {
-                            dispatch(fundmeAction.updateFundMe(fundmeId, {
-                                title: title, category: category, teaserFile: teaserFile, coverFile: coverFile, teaserType: fundmeState.teaserSizeType
-                            }, navigate));
-                        }
-                    }}>
+                    <div className="save-button" onClick={saveFundme}>
                         <Button text="Save" color="primary" fillStyle="fill" shape="rounded" />
                     </div>
                 </>
@@ -198,4 +206,4 @@ const FundMeDetails = () => {
     )
 }
 
-export default FundMeDetails;
+export default AdminFundmeDetail;
