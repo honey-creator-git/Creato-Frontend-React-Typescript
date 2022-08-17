@@ -71,6 +71,7 @@ const Payment = () => {
             {contexts.PAYMENT.STRIPE_CONTENT}
           </div>
           <div style={{ width: '100%' }} onClick={() => {
+            setOpenSoon(true)
             // if (payment?.stripe) disConnectStripe()
             // else connectStripe()
           }}>

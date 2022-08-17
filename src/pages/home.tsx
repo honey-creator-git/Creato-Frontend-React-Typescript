@@ -1,26 +1,26 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { daremeAction } from "../redux/actions/daremeActions";
-import { LanguageContext } from "../routes/authRoute";
-import VideoCardMobile from "../components/dareme/videoCardMobile";
-import AvatarLink from "../components/dareme/avatarLink";
-import FirstBanner from "../components/banner/firstBanner";
-import SecondBanner from "../components/banner/secondBanner";
-import Dialog from "../components/general/dialog";
-import CategoryBtn from "../components/general/categoryBtn";
-import Avatar from "../components/general/avatar";
-import Creato from "../components/general/creato";
-import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan";
-import PaymentForm from "../components/stripe/paymentForm";
-import { fanwallAction } from "../redux/actions/fanwallActions";
-import CONSTANT from "../constants/constant";
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE, SET_USERS } from "../redux/types";
-import { RewardIcon } from "../assets/svg";
-import { fundmeAction } from "../redux/actions/fundmeActions";
-import { paymentAction } from "../redux/actions/paymentActions";
-import "../assets/styles/homeStyle.scss";
-import WelcomeDlg from "../components/general/welcomeDlg";
+import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useContext, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { daremeAction } from "../redux/actions/daremeActions"
+import { LanguageContext } from "../routes/authRoute"
+import VideoCardMobile from "../components/dareme/videoCardMobile"
+import AvatarLink from "../components/dareme/avatarLink"
+import FirstBanner from "../components/banner/firstBanner"
+import SecondBanner from "../components/banner/secondBanner"
+import Dialog from "../components/general/dialog"
+import CategoryBtn from "../components/general/categoryBtn"
+import Avatar from "../components/general/avatar"
+import Creato from "../components/general/creato"
+import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan"
+import PaymentForm from "../components/stripe/paymentForm"
+import { fanwallAction } from "../redux/actions/fanwallActions"
+import CONSTANT from "../constants/constant"
+import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE, SET_USERS } from "../redux/types"
+import { RewardIcon } from "../assets/svg"
+import { fundmeAction } from "../redux/actions/fundmeActions"
+import { paymentAction } from "../redux/actions/paymentActions"
+import WelcomeDlg from "../components/general/welcomeDlg"
+import "../assets/styles/homeStyle.scss"
 
 const creatoList = [
   {
