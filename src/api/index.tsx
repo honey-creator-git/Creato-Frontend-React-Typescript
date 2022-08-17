@@ -21,8 +21,8 @@ export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar
 export const saveProfileInfo = (data: any) => API.post('/api/auth/profile/save', data);
 export const getExistName = (data: any) => API.post('/api/auth/exist_name', data);
 export const getExistURL = (data: any) => API.post('/api/auth/exist_url', data);
-export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', data);
-
+export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', data)
+export const getTipState = () => API.get('/api/auth/tip_state')
 export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);
 //Dareme API
 export const publishDareme = () => API.post('/api/dareme/publish');
@@ -82,6 +82,7 @@ export const getUserTransactionsByDays = (data: any) => API.post('/api/transacti
 export const getTips = () => API.get('/api/tip/list');
 export const getTipProfile = (url: any) => API.get(`/api/tip/profile/${url}`);
 export const setTipFunction = (data: any) => API.post('/api/tip/profile/tipsetting', data);
+export const setTipFunctionByUser = (data: any) => API.post('/api/tip/profile_edit/tipsetting', data)
 export const changeVisible = (data: any) => API.post('/api/tip/profile/changevisible', data);
 export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
 export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);

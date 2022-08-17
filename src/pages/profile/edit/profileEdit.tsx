@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authAction } from "../../../redux/actions/authActions";
 import Title from "../../../components/general/title";
@@ -10,12 +10,15 @@ import CONSTANT from "../../../constants/constant";
 import { SET_NAME_EXIST, SET_PROFILE_DATA, SET_URL_EXIST } from "../../../redux/types";
 import { AddIcon, SpreadIcon } from "../../../assets/svg";
 import Dialog from "../../../components/general/dialog";
+import ToggleButton from "../../../components/admin/ToggleButton";
 import { LanguageContext } from "../../../routes/authRoute";
 import "../../../assets/styles/profile/profileEditStyle.scss";
+import { tipAction } from "../../../redux/actions/tipActions";
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation()
   const userState = useSelector((state: any) => state.auth);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const user = userState.user;
@@ -48,10 +51,11 @@ const ProfileEdit = () => {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch({ type: SET_NAME_EXIST, payload: false });
-    dispatch({ type: SET_URL_EXIST, payload: false });
-  }, []);
+    window.scrollTo(0, 0)
+    dispatch({ type: SET_NAME_EXIST, payload: false })
+    dispatch({ type: SET_URL_EXIST, payload: false })
+    if (user) dispatch(authAction.getTipState(user))
+  }, [location]);
 
   useEffect(() => {
     if (displayName !== "") dispatch(authAction.getExistName(displayName));
@@ -136,6 +140,13 @@ const ProfileEdit = () => {
             {contexts.EDIT_PROFILE_LETTER.URL_ERROR}
           </span> : ""
         }
+        {user?.finishCnt > 0 &&
+          <div className="tipping-mode">
+            <div><span>Tipping Mode: &nbsp;{user.tipFunction ? 'Enable' : 'Disable'}</span></div>
+            <div>
+              <ToggleButton toggle={user.tipFunction} setToggle={() => { dispatch(tipAction.setTipFunctionByUser(!user.tipFunction, user)) }} />
+            </div>
+          </div>}
         <div
           className="social-link"
           onClick={() => {
