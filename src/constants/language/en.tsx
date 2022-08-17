@@ -174,6 +174,7 @@ export const EN = {
         DARE_CREATORS: 'Dare Creators',
         DARE_CREATORS_LETTER: 'Are you ready to dare your favourite Creators & create together?! LFG! :)',
         COPY: 'Copy',
+        COPIED: 'Copied'
     },
     NOTIFICATIONS_LETTER: {
         UNREAD: 'Unread:',

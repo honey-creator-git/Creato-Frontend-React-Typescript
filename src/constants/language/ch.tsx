@@ -174,6 +174,7 @@ export const CH = {
         DARE_CREATORS: '挑戰 Creators',
         DARE_CREATORS_LETTER: '大膽挑戰你喜歡的創作者吧！',
         COPY: '複製',
+        COPIED: '已復制'
     },
     NOTIFICATIONS_LETTER: {
         UNREAD: '未讀:',

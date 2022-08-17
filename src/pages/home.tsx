@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect, useContext, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { daremeAction } from "../redux/actions/daremeActions"
@@ -88,6 +88,8 @@ const Home = () => {
   const stripeID = userState.stripeID;
   const cardNum = userState.cardNum;
   const dlgState = loadState.dlgState;
+  const [searchParams, setSearchParams] = useSearchParams()
+  const code = searchParams.get("invitedBy")
 
   const buyDonuts = async (creato: any) => {
     if (user) { await setDonutPlan(creato); }
@@ -98,10 +100,16 @@ const Home = () => {
     let category = '';
     categories.map((cate: any, index: any) => {
       category += contexts.CREATOR_CATEGORY_LIST[cate];
-      if (index !== categories.length - 1) category += '/';
-    });
-    return category;
+      if (index !== categories.length - 1) category += '/'
+    })
+    return category
   }
+
+  useEffect(() => {
+    if(code) {
+      navigate('/auth/signup')
+    }
+  }, [code])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -142,18 +150,18 @@ const Home = () => {
     <div className="home-wrapper">
       <WelcomeDlg
         display={openWelcomeDlg2}
-        exit={() => { 
-          setOpenWelcomeDlg2(false) 
+        exit={() => {
+          setOpenWelcomeDlg2(false)
           dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
         }}
-        wrapExit={() => { 
-          setOpenWelcomeDlg2(false) 
+        wrapExit={() => {
+          setOpenWelcomeDlg2(false)
           dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
         }}
         buttons={[{
           text: 'Go',
-          handleClick: () => { 
-            setOpenWelcomeDlg2(false) 
+          handleClick: () => {
+            setOpenWelcomeDlg2(false)
             dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
           }
         }]}
@@ -630,7 +638,7 @@ const Home = () => {
             {fanwalls.map((fanwall: any, index: any) => (
               <div className="dareme" key={index}>
                 <VideoCardMobile
-                  donuts={fanwall?.dareme?.donuts ? fanwall?.dareme?.donuts : 0 }
+                  donuts={fanwall?.dareme?.donuts ? fanwall?.dareme?.donuts : 0}
                   url={`${CONSTANT.SERVER_URL}/${fanwall?.video}`}
                   title={fanwall?.dareme?.title}
                   sizeType={fanwall?.sizeType}

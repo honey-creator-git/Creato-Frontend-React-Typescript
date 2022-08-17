@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom"
+import decode from "jwt-decode"
 import Title from "../../../components/general/title";
 import Button from "../../../components/general/button";
 import {
@@ -10,13 +10,23 @@ import {
   SpreadIcon,
   WhatsappIcon,
 } from "../../../assets/svg";
-import { LanguageContext } from "../../../routes/authRoute";
+import { LanguageContext } from "../../../routes/authRoute"
 import "../../../assets/styles/profile/invitefriendsStyle.scss";
 
 const Invitefriends = () => {
-  const navigate = useNavigate();
-  const user = useSelector((state: any) => state.auth.user);
-  const contexts = useContext(LanguageContext);
+  const navigate = useNavigate()
+  const location = useLocation()
+  const token: any = JSON.parse(localStorage.getItem('dareme_token') || '{}')
+  const decoded: any = decode(token)
+  const contexts = useContext(LanguageContext)
+  const [copy, setCopy] = useState(false)
+  // const url = 'localhost:3000'
+  const url = 'creatogether.io'
+  // const url = 'dev8.creatogether.io'
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location])
 
   return (
     <>
@@ -61,13 +71,16 @@ const Invitefriends = () => {
           </div>
         </div>
         <div className="copy-field">
-          <div className="text">creatogether.app/lamsailong</div>
+          <div className="text">{url + '?invitedBy=' + (decoded.referralLink ? decoded.referralLink : '')}</div>
           <Button
             color="primary"
             shape="rounded"
             fillStyle="fill"
-            text={contexts.INVITE_FRIEND_LETTER.COPY}
-            handleSubmit={() => { }}
+            text={!copy ? contexts.INVITE_FRIEND_LETTER.COPY : contexts.INVITE_FRIEND_LETTER.COPIED}
+            handleSubmit={() => {
+              navigator.clipboard.writeText(`${url}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)
+              setCopy(true)
+            }}
           />
         </div>
         <div className="social-link">

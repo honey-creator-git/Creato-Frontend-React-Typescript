@@ -176,5 +176,5 @@ export const authAction = {
           dispatch({ type: SET_USER, payload: state })
         }
       }).catch(err => console.log(err))
-  }
+  },
 }

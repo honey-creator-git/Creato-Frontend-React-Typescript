@@ -1,7 +1,7 @@
 import { useEffect, useState, createContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import decode from "jwt-decode";
+import decode from "jwt-decode"
 import { authAction } from "../redux/actions/authActions";
 import { notificationAction } from '../redux/actions/notificationAction';
 import { EN, CH } from "../constants/language";
