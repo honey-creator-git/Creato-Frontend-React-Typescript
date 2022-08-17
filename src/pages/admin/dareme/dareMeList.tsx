@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { daremeAction } from "../../../redux/actions/daremeActions";
 import { HiddenIcon, SearchIcon } from "../../../assets/svg";
 import { LanguageContext } from "../../../routes/authRoute";
-import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
+import { SET_COVERFILE, SET_COVERINDEX, SET_PREVIOUS_ROUTE, SET_SIZETYPE, SET_VIDEOFILE } from "../../../redux/types";
 import "../../../assets/styles/admin/dareme/adminDareMeListStyle.scss";
 
 const DareMeList = () => {
@@ -63,6 +63,10 @@ const DareMeList = () => {
                                 </td>
                                 <td>{dareme.wallet}</td>
                                 <td onClick={() => {
+                                    dispatch({ type: SET_COVERFILE, payload: null })
+                                    dispatch({ type: SET_VIDEOFILE, payload: null })
+                                    dispatch({ type: SET_SIZETYPE, payload: null })
+                                    dispatch({ type: SET_COVERINDEX, payload: -1 })
                                     dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/admin/daremes' });
                                     navigate('/admin/daremes/details/' + dareme.id);
                                 }}>

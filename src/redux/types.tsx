@@ -68,3 +68,8 @@ export const SET_OPTION_LOGS = "SET_OPTION_LOGS";
 export const SET_REFUND_DONUTS = "SET_REFUND_DONUTS";
 export const SET_TIPID = 'SET_TIPID'
 export const SET_PAYMENT = 'SET_PAYMENT'
+
+export const SET_VIDEOFILE = 'SET_VIDEOFILE'
+export const SET_COVERFILE = 'SET_COVERFILE'
+export const SET_SIZETYPE = 'SET_SIZETYPE'
+export const SET_COVERINDEX = 'SET_COVERINDEX'

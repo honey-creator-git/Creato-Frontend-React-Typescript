@@ -7,13 +7,13 @@ import "../../assets/styles/dareme/components/videoCardDesktopStyle.scss";
 const VideoCardDesktop = (props: any) => {
     const { url, sizeType, coverImage } = props;
     const playerRef = useRef<ReactPlayer | null>(null);
-    const [play, setPlay] = useState(false);
+    const [play, setPlay] = useState(false)
 
     return (
         <div className="videoCard-desktop-wrapper">
             <div className="videoCard-desktop-main" onClick={() => {
-                if (play) { 
-                    setPlay(false); 
+                if (play) {
+                    setPlay(false);
                     playerRef.current?.seekTo(0);
                 }
             }}>
@@ -31,9 +31,7 @@ const VideoCardDesktop = (props: any) => {
                         url={url}
                         playing={play}
                         ref={playerRef}
-                        onProgress={(progress) => {
-                            if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-                        }}
+                        onProgress={(progress) => { if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0) }}
                     />
                 }
             </div>

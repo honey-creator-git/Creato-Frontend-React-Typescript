@@ -58,7 +58,7 @@ import WatchContent from '../pages/fanwall/watchContent';
 import AdminHome from '../pages/admin/home';
 import UserList from '../pages/admin/userList';
 import DareMeList from '../pages/admin/dareme/dareMeList';
-import DaremeDetail from '../pages/admin/dareme/dareMeDetails';
+import AdminDaremeDetail from '../pages/admin/dareme/AdminDaremeDetail';
 import DareMeTitile from '../pages/admin/dareme/dareMeTitle';
 import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
 import FundMeList from '../pages/admin/fundme/fundMeList';
@@ -83,6 +83,8 @@ import Notifications from '../pages/admin/notification/notifications';
 import NotificationSetting from '../pages/admin/notification/notificationSetting';
 import NotificationNew from '../pages/admin/notification/notificationNew';
 import NotificationHistory from '../pages/admin/notification/notificationHistory';
+
+import CoverImageSelect from '../components/coverImage';
 
 const AppRoutes = () => {
   return (
@@ -142,9 +144,10 @@ const AppRoutes = () => {
       <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
       <Route path="admin/daremes" element={<AuthRoute child={<DareMeList />} routeType="private" />} />
-      <Route path="admin/daremes/details/:daremeId" element={<AuthRoute child={<DaremeDetail />} routeType="private" />} />
+      <Route path="admin/daremes/details/:daremeId" element={<AuthRoute child={<AdminDaremeDetail />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId/title" element={<AuthRoute child={<DareMeTitile />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
+      <Route path="admin/daremes/details/:daremeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
       <Route path="admin/fundmes" element={<AuthRoute child={<FundMeList />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<FundMeDetail />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
@@ -171,6 +174,8 @@ const AppRoutes = () => {
       <Route path="fundme/fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
       <Route path="fundme/fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetails />} />} />
       <Route path="fundme/fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
+
+
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
