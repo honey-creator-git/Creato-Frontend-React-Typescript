@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST } from "../types";
+import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION } from "../types";
 import * as api from '../../api';
 
 export const authAction = {
@@ -165,15 +165,17 @@ export const authAction = {
       }).catch(err => console.log(err));
   },
 
-  getTipState: (user: any) => async (dispatch: Dispatch<any>) => {
+  getTipState: () => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE })
     api.getTipState()
       .then((result) => {
         const { data } = result
         dispatch({ type: SET_LOADING_FALSE })
         if (data.success) {
-          const state = { ...user, finishCnt: data.cnt, tipFunction: data.tipFunction }
-          dispatch({ type: SET_USER, payload: state })
+          if (data.cnt > 0) {
+            dispatch({ type: SET_TIPAVAILABLE, payload: true })
+            dispatch({ type: SET_TIPFUNCTION, payload: data.tipFunction })
+          }
         }
       }).catch(err => console.log(err))
   },

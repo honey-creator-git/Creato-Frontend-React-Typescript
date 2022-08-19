@@ -9,6 +9,8 @@ const INITIAL_STATE: any = {
     cardNum: null,
     lang: 'CH',
     payment: null,
+    tipAvailable: null,
+    tipFunction: null,
     profileData: {
         category: [],
         avatarFile: null,
@@ -45,6 +47,16 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_PAYMENT:
             state.payment = payload
             return { ...state }
+        case actionTypes.SET_TIPAVAILABLE:
+            return {
+                ...state,
+                tipAvailable: payload
+            }
+        case actionTypes.SET_TIPFUNCTION:
+            return {
+                ...state,
+                tipFunction: payload
+            }
         case actionTypes.SET_USER_INITIAL: {
             return {
                 user: null,
@@ -55,6 +67,8 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
                 cardNum: null,
                 payment: null,
                 lang: 'EN',
+                tipAvailable: null,
+                tipFunction: null,
                 profileData: {
                     category: [],
                     avatarFile: null,

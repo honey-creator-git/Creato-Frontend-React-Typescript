@@ -76,6 +76,7 @@ const Invitefriends = () => {
             color="primary"
             shape="rounded"
             fillStyle="fill"
+            width={50}
             text={!copy ? contexts.INVITE_FRIEND_LETTER.COPY : contexts.INVITE_FRIEND_LETTER.COPIED}
             handleSubmit={() => {
               navigator.clipboard.writeText(`${url}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)

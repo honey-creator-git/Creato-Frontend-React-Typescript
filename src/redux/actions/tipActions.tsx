@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import * as api from "../../api";
-import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_TIP, SET_TIPS, SET_USER, SET_USERS } from "../types";
+import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_TIP, SET_TIPFUNCTION, SET_TIPS, SET_USER, SET_USERS } from "../types";
 
 export const tipAction = {
   tipUser: (type: any, tipper: any, user: any, tip: any, message: any) => async (dispatch: Dispatch<any>) => {
@@ -73,15 +73,14 @@ export const tipAction = {
       }).catch(err => console.log(err));
   },
 
-  setTipFunctionByUser: (tipValue: any, user: any) => async (dispatch: Dispatch<any>) => {
+  setTipFunctionByUser: (tipValue: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE })
     api.setTipFunctionByUser({ tipValue: tipValue })
       .then((result) => {
         const { data } = result
         dispatch({ type: SET_LOADING_FALSE })
         if (data.success) {
-          const state = { ...user, tipFunction: tipValue }
-          dispatch({ type: SET_USER, payload: state })
+          dispatch({ type: SET_TIPFUNCTION, payload: tipValue })
         }
       }).catch(err => console.log(err))
   },

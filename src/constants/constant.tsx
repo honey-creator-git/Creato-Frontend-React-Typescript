@@ -5,14 +5,14 @@ const CONSTANT = {
     MAX_VIDEO_FILE_SIZE: 100 * 1024 * 1024,
     // CLIENT_ID: 'ca_LCyMHzKOJORYKW4pj1arlyKyVEQDQMNM', /// live
     CLIENT_ID: 'ca_LCyMo6jVUIqkWEnpIRRd3wwsJQZHvENJ', /// test
-    // STRIPE_PUBLIC_KEY: 'pk_test_51KWY2HH1PVlCPauNRfz8xd4XvSe5m1u84xADolcIoOFfTZ9YZbjv4aetHHp42uRrDu0qiDHV1zb4te0YRLJz37Nq00P289bOKW',
-    STRIPE_PUBLIC_KEY: 'pk_live_51KWY2HH1PVlCPauNQ599l47LEZ5Jy3A1gxW102RdRJLMipsA9w0mOwhUs9HuMFdOpaZPIXdqwqlBIT0RTAiKdEUl00PRNXb4lD',
-    SERVER_URL: 'https://creatogether.io',
-    CLIENT_URL: 'https://creatogether.io',
+    STRIPE_PUBLIC_KEY: 'pk_test_51KWY2HH1PVlCPauNRfz8xd4XvSe5m1u84xADolcIoOFfTZ9YZbjv4aetHHp42uRrDu0qiDHV1zb4te0YRLJz37Nq00P289bOKW',
+    // STRIPE_PUBLIC_KEY: 'pk_live_51KWY2HH1PVlCPauNQ599l47LEZ5Jy3A1gxW102RdRJLMipsA9w0mOwhUs9HuMFdOpaZPIXdqwqlBIT0RTAiKdEUl00PRNXb4lD',
+    // SERVER_URL: 'https://creatogether.io',
+    // CLIENT_URL: 'https://creatogether.io',
     // SERVER_URL: 'https://dev8.creatogether.io',
     // CLIENT_URL: 'https://dev8.creatogether.io',
-    // SERVER_URL: 'http://localhost:5000',
-    // CLIENT_URL: 'http://localhost:3000',
+    SERVER_URL: 'http://localhost:5000',
+    CLIENT_URL: 'http://localhost:3000',
     DARE_TITLE_SUGGESTIONS: [ 
         "My dinner on Valentine's Day? 🌹",
         "Who to invite as guest in next video? 📽️",

@@ -21,7 +21,9 @@ const ProfileEdit = () => {
   const location = useLocation()
   const userState = useSelector((state: any) => state.auth);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const user = userState.user;
+  const user = userState.user
+  const tipAvailable = userState.tipAvailable
+  const tipFunction = userState.tipFunction
   const existName = userState.nameExist;
   const existURL = userState.urlExist;
   const profile = userState.profileData;
@@ -54,7 +56,7 @@ const ProfileEdit = () => {
     window.scrollTo(0, 0)
     dispatch({ type: SET_NAME_EXIST, payload: false })
     dispatch({ type: SET_URL_EXIST, payload: false })
-    if (user) dispatch(authAction.getTipState(user))
+    dispatch(authAction.getTipState())
   }, [location]);
 
   useEffect(() => {
@@ -140,11 +142,11 @@ const ProfileEdit = () => {
             {contexts.EDIT_PROFILE_LETTER.URL_ERROR}
           </span> : ""
         }
-        {user?.finishCnt > 0 &&
+        {tipAvailable &&
           <div className="tipping-mode">
-            <div><span>Tipping Mode: &nbsp;{user.tipFunction ? 'Enable' : 'Disable'}</span></div>
+            <div><span>Tipping Mode: &nbsp;{tipFunction ? 'Enable' : 'Disable'}</span></div>
             <div>
-              <ToggleButton toggle={user.tipFunction} setToggle={() => { dispatch(tipAction.setTipFunctionByUser(!user.tipFunction, user)) }} />
+              <ToggleButton toggle={tipFunction} setToggle={() => { dispatch(tipAction.setTipFunctionByUser(!tipFunction)) }} />
             </div>
           </div>}
         <div
