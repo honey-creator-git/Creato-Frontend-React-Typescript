@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { GoogleLogin } from "react-google-login";
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import AppleLogin from 'react-apple-login'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import CONSTANT from "../constants/constant";
@@ -73,8 +74,8 @@ const Auth = (props: any) => {
       browser: browser,
       lang: lang
     });
-    if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute));
-    else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute));
+    if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute))
+    else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute))
   };
 
   const responseGoogleError = (error: any) => {
@@ -98,6 +99,25 @@ const Auth = (props: any) => {
   //   if (props.isSignin) dispatch(authAction.facebookSigninUser(userData, navigate, prevRoute));
   //   else dispatch(authAction.facebookSignupUser(userData, navigate, prevRoute));
   // }
+
+  const responseApple = (response: any) => {
+    if (!response.error) {
+      let browser = "";
+      if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
+      else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
+      else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
+
+      const userData = ({
+        token: response.authorization.id_token,
+        user: response.user ? response.user : null,
+        browser: browser,
+        lang: lang
+      })
+
+      if (props.isSignin) dispatch(authAction.appleSigninUser(userData, navigate, prevRoute))
+      else dispatch(authAction.appleSignupUser(userData, navigate, prevRoute))
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -180,9 +200,19 @@ const Auth = (props: any) => {
               </div>
             )}
           /> */}
-          {/* <div className="icon">
-            <AppleIcon color="#EFA058" />
-          </div> */}
+          <AppleLogin
+            clientId="dev.apple.service.creato"
+            redirectURI="https://dev8.creatogether.io/auth"
+            callback={responseApple} // Catch the response
+            scope="email name"
+            responseMode="query"
+            usePopup={true}
+            render={(renderProps) => (
+              <div className="icon" onClick={renderProps.onClick}>
+                <AppleIcon color="#EFA058" />
+              </div>
+            )}
+          />
         </div>
         {props.isSignin === false ? (
           <p>{contexts.AUTH_LETTER.BY_SIGN_UP}

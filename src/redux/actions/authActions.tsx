@@ -35,6 +35,32 @@ export const authAction = {
       }).catch(err => console.log(err));
   },
 
+  appleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+    api.appleSignup(userData)
+      .then((result) => {
+        const { data } = result;
+        localStorage.clear();
+        localStorage.setItem('dareme_token', JSON.stringify(data.token));
+        dispatch({ type: SET_USER, payload: data.user });
+        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
+        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        navigate(prevRoute === '' ? '/' : prevRoute)
+      }).catch(err => console.log(err))
+  },
+
+  appleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+    api.appleSignin(userData)
+      .then((result) => {
+        const { data } = result;
+        localStorage.clear();
+        localStorage.setItem('dareme_token', JSON.stringify(data.token));
+        dispatch({ type: SET_USER, payload: data.user });
+        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
+        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        navigate(prevRoute === '' ? '/' : prevRoute)
+      }).catch(err => console.log(err));
+  },
+
   facebookSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
     api.facebookSignup(userData)
       .then((result) => {

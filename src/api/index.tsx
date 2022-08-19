@@ -16,6 +16,8 @@ export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', da
 export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data);
 export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin', data);
 export const facebookSignup = (data: any) => API.post('/api/auth/facebookSignup', data);
+export const appleSignin = (data: any) => API.post('/api/auth/appleSignin', data);
+export const appleSignup = (data: any) => API.post('/api/auth/appleSignup', data);
 export const getAuthData = () => API.get('/api/auth/get');
 export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar/upload', data, config);
 export const saveProfileInfo = (data: any) => API.post('/api/auth/profile/save', data);

@@ -25,6 +25,7 @@
     "jwt-decode": "^3.1.2",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
+    "react-apple-login": "^1.1.5",
     "react-dom": "^17.0.2",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
