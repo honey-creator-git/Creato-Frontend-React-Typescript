@@ -76,7 +76,7 @@ const Home = () => {
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
   const [openTopupDlg, setOpenTopupDlg] = useState(false);
   const [openErrorDlg, setOpenErrorDlg] = useState(false);
-  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false);
+  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
   const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
@@ -264,7 +264,6 @@ const Home = () => {
             handleClick: () => {
               setOpenWelcomeDlg(false);
               dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
-              if (loadState.prevRoute !== "") navigate(loadState.prevRoute);
             }
           }
         ]}

@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { daremeAction } from "../../../redux/actions/daremeActions";
 import { fundmeAction } from "../../../redux/actions/fundmeActions";
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
 import VideoCardMobile from "../../../components/dareme/videoCardMobile";
@@ -9,7 +8,8 @@ import AvatarLink from "../../../components/dareme/avatarLink";
 import Title from "../../../components/general/title";
 import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
-import Dialog from "../../../components/general/dialog";
+import Dialog from "../../../components/general/dialog"
+import WelcomeDlg from "../../../components/general/welcomeDlg"
 import Gif from "../../../components/general/gif";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
@@ -41,7 +41,9 @@ const FundmeDetails = () => {
   const [type, setType] = useState(0);
   const [isOneFree, setIsOneFree] = useState(false);
   const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false);
-  const [voteSuperfanGif, setVoteSuperfanGif] = useState(false);
+  const [voteSuperfanGif, setVoteSuperfanGif] = useState(false)
+  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
+  const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
   const user = userState.user;
   const interval = fundme.goal ? (Number(fundme.goal) / 20).toFixed(1) : 0;
   const count = fundme.goal ? Number(Math.floor(Number(fundme.wallet) / Number(interval))) : 0;
@@ -103,6 +105,14 @@ const FundmeDetails = () => {
     } else if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
       setIsFundCopyLink(true);
       setVoteSuperfanGif(true)
+    } else if (dlgState.type === 'welcome') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg(true);
+      }
+    } else if (dlgState.type === 'welcome2') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg2(true)
+      }
     }
   }, [dlgState]);
 
@@ -113,6 +123,10 @@ const FundmeDetails = () => {
   useEffect(() => {
     if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500);
   }, [voteSuperfanGif]);
+
+  useEffect(() => {
+    if (fundme.owner && fundme.finished) navigate(`/fundme/result/${fundmeId}`)
+  }, [fundme])
 
   return (
     <div>
@@ -132,6 +146,54 @@ const FundmeDetails = () => {
       </div>
       {(fundme.owner && fundme.owner.avatar) &&
         <>
+          <Dialog
+            display={openWelcomeDlg}
+            title="Welcome to Creato"
+            exit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            wrapExit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            subcontext={true}
+            icon={
+              {
+                pos: 1,
+                icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+              }
+            }
+            buttons={[
+              {
+                text: "Go",
+                handleClick: () => {
+                  setOpenWelcomeDlg(false);
+                  dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                  navigate('/')
+                }
+              }
+            ]}
+          />
+          <WelcomeDlg
+            display={openWelcomeDlg2}
+            exit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            wrapExit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            buttons={[{
+              text: 'Go',
+              handleClick: () => {
+                setOpenWelcomeDlg2(false)
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+                navigate('/')
+              }
+            }]}
+          />
           <Dialog
             display={isFree}
             title={"Free🍩"}

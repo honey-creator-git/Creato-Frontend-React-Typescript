@@ -10,10 +10,11 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
 import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
+import WelcomeDlg from "../../../components/general/welcomeDlg"
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, NotificationwithCircleIcon, RewardIcon } from "../../../assets/svg";
-import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE } from "../../../redux/types";
+import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../../redux/types";
 import "../../../assets/styles/dareme/dare/daremeDetailsStyle.scss";
 
 const DaremeDetails = () => {
@@ -26,6 +27,7 @@ const DaremeDetails = () => {
   const loadState = useSelector((state: any) => state.load);
   const userState = useSelector((state: any) => state.auth);
   const dareme = daremeState.dareme;
+  const dlgState = loadState.dlgState
   const [canShow, setCanShow] = useState<any>(null);
   const [resultOptions, setResultOptions] = useState<Array<any>>([]);
   const [isSignIn, setIsSignIn] = useState(false);
@@ -33,7 +35,9 @@ const DaremeDetails = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [isDareDisable, setIsDareDisable] = useState(false);
   const [isReward, setIsReward] = useState(false);
-  const user = userState.user;
+  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
+  const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
+  const user = userState.user
 
   const calcTime = (time: any) => {
     if (dareme.finished) return contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.ENDED;
@@ -78,8 +82,23 @@ const DaremeDetails = () => {
   }, [location]);
 
   useEffect(() => {
-    if (dareme.owner) setCanShow(canShowResult(dareme, user));
-  }, [dareme]);
+    if (dareme.owner) {
+      if (dareme.finished) navigate(`/dareme/result/${daremeId}`)
+      setCanShow(canShowResult(dareme, user))
+    }
+  }, [dareme])
+
+  useEffect(() => {
+    if (dlgState.type === 'welcome') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg(true);
+      }
+    } else if (dlgState.type === 'welcome2') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg2(true)
+      }
+    }
+  }, [dlgState])
 
   useEffect(() => {
     if (dareme.owner) {
@@ -103,6 +122,54 @@ const DaremeDetails = () => {
       </div>
       {(resultOptions.length > 0 && dareme.owner) &&
         <>
+          <Dialog
+            display={openWelcomeDlg}
+            title="Welcome to Creato"
+            exit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            wrapExit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            subcontext={true}
+            icon={
+              {
+                pos: 1,
+                icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+              }
+            }
+            buttons={[
+              {
+                text: "Go",
+                handleClick: () => {
+                  setOpenWelcomeDlg(false);
+                  dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                  navigate('/')
+                }
+              }
+            ]}
+          />
+          <WelcomeDlg
+            display={openWelcomeDlg2}
+            exit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            wrapExit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            buttons={[{
+              text: 'Go',
+              handleClick: () => {
+                setOpenWelcomeDlg2(false)
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+                navigate('/')
+              }
+            }]}
+          />
           <Dialog
             display={isReward}
             exit={() => { setIsReward(false) }}

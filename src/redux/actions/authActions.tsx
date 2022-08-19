@@ -1,6 +1,6 @@
-import { Dispatch } from "redux";
+import { Dispatch } from "redux"
 import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION } from "../types";
-import * as api from '../../api';
+import * as api from '../../api'
 
 export const authAction = {
   logout: (navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -16,15 +16,10 @@ export const authAction = {
         localStorage.clear();
         localStorage.setItem('dareme_token', JSON.stringify(data.token));
         dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } });
-          navigate("/");
-        }
-        if (data.new) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-          navigate("/");
-        } else navigate(prevRoute);
-      }).catch(err => console.log(err));
+        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
+        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        navigate(prevRoute === '' ? '/' : prevRoute)
+      }).catch(err => console.log(err))
   },
 
   googleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
@@ -34,14 +29,9 @@ export const authAction = {
         localStorage.clear();
         localStorage.setItem('dareme_token', JSON.stringify(data.token));
         dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } });
-          navigate("/");
-        }
-        if (data.new) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-          navigate("/");
-        } else navigate(prevRoute);
+        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
+        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        navigate(prevRoute === '' ? '/' : prevRoute)
       }).catch(err => console.log(err));
   },
 
