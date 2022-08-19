@@ -142,7 +142,7 @@ const TipDonut = () => {
             display={openEmptyMsg}
             exit={() => { setOpenEmptyMsg(false); }}
             wrapExit={() => { setOpenEmptyMsg(false); }}
-            title={`${contexts.CONFIRM}:`}
+            title={`${contexts.DIALOG.HEADER_TITLE.CONFIRM}:`}
             context={contexts.PROCEED_WITHOUT_MESSAGE_TO_CREATOR}
             buttons={[
               {

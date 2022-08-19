@@ -8,6 +8,8 @@ export const EN = {
         DETAIL_SUPERFAN_LETTER: 'Supporting the creator as SuperFan will get you entitled for the reward!',
         DETAIL_FREE_LETTER: 'Supporting the creator for Free!',
         DONUTED_BY_CREATOR: 'This 1 Donut will be donated by Creato!',
+        SEE_SUPERFAN_REWARD: 'See superFan Reward',
+        DONUTS_FOR: 'Donuts for'
     },
     HOME_LETTER: {
         DAREME_WITH_MOST_DONUTS: 'DareMe & FundMe with Most Donuts 🍩',
@@ -47,11 +49,28 @@ export const EN = {
         SETTINGS: 'Settings',
         LANGUAGE: 'Language',
         DONUTS_YOU_LIKE: 'Donuts As You Like',
+        CHOOSE_CATEGORY: 'Choose categories',
     },
     GENERAL_LETTER: {
         CREATE: 'Create',
         PUBLISH: 'Publish',
-        DONUTS: 'Donuts'
+        DONUTS: 'Donuts',
+        NUMBER_OF_DONUTS: 'Number of Donuts',
+        FREE_SUPPORT: 'Donut x1 (Free!)',
+        DONUTX1: 'Donut x1:',
+        DONUTX1_LETTER: 'Supporting the creator for Free! This 1 Donut will be donated by Creato!',
+        DONUTS_SUPERFAN_PART1: 'Donut x',
+        DONUTS_SUPERFAN_PART2: '(SuperFan!)',
+        SUPERFANS: 'SuperFans:',
+        SUPERFANS_LETTER: 'Support creators by giving specific amount of donut and get exclusive content.',
+        DONUTS_YOU_LIKE: 'Donuts as you like!',
+        DONUTS_YOU_LIKE_LETTER: 'Support any number of Donuts as you wish!',
+        GIVE_DONUTS_AS_YOU_LIKE: 'Give Donuts as you like:',
+        SEND: 'Send',
+        CLEAR_ALL: 'Clear all',
+        PREVIEW: 'Preview',
+        OR: 'Or',
+        SAVE: 'Save'
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: 'Period',
@@ -65,7 +84,6 @@ export const EN = {
         TEASER_VIDEO_UPLOADED: 'Teaser video uploaded',
         CHANGE_TEASER: 'Change teaser',
         CHOOSE_COVER: 'Choose a cover',
-        PREVIEW: 'Preview'
     },
     AUTH_LETTER: {
         SIGN_UP_TO_ENJOY: 'Sign up to enjoy:',
@@ -113,7 +131,6 @@ export const EN = {
     PROCEED_WITHOUT_MESSAGE_TO_CREATOR: 'Proceed without a message to creator?',
     PAY_WITH_SAVED_CARD_DETAILS: 'Pay with saved Card Details:',
     TIP_CREATOR: 'Tip Creator',
-    NUMBER_OF_DONUTS: 'Number of Donuts',
     SAY_SOMETHING_TO_SUPPORT: 'Say something to support!',
     MESSAGE_TO_CREATORS: 'Message to Creators',
     EG_30_100: 'e.g. 30, 100',
@@ -121,13 +138,11 @@ export const EN = {
     PICK_DONUT_PACKAGE: 'Pick a Donut package 🍩',
     SEE_MORE: 'See More',
     CHARACTERS: 'characters',
-    SEND: 'Send',
     TOP_UP_NOW: 'Top up now',
     CONGRATS: 'Congrats!',
     BACK_TO_PROFILE: 'Back to Profile',
     JOIN_CREATO: 'Join Creato',
     SIGN_UP: 'Sign Up',
-    OR: 'Or',
     CONTINUE_AS_VISITOR: 'Continue as Visitor',
     NICKNAME: 'Nickname',
     NEXT: 'Next',
@@ -160,9 +175,6 @@ export const EN = {
             DAYS: ' days',
             DAY: ' day',
             AGO: ' ago',
-        },
-        CREATO: {
-            SAVE: 'SAVE'
         }
     },
     INVITE_FRIEND_LETTER: {
@@ -225,9 +237,9 @@ export const EN = {
         PERSONALISED_URL: 'Personalized URL',
         LINK_SOCIAL_ACCOUNT: 'Link Social Accounts',
         CATEGORIES: 'Categories',
-        SAVE: 'Save',
         DISPLAY_NAME_ERROR: 'This username already existed! Please use another one.',
-        URL_ERROR: 'This URL handle already existed! Please use another one.'
+        URL_ERROR: 'This URL handle already existed! Please use another one.',
+        CATEGORY_LETTER: 'Please select Categories of your content, choosing a maximum 3 categories will increase search rate & create more accurate suggestions.',
     },
     CREATE_DAREME_LETTER: {
         DEADLINE: 'Deadline',
@@ -239,24 +251,22 @@ export const EN = {
         CHOOSE_COVER: 'Choose a cover',
         FIRST_DARE_OPTION: '1st Dare Option',
         SECOND_DARE_OPTION: '2nd Dare Option',
-        PREVIEW: 'Preview'
+        SELECT_DARE_OPTION: 'Select dare option',
+        BACK_TO_EDIT_MODE: 'Back to edit mode',
     },
     DAREME_TITLE_LETTER: {
         TITLE_PLACEHOLDER: 'Tell us about this title...',
         RECENT_TITLE: 'Recent Titles:',
-        SAVE: 'Save'
     },
     DARE_OPTIONS_LETTER: {
         EXPLAIN: 'Start the game with 2 Dare options, your fans will be able to propose new Dares once the game started.',
         FIRST_DARE: 'What is your 1st Dare?',
         SECOND_DARE: 'What is your 2nd Dare?',
         RECENT_DARES: 'Recent Dares:',
-        SAVE: 'Save'
     },
     UPLOAD_TEASER_LETTER: {
         EXPLAIN: 'Tell your fans about this DareMe.\nGet them excited to take part in your content creation!',
         CHOOSE_COVER: 'Choose a cover',
-        SAVE: 'Save',
         FUNDME_EXPLAIN: 'Tell your fans about this FundMe.\nGet them excited to take part in your content creation!'
     },
     CHOOSE_COVER_LETTER: {
@@ -269,8 +279,6 @@ export const EN = {
         SEE_REQUESTS: 'See Requests'
     },
     SUPPORT_CREATOR: {
-        FREE_SUPPORT: 'Donut x1 (Free!)',
-        SUPER_SUPPORT: 'Donut x50 (SuperFan!)',
         HOW_IT_WORKS: 'How it works?',
         DONUT_FREE: 'Donuts x1',
         DONUT_FREE_LETTER: 'Support the creator for free! We will give 1 donut on your behalf to the creator.',
@@ -308,7 +316,6 @@ export const EN = {
     },
     EXCLUSIVE_VIDEO_UPLOAD: {
         UPLOAD_VIDEO: 'Upload exclusive video to fans!',
-        SAVE: 'Save'
     },
     WALLET_LETTER: {
         TOTAL_NUMBER: 'Total number of donuts:',
@@ -358,7 +365,6 @@ export const EN = {
         PAY_WITH_SAVED_CARD: 'Pay with saved Card Details',
         SAVE_CARD_INFO: 'Save this card for future purchases',
         PAY: 'Pay',
-        CONFIRM: 'Confrim',
         YES: 'Yes',
         NO: 'No',
         BUY_DONUTS: 'Buy donuts'
@@ -376,7 +382,7 @@ export const EN = {
             ACCEPT_REQUEST: 'Accept request',
             DARE_ACCEPTED: 'Dare accepted',
             DARE_DECLIEND: 'Dare declined',
-            STAY_TUNED: 'Stay tuned!',
+            STAY_TUNED: 'Stay tuned...',
             CONGRAT: 'Congratulations!',
             UNLOCK_REWARDS: 'Unlock Rewards?'
         },
@@ -401,7 +407,9 @@ export const EN = {
             WIN_CONG: 'won the DareMe!\n\nShare it to your Fans to stay tuned!',
             CAN_EDIT_AFTER_POSTING: 'Post can be edited afterwards.',
             DELETE_POST: 'Deleting the post',
-            UNLOCK_FANWALL: '500 Donuts is required.'
+            UNLOCK_FANWALL: '500 Donuts is required.',
+            PUBLISH_ITEM: 'No edits after publishing',
+            LAUNCHING_SOON: 'We will be launching this soon.',
         },
         BUTTON_LETTER: {
             CONFIRM: 'Confirm',

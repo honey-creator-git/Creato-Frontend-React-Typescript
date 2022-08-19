@@ -408,7 +408,7 @@ const CreateFundme = () => {
                                         }
                                     }}
                                 >
-                                    <ContainerBtn text={contexts.CREATE_FUNDME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
+                                    <ContainerBtn text={contexts.GENERAL_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
                                 </div>
                             </div>
                         </div>
@@ -572,7 +572,7 @@ const CreateFundme = () => {
                                 }
                             }}
                         >
-                            <ContainerBtn text={contexts.CREATE_FUNDME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
+                            <ContainerBtn text={contexts.GENERAL_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
                         </div>
                     </div>
                 )}

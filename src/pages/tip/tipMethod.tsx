@@ -40,7 +40,7 @@ const TipMethod = () => {
                 </div>
                 <div className="or">
                     <div className="line"></div>
-                    <div className="or-style">{contexts.OR}</div>
+                    <div className="or-style">{contexts.GENERAL_LETTER.OR}</div>
                     <div className="line"></div>
                 </div>
                 <div className="button">

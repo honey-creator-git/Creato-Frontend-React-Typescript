@@ -2,12 +2,14 @@ export const CH = {
     DAREME_CATEGORY_LIST: ['週末交給你決定', '寵粉絲系列', '創作做什麼', '節日挑戰', '參與其中吧 ', '找數真漢子 ', '挑戰我吧', '才華招募', '求包養系列'],
     FUNDME_CATEGORY_LIST: ['人生第一次', '寵粉絲系列', '參與其中吧', '找數真漢子', '挑戰我吧', '求包養系列'],
     DAREME_DEADLINE_LIST: ["1 日", "2 日", "3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日"],
-    CREATOR_CATEGORY_LIST: ["藝人", "作家", "Blogger", "健身教練", "Gamer", "Instagram Creator", "直播主", "音樂人", "攝影師", "播客", "Tiktok Creator", "影片製作者", "YouTuber"],
+    CREATOR_CATEGORY_LIST: ["藝人", "作家", "博主", "健身教練", "電競選手", "Instagram 創作者", "直播主", "音樂人", "攝影師", "播客", "Tiktok 創作者", "影片製作者", "YouTuber"],
     FUNDME_DEADLINE_LIST: ["3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日", "11 日", "12 日", "13 日", "14 日"],
     FUNDME_LETTER: {
         DETAIL_SUPERFAN_LETTER: '以 SuperFan 身份支持創作者將獲得獎勵!',
         DETAIL_FREE_LETTER: '免費支持創作者!',
         DONUTED_BY_CREATOR: '1個甜甜圈由Creato代為送出!',
+        SEE_SUPERFAN_REWARD: '查看 SuperFan 的專屬獨家內容／禮物',
+        DONUTS_FOR: '個甜甜圈用作'
     },
     HOME_LETTER: {
         DAREME_WITH_MOST_DONUTS: '最多甜甜圈的 DareMe 和 FundMe🍩',
@@ -41,17 +43,34 @@ export const CH = {
         MY_DONUTS: '我的冬甩',
         SHOP_DONUTS: '冬甩店',
         POST_DETAILS: '帖子內容',
-        EDIT_PROFILE: '編輯',
+        EDIT_PROFILE: '編輯個人檔案',
         NOTIFICATIONS: '通知',
         INVITE_FRIENDS: '邀請朋友',
         SETTINGS: '設定',
         LANGUAGE: '語言',
-        DONUTS_YOU_LIKE: 'Donuts As You Like',
+        DONUTS_YOU_LIKE: '隨你喜歡的甜甜圈數量',
+        CHOOSE_CATEGORY: '選擇類別',
     },
     GENERAL_LETTER: {
         CREATE: '創建',
         PUBLISH: '發佈',
-        DONUTS: '甜甜圈'
+        DONUTS: '甜甜圈',
+        NUMBER_OF_DONUTS: '甜甜圈數量',
+        FREE_SUPPORT: '甜甜圈x1（免費）',
+        DONUTX1: '甜甜圈x1:',
+        DONUTX1_LETTER: '免費支持創作者！ 這1個甜甜圈將由 Creato 捐贈！',
+        DONUTS_SUPERFAN_PART1: '甜甜圈x',
+        DONUTS_SUPERFAN_PART2: '（SuperFan！）',
+        SUPERFANS: 'SuperFans:',
+        SUPERFANS_LETTER: '通過提供特定數量的甜甜圈來支持創作者並獲得獨家內容。',
+        DONUTS_YOU_LIKE: '我想自己決定',
+        DONUTS_YOU_LIKE_LETTER: '隨心所欲地給任意數量的甜甜圈！',
+        GIVE_DONUTS_AS_YOU_LIKE: '隨心所欲地給任意數量的甜甜圈！',
+        SEND: '送出',
+        CLEAR_ALL: '清除所有',
+        PREVIEW: '創建並預覧',
+        OR: '或是',
+        SAVE: '儲存'
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: '期限',
@@ -65,7 +84,6 @@ export const CH = {
         CATEGORY: '類別',
         CHANGE_TEASER: '更改預告短片',
         CHOOSE_COVER: '選擇封面',
-        PREVIEW: '創建',
     },
     AUTH_LETTER: {
         SIGN_UP_TO_ENJOY: '現在註冊可享有:',
@@ -113,7 +131,6 @@ export const CH = {
     PROCEED_WITHOUT_MESSAGE_TO_CREATOR: '不給創作者留言嗎？',
     PAY_WITH_SAVED_CARD_DETAILS: '使用已保存的卡付款：',
     TIP_CREATOR: '贊助創作者',
-    NUMBER_OF_DONUTS: '甜甜圈數量',
     SAY_SOMETHING_TO_SUPPORT: '給鼓勵說話！',
     MESSAGE_TO_CREATORS: '給創作者的話',
     EG_30_100: '例如 30,100',
@@ -121,17 +138,14 @@ export const CH = {
     PICK_DONUT_PACKAGE: '選擇甜甜圈贊助禮包🍩',
     SEE_MORE: '看更多',
     CHARACTERS: '字數',
-    SEND: '發送',
     TOP_UP_NOW: '立刻儲值',
     CONGRATS: '恭喜！',
     BACK_TO_PROFILE: '返回個人資料',
     JOIN_CREATO: '加入Creato',
     SIGN_UP: '登入',
-    OR: '或',
     CONTINUE_AS_VISITOR: '以訪客身分繼續',
     NICKNAME: '暱稱',
     NEXT: '下一步',
-    CONFIRM: '確認',
     YES: '是',
     NO: '否',
     CREATE_LETTER: {
@@ -161,9 +175,6 @@ export const CH = {
             DAY: ' 天',
             AGO: '',
         },
-        CREATO: {
-            SAVE: '省了'
-        }
     },
     INVITE_FRIEND_LETTER: {
         HEADER_TITLE: '推薦朋友賺取冬甩吧!',
@@ -219,15 +230,15 @@ export const CH = {
         OTHER_EXCLUSIVE_REWARDS: "的獨家內容",
     },
     EDIT_PROFILE_LETTER: {
-        EDIT: 'Edit',
+        EDIT: '編輯',
         DISPLAY_NAME: '用戶名',
         EDIT_HERE: '更新',
         PERSONALISED_URL: '專屬Creato網址',
         LINK_SOCIAL_ACCOUNT: '連結社交帳戶',
         CATEGORIES: '類別',
-        SAVE: '儲存',
         DISPLAY_NAME_ERROR: '用戶名已存在, 請重新輸入!',
-        URL_ERROR: '專屬Creato網址已存在, 請重新輸入!'
+        URL_ERROR: '專屬Creato網址已存在, 請重新輸入!',
+        CATEGORY_LETTER: '請選擇類別來界定你的內容，最多三項類別。將用作提高搜索率並提供更準確的建議。',
     },
     CREATE_DAREME_LETTER: {
         DEADLINE: '期限',
@@ -239,24 +250,22 @@ export const CH = {
         CHOOSE_COVER: '選擇封面',
         FIRST_DARE_OPTION: '輸入DareMe選項',
         SECOND_DARE_OPTION: '輸入DareMe選項',
-        PREVIEW: '創建'
+        SELECT_DARE_OPTION: '選擇 dare 選項',
+        BACK_TO_EDIT_MODE: '返回編輯模式',
     },
     DAREME_TITLE_LETTER: {
         TITLE_PLACEHOLDER: '描述你的想法...',
         RECENT_TITLE: '建議:',
-        SAVE: '儲存'
     },
     DARE_OPTIONS_LETTER: {
         EXPLAIN: '請輸入兩個選項，之後觀眾可以對你作出挑戰，把他們的想法和創意告訴你',
         FIRST_DARE: '第一個Dare選項...',
         SECOND_DARE: '第二個Dare選項...',
         RECENT_DARES: '建議:',
-        SAVE: '儲存'
     },
     UPLOAD_TEASER_LETTER: {
         EXPLAIN: '邀請觀眾發揮下他們的創意，再把他們的主意注入你的內容！',
         CHOOSE_COVER: '選擇封面',
-        SAVE: '儲存',
         FUNDME_EXPLAIN: 'Tell your fans about this FundMe.\nGet them excited to take part in your content creation!'
     },
     CHOOSE_COVER_LETTER: {
@@ -269,8 +278,6 @@ export const CH = {
         SEE_REQUESTS: '你的挑戰'
     },
     SUPPORT_CREATOR: {
-        FREE_SUPPORT: '冬甩 x1 (Free!)',
-        SUPER_SUPPORT: '冬甩 x50 (SuperFan!)',
         HOW_IT_WORKS: '如何運作？',
         DONUT_FREE: '冬甩 x1',
         DONUT_FREE_LETTER: '免費支持創作者！我們將代表您向創作者贈送 1 個冬甩。',
@@ -308,7 +315,6 @@ export const CH = {
     },
     EXCLUSIVE_VIDEO_UPLOAD: {
         UPLOAD_VIDEO: '上傳影片給粉絲吧!',
-        SAVE: '儲存'
     },
     WALLET_LETTER: {
         TOTAL_NUMBER: '冬甩總數:',
@@ -376,7 +382,7 @@ export const CH = {
             ACCEPT_REQUEST: '接受挑戰',
             DARE_ACCEPTED: '已接受挑戰',
             DARE_DECLIEND: '拒絕挑戰',
-            STAY_TUNED: '敬請期待!',
+            STAY_TUNED: '敬請關注...',
             CONGRAT: '恭喜！',
             UNLOCK_REWARDS: '解鎖獨家內容'
         },
@@ -385,7 +391,7 @@ export const CH = {
             SAVE_DRAFT: '暫時退出？\n您的草稿將被保存。',
             OWNER_VOTE: '上傳到社交平台\n呼籲更多人參與！',
             SIGN_IN_NOW: '挑戰你最喜愛的Creator！',
-            TOP_UP_NOW: '您需要更多冬甩來支持創作者！',
+            TOP_UP_NOW: '您需要更多甜甜圈來支持創作者！',
             VOTE_FREE: '1個冬甩投\n',
             VOTE_SUPER: '個冬甩投:\n',
             USED_FREE: '這個DareMe的免費冬甩已用 :)\n\n請用你的冬甩支持創作者!',
@@ -401,15 +407,17 @@ export const CH = {
             WIN_CONG: '勝出是次DareMe!\n分享到社交平台吧！',
             CAN_EDIT_AFTER_POSTING: '請注意發布後不可修改。',
             DELETE_POST: '刪除帖子',
-            UNLOCK_FANWALL: '需要500個冬甩'
+            UNLOCK_FANWALL: '需要500個冬甩',
+            PUBLISH_ITEM: '發佈後無發修改',
+            LAUNCHING_SOON: '我們將很快推出此功能。',
         },
         BUTTON_LETTER: {
-            CONFIRM: '確認',
+            CONFIRM: '確認：',
             SAVE_DRAFT: '保存',
             COPY_LINK: '複製鏈結',
             COPIED: '已複製',
             SIGN_IN: '登入',
-            TOP_UP: '冬甩店',
+            TOP_UP: '甜甜圈店',
             VOTE_NOW: '去支持吧',
             DECLINE: '拒絕',
             PUBLISH: '發佈',

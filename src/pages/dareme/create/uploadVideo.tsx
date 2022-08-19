@@ -185,7 +185,7 @@ const UploadVideo = () => {
           <>
             <div className="choose-cover" onClick={selectCover}><span>{contexts.UPLOAD_TEASER_LETTER.CHOOSE_COVER}</span></div>
             <div className="save-btn" onClick={() => { saveFirstFrame(1) }}>
-              <ContainerBtn disabled={false} styleType="fill" text={contexts.UPLOAD_TEASER_LETTER.SAVE} />
+              <ContainerBtn disabled={false} styleType="fill" text={contexts.GENERAL_LETTER.SAVE} />
             </div>
           </>
         }

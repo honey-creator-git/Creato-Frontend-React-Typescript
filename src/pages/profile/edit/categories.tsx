@@ -54,13 +54,10 @@ const Categories = () => {
   return (
     <>
       <div className="title-header">
-        <Title title="Choose categories" back={() => navigate(`/myaccount/edit`)} />
+        <Title title={contexts.HEADER_TITLE.CHOOSE_CATEGORY} back={() => navigate(`/myaccount/edit`)} />
       </div>
       <div className="categories-wrapper">
-        <div className="description">
-          Please select Categories of your content, choosing a maximum 3
-          categories will increase search rate & create more accurate suggestions.
-        </div>
+        <div className="description">{contexts.EDIT_PROFILE_LETTER.CATEGORY_LETTER}</div>
         <div className="categories">
           {contexts.CREATOR_CATEGORY_LIST.map((title: any, i: any) => (
             <div className="category" key={i} onClick={() => { selectCategory(i); }}>
@@ -71,7 +68,7 @@ const Categories = () => {
         <div className="save-btn">
           <Button
             fillStyle="fill"
-            text="Save"
+            text={contexts.GENERAL_LETTER.SAVE}
             color="primary"
             shape="rounded"
             width="100px"

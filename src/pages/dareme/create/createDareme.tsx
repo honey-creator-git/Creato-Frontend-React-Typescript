@@ -464,7 +464,7 @@ const CreateDareme = () => {
             </div>
             <div className="preview-clear">
               <div className="clear-btn" onClick={() => { setOpenErase(true) }}>
-                <ContainerBtn text='Clear all' styleType="clear" />
+                <ContainerBtn text={contexts.GENERAL_LETTER.CLEAR_ALL} styleType="clear" />
               </div>
               <div
                 className="prev-btn"
@@ -475,7 +475,7 @@ const CreateDareme = () => {
                   }
                 }}
               >
-                <ContainerBtn text={contexts.CREATE_DAREME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
+                <ContainerBtn text={contexts.GENERAL_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
               </div>
             </div>
           </div>
@@ -654,7 +654,7 @@ const CreateDareme = () => {
               </div>
             </div>
             <div className="prev-btn" onClick={() => { setOpenErase(true) }}>
-              <ContainerBtn text='Clear all' styleType="clear" />
+              <ContainerBtn text={contexts.GENERAL_LETTER.CLEAR_ALL} styleType="clear" />
             </div>
             <div
               className="prev-btn"
@@ -664,7 +664,7 @@ const CreateDareme = () => {
                 }
               }}
             >
-              <ContainerBtn text={contexts.CREATE_DAREME_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
+              <ContainerBtn text={contexts.GENERAL_LETTER.PREVIEW} disabled={!prevBtn} styleType="fill" />
             </div>
           </div>
         )}

@@ -65,7 +65,7 @@ const FundmePreview = () => {
           <Gif gif={CreateFundMeGif} />
         }
         <Title
-          title={contexts.CREATE_FUNDME_LETTER.PREVIEW}
+          title={contexts.GENERAL_LETTER.PREVIEW}
           back={() => {
             dispatch({ type: SET_TEASER_FILE1, payload: null });
             dispatch({ type: SET_COVER_FILE1, payload: null });

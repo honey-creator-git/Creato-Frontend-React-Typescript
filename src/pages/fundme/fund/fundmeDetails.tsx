@@ -220,7 +220,7 @@ const FundmeDetails = () => {
             ]}
             exit={() => { setIsSuperFan(false) }}
             wrapExit={() => { setIsSuperFan(false) }}
-            context={`${fundme.reward} Donuts for\n${fundme.title}`}
+            context={`${fundme.reward} ${contexts.FUNDME_LETTER.DONUTS_FOR}\n${fundme.title}`}
             buttons={[
               {
                 text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
@@ -418,42 +418,34 @@ const FundmeDetails = () => {
                     <ContainerBtn
                       disabled={false}
                       styleType="outline"
-                      text={'See SuperFan Reward'}
+                      text={contexts.FUNDME_LETTER.SEE_SUPERFAN_REWARD}
                       icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
                     />
                   </div>
                   <div className="number-of-donuts">
-                    <span></span>Number of Donuts<span></span>
+                    <span></span>{contexts.GENERAL_LETTER.NUMBER_OF_DONUTS}<span></span>
                   </div>
                   <div className="support-fun" onClick={() => {
                     if (checkCanFree()) fund(1);
                     else setIsOneFree(true);
                   }}>
-                    <ContainerBtn text={contexts.SUPPORT_CREATOR.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
+                    <ContainerBtn text={contexts.GENERAL_LETTER.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
                   </div>
                   <div className="support-letter">
-                    <span>Donut x1:</span>
+                    <span>{contexts.GENERAL_LETTER.DONUTX1}</span>
                   </div>
                   <div className="support-explain">
-                    <span>
-                      Supporting the creator for Free! This 1 Donut will be donated by Creato!
-                    </span>
+                    <span>{contexts.GENERAL_LETTER.DONUTX1_LETTER}</span>
                   </div>
                   <div className="support-fun" onClick={() => {
                     fund(fundme.reward)
                   }}>
-                    <ContainerBtn text={`Donut x${fundme.reward} (SuperFan!)`} styleType="fill"
+                    <ContainerBtn text={`${contexts.GENERAL_LETTER.DONUTS_SUPERFAN_PART1}${fundme.reward}${contexts.GENERAL_LETTER.DONUTS_SUPERFAN_PART2}`} styleType="fill"
                       icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
                     />
                   </div>
-                  <div className="support-letter">
-                    <span>SuperFans:</span>
-                  </div>
-                  <div className="support-explain">
-                    <span>
-                      Support creators by giving specific amount of donut and get exclusive content.
-                    </span>
-                  </div>
+                  <div className="support-letter"><span>{contexts.GENERAL_LETTER.SUPERFANS}</span></div>
+                  <div className="support-explain"><span>{contexts.GENERAL_LETTER.SUPERFANS_LETTER}</span></div>
                   <div className="support-fun" onClick={() => {
                     if (user) {
                       if (user.id === fundme.owner._id) {
@@ -462,18 +454,10 @@ const FundmeDetails = () => {
                       } else navigate('/fundme/details/' + fundmeId + '/wish')
                     } else setIsSignIn(true)
                   }}>
-                    <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
-                      icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
-                    />
+                    <ContainerBtn text={contexts.GENERAL_LETTER.DONUTS_YOU_LIKE} styleType="fill" bgColor="#DE5A67" icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]} />
                   </div>
-                  <div className="support-letter">
-                    <span></span>
-                  </div>
-                  <div className="support-explain">
-                    <span>
-                      Support any number of Donuts as you wish!
-                    </span>
-                  </div>
+                  <div className="support-letter"><span></span></div>
+                  <div className="support-explain"><span>{contexts.GENERAL_LETTER.DONUTS_YOU_LIKE_LETTER}</span></div>
                 </div>
               </div>
             </div>

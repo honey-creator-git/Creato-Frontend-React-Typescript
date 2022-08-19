@@ -140,7 +140,7 @@ const DareOptions = () => {
           ))}
         </div>
         <div className="save-btn" onClick={handleSave}>
-          <ContainerBtn disabled={false} styleType="fill" text={contexts.DARE_OPTIONS_LETTER.SAVE} />
+          <ContainerBtn disabled={false} styleType="fill" text={contexts.GENERAL_LETTER.SAVE} />
         </div>
       </div>
     </>

@@ -86,7 +86,7 @@ const Preview = () => {
           <Gif gif={CreateDaremeGif} />
         }
         <Title
-          title={contexts.CREATE_FUNDME_LETTER.PREVIEW}
+          title={contexts.GENERAL_LETTER.PREVIEW}
           back={() => {
             dispatch({ type: SET_TEASER_FILE, payload: null });
             dispatch({ type: SET_COVER_FILE, payload: null });
@@ -95,9 +95,9 @@ const Preview = () => {
         />
       </div>
       <Dialog
-        title="Confirm:"
+        title={contexts.DIALOG.HEADER_TITLE.CONFIRM}
         display={openPublishDlg}
-        context={"No edits after publishing"}
+        context={contexts.DIALOG.BODY_LETTER.PUBLISH_ITEM}
         exit={() => { setOpenPublishDlg(false) }}
         wrapExit={() => { setOpenPublishDlg(false) }}
         buttons={[
@@ -195,12 +195,12 @@ const Preview = () => {
                 <ContainerBtn
                   disabled={false}
                   styleType="outline"
-                  text={'See SuperFan Reward'}
+                  text={contexts.FUNDME_LETTER.SEE_SUPERFAN_REWARD}
                   icon={[<RewardIcon color="#EFA058" />, <RewardIcon color="white" />]}
                 />
               </div>
               <div className="select-dare-option">
-                <span></span>Select dare option<span></span>
+                <span></span>{contexts.CREATE_DAREME_LETTER.SELECT_DARE_OPTION}<span></span>
               </div>
               <div className="dare-btn">
                 <div>
@@ -211,7 +211,7 @@ const Preview = () => {
                   />
                 </div>
               </div>
-              <div className="or-style">or</div>
+              <div className="or-style">{contexts.GENERAL_LETTER.OR}</div>
             </div>
             <div className="dare-options">
               {
@@ -239,7 +239,7 @@ const Preview = () => {
           dispatch({ type: SET_COVER_FILE, payload: null });
           navigate("/dareme/create");
         }}>
-          <ContainerBtn text={'Back to edit mode'} styleType="outline" />
+          <ContainerBtn text={contexts.CREATE_DAREME_LETTER.BACK_TO_EDIT_MODE} styleType="outline" />
         </div>
         <div className="publish-btn" onClick={() => { setOpenPublishDlg(true) }}>
           <ContainerBtn text={contexts.PUBLISH} styleType="fill" />

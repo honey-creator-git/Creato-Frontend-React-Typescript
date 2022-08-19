@@ -106,7 +106,7 @@ const Header = () => {
           langauge={lang}
           buttons={[
             {
-              text: contexts.EDIT_PROFILE_LETTER.SAVE,
+              text: contexts.GENERAL_LETTER.SAVE,
               handleClick: () => { }
             }
           ]}

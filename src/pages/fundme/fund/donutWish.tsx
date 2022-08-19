@@ -212,7 +212,7 @@ const DonutWish = () => {
                     </div>
                     <div className="donuts-send">
                         <div className="top-letter">
-                            <span>Give Donuts as you like:</span>
+                            <span>{contexts.GENERAL_LETTER.GIVE_DONUTS_AS_YOU_LIKE}</span>
                         </div>
                         <div className="donuts-number">
                             <label className="letter">{contexts.REVIEW_LETTER.DONUTS_NUMBER}</label>
@@ -231,7 +231,7 @@ const DonutWish = () => {
                         </div>
                         <div style={{ marginTop: '5px' }}>
                             <Button
-                                text="Send"
+                                text={contexts.GENERAL_LETTER.SEND}
                                 width="316px"
                                 shape="rounded"
                                 color="primary"

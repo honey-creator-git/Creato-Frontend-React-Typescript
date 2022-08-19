@@ -123,7 +123,7 @@ const DaremeRewards = () => {
           ))}
         </div>
         <div className="save-btn" onClick={handleSave}>
-          <ContainerBtn disabled={false} styleType="fill" text={contexts.DAREME_TITLE_LETTER.SAVE} />
+          <ContainerBtn disabled={false} styleType="fill" text={contexts.GENERAL_LETTER.SAVE} />
         </div>
       </div>
     </>

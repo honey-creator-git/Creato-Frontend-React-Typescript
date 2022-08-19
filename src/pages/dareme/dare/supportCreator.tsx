@@ -299,7 +299,7 @@ const SupportCreator = () => {
                                             else setOpenFreeDlg(true);
                                         } else setIsSignIn(true);
                                     }}>
-                                        <ContainerBtn text={contexts.SUPPORT_CREATOR.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
+                                        <ContainerBtn text={contexts.GENERAL_LETTER.FREE_SUPPORT} styleType="outline" disabled={!checkCanFree()} />
                                     </div>
                                     <div className="support-letter">
                                         <span>Donut x1:</span>

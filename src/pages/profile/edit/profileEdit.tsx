@@ -79,14 +79,14 @@ const ProfileEdit = () => {
         <Dialog
           display={openLinkSocial}
           wrapExit={() => { setOpenLinkSocial(false) }}
-          title="Stay tuned..."
+          title={contexts.DIALOG.HEADER_TITLE.STAY_TUNED}
           icon={
             {
               pos: 0,
               icon: <SpreadIcon color="#EFA058" width="50px" height="50px" />
             }
           }
-          context={'We will be launching this soon.'}
+          context={contexts.DIALOG.BODY_LETTER.LAUNCHING_SOON}
         />
         <div className="avatar-info">
           <div className="avatar">
@@ -175,7 +175,7 @@ const ProfileEdit = () => {
         <div className="save-btn">
           <Button
             fillStyle="fill"
-            text={contexts.EDIT_PROFILE_LETTER.SAVE}
+            text={contexts.GENERAL_LETTER.SAVE}
             color="primary"
             shape="rounded"
             width="100px"
