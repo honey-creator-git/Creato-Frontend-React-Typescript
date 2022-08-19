@@ -15,22 +15,23 @@ Description 1: Added Donuts
 Description 2: Purchase Donuts
 Description 3: Vote Donuts Free
 Description 4: Earnings From DareMe/FudnMe
-Description 5: Vote as SupeFan
+Description 5: Vote as SuperFan
 Description 6: Dare Request
 Description 7: Refund of Donuts
 Description 8: Tipping Donuts User - Admin
 Description 9: Tipping Donuts User - User
 Description 10: Unlock Exclusive Content
+Description 11: Vote as Non-SuperFan 
 */
 
 export const transactionActions = {
     getAdminTransactions: (type: any) => async (dispatch: Dispatch<any>) => {
-        dispatch({ type: SET_LOADING_TRUE });
+        dispatch({ type: SET_LOADING_TRUE })
+        dispatch({ type: SET_TRANSACTIONS, payload: [] })
         api.getTransactions(type)
             .then((result) => {
                 const { data } = result;
                 if (data.success) {
-                    dispatch({ type: SET_TRANSACTIONS, payload: [] });
                     dispatch({
                         type: SET_DONUTS_INFO, payload: {
                             adminDonuts: data.adminDonuts,

@@ -107,6 +107,7 @@ const Home = () => {
 
   useEffect(() => {
     if(code) {
+      
       navigate('/auth/signup')
     }
   }, [code])

@@ -77,7 +77,7 @@ const Sidebar = () => {
             <span>Donuts Shop</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/transactions" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/admin_transactions" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
             <BalanceIcon className="icon-svg" color={activePath === '/admin/transactions' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/transactions" ? "#EFA058" : "#A6A29F"} />
           </div>

@@ -71,7 +71,8 @@ import FanwallDetail from '../pages/admin/fanwall/fanwallDetail';
 import PostAdminFanwall from '../pages/admin/fanwall/postFanwall';
 import UploadAdminVideo from '../pages/admin/fanwall/uploadVideo';
 
-import AdminTransactions from '../pages/admin/transactions/transactions';
+import AdminTransactions from '../pages/admin/transactions/adminTransactions';
+import UserTransactions from '../pages/admin/transactions/userTransactions';
 import Error404 from '../pages/error/error404';
 
 import TipDonut from '../pages/tip/tipDonut';
@@ -153,7 +154,8 @@ const AppRoutes = () => {
       <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
-      <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
+      <Route path="admin/admin_transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
+      <Route path="admin/user_transactions" element={<AuthRoute child={<UserTransactions />} routeType="private" />} />
       <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
       <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
       <Route path="admin/tipping/profile/:url/:id/edit" element={<AuthRoute child={<TipEditor />} routeType="private" />} />
