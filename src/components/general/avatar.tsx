@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import visitorImg from "../../assets/img/visitor_avatar.png";
 
 const Avatar = (props: any) => {
   const { size, avatarStyle, category, username, avatar, handleClick, hover } = props;
@@ -85,7 +86,7 @@ const Avatar = (props: any) => {
       <div style={Style}>
         <div style={usernameStyle}>{username}</div>
         <div style={imgStyle}>
-          <img src={avatar} alt="avatar" style={image as React.CSSProperties} />
+          <img src={avatar !== "" ? avatar : visitorImg} alt="avatar" style={image as React.CSSProperties} />
         </div>
       </div>
       <div style={myStyle1 as React.CSSProperties}>

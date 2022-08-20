@@ -210,6 +210,7 @@ export const daremeAction = {
 
   getDaremesByPersonalisedUrl: (url: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
+    dispatch({ type: SET_USERS, payload: [] })
     api.getDaremesByPersonalisedUrl({ url: url })
       .then((result) => {
         const { data } = result;
