@@ -201,8 +201,8 @@ const Auth = (props: any) => {
             )}
           /> */}
           <AppleLogin
-            clientId="dev.apple.service.creato"
-            redirectURI="https://dev8.creatogether.io/auth"
+            clientId="creatogether.io.apple.login.service"
+            redirectURI="https://creatogether.io/auth"
             callback={responseApple} // Catch the response
             scope="email name"
             responseMode="query"
