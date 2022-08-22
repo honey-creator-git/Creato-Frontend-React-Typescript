@@ -32,7 +32,10 @@ export const authAction = {
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => console.log(err));
+      }).catch(err => {
+        const { data } = err.response
+        if (data.error === 'sing-up methods error') dispatch({ type: SET_DIALOG_STATE, payload: { type: 'error_signup_method', state: true } })
+      });
   },
 
   appleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
@@ -58,7 +61,10 @@ export const authAction = {
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => console.log(err));
+      }).catch(err => {
+        const { data } = err.response
+        if (data.error === 'sing-up methods error') dispatch({ type: SET_DIALOG_STATE, payload: { type: 'error_signup_method', state: true } })
+      });
   },
 
   facebookSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {

@@ -10,6 +10,7 @@ import { LanguageContext } from "../routes/authRoute";
 import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons";
 import { authAction } from "../redux/actions/authActions";
 import "../assets/styles/signupStyle.scss";
+import { SET_DIALOG_STATE } from "../redux/types";
 const InApp = require("detect-inapp");
 
 declare global {
@@ -23,10 +24,12 @@ const Auth = (props: any) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const loadState = useSelector((state: any) => state.load);
+  const dlgState = loadState.dlgState
   const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB);
   const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
   const [isHover, setIsHover] = useState(false);
   const [isHover1, setIsHover1] = useState(false);
+  const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
   const lang = useSelector((state: any) => state.auth.lang);
   const prevRoute = loadState.prevRoute;
   const contexts = useContext(LanguageContext);
@@ -121,10 +124,29 @@ const Auth = (props: any) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [location])
+
+  useEffect(() => {
+    if (dlgState.state) {
+      if (dlgState.type === 'error_signup_method') SetOpenSignupMethodErrorDlg(true)
+    }
+  }, [dlgState])
 
   return (
     <React.Fragment>
+      <Dialog
+        display={openSignupMethodErrorDlg}
+        title="Error"
+        exit={() => {
+          SetOpenSignupMethodErrorDlg(false)
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+        }}
+        wrapExit={() => {
+          SetOpenSignupMethodErrorDlg(false)
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+        }}
+        context={"You’ve already signed up with Creato! Please use another method to log in :)"}
+      />
       <Dialog
         display={openWith}
         title="Open In Browser 🌐"
