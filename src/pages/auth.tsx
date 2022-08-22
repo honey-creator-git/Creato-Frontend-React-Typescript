@@ -32,6 +32,7 @@ const Auth = (props: any) => {
   const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
   const lang = useSelector((state: any) => state.auth.lang);
   const prevRoute = loadState.prevRoute;
+  const referralInfo = JSON.parse(localStorage.getItem("referral_info") || '{}')
   const contexts = useContext(LanguageContext);
 
   const signupStyle = {
@@ -69,20 +70,22 @@ const Auth = (props: any) => {
     else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
     else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
 
+    // let referral: any = null
+    // if(referralInfo.userId) {
+    //   console.log(new Date(referralInfo.date).getTime())
+    // }
+
     const userData = ({
       name: result.name,
       avatar: result.imageUrl,
       email: result.email,
       googleId: result.googleId,
       browser: browser,
-      lang: lang
+      lang: lang,
+      referral: referralInfo
     });
     if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute))
     else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute))
-  };
-
-  const responseGoogleError = (error: any) => {
-
   };
 
   // const responseFacebook = (response: any) => {
@@ -114,7 +117,8 @@ const Auth = (props: any) => {
         token: response.authorization.id_token,
         user: response.user ? response.user : null,
         browser: browser,
-        lang: lang
+        lang: lang,
+        referral: referralInfo
       })
 
       if (props.isSignin) dispatch(authAction.appleSigninUser(userData, navigate, prevRoute))
@@ -136,7 +140,7 @@ const Auth = (props: any) => {
     <React.Fragment>
       <Dialog
         display={openSignupMethodErrorDlg}
-        title="Error"
+        title="Oops!"
         exit={() => {
           SetOpenSignupMethodErrorDlg(false)
           dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
@@ -145,7 +149,13 @@ const Auth = (props: any) => {
           SetOpenSignupMethodErrorDlg(false)
           dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
         }}
-        context={"You’ve already signed up with Creato! Please use another method to log in :)"}
+        context={"You've already signed up with Creato! 😄👏🏻"}
+        buttons={[
+          {
+            text: 'Sign In Now',
+            handleClick: () => { navigate('/auth/signin') }
+          }
+        ]}
       />
       <Dialog
         display={openWith}
@@ -207,7 +217,6 @@ const Auth = (props: any) => {
               </div>
             )}
             onSuccess={responseGoogleSuccess}
-            onFailure={responseGoogleError}
             cookiePolicy={"single_host_origin"}
           />
           {/* <FacebookLogin
@@ -225,6 +234,8 @@ const Auth = (props: any) => {
           <AppleLogin
             clientId="creatogether.io.apple.login.service"
             redirectURI="https://creatogether.io/auth"
+            // clientId="dev.creatogether.io.apple.login.service"
+            // redirectURI="https://dev8.creatogether.io/auth"
             callback={responseApple} // Catch the response
             scope="email name"
             responseMode="query"

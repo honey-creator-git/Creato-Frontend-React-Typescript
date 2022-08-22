@@ -62,7 +62,7 @@ const FundMeList = () => {
                                         <span key={i}>{contexts.CREATOR_CATEGORY_LIST[category]}{i !== array.length - 1 && "/"}</span>
                                     ))}
                                 </td>
-                                <td>{fundme.wallet}</td>
+                                <td>{fundme.empty ? 0 : fundme.wallet}</td>
                                 <td onClick={() => {
                                     dispatch({ type: SET_COVERFILE, payload: null })
                                     dispatch({ type: SET_VIDEOFILE, payload: null })

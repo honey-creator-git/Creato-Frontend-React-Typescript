@@ -105,12 +105,11 @@ const Home = () => {
     return category
   }
 
-  useEffect(() => {
-    if(code) {
-      
-      navigate('/auth/signup')
-    }
-  }, [code])
+  // useEffect(() => {
+  //   if(code) {
+  //     dispatch(authAction.inviteFriend(code, navigate))
+  //   }
+  // }, [code])
 
   useEffect(() => {
     window.scrollTo(0, 0);

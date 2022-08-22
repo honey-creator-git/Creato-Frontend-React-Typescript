@@ -198,7 +198,7 @@ const AdminTransactions = () => {
                       {transaction.description === 1 && "Added Donuts"}
                       {transaction.description === 2 && `Purchase - ${transaction.donuts} Donuts`}
                       {transaction.description === 3 && `${transaction.dareme ? transaction.dareme.title : transaction.fundme ? transaction.fundme.title : ''} - Donut x1`}
-                      {transaction.description === 4 && <>Earnings from <strong>{transaction.from === "DAREME" && transaction.dareme ? transaction.dareme.title : ''}{transaction.from = "FUNDME" && transaction.fundme ? transaction.fundme.title : ''}</strong></>}
+                      {transaction.description === 4 && <>Earnings from <strong>{transaction.from === "DAREME" && transaction.dareme ? transaction.dareme.title : ''}{transaction.from === "FUNDME" && transaction.fundme ? transaction.fundme.title : ''}</strong></>}
                       {transaction.description === 5 && "Vote as SuperFans"}
                       {transaction.description === 6 && (transaction.dareme ? "Dare Request" : "")}
                       {transaction.description === 7 && <>Refund of Donuts in <strong>{transaction.dareme ? transaction.dareme.title : ""}</strong></>}
@@ -209,7 +209,7 @@ const AdminTransactions = () => {
                     <td>
                       {transaction.from === "ADMIN" && "Admin"}
                       {transaction.from === "USER" && (transaction.nickname ? transaction.nickname : transaction.user ? transaction.user.name : '')}
-                      {(transaction.from === "" || transaction.from === "DAREME") && (transaction.dareme ? transaction.dareme.title : '')}
+                      {transaction.from === "DAREME" && (transaction.dareme ? transaction.dareme.title : '')}
                       {transaction.from === "FUNDME" && (transaction.fundme ? transaction.fundme.title : '')}
                     </td>
                     <td>

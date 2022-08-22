@@ -201,4 +201,23 @@ export const authAction = {
         }
       }).catch(err => console.log(err))
   },
+
+  inviteFriend: (code: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    api.inviteFriend({ referralLink: code })
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          const payload = data.data
+
+          const referralInfo = {
+            userId: payload.userId,
+            index: payload.index,
+            date: new Date()
+          }
+
+          localStorage.setItem("referral_info", JSON.stringify(referralInfo))
+          navigate('/auth/signup')
+        }
+      }).catch(err => console.log(err))
+  }
 }

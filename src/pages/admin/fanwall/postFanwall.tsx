@@ -84,8 +84,10 @@ const PostFanwall = () => {
     }, [embedUrl]);
 
     useEffect(() => {
-        if (itemType === 'DareMe') setItem(dareme)
-        else setItem(fundme)
+        if (fundme.owner || dareme.owner) {
+            if (itemType === 'DareMe') setItem(dareme)
+            else setItem(fundme)
+        }
     }, [dareme, fundme])
 
     useEffect(() => {
@@ -133,7 +135,7 @@ const PostFanwall = () => {
                         <div className="dare-post-fanwall-main">
                             <div className="reward-name">
                                 {itemType === 'DareMe' &&
-                                    <span>{item.options.filter((option: any) => option.option.win === true)[0].option.title}</span>
+                                    <span>{item?.options?.filter((option: any) => option.option.win === true)[0]?.option?.title}</span>
                                 }
                                 {itemType === 'FundMe' &&
                                     <span>{item.title}</span>

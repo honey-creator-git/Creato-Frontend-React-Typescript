@@ -26,6 +26,7 @@ export const getExistURL = (data: any) => API.post('/api/auth/exist_url', data);
 export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', data)
 export const getTipState = () => API.get('/api/auth/tip_state')
 export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);
+export const inviteFriend = (data: any) => API.post('/api/auth/invite_friend', data)
 //Dareme API
 export const publishDareme = () => API.post('/api/dareme/publish');
 export const getDraftDareme = () => API.post('/api/dareme/draft');
