@@ -11,6 +11,7 @@ import {
   WhatsappIcon,
 } from "../../../assets/svg";
 import { LanguageContext } from "../../../routes/authRoute"
+import CONSTANT from "../../../constants/constant";
 import "../../../assets/styles/profile/invitefriendsStyle.scss";
 
 const Invitefriends = () => {
@@ -20,9 +21,6 @@ const Invitefriends = () => {
   const decoded: any = decode(token)
   const contexts = useContext(LanguageContext)
   const [copy, setCopy] = useState(false)
-  // const url = 'localhost:3000'
-  const url = 'creatogether.io'
-  // const url = 'dev8.creatogether.io'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -71,7 +69,7 @@ const Invitefriends = () => {
           </div>
         </div>
         <div className="copy-field">
-          <div className="text">{url + '?invitedBy=' + (decoded.referralLink ? decoded.referralLink : '')}</div>
+          <div className="text">{CONSTANT.INVITE_LINK + '?invitedBy=' + (decoded.referralLink ? decoded.referralLink : '')}</div>
           <Button
             color="primary"
             shape="rounded"
@@ -79,7 +77,7 @@ const Invitefriends = () => {
             width={50}
             text={!copy ? contexts.INVITE_FRIEND_LETTER.COPY : contexts.INVITE_FRIEND_LETTER.COPIED}
             handleSubmit={() => {
-              navigator.clipboard.writeText(`${url}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)
+              navigator.clipboard.writeText(`${CONSTANT.INVITE_LINK}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)
               setCopy(true)
             }}
           />

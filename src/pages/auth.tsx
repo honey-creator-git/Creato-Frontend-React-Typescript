@@ -70,11 +70,6 @@ const Auth = (props: any) => {
     else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
     else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
 
-    // let referral: any = null
-    // if(referralInfo.userId) {
-    //   console.log(new Date(referralInfo.date).getTime())
-    // }
-
     const userData = ({
       name: result.name,
       avatar: result.imageUrl,

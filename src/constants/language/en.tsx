@@ -113,9 +113,10 @@ export const EN = {
       SUBTITLE: '🎉 Tip Donuts to Creator is now live!',
       HOW_IT_WORKS: 'How it works:',
       LINE1: '1. Go to Creator’s profile',
-      LINE2: '2. Click the Tip Icon (as shown above)',
-      LINE3: '3. Visitors can also Tip Donuts to Creators!',
+      LINE2: '2. Click "Tip" Icon',
+      LINE3: '3. Leave a message to Creators!',
       LINE4: '4. Enjoy!🍩🎊',
+      OK: 'Ok',
     },
     FUNDME_REWARDS: [
         "Behind-the-scene videos 📽️",

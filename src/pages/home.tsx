@@ -19,6 +19,7 @@ import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE, SET_USERS } fro
 import { RewardIcon } from "../assets/svg"
 import { fundmeAction } from "../redux/actions/fundmeActions"
 import { paymentAction } from "../redux/actions/paymentActions"
+import { authAction } from "../redux/actions/authActions"
 import WelcomeDlg from "../components/general/welcomeDlg"
 import "../assets/styles/homeStyle.scss"
 
@@ -105,11 +106,9 @@ const Home = () => {
     return category
   }
 
-  // useEffect(() => {
-  //   if(code) {
-  //     dispatch(authAction.inviteFriend(code, navigate))
-  //   }
-  // }, [code])
+  useEffect(() => {
+    if (code) dispatch(authAction.inviteFriend(code, navigate))
+  }, [code])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -159,7 +158,7 @@ const Home = () => {
           dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
         }}
         buttons={[{
-          text: 'Go',
+          text: contexts.WELCOME_DLG.OK,
           handleClick: () => {
             setOpenWelcomeDlg2(false)
             dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })

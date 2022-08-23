@@ -195,17 +195,7 @@ const ProfileHeader = (props: profileProps) => {
           </div>
         ) : (
           <div className="pen-icon" onClick={() => {
-            if (user) {
-              dispatch({
-                type: SET_PROFILE_DATA, payload: {
-                  category: user?.category,
-                  avatarFile: null,
-                  displayName: user?.name,
-                  creatoUrl: `www.creatogether.io/${user?.personalisedUrl}`
-                }
-              });
-              navigate(`/myaccount/edit`);
-            }
+            if (user) navigate(`/myaccount/edit`);
           }}>
             <EditIcon color="#E17253" />
           </div>

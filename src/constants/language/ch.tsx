@@ -111,11 +111,12 @@ export const CH = {
     WELCOME_DLG: {
         TITLE: '歡迎回來Creato!',
         SUBTITLE: '🎉 贊助甜甜圈 正式推出！',
-        HOW_IT_WORKS: ' 如何使用:',
-        LINE1: '1. 去創作者的Profile業面',
-        LINE2: '2. 找尋『贊助甜甜圈』的圖標',
-        LINE3: '3. 訪客也可以贊助甜甜圈的!',
+        HOW_IT_WORKS: '如何使用:',
+        LINE1: '1. 去創作者的個人檔案',
+        LINE2: '2. 按『贊助甜甜圈』的圖標',
+        LINE3: '3. 給創作者留下支持的說話!',
         LINE4: '4. 請慢用! 🍩🎊',
+        OK: '好的',
     },
     FUNDME_REWARDS: [
         "獨家幕後影片 📽️",

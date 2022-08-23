@@ -162,7 +162,7 @@ const DaremeDetails = () => {
               dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
             }}
             buttons={[{
-              text: 'Go',
+              text: contexts.WELCOME_DLG.OK,
               handleClick: () => {
                 setOpenWelcomeDlg2(false)
                 dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })

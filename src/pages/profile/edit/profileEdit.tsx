@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import AvatarEditor from 'react-avatar-editor'
 import { authAction } from "../../../redux/actions/authActions";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
@@ -12,13 +13,14 @@ import { AddIcon, SpreadIcon } from "../../../assets/svg";
 import Dialog from "../../../components/general/dialog";
 import ToggleButton from "../../../components/admin/ToggleButton";
 import { LanguageContext } from "../../../routes/authRoute";
-import "../../../assets/styles/profile/profileEditStyle.scss";
 import { tipAction } from "../../../redux/actions/tipActions";
+import "../../../assets/styles/profile/profileEditStyle.scss"
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation()
+  let imageEditor: any = null
   const userState = useSelector((state: any) => state.auth);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const user = userState.user
@@ -27,21 +29,31 @@ const ProfileEdit = () => {
   const existName = userState.nameExist;
   const existURL = userState.urlExist;
   const profile = userState.profileData;
-  const [displayName, setDisplayName] = useState<string>(profile.displayName ? profile.displayName : '');
-  const [creatoURL, setCreatoURL] = useState<string>(profile.creatoUrl ? profile.creatoUrl : 'www.creatogether.io/');
+  const [displayName, setDisplayName] = useState<string>("");
+  const [creatoURL, setCreatoURL] = useState<string>('www.creatogether.io/');
   const [openLinkSocial, setOpenLinkSocial] = useState(false);
   const contexts = useContext(LanguageContext);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (existName === false && existURL === false) {
+      let imageFile: any = null
+      if (profile.avatarFile && imageEditor) {
+        const canvas = imageEditor.getImage()
+        let url = canvas.toDataURL('image/png')
+        const res = await fetch(url)
+        const blob = await res.blob()
+        imageFile = new File([blob], 'avatar.png', blob)
+      }
       const url = creatoURL.substring(0, 20);
       if (url !== 'www.creatogether.io/') alert("Wrong Url");
       else {
         const creato = creatoURL.substring(20);
-        dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, profile.avatarFile, navigate));
+        dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate));
       }
     }
   };
+
+  const setEditorRef = (editor: any) => (imageEditor = editor)
 
   const handleFileUpload = (e: any) => {
     const files = e.target.files;
@@ -64,11 +76,31 @@ const ProfileEdit = () => {
   }, [displayName]);
 
   useEffect(() => {
-    if (creatoURL !== "") {
+    if (creatoURL) {
       const creato = creatoURL.substring(20);
       dispatch(authAction.getExistURL(creato));
     }
   }, [creatoURL]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch({
+        type: SET_PROFILE_DATA, payload: {
+          category: user.category,
+          avatarFile: null,
+          displayName: user.name,
+          creatoUrl: `www.creatogether.io/${user.personalisedUrl}`
+        }
+      });
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (profile.category) {
+      setDisplayName(profile.displayName)
+      setCreatoURL(profile.creatoUrl)
+    }
+  }, [profile])
 
   return (
     <>
@@ -91,9 +123,14 @@ const ProfileEdit = () => {
         <div className="avatar-info">
           <div className="avatar">
             {user &&
-              <img
-                src={profile.avatarFile ? profile.avatarFile.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
-                alt="avatar"
+              <AvatarEditor
+                ref={setEditorRef}
+                image={profile.avatarFile ? profile.avatarFile.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
+                width={150}
+                height={150}
+                border={30}
+                color={[0, 0, 0, 0.6]} // RGBA
+                scale={1.0}
               />
             }
           </div>
@@ -114,7 +151,7 @@ const ProfileEdit = () => {
             size="small"
             label={contexts.EDIT_PROFILE_LETTER.DISPLAY_NAME}
             wordCount={20}
-            title={displayName}
+            title={displayName ? displayName : ''}
             setTitle={setDisplayName}
             setFocus={() => { }}
           />
@@ -131,7 +168,7 @@ const ProfileEdit = () => {
             label={contexts.EDIT_PROFILE_LETTER.PERSONALISED_URL}
             wordCount={40}
             size="small"
-            title={creatoURL}
+            title={creatoURL ? creatoURL : ''}
             isUrl={true}
             setTitle={setCreatoURL}
             setFocus={() => { }}
