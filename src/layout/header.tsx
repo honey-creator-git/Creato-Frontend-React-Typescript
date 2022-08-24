@@ -41,7 +41,11 @@ const Header = () => {
   const user = userState.user;
   const lang = userState.lang;
 
-  const handleSubmit = () => { navigate("/auth/signin") }
+  const handleSubmit = () => {
+    dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+    navigate("/auth/signin")
+  }
+
   const handleLogout = () => {
     setOpenSideMenu(false);
     dispatch({ type: SET_DAREMES, payload: [] });
@@ -93,7 +97,7 @@ const Header = () => {
       const decodedToken: any = decode(JSON.parse(token));
       if (decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
     }
-  }, [location]);
+  }, [location, dispatch]);
 
   return (
     <div className="header-padding" style={user ? user.role === "ADMIN" ? width > 1010 ? {} : { padding: '87px' } : width > 1010 ? {} : { padding: '60px' } : {}}>
@@ -141,7 +145,7 @@ const Header = () => {
                   {user.new_notification && <div className="red-dot"></div>}
                   <Avatar
                     size="small"
-                    style="horizontal"
+                    avatarStyle="horizontal"
                     username=""
                     avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
                   />

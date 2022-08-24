@@ -9,11 +9,12 @@ import Avatar from "../../components/general/avatar";
 import Button from "../../components/general/button";
 import Title from "../../components/general/title";
 import Dialog from "../../components/general/dialog";
+import WelcomeDlg from "../../components/general/welcomeDlg";
 import CategoryBtn from "../../components/general/categoryBtn";
 import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
-import { CreatoCoinIcon, MoreIcon, WinningIcon } from "../../assets/svg";
-import { SET_PREVIOUS_ROUTE, SET_FANWALL_TYPE } from "../../redux/types";
+import { CreatoCoinIcon, MoreIcon, WinningIcon, RewardIcon } from "../../assets/svg";
+import { SET_PREVIOUS_ROUTE, SET_FANWALL_TYPE, SET_DIALOG_STATE } from "../../redux/types";
 import "../../assets/styles/fanwall/fanwallDetailsStyle.scss";
 
 const FanwallDetails = () => {
@@ -23,6 +24,7 @@ const FanwallDetails = () => {
 
   const fanwallState = useSelector((state: any) => state.fanwall);
   const userState = useSelector((state: any) => state.auth);
+  const dlgState = useSelector((state: any) => state.load.dlgState)
 
   const fanwall = fanwallState.fanwall;
   const winOption = fanwallState.winOption;
@@ -38,6 +40,8 @@ const FanwallDetails = () => {
   const [isTopUp, setIsTopUp] = useState(false);
   const [moreInfo, setMoreInfo] = useState(false);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
+  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
+  const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
 
   let width;
   if (fanwall.fundme) {
@@ -89,6 +93,18 @@ const FanwallDetails = () => {
   }, [fanwallId, dispatch]);
 
   useEffect(() => {
+    if (dlgState.type === 'welcome') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg(true);
+      }
+    } else if (dlgState.type === 'welcome2') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg2(true)
+      }
+    }
+  }, [dlgState])
+
+  useEffect(() => {
     if (fanwall && fanwall.writer) {
       if (fanwall.dareme) {
         if (fanwall.dareme.options) {
@@ -113,6 +129,54 @@ const FanwallDetails = () => {
             }} />
           </div>
           <div className="fanwall-detail-wrapper">
+            <Dialog
+              display={openWelcomeDlg}
+              title="Welcome to Creato"
+              exit={() => {
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                setOpenWelcomeDlg(false);
+              }}
+              wrapExit={() => {
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                setOpenWelcomeDlg(false);
+              }}
+              subcontext={true}
+              icon={
+                {
+                  pos: 1,
+                  icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+                }
+              }
+              buttons={[
+                {
+                  text: "Go",
+                  handleClick: () => {
+                    setOpenWelcomeDlg(false);
+                    dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                    navigate('/')
+                  }
+                }
+              ]}
+            />
+            <WelcomeDlg
+              display={openWelcomeDlg2}
+              exit={() => {
+                setOpenWelcomeDlg2(false)
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+              }}
+              wrapExit={() => {
+                setOpenWelcomeDlg2(false)
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+              }}
+              buttons={[{
+                text: contexts.WELCOME_DLG.OK,
+                handleClick: () => {
+                  setOpenWelcomeDlg2(false)
+                  dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+                  navigate('/')
+                }
+              }]}
+            />
             <Dialog
               display={openDelPostDlg}
               exit={() => { setOpenDelPostDlg(false) }}

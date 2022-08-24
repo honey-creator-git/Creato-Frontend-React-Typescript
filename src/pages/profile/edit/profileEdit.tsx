@@ -69,18 +69,18 @@ const ProfileEdit = () => {
     dispatch({ type: SET_NAME_EXIST, payload: false })
     dispatch({ type: SET_URL_EXIST, payload: false })
     dispatch(authAction.getTipState())
-  }, [location]);
+  }, [location, dispatch]);
 
   useEffect(() => {
     if (displayName !== "") dispatch(authAction.getExistName(displayName));
-  }, [displayName]);
+  }, [displayName, dispatch]);
 
   useEffect(() => {
     if (creatoURL) {
       const creato = creatoURL.substring(20);
       dispatch(authAction.getExistURL(creato));
     }
-  }, [creatoURL]);
+  }, [creatoURL, dispatch]);
 
   useEffect(() => {
     if (user) {
@@ -93,7 +93,7 @@ const ProfileEdit = () => {
         }
       });
     }
-  }, [user])
+  }, [user, dispatch])
 
   useEffect(() => {
     if (profile.category) {

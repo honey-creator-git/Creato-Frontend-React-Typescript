@@ -99,7 +99,7 @@ const Home = () => {
 
   const showCategories = (categories: any) => {
     let category = '';
-    categories.map((cate: any, index: any) => {
+    categories.forEach((cate: any, index: any) => {
       category += contexts.CREATOR_CATEGORY_LIST[cate];
       if (index !== categories.length - 1) category += '/'
     })
@@ -108,7 +108,7 @@ const Home = () => {
 
   useEffect(() => {
     if (code) dispatch(authAction.inviteFriend(code, navigate))
-  }, [code])
+  }, [code, dispatch, navigate])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -117,7 +117,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user) dispatch(paymentAction.getStripeID());
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     setOpenDonutsPlanDlg(donutPlan);
@@ -463,7 +463,7 @@ const Home = () => {
                 <Avatar
                   avatar={user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user?.avatar}` : user?.avatar}
                   size="web"
-                  style="vertical"
+                  avatarStyle="vertical"
                   category={showCategories(user?.categories)}
                   username={user?.name}
                 />

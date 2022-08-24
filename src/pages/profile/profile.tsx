@@ -8,10 +8,11 @@ import ProfileHeader from "../../components/profile/profileHeader";
 import ProfileMenu from "../../components/profileMenu";
 import ContainerBtn from "../../components/general/containerBtn";
 import Dialog from "../../components/general/dialog";
+import WelcomeDlg from "../../components/general/welcomeDlg";
 import AvatarLink from "../../components/dareme/avatarLink";
-import { Dare2Icon, HotIcon, AddIcon } from "../../assets/svg";
+import { Dare2Icon, HotIcon, AddIcon, RewardIcon } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
-import { SET_PREVIOUS_ROUTE } from "../../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/profile/profileStyle.scss";
 
@@ -23,8 +24,11 @@ const Profile = () => {
   const contexts = useContext(LanguageContext);
   const daremeStore = useSelector((state: any) => state.dareme);
   const userStore = useSelector((state: any) => state.auth);
+  const dlgState = useSelector((state: any) => state.load.dlgState)
   const daremes = daremeStore.daremes;
   const authuser = userStore.users.length ? userStore.users[0] : null;
+  const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
+  const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
   const [isSame, setIsSame] = useState(false);
   const user = userStore.user;
   const [openSignin, setOpenSignin] = useState(false);
@@ -38,7 +42,7 @@ const Profile = () => {
     window.scrollTo(0, 0)
     const personalisedUrl = pathname.substring(1);
     dispatch(daremeAction.getDaremesByPersonalisedUrl(personalisedUrl))
-  }, [location]);
+  }, [location, dispatch, pathname]);
 
   useEffect(() => {
     if (authuser) {
@@ -49,10 +53,70 @@ const Profile = () => {
     }
   }, [authuser, user]);
 
+  useEffect(() => {
+    if (dlgState.type === 'welcome') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg(true);
+      }
+    } else if (dlgState.type === 'welcome2') {
+      if (dlgState.state) {
+        setOpenWelcomeDlg2(true)
+      }
+    }
+  }, [dlgState])
+
   return (
     <div className="profile-wrapper">
       {authuser !== null &&
         <>
+          <Dialog
+            display={openWelcomeDlg}
+            title="Welcome to Creato"
+            exit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            wrapExit={() => {
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+              setOpenWelcomeDlg(false);
+            }}
+            subcontext={true}
+            icon={
+              {
+                pos: 1,
+                icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+              }
+            }
+            buttons={[
+              {
+                text: "Go",
+                handleClick: () => {
+                  setOpenWelcomeDlg(false);
+                  dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+                  navigate('/')
+                }
+              }
+            ]}
+          />
+          <WelcomeDlg
+            display={openWelcomeDlg2}
+            exit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            wrapExit={() => {
+              setOpenWelcomeDlg2(false)
+              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            }}
+            buttons={[{
+              text: contexts.WELCOME_DLG.OK,
+              handleClick: () => {
+                setOpenWelcomeDlg2(false)
+                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+                navigate('/')
+              }
+            }]}
+          />
           <Dialog
             display={openSignin}
             exit={() => { setOpenSignin(false) }}
