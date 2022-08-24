@@ -71,7 +71,7 @@ const ProfileFanwall = () => {
     setExpandState(false);
     setTimerId(0);
     dispatch(fanwallAction.getFanwallsByPersonalUrl(personalisedUrl))
-  }, [location]);
+  }, [location, dispatch, pathname]);
 
   useEffect(() => {
     if (expandState) {
@@ -89,7 +89,7 @@ const ProfileFanwall = () => {
         setTimerId(tId);
       }
     }
-  }, [expandState]);
+  }, [expandState, tipIndex, tips]);
 
   useEffect(() => {
     if (tips.length > 2 && tipIndex === tips.length && timerId) clearInterval(timerId);
@@ -97,7 +97,7 @@ const ProfileFanwall = () => {
       window.scrollTo(0, 0);
       clearInterval(timerId);
     }
-  }, [tipIndex]);
+  }, [tipIndex, timerId]);
 
   useEffect(() => {
     if (authuser) {
@@ -124,7 +124,7 @@ const ProfileFanwall = () => {
       })
       setOpenTipMessageDlg(true);
     }
-  }, [tipId, tips])
+  }, [tipId, tips, authuser])
 
   return (
     <div className="profile-wrapper">
@@ -198,20 +198,21 @@ const ProfileFanwall = () => {
                       <p>{contexts.DONUTS_RECEIVED}</p>
                     </div>
                     <div className="tip-card">
-                      {tips.map((tip: any, index: any) => {
-                        if (index < tipIndex) {
-                          return <div className="card-detail" key={index}>
-                            <TipCard
-                              avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
-                              username={tip.tipper ? tip.tipper.name : tip.nickname}
-                              tip={tip.tip}
-                              message={tip.message}
-                              handleClick={() => { openDlg(index) }}
-                            />
-                          </div>
-                        }
-                      }
-                      )}
+                      {tips.map((tip: any, index: any) => (
+                        <>
+                          {index < tipIndex &&
+                            <div className="card-detail" key={index}>
+                              <TipCard
+                                avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
+                                username={tip.tipper ? tip.tipper.name : tip.nickname}
+                                tip={tip.tip}
+                                message={tip.message}
+                                handleClick={() => { openDlg(index) }}
+                              />
+                            </div>
+                          }
+                        </>
+                      ))}
                     </div>
                     {tips.length > 2 &&
                       <div className="arrow"

@@ -106,9 +106,9 @@ const Home = () => {
     return category
   }
 
-  useEffect(() => {
-    if (code) dispatch(authAction.inviteFriend(code, navigate))
-  }, [code, dispatch, navigate])
+  // useEffect(() => {
+  //   if (code) dispatch(authAction.inviteFriend(code, navigate))
+  // }, [code, dispatch, navigate])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -226,17 +226,6 @@ const Home = () => {
         }}
         title="Error!"
         context={errorText}
-      // buttons={[
-      //   {
-      //     text: 'Dare now',
-      //     handleClick: () => {
-      //       setOpenErrorDlg(false);
-      //       setDonutPlan(null);
-      //       dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
-      //       navigate("/");
-      //     }
-      //   }
-      // ]}
       />
       <Dialog
         display={openWelcomeDlg}
