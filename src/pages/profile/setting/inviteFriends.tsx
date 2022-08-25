@@ -1,4 +1,5 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom"
 import decode from "jwt-decode"
 import Title from "../../../components/general/title";
@@ -11,20 +12,25 @@ import {
   WhatsappIcon,
 } from "../../../assets/svg";
 import { LanguageContext } from "../../../routes/authRoute"
+import { referralAction } from "../../../redux/actions/referralActions"
 import CONSTANT from "../../../constants/constant";
 import "../../../assets/styles/profile/invitefriendsStyle.scss";
 
 const Invitefriends = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch()
   const token: any = JSON.parse(localStorage.getItem('dareme_token') || '{}')
   const decoded: any = decode(token)
+  const referral = useSelector((state: any) => state.referral.referralLink)
+  console.log(referral)
   const contexts = useContext(LanguageContext)
   const [copy, setCopy] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [location])
+    dispatch(referralAction.getReferralLinkDetail(decoded.id))
+  }, [location, dispatch])
 
   return (
     <>
@@ -34,6 +40,22 @@ const Invitefriends = () => {
       <div className="invite-friends">
         <div className="title">
           {contexts.INVITE_FRIEND_LETTER.HEADER_TITLE}
+        </div>
+        <div className="referral-info">
+          <div className="rectangle">
+            <div className="letter">You have invited</div>
+            <div className="number">
+              <NoOfPeopleIcon color="#EFA058" width={30} height={35}/>
+              <span>{referral?.invitedUsers.filter((user: any) => user.newUser).length}</span>
+            </div>
+          </div>
+          <div className="rectangle">
+            <div className="letter">You have earned</div>
+            <div className="number">
+              <CreatoCoinIcon color="#EFA058" width={30} height={35}/>
+              <span>{referral?.earned}</span>
+            </div>
+          </div>
         </div>
         <div className="content">
           <div className="icon">

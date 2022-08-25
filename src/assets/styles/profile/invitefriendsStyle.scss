@@ -12,6 +12,48 @@
     margin: 10px;
   }
 
+  .referral-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 25px 10px 25px;
+
+    .rectangle {
+      box-sizing: border-box;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 130px;
+      height: 130px;
+      background: #FFFFFF;
+      border: 3px solid #EFA058;
+      border-radius: 50%;
+
+      .letter {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #EFA058;
+      }
+
+      .number {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: #EFA058;
+      }
+    }
+  }
+
   .content {
     display: flex;
     flex-direction: row;
@@ -76,6 +118,6 @@
   .social-link {
     display: flex;
     justify-content: space-around;
-    padding: 40px 0;
+    padding: 10px 0;
   }
 }

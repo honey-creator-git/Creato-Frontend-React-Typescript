@@ -149,7 +149,10 @@ const Auth = (props: any) => {
         buttons={[
           {
             text: 'Sign In Now',
-            handleClick: () => { navigate('/auth/signin') }
+            handleClick: () => { 
+              SetOpenSignupMethodErrorDlg(false)
+              navigate('/auth/signin')
+            }
           }
         ]}
       />
