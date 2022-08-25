@@ -91,7 +91,11 @@ export const getTipData = (tipId: any) => API.get(`/api/tip/${tipId}`);
 export const updateTip = (tipId: any, data: any) => API.post(`/api/tip/${tipId}/update`, data);
 export const deleteTip = (tipId: any) => API.delete(`/api/tip/${tipId}`);
 export const getActiveTipUsers = () => API.get('/api/tip/users/tipactive')
-export const getFanwallList = () => API.get('/api/fanwall/fanwalls') 
+export const getFanwallList = () => API.get('/api/fanwall/fanwalls')
+export const getReferralLinks = () => API.get('/api/referral')
+export const changeRewardDonuts = (data: any) => API.post('/api/referral/change_reward', data)
+export const transferDonutsForReferral = (data: any) => API.post('/api/referral/send_donuts', data)
+export const getReferralLinkDetail = (userId: any) => API.get(`/api/referral/${userId}`)
 
 ///Notification API////
 export const getNotificationSetting = () => API.get('/api/notification/setting');

@@ -6,6 +6,7 @@ import fanwallReducer from "./reducers/fanwallReducer";
 import loadRedcuer from "./reducers/loadReducer";
 import notificationReducer from './reducers/notificationReducer';
 import transactionReducer from './reducers/transactionReducer';
+import referralReducer from "./reducers/referralReducer";
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     load: loadRedcuer,
     fanwall: fanwallReducer,
     notification: notificationReducer,
-    transaction: transactionReducer
+    transaction: transactionReducer,
+    referral: referralReducer
 });
 
 export default rootReducer;

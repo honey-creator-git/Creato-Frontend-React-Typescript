@@ -78,7 +78,8 @@ const Auth = (props: any) => {
       browser: browser,
       lang: lang,
       referral: referralInfo
-    });
+    })
+
     if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute))
     else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute))
   };

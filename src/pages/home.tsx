@@ -106,9 +106,9 @@ const Home = () => {
     return category
   }
 
-  // useEffect(() => {
-  //   if (code) dispatch(authAction.inviteFriend(code, navigate))
-  // }, [code, dispatch, navigate])
+  useEffect(() => {
+    if (code) dispatch(authAction.inviteFriend(code, navigate))
+  }, [code, dispatch, navigate])
 
   useEffect(() => {
     window.scrollTo(0, 0);

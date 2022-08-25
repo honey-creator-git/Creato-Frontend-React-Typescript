@@ -73,6 +73,8 @@ import UploadAdminVideo from '../pages/admin/fanwall/uploadVideo';
 
 import AdminTransactions from '../pages/admin/transactions/adminTransactions';
 import UserTransactions from '../pages/admin/transactions/userTransactions';
+import ReferralLinks from '../pages/admin/referral/referralLinks'
+import ReferralLinkDetail from '../pages/admin/referral/referralLinkDetail'
 import Error404 from '../pages/error/error404';
 
 import TipDonut from '../pages/tip/tipDonut';
@@ -167,6 +169,8 @@ const AppRoutes = () => {
       <Route path="admin/fanwalls/details/:fanwallId" element={<AuthRoute child={<FanwallDetail />} routeType="private" />} />
       <Route path="admin/fanwalls/details/post/:itemId" element={<AuthRoute child={<PostAdminFanwall />} routeType="private" />} />
       <Route path="admin/fanwalls/details/upload" element={<AuthRoute child={<UploadAdminVideo />} routeType="private" />} />
+      <Route path="admin/referral_links" element={<AuthRoute child={<ReferralLinks />} routeType="private" />} />
+      <Route path="admin/referral_links/:userId" element={<AuthRoute child={<ReferralLinkDetail />} routeType="private" />} />
 
       <Route path="dareme/fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
       <Route path="dareme/fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
