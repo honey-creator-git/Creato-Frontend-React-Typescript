@@ -103,7 +103,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/admin/referral_links" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <SettingIcon className="icon-svg" color={activePath === '/admin/referral_links' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/referral-links" ? "#EFA058" : "#A6A29F"} />
+            <SettingIcon className="icon-svg" color={location.pathname.indexOf('/admin/referral_links') !== -1 ? "#EFA058" : hoverPath === "/admin/referral_links" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>Referral link</span>
