@@ -189,8 +189,8 @@ const ProfileEdit = () => {
         <div
           className="social-link"
           onClick={() => {
-            // navigate("/profile/edit/socialaccount")
-            setOpenLinkSocial(true);
+            navigate("/myaccount/edit/connect_social")
+            // setOpenLinkSocial(true);
           }}
         >
           <ContainerBtn

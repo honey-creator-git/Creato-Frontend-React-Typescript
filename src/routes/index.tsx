@@ -124,7 +124,7 @@ const AppRoutes = () => {
 
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
-      <Route path="myaccount/edit/socialaccount" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+      <Route path="myaccount/edit/connect_social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
       <Route path="myaccount/wallet/earning" element={<AuthRoute child={<Earning />} routeType="private" />} />

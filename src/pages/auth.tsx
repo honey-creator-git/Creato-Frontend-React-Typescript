@@ -8,9 +8,9 @@ import CONSTANT from "../constants/constant";
 import Dialog from "../components/general/dialog";
 import { LanguageContext } from "../routes/authRoute";
 import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons";
+import { SET_DIALOG_STATE } from "../redux/types";
 import { authAction } from "../redux/actions/authActions";
 import "../assets/styles/signupStyle.scss";
-import { SET_DIALOG_STATE } from "../redux/types";
 const InApp = require("detect-inapp");
 
 declare global {

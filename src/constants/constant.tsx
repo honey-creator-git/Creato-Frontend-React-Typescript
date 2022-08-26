@@ -16,7 +16,7 @@ const CONSTANT = {
 
     INVITE_LINK: 'localhost:3000',
     // INVITE_LINK: 'creatogether.io',
-    // INVOTE_LINK: 'dev8.creatogether.io'
+    // INVITE_LINK: 'dev8.creatogether.io',
     DARE_TITLE_SUGGESTIONS: [ 
         "My dinner on Valentine's Day? 🌹",
         "Who to invite as guest in next video? 📽️",

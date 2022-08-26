@@ -1,24 +1,33 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { GoogleLogin } from "react-google-login"
 import {
-  FacebookIcon,
+  // FacebookIcon,
   InstagramIcon,
-  TwitterIcon,
+  // TwitterIcon,
   YoutubeIcon,
-} from "../../../assets/svg";
-import Button from "../../../components/general/button";
-import Title from "../../../components/general/title";
-import "../../../assets/styles/profile/socialAccountStyle.scss";
+} from "../../../assets/svg"
+import Button from "../../../components/general/button"
+import Title from "../../../components/general/title"
+import CONSTANT from "../../../constants/constant"
+import "../../../assets/styles/profile/socialAccountStyle.scss"
 
 const Socialaccount = () => {
-  const navigate = useNavigate();
-  const locations = useLocation();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const dispatch = useDispatch()
   const userState = useSelector((state: any) => state.auth);
   const user = userState.user;
-  const handleSave = () => {
-    navigate("/profile/edit")
+  const handleSave = () => { navigate("/myaccount/edit") }
+
+  const responseGoogleSuccess = async (response: any) => {
+    console.log(response)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location])
 
   return (
     <>
@@ -27,7 +36,7 @@ const Socialaccount = () => {
       </div>
       <div className="socialaccount-wrapper">
         <div className="socialaccounts">
-          <div className="content">
+          {/* <div className="content">
             <div className="icon">
               <FacebookIcon color="#EFA058" />
             </div>
@@ -41,7 +50,7 @@ const Socialaccount = () => {
                 handleSubmit={() => { }}
               />
             </div>
-          </div>
+          </div> */}
           <div className="content">
             <div className="icon">
               <InstagramIcon color="#EFA058" />
@@ -63,16 +72,24 @@ const Socialaccount = () => {
             </div>
             <div className="title">Youtube</div>
             <div className="btn">
-              <Button
-                fillStyle="nofile"
-                text="Connect"
-                shape="pill"
-                color="primary"
-                handleSubmit={() => { }}
+              <GoogleLogin
+                clientId={CONSTANT.GOOGLE_CLIENT_ID}
+                render={(renderProps) => (
+                  <Button
+                    fillStyle="nofile"
+                    text="Connect"
+                    shape="pill"
+                    color="primary"
+                    handleSubmit={() => { renderProps.onClick() }}
+                  />
+                )}
+                onSuccess={responseGoogleSuccess}
+                cookiePolicy={"single_host_origin"}
+                scope='https://www.googleapis.com/auth/youtube.readonly'
               />
             </div>
           </div>
-          <div className="content">
+          {/* <div className="content">
             <div className="icon">
               <TwitterIcon color="#EFA058" />
             </div>
@@ -86,7 +103,7 @@ const Socialaccount = () => {
                 handleSubmit={() => { }}
               />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="save-btn">
           <Button
