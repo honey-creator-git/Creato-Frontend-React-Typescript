@@ -10,7 +10,8 @@ import {
   NotificationwithCircleIcon,
   ProfileIcon,
   SettingIcon,
-  LanguageIcon
+  LanguageIcon,
+  ListViewIcon
 } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import { LogoutIcon } from "../constants/awesomeIcons";
@@ -55,6 +56,11 @@ const SideMenu = (props: any) => {
     else navigate(`/myaccount/wallet`);
     props.setOpen(false);
   };
+  const handleCreators = () => {
+    if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
+    else navigate(`/creators`);
+    props.setOpen(false);
+  }
   const handleShop = () => {
     if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'createDareMe', state: true } });
     else navigate(`/myaccount/shop`);
@@ -101,6 +107,12 @@ const SideMenu = (props: any) => {
             <BalanceIcon color="black" />
           </div>
           <p>{contexts.SIDE_MENU.DONUTS}</p>
+        </div>
+        <div className="list" onClick={handleCreators}>
+          <div className="icon">
+            <ListViewIcon color="black" />
+          </div>
+          <p>{'List of Creators'}</p>
         </div>
         <div className="list" onClick={handleShop}>
           <div className="icon">

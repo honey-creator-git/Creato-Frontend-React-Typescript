@@ -219,5 +219,16 @@ export const authAction = {
           navigate('/auth/signup')
         }
       }).catch(err => console.log(err))
+  },
+
+  getCreatorsByCategory: (categories: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_USERS, payload: [] })
+    api.getCreatorsByCategory({ categories: categories })
+      .then((result) => {
+        const { data } = result
+        dispatch({ type: SET_LOADING_FALSE })
+        if (data.success) dispatch({ type: SET_USERS, payload: data.creators })
+      }).catch(err => console.log(err))
   }
 }

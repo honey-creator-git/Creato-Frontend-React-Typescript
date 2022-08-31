@@ -213,9 +213,9 @@ const ProfileFanwall = () => {
                     </div>
                     <div className="tip-card">
                       {tips.map((tip: any, index: any) => (
-                        <>
+                        <div key={index}>
                           {index < tipIndex &&
-                            <div className="card-detail" key={index}>
+                            <div className="card-detail">
                               <TipCard
                                 avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
                                 username={tip.tipper ? tip.tipper.name : tip.nickname}
@@ -225,7 +225,7 @@ const ProfileFanwall = () => {
                               />
                             </div>
                           }
-                        </>
+                        </div>
                       ))}
                     </div>
                     {tips.length > 2 &&

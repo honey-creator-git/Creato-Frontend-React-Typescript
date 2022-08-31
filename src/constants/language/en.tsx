@@ -70,7 +70,8 @@ export const EN = {
         CLEAR_ALL: 'Clear all',
         PREVIEW: 'Preview',
         OR: 'Or',
-        SAVE: 'Save'
+        SAVE: 'Save',
+        NEXT: 'Next',
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: 'Period',
@@ -146,7 +147,6 @@ export const EN = {
     SIGN_UP: 'Sign Up',
     CONTINUE_AS_VISITOR: 'Continue as Visitor',
     NICKNAME: 'Nickname',
-    NEXT: 'Next',
     CONFIRM: 'Confirm',
     YES: 'Yes',
     NO: 'No',

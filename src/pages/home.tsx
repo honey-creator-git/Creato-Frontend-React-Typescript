@@ -445,9 +445,9 @@ const Home = () => {
         </div> */}
           <div className="users scroll-bar">
             {users.map((user: any, i: any) => (
-              <>
+              <div key={i}>
                 {user.avatar &&
-                  <div className="user" key={i} onClick={() => {
+                  <div className="user" onClick={() => {
                     dispatch({ type: SET_USERS, payload: [] })
                     navigate(`/${user?.personalisedUrl}`)
                   }}>
@@ -460,7 +460,7 @@ const Home = () => {
                     />
                   </div>
                 }
-              </>
+              </div>
             ))}
           </div>
         </div>

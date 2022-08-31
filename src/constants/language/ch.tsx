@@ -70,7 +70,8 @@ export const CH = {
         CLEAR_ALL: '清除所有',
         PREVIEW: '創建並預覧',
         OR: '或是',
-        SAVE: '儲存'
+        SAVE: '儲存',
+        NEXT: '下一步',
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: '期限',
@@ -146,7 +147,6 @@ export const CH = {
     SIGN_UP: '登入',
     CONTINUE_AS_VISITOR: '以訪客身分繼續',
     NICKNAME: '暱稱',
-    NEXT: '下一步',
     YES: '是',
     NO: '否',
     CREATE_LETTER: {

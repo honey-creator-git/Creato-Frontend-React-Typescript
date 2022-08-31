@@ -177,12 +177,12 @@ const ProfileHeader = (props: profileProps) => {
           <span className="name">{authuser ? authuser.name : ''}</span>
           <span className="cetegory">{categoryText}</span>
           <span className="social-icons">
-            <div className="youtube-icon">
+            {/* <div className="youtube-icon">
               <YoutubeIcon color="#E17253" />
             </div>
             <div className="instagram-icon">
               <InstagramIcon color="#E17253" />
-            </div>
+            </div> */}
             {/* {props.property === "view" && (
             <div className="facebook-icon">
               <FacebookIcon color="#E17253" />

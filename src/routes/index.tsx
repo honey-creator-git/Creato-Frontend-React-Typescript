@@ -40,6 +40,7 @@ import Language from '../pages/profile/setting/language';
 import ShopDonuts from '../pages/profile/shopDonuts';
 import Socialaccount from '../pages/profile/edit/socialAccount';
 import Categories from '../pages/profile/edit/categories';
+import Creators from '../pages/profile/creators';
 
 import DaremeDetails from '../pages/dareme/dare/daremeDetails';
 import DaremeVoters from '../pages/dareme/dare/daremeVoters';
@@ -122,6 +123,7 @@ const AppRoutes = () => {
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="/:creatorLink/fanwall" element={<AuthRoute child={<ProfileFanwall />} />} />
 
+      <Route path="creators" element={<AuthRoute child={<Creators />} routeType="private" />} />
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="myaccount/edit/connect_social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />

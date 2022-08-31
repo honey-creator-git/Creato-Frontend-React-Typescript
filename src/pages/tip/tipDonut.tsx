@@ -258,7 +258,7 @@ const TipDonut = () => {
           }
           <div className="send-btn" onClick={() => { if (check()) tipDonuts() }}>
             <ContainerBtn
-              text={user ? contexts.SEND : contexts.NEXT}
+              text={user ? contexts.GENERAL_LETTER.SEND : contexts.GENERAL_LETTER.NEXT}
               disabled={!check()}
               styleType="fill"
             />
