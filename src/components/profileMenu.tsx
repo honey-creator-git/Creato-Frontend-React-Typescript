@@ -21,14 +21,8 @@ const ProfileMenu = (props: any) => {
       fontSize: "18px",
       lineHeight: "20px",
       cursor: "pointer",
-    },
-    fundme: {
-      color: props.menu === "fundme" ? "#EFA058" : "#D6D5CC",
-      fontStyle: "normal",
-      fontWeight: "bold",
-      fontSize: "18px",
-      lineHeight: "20px",
-      cursor: "pointer",
+      display: "flex",
+      justifyContent: 'center',
     },
 
     fanWall: {

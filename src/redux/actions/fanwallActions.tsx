@@ -11,7 +11,8 @@ import {
   SET_FUNDME,
   SET_DAREME,
   SET_TIPS,
-  SET_USERS
+  SET_USERS,
+  SET_VOTER_COUNT
 } from "../types";
 import * as api from "../../api";
 
@@ -104,6 +105,7 @@ export const fanwallAction = {
           dispatch({ type: SET_FANWALLS, payload: data.fanwalls })
           dispatch({ type: SET_TIPS, payload: data.tips })
           dispatch({ type: SET_USERS, payload: [data.user] })
+          dispatch({ type: SET_VOTER_COUNT, payload: data.voterCount })
         }
       }).catch((err: any) => console.log(err));
   },
