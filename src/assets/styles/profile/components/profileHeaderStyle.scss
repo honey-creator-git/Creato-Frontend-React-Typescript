@@ -13,7 +13,6 @@
     top: 10px;
 
     .name-category {
-      margin-left: 10px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -33,6 +32,7 @@
         font-size: 12px;
         line-height: 14px;
         letter-spacing: 0.02em;
+        overflow: hidden;
       }
 
       .social-icons {
@@ -150,8 +150,8 @@
 
   .rating-container {
     position: absolute;
-    left: 94px;
-    bottom: 58px;
+    left: 130px;
+    bottom: 60px;
   }
 
 
@@ -200,6 +200,7 @@
   .profile-header {
     .avatar {
       .name-category {
+
         .social-icons {
           display: flex;
           margin-top: 2px;
@@ -217,6 +218,12 @@
           }
         }
       }
+    }
+
+    .rating-container {
+      position: absolute;
+      left: 80px;
+      bottom: 60px;
     }
   }
 }

@@ -64,7 +64,6 @@ const ProfileHeader = (props: profileProps) => {
   const [moreInfo, setMoreInfo] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false);
-  const [totalDonuts, setTotalDonuts] = useState(0);
   const wrapRef = useRef<any>(null);
   const res = useOutsideAlerter(wrapRef, moreInfo);
 
@@ -79,13 +78,6 @@ const ProfileHeader = (props: profileProps) => {
       });
       setCategoryText(texts);
     }
-    if (daremes.length !== 0) {
-      let donutSum = 0;
-      for (let i = 0; i < daremes.length; i++)
-        if (daremes[i].finished === true && daremes[i].isUser === true)
-          donutSum += daremes[i].donuts;
-      setTotalDonuts(donutSum);
-    }
   }, [authuser, contexts.CREATOR_CATEGORY_LIST, daremes]);
 
   useEffect(() => {
@@ -97,19 +89,8 @@ const ProfileHeader = (props: profileProps) => {
   }, [user, authuser]);
 
   const formalNumber = (num: Number) => {
-    if (num <= 999) return num;
-    const s_reverseNum = num.toString().split("").reverse().join("");
-    let s_buffer = "";
-    let cnt = 0;
-    for (let i = 0; i < s_reverseNum.length; i++) {
-      s_buffer += s_reverseNum[i];
-      if (cnt === 2) {
-        cnt = 0;
-        s_buffer += ',';
-      }
-      cnt++;
-    }
-    return s_buffer.split("").reverse().join("");
+    if (num <= 999) return num
+    return num.toLocaleString('en-US')
   }
 
   const roundNumber = (num: number) => {
@@ -149,7 +130,7 @@ const ProfileHeader = (props: profileProps) => {
   return (
     <div
       className="profile-header"
-      style={{ height: `${props.size === "mobile" ? "150px" : "200px"}` }}
+      style={{ height: `${props.size === "mobile" ? voterCount > 0 ? "170px" : "150px" : "200px"}` }}
     >
       <Dialog
         display={isSignIn}
@@ -175,14 +156,14 @@ const ProfileHeader = (props: profileProps) => {
         />
         <div className="name-category">
           <span className="name">{authuser ? authuser.name : ''}</span>
-          <span className="cetegory">{categoryText}</span>
+          <span className="category">{categoryText}</span>
           <span className="social-icons">
-            {/* <div className="youtube-icon">
+            <div className="youtube-icon">
               <YoutubeIcon color="#E17253" />
             </div>
             <div className="instagram-icon">
               <InstagramIcon color="#E17253" />
-            </div> */}
+            </div>
             {/* {props.property === "view" && (
             <div className="facebook-icon">
               <FacebookIcon color="#E17253" />
@@ -199,12 +180,12 @@ const ProfileHeader = (props: profileProps) => {
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
       </div>
-      {voterCount || totalDonuts ?
+      {voterCount ?
         <div className="rating-container">
           <span className="Voting-value"><b>{roundNumber(voterCount)} </b></span>
           <HotIcon className="rating-icons" color="#EFA058" width="18" />
           <span><b>SuperFans</b></span>
-          <span className="Voting-value"> <b>&nbsp; {roundNumber(totalDonuts)}</b></span>
+          <span className="Voting-value"> <b>&nbsp; {roundNumber(Number((user.wallet).toFixed(1)))}</b></span>
           <CreatoCoinIcon className="rating-icons" color="#EFA058" width="18" />
         </div> :
         <></>
