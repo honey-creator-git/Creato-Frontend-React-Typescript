@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION } from "../types";
+import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION, SET_PREVIOUS_ROUTE } from "../types";
 import * as api from '../../api'
 
 export const authAction = {
@@ -18,6 +18,7 @@ export const authAction = {
         dispatch({ type: SET_USER, payload: data.user });
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
         navigate(prevRoute === '' ? '/' : prevRoute)
       }).catch(err => console.log(err))
   },
@@ -31,6 +32,7 @@ export const authAction = {
         dispatch({ type: SET_USER, payload: data.user });
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
         navigate(prevRoute === '' ? '/' : prevRoute)
       }).catch(err => {
         const { data } = err.response
@@ -47,6 +49,7 @@ export const authAction = {
         dispatch({ type: SET_USER, payload: data.user });
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
         navigate(prevRoute === '' ? '/' : prevRoute)
       }).catch(err => console.log(err))
   },
@@ -60,6 +63,7 @@ export const authAction = {
         dispatch({ type: SET_USER, payload: data.user });
         if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
         if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
         navigate(prevRoute === '' ? '/' : prevRoute)
       }).catch(err => {
         const { data } = err.response
