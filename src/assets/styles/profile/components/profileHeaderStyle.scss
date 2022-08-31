@@ -7,8 +7,51 @@
 
   .avatar {
     position: absolute;
+    display: flex;
+    align-items: center;
     left: 24px;
     top: 10px;
+
+    .name-category {
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .name {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 18px;
+      }
+
+      .category {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.02em;
+      }
+
+      .social-icons {
+        display: flex;
+        margin-top: 15px;
+
+        .youtube-icon {
+          padding-right: 15px;
+        }
+
+        .instagram-icon {
+          padding-right: 15px;
+        }
+
+        .facebook-icon {
+          padding-right: 15px;
+        }
+      }
+    }
   }
 
   .avatar_empty {
@@ -45,7 +88,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    left: 51px;
+    left: 35px;
     bottom: 12px;
 
     .bell-icon {
@@ -53,19 +96,21 @@
     }
 
     .pen-icon {
-      padding-right: 33px;
-    }
-
-    .youtube-icon {
-      padding-right: 21px;
-    }
-
-    .instagram-icon {
-      padding-right: 21px;
-    }
-
-    .facebook-icon {
-      padding-right: 21px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: white;
+      background-color: #EFA058;
+      margin-right: 5px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      height: 30px;
     }
   }
 
@@ -146,6 +191,31 @@
 
       &:hover {
         color: grey;
+      }
+    }
+  }
+}
+
+@media (max-width: 880px) {
+  .profile-header {
+    .avatar {
+      .name-category {
+        .social-icons {
+          display: flex;
+          margin-top: 2px;
+
+          .youtube-icon {
+            padding-right: 10px;
+          }
+
+          .instagram-icon {
+            padding-right: 10px;
+          }
+
+          .facebook-icon {
+            padding-right: 10px;
+          }
+        }
       }
     }
   }

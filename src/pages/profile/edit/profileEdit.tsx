@@ -83,19 +83,6 @@ const ProfileEdit = () => {
   }, [creatoURL, dispatch]);
 
   useEffect(() => {
-    if (user) {
-      dispatch({
-        type: SET_PROFILE_DATA, payload: {
-          category: user.category,
-          avatarFile: null,
-          displayName: user.name,
-          creatoUrl: `www.creatogether.io/${user.personalisedUrl}`
-        }
-      });
-    }
-  }, [user, dispatch])
-
-  useEffect(() => {
     if (profile.category) {
       setDisplayName(profile.displayName)
       setCreatoURL(profile.creatoUrl)

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { daremeAction } from "../../redux/actions/daremeActions";
@@ -16,8 +16,22 @@ import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/profile/profileStyle.scss";
 
+const useWindowSize = () => {
+  const [size, setSize] = useState(0);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
+
 const Profile = () => {
   const { pathname } = useLocation();
+  const width = useWindowSize();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -136,7 +150,7 @@ const Profile = () => {
           <div className="profile">
             <div className="profile-header">
               <ProfileHeader
-                size="mobile"
+                size={width > 880 ? "web" : "mobile"}
                 property={isSame ? 'edit' : 'view'}
                 handleCreateDareMe={handleCreateDareMe}
               />

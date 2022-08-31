@@ -9,14 +9,15 @@ import {
   EditIcon,
   // FacebookIcon,
   HotIcon,
-  // InstagramIcon,
+  InstagramIcon,
   MoreIcon,
   NotificationOutlineIcon,
   NotificationSubscribedIcon,
   // TwitterIcon,
-  // YoutubeIcon,
+  YoutubeIcon,
   TipIcon,
-  CreatoCoinIcon
+  CreatoCoinIcon,
+  InviteIcon
 } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
 import { SET_PROFILE_DATA } from "../../redux/types";
@@ -148,7 +149,7 @@ const ProfileHeader = (props: profileProps) => {
   return (
     <div
       className="profile-header"
-      style={{ height: `${props.size === "mobile" ? "169px" : "254px"}` }}
+      style={{ height: `${props.size === "mobile" ? "150px" : "200px"}` }}
     >
       <Dialog
         display={isSignIn}
@@ -170,10 +171,30 @@ const ProfileHeader = (props: profileProps) => {
         <Avatar
           size={props.size}
           avatarStyle="horizontal"
-          category={categoryText}
-          username={authuser ? authuser.name : ''}
           avatar={authuser ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}` : ''}
         />
+        <div className="name-category">
+          <span className="name">{authuser ? authuser.name : ''}</span>
+          <span className="cetegory">{categoryText}</span>
+          <span className="social-icons">
+            <div className="youtube-icon">
+              <YoutubeIcon color="#E17253" />
+            </div>
+            <div className="instagram-icon">
+              <InstagramIcon color="#E17253" />
+            </div>
+            {/* {props.property === "view" && (
+            <div className="facebook-icon">
+              <FacebookIcon color="#E17253" />
+            </div>
+            )} */}
+            {/* {props.property === "view" && (
+              <div className="twitter-icon">
+                <TwitterIcon color="#E17253" />
+              </div>
+            )} */}
+          </span>
+        </div>
       </div>
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
@@ -194,28 +215,27 @@ const ProfileHeader = (props: profileProps) => {
             {subscribed ? <NotificationSubscribedIcon color="#EFA058" /> : <NotificationOutlineIcon color="#EFA058" />}
           </div>
         ) : (
-          <div className="pen-icon" onClick={() => {
-            if (user) navigate(`/myaccount/edit`);
-          }}>
-            <EditIcon color="#E17253" />
-          </div>
+          <>
+            <div className="pen-icon" onClick={() => {
+              if (user) {
+                dispatch({
+                  type: SET_PROFILE_DATA, payload: {
+                    category: user.category,
+                    avatarFile: null,
+                    displayName: user.name,
+                    creatoUrl: `www.creatogether.io/${user.personalisedUrl}`
+                  }
+                });
+                navigate(`/myaccount/edit`);
+              }
+            }}>
+              <EditIcon color="white" /><span>&nbsp;Edit</span>
+            </div>
+            <div className="pen-icon" onClick={() => { if (user) navigate(`/myaccount/setting/invitefriends`) }}>
+              <InviteIcon color="white" width={25} height={15}/><span>&nbsp;Invite</span>
+            </div>
+          </>
         )}
-        {/* <div className="youtube-icon">
-          <YoutubeIcon color="#E17253" />
-        </div>
-        <div className="instagram-icon">
-          <InstagramIcon color="#E17253" />
-        </div>
-        {props.property === "view" && (
-          <div className="facebook-icon">
-            <FacebookIcon color="#E17253" />
-          </div>
-        )} */}
-        {/* {props.property === "view" && (
-          <div className="twitter-icon">
-            <TwitterIcon color="#E17253" />
-          </div>
-        )} */}
       </div>
       <div className="create-btn">
         {(user && authuser && user.id === authuser._id) ?

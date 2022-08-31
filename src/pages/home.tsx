@@ -445,18 +445,22 @@ const Home = () => {
         </div> */}
           <div className="users scroll-bar">
             {users.map((user: any, i: any) => (
-              <div className="user" key={i} onClick={() => {
-                dispatch({ type: SET_USERS, payload: [] })
-                navigate(`/${user?.personalisedUrl}`)
-              }}>
-                <Avatar
-                  avatar={user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user?.avatar}` : user?.avatar}
-                  size="web"
-                  avatarStyle="vertical"
-                  category={showCategories(user?.categories)}
-                  username={user?.name}
-                />
-              </div>
+              <>
+                {user.avatar &&
+                  <div className="user" key={i} onClick={() => {
+                    dispatch({ type: SET_USERS, payload: [] })
+                    navigate(`/${user?.personalisedUrl}`)
+                  }}>
+                    <Avatar
+                      avatar={user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user?.avatar}` : user?.avatar}
+                      size="web"
+                      avatarStyle="vertical"
+                      category={showCategories(user?.categories)}
+                      username={user?.name}
+                    />
+                  </div>
+                }
+              </>
             ))}
           </div>
         </div>

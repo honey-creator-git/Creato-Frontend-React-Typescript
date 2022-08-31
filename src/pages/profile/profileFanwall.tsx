@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fanwallAction } from "../../redux/actions/fanwallActions";
@@ -16,8 +16,22 @@ import { LanguageContext } from "../../routes/authRoute";
 import visitorImg from "../../assets/img/visitor_avatar.png";
 import "../../assets/styles/profile/profileStyle.scss";
 
+const useWindowSize = () => {
+  const [size, setSize] = useState(0);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
+
 const ProfileFanwall = () => {
   const { pathname } = useLocation();
+  const width = useWindowSize();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -181,7 +195,7 @@ const ProfileFanwall = () => {
           <div className="profile">
             <div className="profile-header">
               <ProfileHeader
-                size="mobile"
+                size={width > 880 ? "web" : "mobile"}
                 property={isSame ? 'edit' : 'view'}
                 handleCreateDareMe={handleCreateDareMe}
               />
