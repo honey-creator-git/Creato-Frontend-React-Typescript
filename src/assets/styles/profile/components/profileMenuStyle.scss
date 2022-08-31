@@ -1,0 +1,35 @@
+.profile-menu-wrapper {
+    display: flex;
+    background: #EFA058;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 5px 8px;
+
+    .dareme-fanwall {
+        color: #FFFFFF;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        cursor: pointer;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        background: #EFA058;
+    }
+
+    .dareme-fanwall-active {
+        color: #EFA058;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        cursor: pointer;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        background: #FFFFFF;
+    }
+}
