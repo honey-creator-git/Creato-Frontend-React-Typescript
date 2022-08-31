@@ -97,7 +97,7 @@ const AdminTransactions = () => {
                 text="Admin"
                 fillStyle={"fill"}
                 color="primary"
-                handleSubmit={() => { navigate('/admin/admin_transactions') }}
+                handleSubmit={() => { navigate('/admin/transactions') }}
               />
             </div>
             <div className="type-button">
@@ -105,7 +105,7 @@ const AdminTransactions = () => {
                 text="User"
                 fillStyle={"outline"}
                 color="primary"
-                handleSubmit={() => { navigate('/admin/user_transactions') }}
+                handleSubmit={() => { navigate('/admin/transactions/user') }}
               />
             </div>
             <div className="type-button">

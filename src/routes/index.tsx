@@ -158,8 +158,8 @@ const AppRoutes = () => {
       <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
-      <Route path="admin/admin_transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
-      <Route path="admin/user_transactions" element={<AuthRoute child={<UserTransactions />} routeType="private" />} />
+      <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
+      <Route path="admin/transactions/user" element={<AuthRoute child={<UserTransactions />} routeType="private" />} />
       <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
       <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
       <Route path="admin/tipping/profile/:url/:id/edit" element={<AuthRoute child={<TipEditor />} routeType="private" />} />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import {
   BalanceIcon,
   CreatoCoinIcon,
@@ -77,9 +77,9 @@ const Sidebar = () => {
             <span>Donuts Shop</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/admin_transactions" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/transactions" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <BalanceIcon className="icon-svg" color={activePath === '/admin/transactions' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/transactions" ? "#EFA058" : "#A6A29F"} />
+            <BalanceIcon className="icon-svg" color={location.pathname.indexOf('/admin/transactions') !== -1 ? "#EFA058" : hoverPath === "/admin/transactions" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>Transaction - Donuts</span>
