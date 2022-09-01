@@ -13,7 +13,7 @@ import { RewardIcon, TipIcon, ExpandIcon, RetrieveIcon } from "../../assets/svg"
 import CONSTANT from "../../constants/constant";
 import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE, SET_TIPID } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
-import visitorImg from "../../assets/img/visitor_avatar.png";
+import visitorImg from "../../assets/img/visitor_avatar.png"
 import "../../assets/styles/profile/profileStyle.scss";
 
 const useWindowSize = () => {

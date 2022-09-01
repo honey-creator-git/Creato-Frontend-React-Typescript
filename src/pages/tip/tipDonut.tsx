@@ -4,7 +4,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Title from "../../components/general/title";
 import Avatar from "../../components/general/avatar";
 import Input from "../../components/general/input";
-import Dialog from "../../components/general/dialog";
+import Dialog from "../../components/general/dialog"
+import TipDialog from "../../components/profile/tipDialog"
 import ContainerBtn from "../../components/general/containerBtn";
 import Creato from "../../components/general/creato";
 import DisplayDonutsPlan from "../../components/stripe/displayDonutsPlan";
@@ -15,7 +16,8 @@ import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
 import { authAction } from "../../redux/actions/authActions";
 import CONSTANT from "../../constants/constant";
-import TippingGif from '../../assets/img/tipping.gif';
+import TippingGif from '../../assets/img/tipping.gif'
+import visitorImg from "../../assets/img/visitor_avatar.png"
 import "../../assets/styles/tip/tipDonutStyle.scss";
 
 const creatoList = [
@@ -73,7 +75,7 @@ const TipDonut = () => {
   const [openTipSuccess, setOpenTipSuccess] = useState(false);
   const [openDonutsPlan, setOpenDonutsPlan] = useState(false);
   const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
-  const [tippingGif, setTippingGif] = useState(false);
+  const [tippingGif, setTippingGif] = useState(false)
   const location = useLocation();
   const user = userState.user;
 
@@ -158,7 +160,19 @@ const TipDonut = () => {
               }
             ]}
           />
-          <Dialog
+          <TipDialog
+            display={true}
+            exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
+            wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
+            avatars={[
+              (authuser.avatar && authuser.avatar.indexOf('uploads') === -1) ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : visitorImg
+            ]}
+            title={contexts.CONGRATS}
+            context={contexts.DONUTS_HAVE_BEEN_TIPPED}
+            personalisedUrl={authuser?.personalisedUrl}
+          />
+          {/* <Dialog
             display={openTipSuccess}
             exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
@@ -171,7 +185,7 @@ const TipDonut = () => {
               }
             ]}
             social
-          />
+          /> */}
           <Dialog
             display={openTopUp}
             exit={() => { setOpenTopUp(false); }}

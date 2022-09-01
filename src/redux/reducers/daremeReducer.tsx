@@ -24,6 +24,7 @@ const INITIAL_STATE: any = {
     options: [],
     daremes: [],
     voterCount: 0,
+    earnings: 0,
     refundDonuts: null,
 }
 
@@ -102,7 +103,12 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
             return { ...state };
         case actionTypes.SET_REFUND_DONUTS:
             state.refundDonuts = payload;
-            return { ...state };
+            return { ...state }
+        case actionTypes.SET_PROFILE_EARNING:
+            return {
+                ...state,
+                earnings: payload
+            }
         default:
             return state;
     }

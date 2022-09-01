@@ -60,6 +60,7 @@ const ProfileHeader = (props: profileProps) => {
   const daremeStore = useSelector((state: any) => state.dareme);
   const daremes = daremeStore.daremes;
   const voterCount = daremeStore.voterCount;
+  const earnings = daremeStore.earnings
   const [categoryText, setCategoryText] = useState("");
   const [moreInfo, setMoreInfo] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -158,12 +159,12 @@ const ProfileHeader = (props: profileProps) => {
           <span className="name">{authuser ? authuser.name : ''}</span>
           <span className="category">{categoryText}</span>
           <span className="social-icons">
-            <div className="youtube-icon">
+            {/* <div className="youtube-icon">
               <YoutubeIcon color="#E17253" />
             </div>
             <div className="instagram-icon">
               <InstagramIcon color="#E17253" />
-            </div>
+            </div> */}
             {/* {props.property === "view" && (
             <div className="facebook-icon">
               <FacebookIcon color="#E17253" />
@@ -180,12 +181,12 @@ const ProfileHeader = (props: profileProps) => {
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
       </div>
-      {voterCount ?
+      {voterCount && earnings ?
         <div className="rating-container">
           <span className="Voting-value"><b>{roundNumber(voterCount)} </b></span>
           <HotIcon className="rating-icons" color="#EFA058" width="18" />
           <span><b>SuperFans</b></span>
-          <span className="Voting-value"> <b>&nbsp; {roundNumber(Number((user.wallet).toFixed(1)))}</b></span>
+          <span className="Voting-value"> <b>&nbsp; {roundNumber(Number((earnings).toFixed(1)))}</b></span>
           <CreatoCoinIcon className="rating-icons" color="#EFA058" width="18" />
         </div> :
         <></>

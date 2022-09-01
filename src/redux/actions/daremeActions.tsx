@@ -15,7 +15,8 @@ import {
   SET_ADMIN_OPTIONS,
   SET_VOTER_COUNT,
   SET_DIALOG_STATE,
-  SET_REFUND_DONUTS
+  SET_REFUND_DONUTS,
+  SET_PROFILE_EARNING
 } from "../types";
 import * as api from "../../api";
 
@@ -217,6 +218,7 @@ export const daremeAction = {
         dispatch({ type: SET_DAREMES, payload: data.daremes });
         dispatch({ type: SET_USERS, payload: [data.user] });
         dispatch({ type: SET_VOTER_COUNT, payload: data.voterCount })
+        dispatch({ type: SET_PROFILE_EARNING, payload: data.earnings })
         dispatch({ type: SET_LOADING_FALSE });
       }).catch((err) => console.log(err));
   },
