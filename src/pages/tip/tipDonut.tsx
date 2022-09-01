@@ -161,7 +161,7 @@ const TipDonut = () => {
             ]}
           />
           <TipDialog
-            display={true}
+            display={openTipSuccess}
             exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             avatars={[
@@ -169,23 +169,10 @@ const TipDonut = () => {
               user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : visitorImg
             ]}
             title={contexts.CONGRATS}
-            context={contexts.DONUTS_HAVE_BEEN_TIPPED}
             personalisedUrl={authuser?.personalisedUrl}
+            donuts={tip}
+            ownerName={authuser?.name}
           />
-          {/* <Dialog
-            display={openTipSuccess}
-            exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
-            wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
-            title={contexts.CONGRATS}
-            context={contexts.DONUTS_HAVE_BEEN_TIPPED}
-            buttons={[
-              {
-                text: contexts.BACK_TO_PROFILE,
-                handleClick: () => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }
-              }
-            ]}
-            social
-          /> */}
           <Dialog
             display={openTopUp}
             exit={() => { setOpenTopUp(false); }}
