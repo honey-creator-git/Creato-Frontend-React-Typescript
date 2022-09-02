@@ -370,6 +370,12 @@ export const CH = {
         NO: '重新輸入',
         BUY_DONUTS: '購買甜甜圈'
     },
+    SIGN_IN_DLG: {
+        WELCOME: '歡迎!',
+        WELCOME_LETTER: '一個屬於創作者和\n粉絲的私人空間',
+        SIGN_IN_AND_UP: '登入/ 建立新帳户:',
+        FREE_DONUTS_LETTER: 'Creato新用戶可獲10個甜甜圈\n來支持創作者！'
+    },
     DIALOG: {
         HEADER_TITLE: {
             CONFIRM: '確認:',

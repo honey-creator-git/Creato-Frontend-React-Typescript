@@ -11,6 +11,7 @@ import Title from "../../components/general/title";
 import Dialog from "../../components/general/dialog";
 import WelcomeDlg from "../../components/general/welcomeDlg";
 import CategoryBtn from "../../components/general/categoryBtn";
+import SignDialog from "../../components/general/signDialog";
 import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
 import { CreatoCoinIcon, MoreIcon, WinningIcon, RewardIcon } from "../../assets/svg";
@@ -197,21 +198,10 @@ const FanwallDetails = () => {
                 }
               ]}
             />
-            <Dialog
+            <SignDialog
               display={isSignIn}
               exit={() => { setIsSignIn(false) }}
               wrapExit={() => { setIsSignIn(false) }}
-              title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-              context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-              buttons={[
-                {
-                  text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                  handleClick: () => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/fanwall/detail/${fanwallId}` });
-                    navigate('/auth/signin');
-                  }
-                }
-              ]}
             />
             <Dialog
               display={isUnLock}

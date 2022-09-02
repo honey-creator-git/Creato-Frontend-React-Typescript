@@ -370,6 +370,12 @@ export const EN = {
         NO: 'No',
         BUY_DONUTS: 'Buy donuts'
     },
+    SIGN_IN_DLG: {
+        WELCOME: 'Welcome!',
+        WELCOME_LETTER: 'A space for you\n&\nyour favourite Creators!',
+        SIGN_IN_AND_UP: 'Sign In / Sign Up:',
+        FREE_DONUTS_LETTER: 'Sign up to enjoy 10 Donuts for free (USD$1)！'
+    },
     DIALOG: {
         HEADER_TITLE: {
             CONFIRM: 'Confirm:',

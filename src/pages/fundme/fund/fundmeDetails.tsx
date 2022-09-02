@@ -10,6 +10,7 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
 import Dialog from "../../../components/general/dialog"
 import WelcomeDlg from "../../../components/general/welcomeDlg"
+import SignDialog from "../../../components/general/signDialog";
 import Gif from "../../../components/general/gif";
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
@@ -267,21 +268,10 @@ const FundmeDetails = () => {
             daremeId={fundmeId}
             daremeTitle={fundme.title}
           />
-          <Dialog
+          <SignDialog
             display={isSignIn}
             exit={() => { setIsSignIn(false) }}
             wrapExit={() => { setIsSignIn(false) }}
-            title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-            context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-            buttons={[
-              {
-                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                handleClick: () => {
-                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/fundme/details/${fundmeId}` });
-                  navigate('/auth/signin');
-                }
-              }
-            ]}
           />
           <Dialog
             display={isTopUp}

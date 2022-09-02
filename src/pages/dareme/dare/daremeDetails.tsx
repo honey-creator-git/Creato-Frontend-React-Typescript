@@ -16,6 +16,7 @@ import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, NotificationwithCircleIcon, RewardIcon } from "../../../assets/svg";
 import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../../redux/types";
 import "../../../assets/styles/dareme/dare/daremeDetailsStyle.scss";
+import SignDialog from "../../../components/general/signDialog";
 
 const DaremeDetails = () => {
   const dispatch = useDispatch();
@@ -183,21 +184,10 @@ const DaremeDetails = () => {
             }
             context={`${dareme?.rewardText}\n\n`}
           />
-          <Dialog
+          <SignDialog
             display={isSignIn}
             exit={() => { setIsSignIn(false) }}
             wrapExit={() => { setIsSignIn(false) }}
-            title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-            context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-            buttons={[
-              {
-                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                handleClick: () => {
-                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/details/${daremeId}` });
-                  navigate('/auth/signin');
-                }
-              }
-            ]}
           />
           <Dialog
             display={isCopyLink}

@@ -11,6 +11,7 @@ import Dialog from "../components/general/dialog"
 import CategoryBtn from "../components/general/categoryBtn"
 import Avatar from "../components/general/avatar"
 import Creato from "../components/general/creato"
+import SignDialog from "../components/general/signDialog"
 import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan"
 import PaymentForm from "../components/stripe/paymentForm"
 import { fanwallAction } from "../redux/actions/fanwallActions"
@@ -173,18 +174,10 @@ const Home = () => {
         }}
         donutPlan={donutPlan}
       />
-      <Dialog
+      <SignDialog
         display={openSigninDlg}
         exit={() => { setOpenSigninDlg(false) }}
         wrapExit={() => { setOpenSigninDlg(false) }}
-        title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-        context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-        buttons={[
-          {
-            text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-            handleClick: () => { navigate('/auth/signin'); }
-          }
-        ]}
       />
       <Dialog
         display={openTopupDlg}

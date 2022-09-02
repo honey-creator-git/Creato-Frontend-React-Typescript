@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CONSTANT from "../constants/constant";
 import Dialog from "../components/general/dialog";
 import { LanguageContext } from "../routes/authRoute";
-import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons";
+import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons"
 import { SET_DIALOG_STATE } from "../redux/types";
 import { authAction } from "../redux/actions/authActions";
 import "../assets/styles/signupStyle.scss";
@@ -30,7 +30,7 @@ const Auth = (props: any) => {
   const [isHover, setIsHover] = useState(false);
   const [isHover1, setIsHover1] = useState(false);
   const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
-  const lang = useSelector((state: any) => state.auth.lang);
+  const lang = useSelector((state: any) => state.auth.lang)
   const prevRoute = loadState.prevRoute;
   const referralInfo = JSON.parse(localStorage.getItem("referral_info") || '{}')
   const contexts = useContext(LanguageContext);

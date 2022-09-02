@@ -45,7 +45,6 @@ const Profile = () => {
   const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
   const [isSame, setIsSame] = useState(false);
   const user = userStore.user;
-  const [openSignin, setOpenSignin] = useState(false);
 
   const handleCreateDareMe = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname });
@@ -130,22 +129,6 @@ const Profile = () => {
                 navigate('/')
               }
             }]}
-          />
-          <Dialog
-            display={openSignin}
-            exit={() => { setOpenSignin(false) }}
-            wrapExit={() => { setOpenSignin(false) }}
-            title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-            context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-            buttons={[
-              {
-                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                handleClick: () => {
-                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
-                  navigate('/auth/signin');
-                }
-              }
-            ]}
           />
           <div className="profile">
             <div className="profile-header">

@@ -8,7 +8,8 @@ import ProfileMenu from "../../components/profileMenu";
 import Dialog from "../../components/general/dialog";
 import AvatarLink from "../../components/dareme/avatarLink";
 import TipCard from "../../components/profile/tipCard";
-import TipMessageDlg from "../../components/profile/tipMessageDlg";
+import TipMessageDlg from "../../components/profile/tipMessageDlg"
+import SignDialog from "../../components/general/signDialog"
 import { RewardIcon, TipIcon, ExpandIcon, RetrieveIcon } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
 import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE, SET_TIPID } from "../../redux/types";
@@ -156,21 +157,10 @@ const ProfileFanwall = () => {
             }}
             tipData={selectedTipData}
           />
-          <Dialog
+          <SignDialog
             display={openSignin}
             exit={() => { setOpenSignin(false) }}
             wrapExit={() => { setOpenSignin(false) }}
-            title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-            context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-            buttons={[
-              {
-                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                handleClick: () => {
-                  dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}/fanwall` });
-                  navigate('/auth/signin');
-                }
-              }
-            ]}
           />
           <Dialog
             display={openDelPostDlg}

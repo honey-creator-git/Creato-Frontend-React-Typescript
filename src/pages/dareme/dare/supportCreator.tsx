@@ -13,6 +13,7 @@ import Gif from "../../../components/general/gif";
 import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { HotIcon, LightbulbIcon } from "../../../assets/svg";
+import SignDialog from "../../../components/general/signDialog";
 import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
 import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
 import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss';
@@ -138,21 +139,10 @@ const SupportCreator = () => {
             </div>
             {(option && dareme.owner) &&
                 <>
-                    <Dialog
+                    <SignDialog
                         display={isSignIn}
                         exit={() => { setIsSignIn(false) }}
                         wrapExit={() => { setIsSignIn(false) }}
-                        title={contexts.DIALOG.HEADER_TITLE.SIGN_IN_NOW}
-                        context={contexts.DIALOG.BODY_LETTER.SIGN_IN_NOW}
-                        buttons={[
-                            {
-                                text: contexts.DIALOG.BUTTON_LETTER.SIGN_IN,
-                                handleClick: () => {
-                                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/dareme/details/${daremeId}` });
-                                    navigate('/auth/signin');
-                                }
-                            }
-                        ]}
                     />
                     <Dialog
                         display={isTopUp}
