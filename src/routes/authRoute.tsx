@@ -1,15 +1,16 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import decode from "jwt-decode"
 import { authAction } from "../redux/actions/authActions";
 import { notificationAction } from '../redux/actions/notificationAction';
 import { EN, CH } from "../constants/language";
-import { SET_USER } from '../redux/types';
+import { SET_LANGUAGE, SET_USER } from '../redux/types';
 import Layout from '../layout/layout';
 import Layout1 from "../layout/layout1";
 import socketIOClient from "socket.io-client";
 import CONSTANT from '../constants/constant';
+import { setLanguage } from '../api';
 
 interface routeProps {
     child: any;
@@ -46,10 +47,24 @@ const AuthRoute = (props: routeProps) => {
 
     useEffect(() => {
         if (user === null) {
-            const lang: any = language === 'EN' ? EN : CH;
-            setContexts(lang);
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+            let lang: any = EN
+            let langLetter: any = 'EN'
+            if (timezone === 'Asia/Shanghai' || timezone === 'Asia/Urumqi' || timezone === 'Asia/Hong_Kong' || timezone === 'Asia/Chongqing') {
+                lang = CH
+                langLetter = 'CH'
+            }
+            dispatch({ type: SET_LANGUAGE, payload: langLetter })
+            setContexts(lang)
         }
-    }, [language]);
+    }, []);
+
+    useEffect(() => {
+        if (user === null) {
+            const lang: any = language === 'EN' ? EN : CH;
+            setContexts(lang)
+        }
+    }, [language])
 
     useEffect(() => {
         if (props.routeType === 'private') {
