@@ -72,6 +72,7 @@ export const EN = {
         OR: 'Or',
         SAVE: 'Save',
         NEXT: 'Next',
+        OFF: 'OFF'
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: 'Period',

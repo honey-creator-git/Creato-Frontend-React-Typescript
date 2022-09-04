@@ -119,7 +119,7 @@ const Header = () => {
           <div className="user-header">
             <div className="dare-creator" onClick={gotoHome}>
               <div className="header-logo"><CreatoColorIcon /></div>
-              <h2>Dare a Creator</h2>
+              <h2>Creato</h2>
             </div>
             {user ? (
               <div className="user-info">

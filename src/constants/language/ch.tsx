@@ -72,6 +72,7 @@ export const CH = {
         OR: '或是',
         SAVE: '儲存',
         NEXT: '下一步',
+        OFF: '折扣'
     },
     CREATE_FUNDME_LETTER: {
         PERIOD: '期限',

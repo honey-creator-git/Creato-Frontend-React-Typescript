@@ -108,7 +108,7 @@ const Creato = (props: any) => {
             </div>
             <div style={styles.donutCount}>{property === "welcome" ? `${donutCount}+${donutCount}` : donutCount}</div>
             {(property === 'discountedPrice' || property === 'popular' || property === "welcome") &&
-                <div style={styles.discounted}>{contexts.GENERAL_LETTER.SAVE} {property === "welcome" ? 50 : discountedPercent}%</div>
+                <div style={styles.discounted}>{property === "welcome" ? 50 : discountedPercent}% {contexts.GENERAL_LETTER.OFF}</div>
             }
             {property === 'popular' &&
                 <div style={styles.popular}>
