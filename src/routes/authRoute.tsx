@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import decode from "jwt-decode"
@@ -10,7 +10,6 @@ import Layout from '../layout/layout';
 import Layout1 from "../layout/layout1";
 import socketIOClient from "socket.io-client";
 import CONSTANT from '../constants/constant';
-import { setLanguage } from '../api';
 
 interface routeProps {
     child: any;
