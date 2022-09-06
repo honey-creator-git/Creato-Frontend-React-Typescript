@@ -345,7 +345,7 @@ const Home = () => {
             teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
             cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
             size: true,
-            lefTime: 44,
+            lefTime: -5184000,
             voters: 234,
             donuts: 23423
           }}

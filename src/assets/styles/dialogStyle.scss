@@ -44,35 +44,6 @@
             }
         }
 
-        .dlg-language {
-            width: 170px;
-            margin: 30px auto;
-            display: flex;
-            justify-content: space-between;
-
-            .active {
-                cursor: pointer;
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 18px;
-                line-height: 20px;
-                text-align: center;
-                color: #EFA058;
-            }
-
-            .inactive {
-                cursor: pointer;
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 18px;
-                line-height: 20px;
-                text-align: center;
-                color: #D6D5CC;
-            }
-        }
-
         .dialog-context {
             font-style: normal;
             font-weight: 400;

@@ -6,12 +6,12 @@ import ContainerBtn from "../components/general/containerBtn";
 import Button from "../components/general/button";
 import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
-import Dialog from "../components/general/dialog";
+import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
 import { CreatoColorIcon, CreatoCoinIcon, AddIcon, LanguageIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import CONSTANT from "../constants/constant";
-import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
+import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS, SET_LANGUAGE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
 
 
@@ -38,8 +38,7 @@ const Header = () => {
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
   const [openLangSelect, setOpenLangSelect] = useState(false);
   const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px";
-  const user = userState.user;
-  const lang = userState.lang;
+  const {user, lang} = userState
 
   const handleSubmit = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -102,18 +101,12 @@ const Header = () => {
   return (
     <div className="header-padding" style={user ? user.role === "ADMIN" ? width > 1010 ? {} : { padding: '87px' } : width > 1010 ? {} : { padding: '60px' } : {}}>
       <div className="header-wrapper">
-        <Dialog
+        <LangDialog
           display={openLangSelect}
           wrapExit={() => { setOpenLangSelect(false) }}
           exit={() => { setOpenLangSelect(false) }}
           title="語言/Language"
           langauge={lang}
-          buttons={[
-            {
-              text: contexts.GENERAL_LETTER.SAVE,
-              handleClick: () => { }
-            }
-          ]}
         />
         <div className="header">
           <div className="user-header">

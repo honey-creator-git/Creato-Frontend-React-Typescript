@@ -25,15 +25,25 @@ const DareMeCard = (props: any) => {
   const contexts = useContext(LanguageContext)
 
   const displayTime = (left: any) => {
+    let res: any
     if (left <= 0) {
-      return 'Finished'
+      const passTime = Math.abs(left)
+      res = contexts.ITEM_CARD.ENDED
+      if ((passTime / (3600 * 24 * 30)) > 0) res = res + ' ' + Math.ceil(passTime / (3600 * 24 * 30)) + '' + (Math.ceil(passTime / (3600 * 24 * 30)) === 1 ? contexts.ITEM_CARD.MONTH : contexts.ITEM_CARD.MONTHS) + contexts.ITEM_CARD.AGO
+      // else if((passTime / (3600 * 24 * 7)) > 0) res = res + ' ' + Mat
+      //   if ((passTime / 7) > 1) return Math.ceil((passTime / 7)) + (Math.ceil((passTime / 7)) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEK : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.WEEKS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+      // if (passTime > 1) return Math.ceil(passTime) + (Math.ceil(passTime) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAY : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.DAYS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+      // if ((passTime * 24) > 1) return Math.ceil(passTime * 24) + (Math.ceil(passTime * 24) === 1 ? contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOUR : contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.HOURS) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+      // if ((passTime * 24 * 60) > 1) return Math.ceil(passTime * 24 * 60) + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MINS + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+      // if (passTime >= 0) return "1" + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.MIN + contexts.GENERAL_COMPONENT.MOBILE_VIDEO_CARD.AGO;
+      
     } else {
       let hours: any = Math.floor(left / 3600)
       let mins = Math.floor((left % 3600) / 60)
       let secs = Math.floor((left % 3600) % 60)
-      let res: any = (hours < 10 ? `0${hours}` : hours) + ' : ' + (mins < 10 ? `0${mins}` : mins) + ' : ' + (secs < 10 ? `0${secs}` : secs)
-      return res
+      res = (hours < 10 ? `0${hours}` : hours) + ' : ' + (mins < 10 ? `0${mins}` : mins) + ' : ' + (secs < 10 ? `0${secs}` : secs)
     }
+    return res
   }
 
   useEffect(() => {
@@ -57,7 +67,7 @@ const DareMeCard = (props: any) => {
             avatar={owner.avatar}
           />
         </div>
-        <div className="ownername-lefttime-tip" style={owner.tip ? { width: '220px' } : { width: '200px' }}>
+        <div className="ownername-lefttime-tip" style={owner.tip ? { width: '225px' } : { width: '205px' }}>
           <div className="ownername-lefttime">
             <div className="owner-name">
               <span>{owner.name}</span>

@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Button from "./button";
 import Avatar from "./avatar";
 import {
@@ -10,14 +7,10 @@ import {
     WhatsappIcon,
 } from "../../assets/svg";
 import CONSTANT from "../../constants/constant";
-import { SET_LANGUAGE } from "../../redux/types";
 import "../../assets/styles/dialogStyle.scss";
 
 const Dialog = (props: any) => {
-    const { display, title, exit, context, buttons, icon, social, avatars, daremeId, ownerName, wrapExit, sizeType, subcontext, shareType, daremeTitle, isFundme, subTitle, langauge } = props;
-    const [lang, setLang] = useState(langauge);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { display, title, exit, context, buttons, icon, social, avatars, daremeId, ownerName, wrapExit, sizeType, subcontext, shareType, daremeTitle, isFundme, subTitle } = props;
 
     return (
         <div className="dialog-wrapper" style={display ? { visibility: 'visible', opacity: 1 } : {}} onClick={wrapExit}>
@@ -33,30 +26,6 @@ const Dialog = (props: any) => {
                                 <CloseIcon color="black" />
                             </div>
                         }
-                    </div>
-                }
-                {langauge &&
-                    <div className="dlg-language">
-                        {lang === "CH" ?
-                            <>
-                                <div className="active">
-                                    繁體中文
-                                </div>
-                                <div className="inactive" onClick={() => { setLang('EN') }}>
-                                    English
-                                </div>
-                            </>
-                            :
-                            <>
-                                <div className="inactive" onClick={() => { setLang('CH') }}>
-                                    繁體中文
-                                </div>
-                                <div className="active">
-                                    English
-                                </div>
-                            </>
-                        }
-
                     </div>
                 }
                 {icon && icon.pos === 1 && <div className="big-icon">{icon.icon}</div>}
@@ -125,11 +94,7 @@ const Dialog = (props: any) => {
                                         fillStyle={index === 0 ? buttons.length === 1 ? "fill" : "outline" : "fill"}
                                         width={buttons.length === 2 ? "75px" : "190px"}
                                         text={button.text}
-                                        handleSubmit={langauge ? () => {
-                                            dispatch({ type: SET_LANGUAGE, payload: lang });
-                                            exit();
-                                            navigate("/");
-                                        } : button.handleClick}
+                                        handleSubmit={button.handleClick}
                                     />
                                 </div>
                             ))
