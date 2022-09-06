@@ -23,6 +23,7 @@ import { paymentAction } from "../redux/actions/paymentActions"
 import { authAction } from "../redux/actions/authActions"
 import WelcomeDlg from "../components/general/welcomeDlg"
 import "../assets/styles/homeStyle.scss"
+import DareMeCard from "../components/dareme/dareMeCard"
 
 const creatoList = [
   {
@@ -315,6 +316,34 @@ const Home = () => {
         <div className="banner">
           <SecondBanner />
         </div>
+      </div>
+      <div style={{ display: 'flex'}}>
+        <DareMeCard 
+          owner={{
+            name: 'Tomson',
+            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            tip: false
+          }}
+          item={{
+            title: '想看我在台灣拍什麼影片呢？😜',
+            lefTime: 44,
+            voters: 234,
+            donuts: 23423
+          }}
+        />
+        <DareMeCard 
+          owner={{
+            name: 'Tomson',
+            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            tip: true
+          }}
+          item={{
+            title: '想看我在台灣拍什麼影片呢？😜',
+            lefTime: 44,
+            voters: 234,
+            donuts: 23423
+          }}
+        />
       </div>
       {(daremes.length > 0) &&
         <div className="section">
