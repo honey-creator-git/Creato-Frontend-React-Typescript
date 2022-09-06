@@ -326,6 +326,9 @@ const Home = () => {
           }}
           item={{
             title: '想看我在台灣拍什麼影片呢？😜',
+            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660709928557.mp4',
+            cover: 'http://localhost:5000/uploads/cover/Cover-1660709854104.png',
+            size: true,
             lefTime: 44,
             voters: 234,
             donuts: 23423
@@ -339,6 +342,9 @@ const Home = () => {
           }}
           item={{
             title: '想看我在台灣拍什麼影片呢？😜',
+            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
+            cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
+            size: true,
             lefTime: 44,
             voters: 234,
             donuts: 23423

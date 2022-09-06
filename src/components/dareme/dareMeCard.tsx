@@ -1,13 +1,28 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
+import ReactPlayer from "react-player"
 import Avatar from "../general/avatar"
 import Button from "../general/button"
-import { TipIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, Dare1Icon } from "../../assets/svg"
+import {
+  TipIcon,
+  ClockIcon,
+  CreatoCoinIcon,
+  NoOfPeopleIcon,
+  Dare1Icon,
+  MuteVolumeIcon,
+  UnMuteVolumeIcon,
+  PlayIcon
+} from "../../assets/svg"
+import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/dareme/components/dareMeCardStyle.scss"
 
 const DareMeCard = (props: any) => {
   const { owner, item } = props
   const [time, setTime] = useState(item.lefTime)
-  let timerId: any = null
+  const [timerId, setTimerId] = useState<any>(null)
+  const playerRef = useRef<ReactPlayer | null>(null)
+  const [play, setPlay] = useState(false)
+  const [muted, setMouted] = useState(true)
+  const contexts = useContext(LanguageContext)
 
   const displayTime = (left: any) => {
     if (left <= 0) {
@@ -24,7 +39,8 @@ const DareMeCard = (props: any) => {
   useEffect(() => {
     if (item.lefTime > 0) {
       if (timerId) clearInterval(timerId)
-      timerId = setInterval(() => { setTime((time: any) => time - 1) }, 1000)
+      let id = setInterval(() => { setTime((time: any) => time - 1) }, 1000)
+      setTimerId(id)
     }
   }, [item.lefTime])
 
@@ -53,8 +69,47 @@ const DareMeCard = (props: any) => {
           {owner.tip ? <div className="tip-button"><TipIcon color="white" /></div> : <></>}
         </div>
       </div>
-      <div className="teaser-video">
-
+      <div className="teaser-video" onClick={() => {
+        if (play) {
+          setPlay(false)
+          setMouted(true)
+          playerRef.current?.seekTo(0)
+        }
+      }}>
+        {(item.cover && !play) &&
+          <div className="cover-image">
+            <img
+              src={item.cover}
+              alt="cover Image"
+              style={item.size ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
+          </div>
+        }
+        {play &&
+          <>
+            <ReactPlayer
+              className={item.size ? "react-player-height" : "react-player-width"}
+              ref={playerRef}
+              url={item.teaser}
+              muted={muted}
+              playing={play}
+              playsinline={true}
+              onProgress={(progress) => {
+                if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
+              }}
+            />
+            <div className="mute-icon" onClick={(e) => {
+              e.stopPropagation()
+              setMouted(!muted)
+            }}>
+              {muted === true ? <MuteVolumeIcon color="white" /> : <UnMuteVolumeIcon color="white" />}
+            </div>
+          </>
+        }
+        {!play &&
+          <div className="play-icon" onClick={() => { setPlay(true) }}>
+            <PlayIcon color="white" />
+          </div>
+        }
       </div>
       <div className="item-detail">
         <div className="item-title">
@@ -73,7 +128,7 @@ const DareMeCard = (props: any) => {
           color="primary"
           fillStyle="outline"
           shape="rounded"
-          text="Vote Now"
+          text={time > 0 ? contexts.ITEM_CARD.VOTE_NOW : contexts.ITEM_CARD.SEE_MORE}
           width={190}
           icon={[<Dare1Icon color="#EFA058" />, <Dare1Icon color="white" />, <Dare1Icon color="white" />]}
           handleSubmit={() => { alert("ABC") }}
