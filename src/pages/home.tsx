@@ -23,7 +23,7 @@ import { paymentAction } from "../redux/actions/paymentActions"
 import { authAction } from "../redux/actions/authActions"
 import WelcomeDlg from "../components/general/welcomeDlg"
 import "../assets/styles/homeStyle.scss"
-import DareMeCard from "../components/dareme/dareMeCard"
+import ItemCard from "../components/dareme/itemCard"
 
 const creatoList = [
   {
@@ -318,36 +318,78 @@ const Home = () => {
         </div>
       </div>
       <div style={{ display: 'flex'}}>
-        <DareMeCard 
+        <ItemCard 
           owner={{
             name: 'Tomson',
             avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            profile: '',
             tip: false
           }}
           item={{
-            title: '想看我在台灣拍什麼影片呢？😜',
+            id: '',
+            title: '想看我在台灣拍什麼影片呢？😜 拍什麼影片呢 拍什麼影片呢',
             teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660709928557.mp4',
             cover: 'http://localhost:5000/uploads/cover/Cover-1660709854104.png',
             size: true,
-            lefTime: 44,
+            lefTime: 434,
             voters: 234,
-            donuts: 23423
+            donuts: 23423,
           }}
         />
-        <DareMeCard 
+        <ItemCard 
           owner={{
             name: 'Tomson',
             avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            profile: '',
             tip: true
           }}
           item={{
+            id: '',
             title: '想看我在台灣拍什麼影片呢？😜',
             teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
             cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
             size: true,
-            lefTime: -5184000,
+            lefTime: -434530,
             voters: 234,
-            donuts: 23423
+            donuts: 23423,
+          }}
+        />
+        <ItemCard 
+          owner={{
+            name: 'Tomson',
+            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            profile: '',
+            tip: false
+          }}
+          item={{
+            id: '',
+            title: '想看我在台灣拍什麼影片呢？😜 拍什麼影片呢 拍什麼影片呢',
+            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660709928557.mp4',
+            cover: 'http://localhost:5000/uploads/cover/Cover-1660709854104.png',
+            size: true,
+            lefTime: 411111,
+            voters: 234,
+            donuts: 13423,
+            goal: 23456
+          }}
+        />
+        <ItemCard 
+          owner={{
+            name: 'Tomson',
+            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
+            profile: '',
+            tip: true
+          }}
+          item={{
+            id: '',
+            title: '想看我在台灣拍什麼影片呢？😜',
+            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
+            cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
+            size: true,
+            lefTime: -400,
+            voters: 234,
+            donuts: 23423,
+            goal: 23456
           }}
         />
       </div>

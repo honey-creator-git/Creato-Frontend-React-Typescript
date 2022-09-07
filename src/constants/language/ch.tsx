@@ -77,6 +77,7 @@ export const CH = {
   ITEM_CARD: {
     DARE: '挑戰',
     VOTE_NOW: 'Vote Now',
+    FUND_NOW: 'Fund Now',
     SEE_MORE: '查看',
     SEE_RESULTS: '查看',
     VIEW_POST: '查看帖子',

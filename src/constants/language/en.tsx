@@ -77,6 +77,7 @@ export const EN = {
   ITEM_CARD: {
     DARE: 'Dare',
     VOTE_NOW: 'Vote Now',
+    FUND_NOW: 'Fund Now',
     SEE_MORE: 'See More',
     SEE_RESULTS: 'See Results',
     VIEW_POST: 'View Post',
