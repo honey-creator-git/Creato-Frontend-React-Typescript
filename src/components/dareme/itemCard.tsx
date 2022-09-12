@@ -55,6 +55,16 @@ const ItemCard = (props: any) => {
     return width
   }
 
+  const navigation = (time: any, goal: any) => {
+    if (time > 0) {
+      if (goal) navigate(`/fundme/details/${item.id}`)
+      else navigate(`/dareme/details/${item.id}`)
+    } else {
+      if (goal) navigate(`/fundme/result/${item.id}`)
+      else navigate(`/dareme/result/${item.id}`)
+    }
+  }
+
   useEffect(() => {
     if (timerId) clearInterval(timerId)
     let id = setInterval(() => { setTime((time: any) => time - 1) }, 1000)
@@ -162,9 +172,7 @@ const ItemCard = (props: any) => {
             [<Dare2Icon color="#EFA058" />, <Dare2Icon color="white" />, <Dare2Icon color="white" />]
             :
             [<Dare1Icon color="#EFA058" />, <Dare1Icon color="white" />, <Dare1Icon color="white" />]}
-          handleSubmit={() => {
-
-          }}
+          handleSubmit={() => { navigation(time, item.goal) }}
         />
       </div>
     </div>

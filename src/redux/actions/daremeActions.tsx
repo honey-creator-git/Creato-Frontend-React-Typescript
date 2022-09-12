@@ -267,7 +267,7 @@ export const daremeAction = {
   },
 
   acceptDareOption: (daremeId: any, optionId: any) => async (dispatch: Dispatch<any>) => {
-    api.acceptDareOption({ optionId: optionId })
+    api.acceptDareOption({ optionId: optionId, daremeId: daremeId })
       .then((result: any) => {
         const { data } = result;
         if (data.success) {
