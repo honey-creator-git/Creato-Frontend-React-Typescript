@@ -15,11 +15,12 @@ import {
   Dare2Icon
 } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/itemCardStyle.scss"
 
 const ItemCard = (props: any) => {
   const { owner, item } = props
-  const [time, setTime] = useState(item.lefTime)
+  const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
   const playerRef = useRef<ReactPlayer | null>(null)
   const [play, setPlay] = useState(false)
@@ -58,7 +59,7 @@ const ItemCard = (props: any) => {
     if (timerId) clearInterval(timerId)
     let id = setInterval(() => { setTime((time: any) => time - 1) }, 1000)
     setTimerId(id)
-  }, [item.lefTime])
+  }, [item.leftTime])
 
   return (
     <div className="item-card-wrapper">
@@ -66,7 +67,7 @@ const ItemCard = (props: any) => {
         <div className="owner-avatar">
           <Avatar
             size="mobile"
-            avatar={owner.avatar}
+            avatar={owner.avatar.indexOf('uploads') === -1 ? owner.avatar : `${CONSTANT.SERVER_URL}/${owner.avatar}`}
             handleClick={() => { navigate(`/${owner.profile}`) }}
           />
         </div>
@@ -79,7 +80,7 @@ const ItemCard = (props: any) => {
               <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(time)}</span>
             </div>
           </div>
-          {owner.tip ? <div className="tip-button"><TipIcon color="white" /></div> : <></>}
+          {owner.tip ? <div className="tip-button" onClick={() => { navigate(`/${owner.profile}/tip`) }}><TipIcon color="white" /></div> : <></>}
         </div>
       </div>
       <div className="teaser-video" onClick={() => {

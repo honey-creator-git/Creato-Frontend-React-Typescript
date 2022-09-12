@@ -12,18 +12,17 @@ import CategoryBtn from "../components/general/categoryBtn"
 import Avatar from "../components/general/avatar"
 import Creato from "../components/general/creato"
 import SignDialog from "../components/general/signDialog"
+import ItemCard from "../components/dareme/itemCard"
 import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan"
 import PaymentForm from "../components/stripe/paymentForm"
 import { fanwallAction } from "../redux/actions/fanwallActions"
 import CONSTANT from "../constants/constant"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE, SET_LOADING_TRUE, SET_USERS } from "../redux/types"
 import { RewardIcon } from "../assets/svg"
-import { fundmeAction } from "../redux/actions/fundmeActions"
 import { paymentAction } from "../redux/actions/paymentActions"
 import { authAction } from "../redux/actions/authActions"
 import WelcomeDlg from "../components/general/welcomeDlg"
 import "../assets/styles/homeStyle.scss"
-import ItemCard from "../components/dareme/itemCard"
 
 const creatoList = [
   {
@@ -317,113 +316,30 @@ const Home = () => {
           <SecondBanner />
         </div>
       </div>
-      <div style={{ display: 'flex'}}>
-        <ItemCard 
-          owner={{
-            name: 'Tomson',
-            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
-            profile: '',
-            tip: false
-          }}
-          item={{
-            id: '',
-            title: '想看我在台灣拍什麼影片呢？😜 拍什麼影片呢 拍什麼影片呢',
-            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660709928557.mp4',
-            cover: 'http://localhost:5000/uploads/cover/Cover-1660709854104.png',
-            size: true,
-            lefTime: 434,
-            voters: 234,
-            donuts: 23423,
-          }}
-        />
-        <ItemCard 
-          owner={{
-            name: 'Tomson',
-            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
-            profile: '',
-            tip: true
-          }}
-          item={{
-            id: '',
-            title: '想看我在台灣拍什麼影片呢？😜',
-            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
-            cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
-            size: true,
-            lefTime: -434530,
-            voters: 234,
-            donuts: 23423,
-          }}
-        />
-        <ItemCard 
-          owner={{
-            name: 'Tomson',
-            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
-            profile: '',
-            tip: false
-          }}
-          item={{
-            id: '',
-            title: '想看我在台灣拍什麼影片呢？😜 拍什麼影片呢 拍什麼影片呢',
-            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660709928557.mp4',
-            cover: 'http://localhost:5000/uploads/cover/Cover-1660709854104.png',
-            size: true,
-            lefTime: 411111,
-            voters: 234,
-            donuts: 13423,
-            goal: 23456
-          }}
-        />
-        <ItemCard 
-          owner={{
-            name: 'Tomson',
-            avatar: 'http://localhost:5000/uploads/avatar/Avatar-1661298209962.png',
-            profile: '',
-            tip: true
-          }}
-          item={{
-            id: '',
-            title: '想看我在台灣拍什麼影片呢？😜',
-            teaser: 'http://localhost:5000/uploads/teaser/Teaser-1660703872318.mp4',
-            cover: 'http://localhost:5000/uploads/cover/Cover-1660703872428.png',
-            size: true,
-            lefTime: -400,
-            voters: 234,
-            donuts: 23423,
-            goal: 23456
-          }}
-        />
-      </div>
       {(daremes.length > 0) &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.DAREME_WITH_MOST_DONUTS}</div>
           <div className="daremes scroll-bar">
             {daremes.map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <VideoCardMobile
-                  url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                  goal={dareme.goal ? dareme.goal : null}
-                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                  title={dareme.title}
-                  donuts={dareme.donuts}
-                  time={dareme.time}
-                  finished={dareme.finished}
-                  sizeType={dareme.sizeType}
-                  coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                  handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type === 'dareme')
-                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type === 'fundme')
-                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
+                <ItemCard
+                  owner={{
+                    name: dareme.owner.name,
+                    avatar: dareme.owner.avatar,
+                    profile: dareme.owner.personalisedUrl,
+                    tip: dareme.owner.tipFunction
                   }}
-                />
-                <AvatarLink
-                  username={dareme.owner.name}
-                  avatar={dareme.owner.avatar}
-                  ownerId={dareme.owner._id}
-                  isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                  daremeId={dareme.id}
+                  item={{
+                    id: dareme.id,
+                    title: dareme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    size: dareme.sizeType,
+                    leftTime: dareme.time,
+                    voters: dareme.voters,
+                    donuts: dareme.donuts,
+                    goal: dareme.goal
+                  }}
                 />
               </div>
             ))
@@ -457,31 +373,24 @@ const Home = () => {
               return first.donuts < second.donuts ? 1 : first.donuts > second.donuts ? -1 : first.date > second.date ? 1 : first.date < second.date ? -1 : 0;
             }).map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <VideoCardMobile
-                  url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                  title={dareme.title}
-                  goal={dareme.goal ? dareme.goal : null}
-                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                  donuts={dareme.donuts}
-                  time={dareme.time}
-                  finished={dareme.finished}
-                  sizeType={dareme.sizeType}
-                  coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                  handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type === 'dareme')
-                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type === 'fundme')
-                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
+                <ItemCard
+                  owner={{
+                    name: dareme.owner.name,
+                    avatar: dareme.owner.avatar,
+                    profile: dareme.owner.personalisedUrl,
+                    tip: dareme.owner.tipFunction
                   }}
-                />
-                <AvatarLink
-                  username={dareme.owner.name}
-                  avatar={dareme.owner.avatar}
-                  ownerId={dareme.owner._id}
-                  isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                  daremeId={dareme.id}
+                  item={{
+                    id: dareme.id,
+                    title: dareme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    size: dareme.sizeType,
+                    leftTime: dareme.time,
+                    voters: dareme.voters,
+                    donuts: dareme.donuts,
+                    goal: dareme.goal
+                  }}
                 />
               </div>
             ))
@@ -550,31 +459,24 @@ const Home = () => {
               return first.date < second.date ? 1 : first.date > second.date ? -1 : 0;
             }).map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <VideoCardMobile
-                  url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                  title={dareme.title}
-                  goal={dareme.goal ? dareme.goal : null}
-                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                  donuts={dareme.donuts}
-                  time={dareme.time}
-                  finished={dareme.finished}
-                  sizeType={dareme.sizeType}
-                  coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                  handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type === 'dareme')
-                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type === 'fundme')
-                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
+                <ItemCard
+                  owner={{
+                    name: dareme.owner.name,
+                    avatar: dareme.owner.avatar,
+                    profile: dareme.owner.personalisedUrl,
+                    tip: dareme.owner.tipFunction
                   }}
-                />
-                <AvatarLink
-                  username={dareme.owner.name}
-                  avatar={dareme.owner.avatar}
-                  ownerId={dareme.owner._id}
-                  isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                  daremeId={dareme.id}
+                  item={{
+                    id: dareme.id,
+                    title: dareme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    size: dareme.sizeType,
+                    leftTime: dareme.time,
+                    voters: dareme.voters,
+                    donuts: dareme.donuts,
+                    goal: dareme.goal
+                  }}
                 />
               </div>
             ))
@@ -604,31 +506,24 @@ const Home = () => {
               return firstDiff > secondDiff ? 1 : firstDiff < secondDiff ? -1 : 0;
             }).map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <VideoCardMobile
-                  url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                  title={dareme.title}
-                  goal={dareme.goal ? dareme.goal : null}
-                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                  donuts={dareme.donuts}
-                  time={dareme.time}
-                  finished={dareme.finished}
-                  sizeType={dareme.sizeType}
-                  coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                  handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type === 'dareme')
-                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type === 'fundme')
-                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
+                <ItemCard
+                  owner={{
+                    name: dareme.owner.name,
+                    avatar: dareme.owner.avatar,
+                    profile: dareme.owner.personalisedUrl,
+                    tip: dareme.owner.tipFunction
                   }}
-                />
-                <AvatarLink
-                  username={dareme.owner.name}
-                  avatar={dareme.owner.avatar}
-                  ownerId={dareme.owner._id}
-                  isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                  daremeId={dareme.id}
+                  item={{
+                    id: dareme.id,
+                    title: dareme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    size: dareme.sizeType,
+                    leftTime: dareme.time,
+                    voters: dareme.voters,
+                    donuts: dareme.donuts,
+                    goal: dareme.goal
+                  }}
                 />
               </div>
             ))
@@ -653,31 +548,24 @@ const Home = () => {
               return firstDiff < secondDiff ? 1 : firstDiff > secondDiff ? -1 : 0;
             }).map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <VideoCardMobile
-                  url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                  title={dareme.title}
-                  goal={dareme.goal ? dareme.goal : null}
-                  category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                  donuts={dareme.donuts}
-                  time={dareme.time}
-                  sizeType={dareme.sizeType}
-                  coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                  finished={dareme.finished}
-                  handleSubmit={() => {
-                    dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' });
-                    if (dareme.type === 'dareme')
-                      dispatch(daremeAction.checkDetailsAndResults(dareme.id, navigate));
-                    else if (dareme.type === 'fundme')
-                      dispatch(fundmeAction.checkDetailsAndResults(dareme.id, navigate));
+                <ItemCard
+                  owner={{
+                    name: dareme.owner.name,
+                    avatar: dareme.owner.avatar,
+                    profile: dareme.owner.personalisedUrl,
+                    tip: dareme.owner.tipFunction
                   }}
-                />
-                <AvatarLink
-                  username={dareme.owner.name}
-                  avatar={dareme.owner.avatar}
-                  ownerId={dareme.owner._id}
-                  isFundme={dareme.type === 'fundme' ? true : false}
-                  handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                  daremeId={dareme.id}
+                  item={{
+                    id: dareme.id,
+                    title: dareme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    size: dareme.sizeType,
+                    leftTime: dareme.time,
+                    voters: dareme.voters,
+                    donuts: dareme.donuts,
+                    goal: dareme.goal
+                  }}
                 />
               </div>
             ))
