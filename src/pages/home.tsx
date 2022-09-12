@@ -330,13 +330,13 @@ const Home = () => {
                     tip: dareme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme.id,
+                    id: dareme._id,
                     title: dareme.title,
                     teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
                     cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
-                    voters: dareme.voters,
+                    voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}
@@ -381,18 +381,18 @@ const Home = () => {
                     tip: dareme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme.id,
+                    id: dareme._id,
                     title: dareme.title,
                     teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
                     cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
-                    voters: dareme.voters,
+                    voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}
                   handleSubmit={() => { 
-                    
+
                   }}
                 />
               </div>
@@ -470,13 +470,13 @@ const Home = () => {
                     tip: dareme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme.id,
+                    id: dareme._id,
                     title: dareme.title,
                     teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
                     cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
-                    voters: dareme.voters,
+                    voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}
@@ -517,13 +517,13 @@ const Home = () => {
                     tip: dareme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme.id,
+                    id: dareme._id,
                     title: dareme.title,
                     teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
                     cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
-                    voters: dareme.voters,
+                    voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}
@@ -559,13 +559,13 @@ const Home = () => {
                     tip: dareme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme.id,
+                    id: dareme._id,
                     title: dareme.title,
                     teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
                     cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
-                    voters: dareme.voters,
+                    voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}

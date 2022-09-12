@@ -26,10 +26,10 @@ const FundmeDetails = () => {
   const navigate = useNavigate();
   const { fundmeId } = useParams();
   const contexts = useContext(LanguageContext);
-  const fundmeState = useSelector((state: any) => state.fundme);
-  const loadState = useSelector((state: any) => state.load);
-  const userState = useSelector((state: any) => state.auth);
-  const dlgState = useSelector((state: any) => state.load.dlgState);
+  const fundmeState = useSelector((state: any) => state.fundme)
+  const loadState = useSelector((state: any) => state.load)
+  const userState = useSelector((state: any) => state.auth)
+  const dlgState = useSelector((state: any) => state.load.dlgState)
   const fundme = fundmeState.fundme;
   const [isSignIn, setIsSignIn] = useState(false);
   const [isCopyLink, setIsCopyLink] = useState(false);
