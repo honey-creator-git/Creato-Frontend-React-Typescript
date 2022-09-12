@@ -1,33 +1,32 @@
-import { useState, useEffect, useContext, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import { daremeAction } from "../../redux/actions/daremeActions";
-import { fundmeAction } from "../../redux/actions/fundmeActions";
-import VideoCardMobile from "../../components/dareme/videoCardMobile";
-import ProfileHeader from "../../components/profile/profileHeader";
-import ProfileMenu from "../../components/profileMenu";
-import ContainerBtn from "../../components/general/containerBtn";
-import Dialog from "../../components/general/dialog";
-import WelcomeDlg from "../../components/general/welcomeDlg";
-import AvatarLink from "../../components/dareme/avatarLink";
-import { Dare2Icon, HotIcon, AddIcon, RewardIcon } from "../../assets/svg";
-import CONSTANT from "../../constants/constant";
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types";
-import { LanguageContext } from "../../routes/authRoute";
-import "../../assets/styles/profile/profileStyle.scss";
+import { useState, useEffect, useContext, useLayoutEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useLocation } from "react-router-dom"
+import { daremeAction } from "../../redux/actions/daremeActions"
+import { fundmeAction } from "../../redux/actions/fundmeActions"
+import VideoCardMobile from "../../components/dareme/videoCardMobile"
+import ProfileHeader from "../../components/profile/profileHeader"
+import ProfileMenu from "../../components/profileMenu"
+import ContainerBtn from "../../components/general/containerBtn"
+import Dialog from "../../components/general/dialog"
+import ItemCard from "../../components/dareme/itemCard"
+import WelcomeDlg from "../../components/general/welcomeDlg"
+import AvatarLink from "../../components/dareme/avatarLink"
+import { Dare2Icon, HotIcon, AddIcon, RewardIcon } from "../../assets/svg"
+import CONSTANT from "../../constants/constant"
+import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
+import { LanguageContext } from "../../routes/authRoute"
+import "../../assets/styles/profile/profileStyle.scss"
 
 const useWindowSize = () => {
-  const [size, setSize] = useState(0);
+  const [size, setSize] = useState(0)
   useLayoutEffect(() => {
-    function updateSize() {
-      setSize(window.innerWidth);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-};
+    const updateSize = () => { setSize(window.innerWidth) }
+    window.addEventListener("resize", updateSize)
+    updateSize()
+    return () => window.removeEventListener("resize", updateSize)
+  }, [])
+  return size
+}
 
 const Profile = () => {
   const { pathname } = useLocation();
@@ -157,29 +156,27 @@ const Profile = () => {
                       daremes.filter((dareme: any) => dareme.isUser === true)
                         .map((dareme: any, index: any) => (
                           <div className="profile-dareme" key={index}>
-                            <VideoCardMobile
-                              donuts={dareme.donuts}
-                              goal={dareme.goal ? dareme.goal : null}
-                              reward={dareme.reward ? dareme.reward : null}
-                              url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                              time={dareme.time}
-                              title={dareme.title}
-                              category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                              finished={dareme.finished}
-                              sizeType={dareme.sizeType}
-                              coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                              handleSubmit={() => {
-                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
-                                if (dareme.goal) dispatch(fundmeAction.checkDetailsAndResults(dareme._id, navigate));
-                                else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
+                            <ItemCard
+                              owner={{
+                                name: dareme.owner.name,
+                                avatar: dareme.owner.avatar,
+                                profile: dareme.owner.personalisedUrl,
+                                tip: dareme.owner.tipFunction
                               }}
-                            />
-                            <AvatarLink
-                              username={dareme.owner.name}
-                              avatar={dareme.owner.avatar}
-                              handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                              ownerId={dareme.owner._id}
-                              daremeId={dareme._id}
+                              item={{
+                                id: dareme.id,
+                                title: dareme.title,
+                                teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                                cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                                size: dareme.sizeType,
+                                leftTime: dareme.time,
+                                voters: dareme.voters,
+                                donuts: dareme.donuts,
+                                goal: dareme.goal
+                              }}
+                              handleSubmit={() => {
+                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
+                              }}
                             />
                           </div>
                         ))
@@ -210,29 +207,27 @@ const Profile = () => {
                       daremes.filter((dareme: any) => dareme.isUser === false)
                         .map((dareme: any, index: any) => (
                           <div className="profile-dareme" key={index}>
-                            <VideoCardMobile
-                              donuts={dareme.donuts}
-                              goal={dareme.goal ? dareme.goal : null}
-                              reward={dareme.reward ? dareme.reward : null}
-                              url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
-                              time={dareme.time}
-                              title={dareme.title}
-                              category={dareme.goal ? contexts.FUNDME_CATEGORY_LIST[dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
-                              finished={dareme.finished}
-                              sizeType={dareme.sizeType}
-                              coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
-                              handleSubmit={() => {
-                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: user ? `/${user.personalisedUrl}` : `/${authuser.personalisedUrl}` });
-                                if (dareme.goal) dispatch(fundmeAction.checkDetailsAndResults(dareme._id, navigate));
-                                else dispatch(daremeAction.checkDetailsAndResults(dareme._id, navigate));
+                            <ItemCard
+                              owner={{
+                                name: dareme.owner.name,
+                                avatar: dareme.owner.avatar,
+                                profile: dareme.owner.personalisedUrl,
+                                tip: dareme.owner.tipFunction
                               }}
-                            />
-                            <AvatarLink
-                              username={dareme.owner.name}
-                              avatar={dareme.owner.avatar}
-                              handleAvatar={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
-                              ownerId={dareme.owner._id}
-                              daremeId={dareme._id}
+                              item={{
+                                id: dareme.id,
+                                title: dareme.title,
+                                teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                                cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                                size: dareme.sizeType,
+                                leftTime: dareme.time,
+                                voters: dareme.voters,
+                                donuts: dareme.donuts,
+                                goal: dareme.goal
+                              }}
+                              handleSubmit={() => {
+                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
+                              }}
                             />
                           </div>
                         ))

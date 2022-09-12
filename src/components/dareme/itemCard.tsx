@@ -19,7 +19,7 @@ import CONSTANT from "../../constants/constant"
 import "../../assets/styles/itemCardStyle.scss"
 
 const ItemCard = (props: any) => {
-  const { owner, item } = props
+  const { owner, item, handleSubmit } = props
   const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
   const playerRef = useRef<ReactPlayer | null>(null)
@@ -56,6 +56,7 @@ const ItemCard = (props: any) => {
   }
 
   const navigation = (time: any, goal: any) => {
+    if(handleSubmit) handleSubmit()
     if (time > 0) {
       if (goal) navigate(`/fundme/details/${item.id}`)
       else navigate(`/dareme/details/${item.id}`)

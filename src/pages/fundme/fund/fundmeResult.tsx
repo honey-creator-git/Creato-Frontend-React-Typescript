@@ -23,10 +23,11 @@ const FundmeResult = () => {
   const contexts = useContext(LanguageContext);
 
   const { fundmeId } = useParams();
-  const fundmeState = useSelector((state: any) => state.fundme);
-  const fanwallState = useSelector((state: any) => state.fanwall);
-  const userState = useSelector((state: any) => state.auth);
+  const fundmeState = useSelector((state: any) => state.fundme)
+  const fanwallState = useSelector((state: any) => state.fanwall)
+  const userState = useSelector((state: any) => state.auth)
   const dlgState = useSelector((state: any) => state.load.dlgState)
+  const prevRoute = useSelector((state: any) => state.load.prevRoute)
   const [isStay, setIsStay] = useState(false);
   const [isReward, setIsReward] = useState(false);
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
@@ -76,7 +77,7 @@ const FundmeResult = () => {
       <div className="title-header">
         <Title
           title={contexts.HEADER_TITLE.FUNDME_RESULT}
-          back={() => { navigate('/'); }}
+          back={() => { navigate(prevRoute) }}
           voters={() => { navigate(`/fundme/${fundmeId}/voters`) }}
           ownerId={fundme?.owner?._id}
         />

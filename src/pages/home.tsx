@@ -391,6 +391,9 @@ const Home = () => {
                     donuts: dareme.donuts,
                     goal: dareme.goal
                   }}
+                  handleSubmit={() => { 
+                    
+                  }}
                 />
               </div>
             ))
