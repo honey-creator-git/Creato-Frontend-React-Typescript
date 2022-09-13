@@ -123,7 +123,7 @@ const AppRoutes = () => {
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="/:creatorLink/fanwall" element={<AuthRoute child={<ProfileFanwall />} />} />
 
-      <Route path="creators" element={<AuthRoute child={<Creators />} routeType="private" />} />
+      <Route path="creators" element={<AuthRoute child={<Creators />} />} />
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="myaccount/edit/connect_social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
