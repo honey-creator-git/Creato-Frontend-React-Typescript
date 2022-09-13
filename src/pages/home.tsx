@@ -114,7 +114,7 @@ const Home = () => {
   }, [code, dispatch, navigate])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     dispatch(daremeAction.getDarmesOngoing());
   }, [location, dispatch]);
 

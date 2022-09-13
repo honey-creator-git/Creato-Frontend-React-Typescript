@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { GoogleLogin } from "react-google-login"
+import axios from "axios"
 import {
   // FacebookIcon,
   InstagramIcon,
@@ -22,7 +23,9 @@ const Socialaccount = () => {
   const handleSave = () => { navigate("/myaccount/edit") }
 
   const responseGoogleSuccess = async (response: any) => {
-    console.log(response)
+    const access_token = response.Cc.access_token
+    const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${CONSTANT.GOOGLE_CLIENT_ID}`)
+    window.open(`https://www.youtube.com/channel/${res.data.items[0].id}`)
   }
 
   useEffect(() => {

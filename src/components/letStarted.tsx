@@ -17,7 +17,10 @@ const LetStarted = (props: any) => {
   return (
     <div className="let-start-wrapper">
       <div className={type === 0 ? "open-status" : "close-status"}
-        onClick={() => { setType(0) }}
+        onClick={() => { 
+          setType(0) 
+          window.scrollTo(0, 0)
+        }}
         onMouseOver={() => { setHover1(true) }}
         onMouseOut={() => { setHover1(false) }}
       >
@@ -74,7 +77,10 @@ const LetStarted = (props: any) => {
         }
       </div>
       <div className={type === 1 ? "open-status" : "close-status"}
-        onClick={() => { setType(1) }}
+        onClick={() => { 
+          setType(1)
+          window.scrollTo(0, 0)
+        }}
         onMouseOver={() => { setHover2(true) }}
         onMouseOut={() => { setHover2(false) }}
       >
@@ -131,7 +137,10 @@ const LetStarted = (props: any) => {
         }
       </div>
       <div className={type === 2 ? "open-status" : "close-status"}
-        onClick={() => { setType(2) }}
+        onClick={() => { 
+          setType(2)
+          window.scrollTo(0, 0)
+        }}
         onMouseOver={() => { setHover3(true) }}
         onMouseOut={() => { setHover3(false) }}
       >
