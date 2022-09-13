@@ -6,13 +6,14 @@ import { LanguageContext } from "../routes/authRoute"
 import VideoCardMobile from "../components/dareme/videoCardMobile"
 import AvatarLink from "../components/dareme/avatarLink"
 import FirstBanner from "../components/banner/firstBanner"
-import SecondBanner from "../components/banner/secondBanner"
+// import SecondBanner from "../components/banner/secondBanner"
 import Dialog from "../components/general/dialog"
 import CategoryBtn from "../components/general/categoryBtn"
 import Avatar from "../components/general/avatar"
 import Creato from "../components/general/creato"
 import SignDialog from "../components/general/signDialog"
 import ItemCard from "../components/dareme/itemCard"
+import LetStarted from "../components/letStarted"
 import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan"
 import PaymentForm from "../components/stripe/paymentForm"
 import { fanwallAction } from "../redux/actions/fanwallActions"
@@ -83,8 +84,9 @@ const Home = () => {
   const [donutPlan, setDonutPlan] = useState<any>(null);
   const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
   const [openPayVia, setOpenPayVia] = useState(false);
-  const [fanwallId, setFanwallId] = useState("");
-  const [errorText, setErrorText] = useState("");
+  const [fanwallId, setFanwallId] = useState("")
+  const [errorText, setErrorText] = useState("")
+  const [type, setType] = useState(0)
   const user = userState.user;
   const users = userState.users;
   const stripeID = userState.stripeID;
@@ -312,9 +314,13 @@ const Home = () => {
         }}
       />
       <div className="section">
-        <div className="banner">
+      <div className="title">Let's get started</div>
+      <div>
+        <LetStarted type={type} setType={setType} user={user}/>
+      </div>
+        {/* <div className="banner">
           <SecondBanner />
-        </div>
+        </div> */}
       </div>
       {(daremes.length > 0) &&
         <div className="section">
