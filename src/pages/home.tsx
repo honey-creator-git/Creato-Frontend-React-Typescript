@@ -355,7 +355,7 @@ const Home = () => {
         <div className="see-more" onClick={() => { navigate(`/myaccount/shop`); }}>See More</div>
         <div className="donuts-list scroll-bar">
           {creatoList.map((creato, i) => (
-            <div className="donuts" key={i} onClick={() => {
+            <div className="donuts" style={{ marginTop: '15px' }} key={i} onClick={() => {
               dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" });
               buyDonuts(creato);
             }}>
