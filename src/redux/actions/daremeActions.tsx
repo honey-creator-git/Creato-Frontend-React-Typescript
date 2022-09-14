@@ -16,7 +16,8 @@ import {
   SET_VOTER_COUNT,
   SET_DIALOG_STATE,
   SET_REFUND_DONUTS,
-  SET_PROFILE_EARNING
+  SET_PROFILE_EARNING,
+  SET_FUNDMES
 } from "../types";
 import * as api from "../../api";
 
@@ -94,20 +95,23 @@ export const daremeAction = {
 
   //-------------------------------------
   getDarmesOngoing: () => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_DAREME_INITIAL });
-    dispatch({ type: SET_USERS, payload: [] });
-    dispatch({ type: SET_FANWALL_INITIAL });
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_DAREMES, payload: [] })
+    dispatch({ type: SET_FUNDMES, payload: [] })
+    dispatch({ type: SET_USERS, payload: [] })
+    dispatch({ type: SET_FANWALLS, payload: [] })
     api.getDaremesOngoing()
       .then((result) => {
-        const { data } = result;
+        const { data } = result
         if (data.success) {
-          dispatch({ type: SET_DAREMES, payload: data.daremes });
-          dispatch({ type: SET_FANWALLS, payload: data.fanwalls });
-          dispatch({ type: SET_USERS, payload: data.users });
-          dispatch({ type: SET_LOADING_FALSE });
+          const payload = data.payload
+          dispatch({ type: SET_DAREMES, payload: payload.daremes })
+          dispatch({ type: SET_FUNDMES, payload: payload.fundmes })
+          dispatch({ type: SET_FANWALLS, payload: payload.fanwalls })
+          dispatch({ type: SET_USERS, payload: payload.users })
+          dispatch({ type: SET_LOADING_FALSE })
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => console.log(err))
   },
 
   checkDetailsAndResults: (daremeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {

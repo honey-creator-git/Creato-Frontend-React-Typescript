@@ -12,14 +12,12 @@ export const EN = {
     DONUTS_FOR: 'Donuts for'
   },
   HOME_LETTER: {
-    DAREME_WITH_MOST_DONUTS: 'DareMe & FundMe with Most Donuts 🍩',
-    EVERY_TALKING: 'Everyone is talking about this',
-    NEW_RELEASE: 'New Release DareMe & FundMe',
-    ONGOING_DAREME: 'Ongoing DareMe & FundMe',
-    GET_DONUTS_TO_DARE: 'GET Donuts to Dare!',
-    FINISHED_DAREME: 'Finished DareMe & FundMe',
+    DAREME_LIST: 'DareMe - Create Content Together',
+    LETS_STARTED: "Let's Get Started",
+    PURCHASE_DONUTS: 'Purchase Donuts to Creators',
+    FUNDME_LIST: 'FundMe - Support Creative Journeys',
+    CREATORS_YOU_LIKE: 'Creators You also Like', 
     POST_ON_FANWALL: 'Posts on Fanwall',
-    CREATORS_YOU_LIKE: 'Creators You Might Like 🎨',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

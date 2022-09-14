@@ -23,14 +23,16 @@ const Socialaccount = () => {
   const handleSave = () => { navigate("/myaccount/edit") }
 
   const responseGoogleSuccess = async (response: any) => {
-    const access_token = response.Cc.access_token
-    const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${CONSTANT.GOOGLE_CLIENT_ID}`)
-    window.open(`https://www.youtube.com/channel/${res.data.items[0].id}`)
+    const access_token = response.accessToken
+    console.log(access_token)
+    axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${CONSTANT.GOOGLE_CLIENT_ID}`)
+      .then((response: any) => {
+        console.log("youtubeId", response.data.items[0].id)
+        window.open(`https://www.youtube.com/channel/${response.data.items[0].id}`)
+      }).catch((err) => console.log(err))
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
+  useEffect(() => { window.scrollTo(0, 0) }, [location])
 
   return (
     <>

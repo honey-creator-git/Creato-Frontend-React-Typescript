@@ -12,14 +12,12 @@ export const CH = {
     DONUTS_FOR: '個甜甜圈用作'
   },
   HOME_LETTER: {
-    DAREME_WITH_MOST_DONUTS: '最多甜甜圈的 DareMe 和 FundMe🍩',
-    EVERY_TALKING: '熱門 DareMe 和 FundMe💬',
-    NEW_RELEASE: '新創建的 DareMe 和 FundMe!!🎉',
-    ONGOING_DAREME: 'DareMe 和 FundMe 進行中🙌🏻',
-    GET_DONUTS_TO_DARE: '購買冬甩支持創作者!',
-    FINISHED_DAREME: '已完成的 DareMe 和 FundMe',
+    DAREME_LIST: 'DareMe - 參與內容創作',
+    LETS_STARTED: "開始使用Creato吧!",
+    PURCHASE_DONUTS: '購買甜甜圈支持創作者!',
+    FUNDME_LIST: 'FundMe - 讓創作點子成真',
+    CREATORS_YOU_LIKE: '你可能喜愛的創作者們🎨', 
     POST_ON_FANWALL: 'Fanwall 上的帖子',
-    CREATORS_YOU_LIKE: '你可能喜愛的創作者 🎨',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

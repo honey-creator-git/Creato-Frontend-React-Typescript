@@ -1,4 +1,4 @@
-.item-card-wrapper {
+.fundme-card-wrapper {
   box-sizing: border-box;
   width: 335px;
 
@@ -184,7 +184,7 @@
         font-size: 14px;
         line-height: 18px;
         letter-spacing: 0.02em;
-        color: #EFA058;
+        color: #14BDC7;
       }
 
       .vote-info {
@@ -196,7 +196,6 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 18px;
-        color: #FFFFFF;
 
         span {
           margin: 0px 5px;
@@ -211,14 +210,12 @@
         position: relative;
         height: 13px;
         width: 250px;
-        background-color: #ffffff;
+        display: flex;
 
         .value-bar {
           position: absolute;
           top: 0px;
           left: 0px;
-          height: 13px;
-          background-image: linear-gradient(to right, #dd4d71 30%, #e48c3c, );
         }
       }
     }
@@ -231,7 +228,6 @@
       font-weight: 700;
       font-size: 14px;
       line-height: 18px;
-      color: #FFFFFF;
     }
   }
 }

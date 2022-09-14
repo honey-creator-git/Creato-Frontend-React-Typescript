@@ -5,14 +5,13 @@ import { daremeAction } from "../redux/actions/daremeActions"
 import { LanguageContext } from "../routes/authRoute"
 import VideoCardMobile from "../components/dareme/videoCardMobile"
 import AvatarLink from "../components/dareme/avatarLink"
-import FirstBanner from "../components/banner/firstBanner"
-// import SecondBanner from "../components/banner/secondBanner"
 import Dialog from "../components/general/dialog"
 import CategoryBtn from "../components/general/categoryBtn"
 import Avatar from "../components/general/avatar"
 import Creato from "../components/general/creato"
 import SignDialog from "../components/general/signDialog"
-import ItemCard from "../components/dareme/itemCard"
+import DareMeCard from "../components/dareme/dareMeCard"
+import FundMeCard from "../components/fundme/fundMeCard"
 import LetStarted from "../components/letStarted"
 import DisplayDonutsPlan from "../components/stripe/displayDonutsPlan"
 import PaymentForm from "../components/stripe/paymentForm"
@@ -64,34 +63,36 @@ const creatoList = [
 ];
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const daremeState = useSelector((state: any) => state.dareme);
-  const userState = useSelector((state: any) => state.auth);
-  const loadState = useSelector((state: any) => state.load);
-  const fanwallState = useSelector((state: any) => state.fanwall);
-  const location = useLocation();
-  const contexts = useContext(LanguageContext);
-  const { daremes } = daremeState;
-  const { fanwalls } = fanwallState;
-  const [openSigninDlg, setOpenSigninDlg] = useState(false);
-  const [openDonutsPlanDlg, setOpenDonutsPlanDlg] = useState(false);
-  const [openPaymentDlg, setOpenPaymentDlg] = useState(false);
-  const [openTopupDlg, setOpenTopupDlg] = useState(false);
-  const [openErrorDlg, setOpenErrorDlg] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const daremeState = useSelector((state: any) => state.dareme)
+  const fundmeState = useSelector((state: any) => state.fundme)
+  const userState = useSelector((state: any) => state.auth)
+  const loadState = useSelector((state: any) => state.load)
+  const fanwallState = useSelector((state: any) => state.fanwall)
+  const location = useLocation()
+  const contexts = useContext(LanguageContext)
+  const { daremes } = daremeState
+  const { fanwalls } = fanwallState
+  const { fundmes } = fundmeState
+  const [openSigninDlg, setOpenSigninDlg] = useState(false)
+  const [openDonutsPlanDlg, setOpenDonutsPlanDlg] = useState(false)
+  const [openPaymentDlg, setOpenPaymentDlg] = useState(false)
+  const [openTopupDlg, setOpenTopupDlg] = useState(false)
+  const [openErrorDlg, setOpenErrorDlg] = useState(false)
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
   const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
-  const [donutPlan, setDonutPlan] = useState<any>(null);
-  const [openDelPostDlg, setOpenDelPostDlg] = useState(false);
-  const [openPayVia, setOpenPayVia] = useState(false);
+  const [donutPlan, setDonutPlan] = useState<any>(null)
+  const [openDelPostDlg, setOpenDelPostDlg] = useState(false)
+  const [openPayVia, setOpenPayVia] = useState(false)
   const [fanwallId, setFanwallId] = useState("")
   const [errorText, setErrorText] = useState("")
   const [type, setType] = useState(0)
-  const user = userState.user;
-  const users = userState.users;
-  const stripeID = userState.stripeID;
-  const cardNum = userState.cardNum;
-  const dlgState = loadState.dlgState;
+  const user = userState.user
+  const users = userState.users
+  const stripeID = userState.stripeID
+  const cardNum = userState.cardNum
+  const dlgState = loadState.dlgState
   const [searchParams, setSearchParams] = useSearchParams()
   const code = searchParams.get("invitedBy")
 
@@ -313,22 +314,13 @@ const Home = () => {
           else setOpenPaymentDlg(true);
         }}
       />
-      <div className="section">
-      <div className="title">Let's get started</div>
-      <div>
-        <LetStarted type={type} setType={setType} user={user}/>
-      </div>
-        {/* <div className="banner">
-          <SecondBanner />
-        </div> */}
-      </div>
       {(daremes.length > 0) &&
-        <div className="section">
-          <div className="title">{contexts.HOME_LETTER.DAREME_WITH_MOST_DONUTS}</div>
+        <div className="section" style={{ marginTop: '20px' }}>
+          <div className="title">{contexts.HOME_LETTER.DAREME_LIST}</div>
           <div className="daremes scroll-bar">
             {daremes.map((dareme: any, i: any) => (
               <div className="dareme" key={i}>
-                <ItemCard
+                <DareMeCard
                   owner={{
                     name: dareme.owner.name,
                     avatar: dareme.owner.avatar,
@@ -344,7 +336,6 @@ const Home = () => {
                     leftTime: dareme.time,
                     voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
-                    goal: dareme.goal
                   }}
                 />
               </div>
@@ -353,6 +344,12 @@ const Home = () => {
           </div>
         </div>
       }
+      <div className="section">
+        <div className="title">Let's get started</div>
+        <div>
+          <LetStarted type={type} setType={setType} user={user} />
+        </div>
+      </div>
       <div className="section">
         <div className="title">{contexts.HOME_LETTER.GET_DONUTS_TO_DARE}</div>
         <div className="see-more" onClick={() => { navigate(`/myaccount/shop`); }}>See More</div>
@@ -371,34 +368,29 @@ const Home = () => {
           ))}
         </div>
       </div>
-      {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.finished === false).length > 0) &&
+      {fundmes.length > 0 &&
         <div className="section">
-          <div className="title">{contexts.HOME_LETTER.EVERY_TALKING}</div>
+          <div className="title">{contexts.HOME_LETTER.FUNDME_LIST}</div>
           <div className="daremes scroll-bar">
-            {daremes.filter((dareme: any) => dareme.finished === false).sort((first: any, second: any) => {
-              return first.donuts < second.donuts ? 1 : first.donuts > second.donuts ? -1 : first.date > second.date ? 1 : first.date < second.date ? -1 : 0;
-            }).map((dareme: any, i: any) => (
+            {fundmes.map((fundme: any, i: any) => (
               <div className="dareme" key={i}>
-                <ItemCard
+                <FundMeCard
                   owner={{
-                    name: dareme.owner.name,
-                    avatar: dareme.owner.avatar,
-                    profile: dareme.owner.personalisedUrl,
-                    tip: dareme.owner.tipFunction
+                    name: fundme.owner.name,
+                    avatar: fundme.owner.avatar,
+                    profile: fundme.owner.personalisedUrl,
+                    tip: fundme.owner.tipFunction
                   }}
                   item={{
-                    id: dareme._id,
-                    title: dareme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                    size: dareme.sizeType,
-                    leftTime: dareme.time,
-                    voters: dareme.voteInfo.length,
-                    donuts: dareme.donuts,
-                    goal: dareme.goal
-                  }}
-                  handleSubmit={() => { 
-
+                    id: fundme._id,
+                    title: fundme.title,
+                    teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
+                    cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                    size: fundme.sizeType,
+                    leftTime: fundme.time,
+                    voters: fundme.voteInfo.length,
+                    donuts: fundme.donuts,
+                    goal: fundme.goal
                   }}
                 />
               </div>
@@ -453,135 +445,6 @@ const Home = () => {
           </div>
         </div>
       }
-      {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.finished === false).length > 0) &&
-        <div className="section">
-          <div className="title">{contexts.HOME_LETTER.NEW_RELEASE}</div>
-          <div className="categories scroll-bar">
-            {contexts.DAREME_CATEGORY_LIST.map((category: any, i: any) => (
-              <div className="category" key={i}>
-                <CategoryBtn text={category} color="primary" />
-              </div>
-            ))}
-          </div>
-          <div className="daremes scroll-bar">
-            {daremes.filter((dareme: any) => dareme.finished === false).sort((first: any, second: any) => {
-              return first.date < second.date ? 1 : first.date > second.date ? -1 : 0;
-            }).map((dareme: any, i: any) => (
-              <div className="dareme" key={i}>
-                <ItemCard
-                  owner={{
-                    name: dareme.owner.name,
-                    avatar: dareme.owner.avatar,
-                    profile: dareme.owner.personalisedUrl,
-                    tip: dareme.owner.tipFunction
-                  }}
-                  item={{
-                    id: dareme._id,
-                    title: dareme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                    size: dareme.sizeType,
-                    leftTime: dareme.time,
-                    voters: dareme.voteInfo.length,
-                    donuts: dareme.donuts,
-                    goal: dareme.goal
-                  }}
-                />
-              </div>
-            ))
-            }
-          </div>
-        </div>
-      }
-      <div className="section">
-        <div className="banner">
-          <FirstBanner />
-        </div>
-      </div>
-      {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.finished === false).length > 0) &&
-        <div className="section">
-          <div className="title">{contexts.HOME_LETTER.ONGOING_DAREME}</div>
-          <div className="categories scroll-bar">
-            {contexts.DAREME_CATEGORY_LIST.map((category: any, i: any) => (
-              <div className="category" key={i}>
-                <CategoryBtn text={category} color="primary" />
-              </div>
-            ))}
-          </div>
-          <div className="daremes scroll-bar">
-            {daremes.filter((dareme: any) => dareme.finished === false).sort((first: any, second: any) => {
-              let firstDiff = new Date(first.date).getTime() - new Date().getTime() + 24 * 1000 * 3600 * first.deadline;
-              let secondDiff = new Date(second.date).getTime() - new Date().getTime() + 24 * 1000 * 3600 * second.deadline;
-              return firstDiff > secondDiff ? 1 : firstDiff < secondDiff ? -1 : 0;
-            }).map((dareme: any, i: any) => (
-              <div className="dareme" key={i}>
-                <ItemCard
-                  owner={{
-                    name: dareme.owner.name,
-                    avatar: dareme.owner.avatar,
-                    profile: dareme.owner.personalisedUrl,
-                    tip: dareme.owner.tipFunction
-                  }}
-                  item={{
-                    id: dareme._id,
-                    title: dareme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                    size: dareme.sizeType,
-                    leftTime: dareme.time,
-                    voters: dareme.voteInfo.length,
-                    donuts: dareme.donuts,
-                    goal: dareme.goal
-                  }}
-                />
-              </div>
-            ))
-            }
-          </div>
-        </div>
-      }
-      {(daremes.length > 0 && daremes.filter((dareme: any) => (dareme.finished === true && dareme.fanwall === false)).length > 0) &&
-        <div className="section">
-          <div className="title">{contexts.HOME_LETTER.FINISHED_DAREME}</div>
-          <div className="categories scroll-bar">
-            {contexts.DAREME_CATEGORY_LIST.map((category: any, i: any) => (
-              <div className="category" key={i}>
-                <CategoryBtn text={category} color="primary" />
-              </div>
-            ))}
-          </div>
-          <div className="daremes scroll-bar">
-            {daremes.filter((dareme: any) => (dareme.finished === true && dareme.fanwall === false)).sort((first: any, second: any) => {
-              let firstDiff = new Date(first.date).getTime() - new Date().getTime() + 24 * 1000 * 3600 * first.deadline;
-              let secondDiff = new Date(second.date).getTime() - new Date().getTime() + 24 * 1000 * 3600 * second.deadline;
-              return firstDiff < secondDiff ? 1 : firstDiff > secondDiff ? -1 : 0;
-            }).map((dareme: any, i: any) => (
-              <div className="dareme" key={i}>
-                <ItemCard
-                  owner={{
-                    name: dareme.owner.name,
-                    avatar: dareme.owner.avatar,
-                    profile: dareme.owner.personalisedUrl,
-                    tip: dareme.owner.tipFunction
-                  }}
-                  item={{
-                    id: dareme._id,
-                    title: dareme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                    size: dareme.sizeType,
-                    leftTime: dareme.time,
-                    voters: dareme.voteInfo.length,
-                    donuts: dareme.donuts,
-                    goal: dareme.goal
-                  }}
-                />
-              </div>
-            ))
-            }
-          </div>
-        </div>
-      }
       {fanwalls.length > 0 &&
         <div className="section">
           <div className="title">{contexts.HOME_LETTER.POST_ON_FANWALL}</div>
@@ -596,18 +459,18 @@ const Home = () => {
             {fanwalls.map((fanwall: any, index: any) => (
               <div className="dareme" key={index}>
                 <VideoCardMobile
-                  donuts={fanwall?.dareme?.donuts ? fanwall?.dareme?.donuts : 0}
+                  donuts={fanwall?.item?.donuts ? fanwall?.item?.donuts : 0}
                   url={`${CONSTANT.SERVER_URL}/${fanwall?.video}`}
-                  title={fanwall?.dareme?.title}
+                  title={fanwall?.item?.title}
                   sizeType={fanwall?.sizeType}
                   coverImage={fanwall?.cover ? `${CONSTANT.SERVER_URL}/${fanwall?.cover}` : ""}
-                  goal={fanwall?.dareme?.goal ? fanwall?.dareme?.goal : null}
-                  category={fanwall?.dareme?.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall?.dareme?.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall?.dareme?.category - 1]}
+                  goal={fanwall?.item?.goal ? fanwall?.item?.goal : null}
+                  category={fanwall?.item?.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall?.item?.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall?.item?.category - 1]}
                   posted={true}
                   finished={true}
                   fanwallData={fanwall}
                   handleSubmit={() => {
-                    if (fanwall?.dareme?.goal) navigate(`/fundme/fanwall/detail/${fanwall?.id}`)
+                    if (fanwall?.item?.goal) navigate(`/fundme/fanwall/detail/${fanwall?.id}`)
                     else navigate(`/dareme/fanwall/detail/${fanwall?.id}`)
                   }}
                 />

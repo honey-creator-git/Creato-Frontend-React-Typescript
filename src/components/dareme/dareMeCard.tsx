@@ -11,14 +11,13 @@ import {
   Dare1Icon,
   MuteVolumeIcon,
   UnMuteVolumeIcon,
-  PlayIcon,
-  Dare2Icon
+  PlayIcon
 } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import CONSTANT from "../../constants/constant"
-import "../../assets/styles/itemCardStyle.scss"
+import "../../assets/styles/dareme/components/daremeCardStyle.scss"
 
-const ItemCard = (props: any) => {
+const DareMeCard = (props: any) => {
   const { owner, item, handleSubmit } = props
   const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
@@ -48,22 +47,10 @@ const ItemCard = (props: any) => {
     return res
   }
 
-  const displayProcess = () => {
-    const interval = item.goal ? (Number(item.goal) / 20).toFixed(1) : 0;
-    const count = item.goal ? Number(Math.floor(Number(item.donuts) / Number(interval))) : 0;
-    const width = item.donuts < interval ? Math.floor(Number(interval) / Number(item.goal) * 250) : Math.floor(Number(interval) * count / Number(item.goal) * 250);
-    return width
-  }
-
-  const navigation = (time: any, goal: any) => {
-    if(handleSubmit) handleSubmit()
-    if (time > 0) {
-      if (goal) navigate(`/fundme/details/${item.id}`)
-      else navigate(`/dareme/details/${item.id}`)
-    } else {
-      if (goal) navigate(`/fundme/result/${item.id}`)
-      else navigate(`/dareme/result/${item.id}`)
-    }
+  const navigation = (time: any) => {
+    if (handleSubmit) handleSubmit()
+    if (time > 0) navigate(`/dareme/details/${item.id}`)
+    else navigate(`/dareme/result/${item.id}`)
   }
 
   useEffect(() => {
@@ -73,7 +60,7 @@ const ItemCard = (props: any) => {
   }, [item.leftTime])
 
   return (
-    <div className="item-card-wrapper">
+    <div className="dareme-card-wrapper">
       <div className="top-info">
         <div className="owner-avatar">
           <Avatar
@@ -136,48 +123,34 @@ const ItemCard = (props: any) => {
           </div>
         }
       </div>
-      <div className="item-detail">
-        <div className="item-title">
+      <div className="item-detail" style={time < 0 ? { background: 'white' } : { background: "linear-gradient(136.21deg, #FFDD94 0%, #FFC38D 27.6%, #FEB389 53.35%, #FDA384 74.31%, #F68B77 100%)" }}>
+        <div className="item-title" style={time > 0 ? { color: 'white' } : { color: '#EFA058' }}>
           <span>{item.title}</span>
         </div>
         <div className="item-info">
           <div className="item-type">
-            <CreatoCoinIcon color={item.goal ? '#EF6461' : '#EFA058'} width={25} />
-            <span style={item.goal ? { color: '#EF6461' } : { color: '#EFA058' }}>{item.goal ? 'FundMe' : 'DareMe'}</span>
+            <CreatoCoinIcon color={'#EFA058'} width={25} />
+            <span>DareMe</span>
           </div>
-          <div className="vote-info">
-            <CreatoCoinIcon color="white" width={20} /><span>{item.donuts.toLocaleString()}</span>
-            <NoOfPeopleIcon color="white" width={20} /><span>{item.voters.toLocaleString()}</span>
+          <div className="vote-info" style={time > 0 ? { color: 'white' } : { color: '#EFA058' }}>
+            <CreatoCoinIcon color={time > 0 ? 'white' : '#EFA058'} width={20} />
+            <span>{item.donuts.toLocaleString()}</span>
+            <NoOfPeopleIcon color={time > 0 ? 'white' : '#EFA058'} width={20} />
+            <span>{item.voters.toLocaleString()}</span>
           </div>
         </div>
-        {item.goal &&
-          <>
-            <div className="process-bar">
-              <div className="goal-bar">
-                <div className="value-bar" style={{ width: item.donuts < item.goal ? `${displayProcess()}px` : '250px' }}>
-                </div>
-              </div>
-            </div>
-            <div className="goal-donuts">
-              <span>{item.donuts.toLocaleString()} / {item.goal.toLocaleString()} Donuts</span>
-            </div>
-          </>
-        }
         <Button
           color="primary"
-          fillStyle="outline"
+          fillStyle={time > 0 ? "outline" : "fill"}
           shape="rounded"
-          text={time > 0 ? item.goal ? contexts.ITEM_CARD.FUND_NOW : contexts.ITEM_CARD.VOTE_NOW : contexts.ITEM_CARD.SEE_MORE}
+          text={time > 0 ? contexts.ITEM_CARD.VOTE_NOW : contexts.ITEM_CARD.SEE_MORE}
           width={190}
-          icon={item.goal ?
-            [<Dare2Icon color="#EFA058" />, <Dare2Icon color="white" />, <Dare2Icon color="white" />]
-            :
-            [<Dare1Icon color="#EFA058" />, <Dare1Icon color="white" />, <Dare1Icon color="white" />]}
-          handleSubmit={() => { navigation(time, item.goal) }}
+          icon={time > 0 ? [<Dare1Icon color="#EFA058" />, <Dare1Icon color="white" />, <Dare1Icon color="white" />] : undefined}
+          handleSubmit={() => { navigation(time) }}
         />
       </div>
     </div>
   )
 }
 
-export default ItemCard
+export default DareMeCard

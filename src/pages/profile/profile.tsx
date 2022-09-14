@@ -8,7 +8,7 @@ import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
-import ItemCard from "../../components/dareme/itemCard"
+import ItemCard from "../../components/dareme/dareMeCard"
 import WelcomeDlg from "../../components/general/welcomeDlg"
 import AvatarLink from "../../components/dareme/avatarLink"
 import { Dare2Icon, HotIcon, AddIcon, RewardIcon } from "../../assets/svg"
@@ -156,7 +156,7 @@ const Profile = () => {
                       daremes.filter((dareme: any) => dareme.isUser === true)
                         .map((dareme: any, index: any) => (
                           <div className="profile-dareme" key={index}>
-                            <ItemCard
+                            {/* <ItemCard
                               owner={{
                                 name: dareme.owner.name,
                                 avatar: dareme.owner.avatar,
@@ -177,7 +177,7 @@ const Profile = () => {
                               handleSubmit={() => {
                                 dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
                               }}
-                            />
+                            /> */}
                           </div>
                         ))
                     }
@@ -207,7 +207,7 @@ const Profile = () => {
                       daremes.filter((dareme: any) => dareme.isUser === false)
                         .map((dareme: any, index: any) => (
                           <div className="profile-dareme" key={index}>
-                            <ItemCard
+                            {/* <ItemCard
                               owner={{
                                 name: dareme.owner.name,
                                 avatar: dareme.owner.avatar,
@@ -228,7 +228,7 @@ const Profile = () => {
                               handleSubmit={() => {
                                 dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
                               }}
-                            />
+                            /> */}
                           </div>
                         ))
                     }

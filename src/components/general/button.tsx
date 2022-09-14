@@ -18,6 +18,13 @@ const Button = (props: any) => {
   const backgroundPressedColorSecondary =
     fillStyle === "fill" ? "#E17253" : fillStyle === "outline" ? "#E17253" : "white";
 
+  const backgroundColorFundme =
+    fillStyle === "fill" ? "#108AA1" : fillStyle === "outline" ? "white" : "white";
+  const backgroundHoverColorFundme =
+    fillStyle === "fill" ? "#14ADC9" : fillStyle === "outline" ? "#14ADC9" : "white";
+  const backgroundPressedColorFundme =
+    fillStyle === "fill" ? "#108AA1" : fillStyle === "outline" ? "#108AA1" : "white";
+
   const borderColorPrimary =
     fillStyle === "fill" ? "#EFA058" : fillStyle === "outline" ? "#EFA058" : "white";
   const borderHoverColorPrimary =
@@ -31,6 +38,13 @@ const Button = (props: any) => {
     fillStyle === "fill" ? "#EBA18C" : fillStyle === "outline" ? "#EBA18C" : "white";
   const borderPressedColorSecondary =
     fillStyle === "fill" ? "#E17253" : fillStyle === "outline" ? "#E17253" : "white";
+
+  const borderColorFundme =
+    fillStyle === "fill" ? "#108AA1" : fillStyle === "outline" ? "#108AA1" : "white";
+  const borderHoverColorFundme =
+    fillStyle === "fill" ? "#14ADC9" : fillStyle === "outline" ? "#14ADC9" : "white";
+  const borderPressedColorFundme =
+    fillStyle === "fill" ? "#108AA1" : fillStyle === "outline" ? "#108AA1" : "white";
 
   const colorNofillHover = color === "primary" ? "#54504E" : "#EFA058";
   const colorNofillPressed = color === "primary" ? "#EFA058" : "#E17253";
@@ -56,11 +70,18 @@ const Button = (props: any) => {
           : state === "pressed"
             ? backgroundPressedColorPrimary
             : backgroundColorPrimary
-        : state === "hover"
-          ? backgroundHoverColorSecondary
-          : state === "pressed"
-            ? backgroundPressedColorSecondary
-            : backgroundColorSecondary) : bgColor,
+        : color === "fundme"
+          ? state === "hover"
+            ? backgroundHoverColorFundme
+            : state === "pressed"
+              ? backgroundPressedColorFundme
+              : backgroundColorFundme
+          : state === "hover"
+            ? backgroundHoverColorSecondary
+            : state === "pressed"
+              ? backgroundPressedColorSecondary
+              : backgroundColorSecondary
+    ) : bgColor,
     borderRadius: borderRadius,
     border: bgColor === undefined ? (
       color === "primary"
@@ -69,23 +90,28 @@ const Button = (props: any) => {
           : state === "pressed"
             ? `1px solid ${borderPressedColorPrimary}`
             : `1px solid ${borderColorPrimary}`
-        : state === "hover"
-          ? `1px solid ${borderHoverColorSecondary}`
-          : state === "pressed"
-            ? `1px solid ${borderPressedColorSecondary}`
-            : `1px solid ${borderColorSecondary}`) : '0px solid white',
+        : color === "fundme"
+          ? state === "hover"
+            ? `1px solid ${borderHoverColorFundme}`
+            : state === "pressed"
+              ? `1px solid ${borderPressedColorFundme}`
+              : `1px solid ${borderColorFundme}`
+          : state === "hover"
+            ? `1px solid ${borderHoverColorSecondary}`
+            : state === "pressed"
+              ? `1px solid ${borderPressedColorSecondary}`
+              : `1px solid ${borderColorSecondary}`) : '0px solid white',
     color: bgColor === undefined ? (
       fillStyle === "fill"
         ? "white"
         : fillStyle === "outline"
           ? state === "default"
-            ? "#EFA058"
-            : "white"
-          : state === "default"
-            ? "black"
-            : state === "hover"
-              ? colorNofillHover
-              : colorNofillPressed) : 'white',
+            ? color === "primary" ? "#EFA058" : color === "fundme" ? "#14BDC7" : "white" : "white"
+            : state === "default"
+              ? "black"
+              : state === "hover"
+                ? colorNofillHover
+                : colorNofillPressed) : 'white',
     padding: icon !== undefined && text === undefined ? "8px" : "16px",
     display: "flex",
     justifyContent: "center",
