@@ -41,7 +41,7 @@ const AdminDaremeDetail = () => {
         video.onloadeddata = evt => {
           window.URL.revokeObjectURL(video.src)
           const size = video.videoWidth / video.videoHeight
-          const type = size >= 0.65
+          const type = size >= 0.583
           dispatch({ type: SET_SIZETYPE, payload: type })
           dispatch({ type: SET_VIDEOFILE, payload: loadFile })
         }

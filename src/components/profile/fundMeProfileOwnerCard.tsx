@@ -1,24 +1,21 @@
 import { useEffect, useState, useRef, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import ReactPlayer from "react-player"
-import Avatar from "../general/avatar"
 import Button from "../general/button"
 import {
-  TipIcon,
   ClockIcon,
   CreatoCoinIcon,
-  NoOfPeopleIcon,
+  Dare2Icon,
   MuteVolumeIcon,
   UnMuteVolumeIcon,
-  PlayIcon,
-  Dare2Icon
+  PlayIcon
 } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import CONSTANT from "../../constants/constant"
-import "../../assets/styles/fundme/components/fundmeCardStyle.scss"
+import "../../assets/styles/profile/components/fundmeProfileCardStyle.scss"
 
-const FundMeCard = (props: any) => {
-  const { owner, item, handleSubmit } = props
+const FundMeProfileOwnerCard = (props: any) => {
+  const { item, handleSubmit } = props
   const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
   const playerRef = useRef<ReactPlayer | null>(null)
@@ -67,27 +64,9 @@ const FundMeCard = (props: any) => {
   }, [item.leftTime])
 
   return (
-    <div className="fundme-card-wrapper">
-      <div className="top-info">
-        <div className="owner-avatar">
-          <Avatar
-            size="mobile"
-            avatar={owner.avatar.indexOf('uploads') === -1 ? owner.avatar : `${CONSTANT.SERVER_URL}/${owner.avatar}`}
-            handleClick={() => { navigate(`/${owner.profile}`) }}
-          />
-        </div>
-        <div className="ownername-lefttime-tip" style={owner.tip ? { width: '225px' } : { width: '205px' }}>
-          <div className="ownername-lefttime">
-            <div className="owner-name">
-              <span>{owner.name}</span>
-            </div>
-            <div className="left-time">
-              <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(time)}</span>
-            </div>
-          </div>
-          {owner.tip ? <div className="tip-button" onClick={() => { navigate(`/${owner.profile}/tip`) }}><TipIcon color="white" /></div> : <></>}
-        </div>
-      </div>
+    <div className="fundme-profile-card-wrapper"
+      style={{ background: time > 0 ? ' linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%)' : 'white' }}
+    >
       <div className="teaser-video" onClick={() => {
         if (play) {
           setPlay(false)
@@ -130,19 +109,18 @@ const FundMeCard = (props: any) => {
           </div>
         }
       </div>
-      <div className="item-detail" style={time < 0 ? { background: 'white' } : { background: "linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%)" }}>
-        <div className="item-title" style={time > 0 ? { color: 'white' } : { color: '#14BDC7' }}>
-          <span>{item.title}</span>
+      <div className="time-info">
+        <div className="item-type">
+          <CreatoCoinIcon color={'#108AA1'} width={25} />
+          <span>FundMe</span>
         </div>
-        <div className="item-info">
-          <div className="item-type">
-            <CreatoCoinIcon color={'#14BDC7'} width={25} />
-            <span>FundMe</span>
-          </div>
-          <div className="vote-info" style={time > 0 ? { color: 'white' } : { color: '#14BDC7' }}>
-            <CreatoCoinIcon color={time > 0 ? 'white' : '#14BDC7'} width={20} /><span>{item.donuts.toLocaleString()}</span>
-            <NoOfPeopleIcon color={time > 0 ? 'white' : '#14BDC7'} width={20} /><span>{item.voters.toLocaleString()}</span>
-          </div>
+        <div className="left-time">
+          <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(time)}</span>
+        </div>
+      </div>
+      <div className="item-detail">
+        <div className="item-title" style={time > 0 ? { color: 'white' } : { color: '#108AA1' }}>
+          <span>{item.title}</span>
         </div>
         <div className="process-bar">
           <div className="goal-bar"
@@ -166,7 +144,7 @@ const FundMeCard = (props: any) => {
           shape="rounded"
           text={time > 0 ? contexts.ITEM_CARD.FUND_NOW : contexts.ITEM_CARD.SEE_MORE}
           width={190}
-          icon={time > 0 ? [<Dare2Icon color="#14BDC7" />, <Dare2Icon color="white" />, <Dare2Icon color="white" />] : undefined}
+          icon={time > 0 ? [<Dare2Icon color="#14ADC9" />, <Dare2Icon color="white" />, <Dare2Icon color="white" />] : undefined}
           handleSubmit={() => { navigation(time) }}
         />
       </div>
@@ -174,4 +152,4 @@ const FundMeCard = (props: any) => {
   )
 }
 
-export default FundMeCard
+export default FundMeProfileOwnerCard

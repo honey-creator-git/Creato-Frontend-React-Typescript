@@ -81,7 +81,7 @@ const CreateFundme = () => {
         video.preload = "metadata";
         video.onloadedmetadata = evt => {
           const size = video.videoWidth / video.videoHeight;
-          const type = size >= 0.65;
+          const type = size >= 0.583;
           const state = { ...fundmeState, sizeType: type };
           dispatch({ type: SET_FUNDME, payload: state });
           dispatch({ type: SET_TEASER_FILE1, payload: loadFile });

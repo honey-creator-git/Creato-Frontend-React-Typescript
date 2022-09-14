@@ -38,7 +38,7 @@ const UploadVideo = () => {
         video.preload = "metadata";
         video.onloadedmetadata = evt => {
           const size = video.videoWidth / video.videoHeight;
-          const type = size >= 0.65;
+          const type = size >= 0.583;
           const state = { ...daremeState, sizeType: type };
           dispatch({ type: SET_DAREME, payload: state });
           dispatch({ type: SET_TEASER_FILE, payload: loadFile });

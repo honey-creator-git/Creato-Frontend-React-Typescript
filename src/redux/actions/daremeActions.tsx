@@ -214,17 +214,23 @@ export const daremeAction = {
   },
 
   getDaremesByPersonalisedUrl: (url: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_DAREMES, payload: [] });
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_USERS, payload: [] })
+    dispatch({ type: SET_DAREMES, payload: [] })
+    dispatch({ type: SET_FUNDMES, payload: [] })
     api.getDaremesByPersonalisedUrl({ url: url })
       .then((result) => {
-        const { data } = result;
-        dispatch({ type: SET_DAREMES, payload: data.daremes });
-        dispatch({ type: SET_USERS, payload: [data.user] });
-        dispatch({ type: SET_VOTER_COUNT, payload: data.voterCount })
-        dispatch({ type: SET_PROFILE_EARNING, payload: data.earnings })
-        dispatch({ type: SET_LOADING_FALSE });
-      }).catch((err) => console.log(err));
+        const { data } = result
+        if (data.success) {
+          const payload = data.payload
+          dispatch({ type: SET_DAREMES, payload: payload.daremes })
+          dispatch({ type: SET_FUNDMES, payload: payload.fundmes })
+          dispatch({ type: SET_USERS, payload: [payload.user] })
+          dispatch({ type: SET_VOTER_COUNT, payload: payload.voterCount })
+          dispatch({ type: SET_PROFILE_EARNING, payload: payload.earnings })
+          dispatch({ type: SET_LOADING_FALSE })
+        }
+      }).catch((err) => console.log(err))
   },
 
   dareCreator: (daremeId: any, title: any, amount: any, navigate: any) => async (dispatch: Dispatch<any>) => {

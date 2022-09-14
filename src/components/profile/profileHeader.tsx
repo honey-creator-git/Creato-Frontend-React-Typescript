@@ -181,7 +181,7 @@ const ProfileHeader = (props: profileProps) => {
       <div className="ellipsis-icon" onClick={() => { setMoreInfo(true); }}>
         <MoreIcon color="black" />
       </div>
-      {voterCount && earnings ?
+      {(voterCount > 0 || earnings > 0) ?
         <div className="rating-container">
           <span className="Voting-value"><b>{roundNumber(voterCount)} </b></span>
           <HotIcon className="rating-icons" color="#EFA058" width="18" />

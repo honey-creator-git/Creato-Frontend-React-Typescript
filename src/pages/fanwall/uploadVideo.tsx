@@ -58,7 +58,7 @@ const UploadVideo = () => {
                 video.preload = "metadata";
                 video.onloadedmetadata = evt => {
                     const size = video.videoWidth / video.videoHeight;
-                    const type = size >= 0.65;
+                    const type = size >= 0.583;
                     const state = { ...fanwall, sizeType: type, video: loadFile };
                     dispatch({ type: SET_FANWALL, payload: { fanwall: state, itemType: fanwallState.itemType } });
                 }

@@ -10,7 +10,9 @@ import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import WelcomeDlg from "../../components/general/welcomeDlg"
 import AvatarLink from "../../components/dareme/avatarLink"
-import { Dare2Icon, HotIcon, AddIcon, RewardIcon } from "../../assets/svg"
+import DareMeProfileOwnerCard from "../../components/profile/dareMeProfileOwnerCard"
+import FundMeProfileOwnerCard from "../../components/profile/fundMeProfileOwnerCard"
+import { Dare2Icon, HotIcon, AddIcon, RewardIcon, CreatoCoinIcon } from "../../assets/svg"
 import CONSTANT from "../../constants/constant"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
 import { LanguageContext } from "../../routes/authRoute"
@@ -28,21 +30,23 @@ const useWindowSize = () => {
 }
 
 const Profile = () => {
-  const { pathname } = useLocation();
-  const width = useWindowSize();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const contexts = useContext(LanguageContext);
-  const daremeStore = useSelector((state: any) => state.dareme);
-  const userStore = useSelector((state: any) => state.auth);
+  const { pathname } = useLocation()
+  const width = useWindowSize()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const contexts = useContext(LanguageContext)
+  const daremeState = useSelector((state: any) => state.dareme)
+  const fundmeState = useSelector((state: any) => state.fundme)
+  const userState = useSelector((state: any) => state.auth)
   const dlgState = useSelector((state: any) => state.load.dlgState)
-  const daremes = daremeStore.daremes;
-  const authuser = userStore.users.length ? userStore.users[0] : null;
+  const { daremes } = daremeState
+  const { fundmes } = fundmeState
+  const { user } = userState
+  const authuser = userState.users.length ? userState.users[0] : null
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
   const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
-  const [isSame, setIsSame] = useState(false);
-  const user = userStore.user;
+  const [isSame, setIsSame] = useState(false)
 
   const handleCreateDareMe = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname });
@@ -142,45 +146,61 @@ const Profile = () => {
             <div className="dare-cards">
               <div className="my-dareMe">
                 <div className="title">
-                  <Dare2Icon color="#EFA058" />
+                  <CreatoCoinIcon color="#EFA058" width={30} height={30} />
                   {authuser &&
                     <p>
                       {(user && user.personalisedUrl === authuser.personalisedUrl) ? contexts.PROFILE_LETTER.MY_DAREME : `${authuser.name} ${contexts.PROFILE_LETTER.OTHER_DAREME}`}
                     </p>
                   }
                 </div>
-                {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0 ?
-                  <div className="dare-card">
-                    {
-                      daremes.filter((dareme: any) => dareme.isUser === true)
-                        .map((dareme: any, index: any) => (
-                          <div className="profile-dareme" key={index}>
-                            {/* <ItemCard
-                              owner={{
-                                name: dareme.owner.name,
-                                avatar: dareme.owner.avatar,
-                                profile: dareme.owner.personalisedUrl,
-                                tip: dareme.owner.tipFunction
-                              }}
-                              item={{
-                                id: dareme.id,
-                                title: dareme.title,
-                                teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                                cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                                size: dareme.sizeType,
-                                leftTime: dareme.time,
-                                voters: dareme.voters,
-                                donuts: dareme.donuts,
-                                goal: dareme.goal
-                              }}
-                              handleSubmit={() => {
-                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
-                              }}
-                            /> */}
-                          </div>
-                        ))
+                {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0)
+                  || (fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) ?
+                  <>
+                    {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0) &&
+                      <div className="dare-card">
+                        {daremes.filter((dareme: any) => dareme.isUser === true)
+                          .map((dareme: any, index: any) => (
+                            <div className="profile-dareme" key={index}>
+                              <DareMeProfileOwnerCard
+                                item={{
+                                  id: dareme._id,
+                                  title: dareme.title,
+                                  teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                                  cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                                  size: dareme.sizeType,
+                                  leftTime: dareme.time,
+                                  voters: dareme.voteInfo.length,
+                                  donuts: dareme.donuts
+                                }}
+                              />
+                            </div>
+                          ))}
+                      </div>
                     }
-                  </div> :
+                    {(fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) &&
+                      <div className="dare-card">
+                        {fundmes.filter((fundme: any) => fundme.isUser === true)
+                          .map((fundme: any, index: any) => (
+                            <div className="profile-dareme" key={index}>
+                              <FundMeProfileOwnerCard
+                                item={{
+                                  id: fundme._id,
+                                  title: fundme.title,
+                                  teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
+                                  cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                                  size: fundme.sizeType,
+                                  leftTime: fundme.time,
+                                  voters: fundme.voteInfo.length,
+                                  donuts: fundme.donuts,
+                                  goal: fundme.goal
+                                }}
+                              />
+                            </div>
+                          ))}
+                      </div>
+                    }
+                  </>
+                  :
                   <div className="no-data">
                     {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
                       <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate("/create") }}>
