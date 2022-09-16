@@ -20,8 +20,8 @@
 
     .ownername-lefttime-tip {
       z-index: 1;
-      margin-left: -10px;
-      padding-left: 10px;
+      margin-left: -16px;
+      padding-left: 16px;
       padding-right: 10px;
       display: flex;
       align-items: center;
@@ -34,6 +34,7 @@
       display: flex;
 
       .ownername-lefttime {
+        width: 180px;
         font-family: 'Lato';
         font-style: normal;
         font-weight: 800;
@@ -44,6 +45,14 @@
         .owner-name {
           margin-bottom: 5px;
           color: #7E7875;
+
+          span {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
 
         .left-time {

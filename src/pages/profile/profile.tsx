@@ -82,151 +82,149 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
-      {authuser !== null &&
-        <>
-          <Dialog
-            display={openWelcomeDlg}
-            title="Welcome to Creato"
-            exit={() => {
-              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+      <Dialog
+        display={openWelcomeDlg}
+        title="Welcome to Creato"
+        exit={() => {
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+          setOpenWelcomeDlg(false);
+        }}
+        wrapExit={() => {
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
+          setOpenWelcomeDlg(false);
+        }}
+        subcontext={true}
+        icon={
+          {
+            pos: 1,
+            icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
+          }
+        }
+        buttons={[
+          {
+            text: "Go",
+            handleClick: () => {
               setOpenWelcomeDlg(false);
-            }}
-            wrapExit={() => {
               dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
-              setOpenWelcomeDlg(false);
-            }}
-            subcontext={true}
-            icon={
-              {
-                pos: 1,
-                icon: <RewardIcon color="#EFA058" width="60px" height="60px" />
-              }
+              navigate('/')
             }
-            buttons={[
-              {
-                text: "Go",
-                handleClick: () => {
-                  setOpenWelcomeDlg(false);
-                  dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } });
-                  navigate('/')
-                }
-              }
-            ]}
+          }
+        ]}
+      />
+      <WelcomeDlg
+        display={openWelcomeDlg2}
+        exit={() => {
+          setOpenWelcomeDlg2(false)
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+        }}
+        wrapExit={() => {
+          setOpenWelcomeDlg2(false)
+          dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+        }}
+        buttons={[{
+          text: contexts.WELCOME_DLG.OK,
+          handleClick: () => {
+            setOpenWelcomeDlg2(false)
+            dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
+            navigate('/')
+          }
+        }]}
+      />
+      <div className="profile">
+        <div className="profile-header">
+          <ProfileHeader
+            size={width > 880 ? "web" : "mobile"}
+            property={isSame ? 'edit' : 'view'}
+            handleCreateDareMe={handleCreateDareMe}
           />
-          <WelcomeDlg
-            display={openWelcomeDlg2}
-            exit={() => {
-              setOpenWelcomeDlg2(false)
-              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
-            }}
-            wrapExit={() => {
-              setOpenWelcomeDlg2(false)
-              dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
-            }}
-            buttons={[{
-              text: contexts.WELCOME_DLG.OK,
-              handleClick: () => {
-                setOpenWelcomeDlg2(false)
-                dispatch({ type: SET_DIALOG_STATE, payload: { type: "", state: false } })
-                navigate('/')
+        </div>
+        <div className="profile-menu">
+          {authuser && <ProfileMenu menu={"dareme"} url={authuser.personalisedUrl} />}
+        </div>
+        <div className="dare-cards">
+          <div className="my-dareMe">
+            <div className="title">
+              <CreatoCoinIcon color="#EFA058" width={30} height={30} />
+              {authuser &&
+                <p>
+                  {(user && user.personalisedUrl === authuser.personalisedUrl) ? contexts.PROFILE_LETTER.MY_DAREME : `${authuser.name} ${contexts.PROFILE_LETTER.OTHER_DAREME}`}
+                </p>
               }
-            }]}
-          />
-          <div className="profile">
-            <div className="profile-header">
-              <ProfileHeader
-                size={width > 880 ? "web" : "mobile"}
-                property={isSame ? 'edit' : 'view'}
-                handleCreateDareMe={handleCreateDareMe}
-              />
             </div>
-            <div className="profile-menu">
-              <ProfileMenu menu={"dareme"} url={authuser.personalisedUrl} />
-            </div>
-            <div className="dare-cards">
-              <div className="my-dareMe">
-                <div className="title">
-                  <CreatoCoinIcon color="#EFA058" width={30} height={30} />
-                  {authuser &&
-                    <p>
-                      {(user && user.personalisedUrl === authuser.personalisedUrl) ? contexts.PROFILE_LETTER.MY_DAREME : `${authuser.name} ${contexts.PROFILE_LETTER.OTHER_DAREME}`}
-                    </p>
-                  }
-                </div>
-                {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0)
-                  || (fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) ?
-                  <>
-                    {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0) &&
-                      <div className="dare-card">
-                        {daremes.filter((dareme: any) => dareme.isUser === true)
-                          .map((dareme: any, index: any) => (
-                            <div className="profile-dareme" key={index}>
-                              <DareMeProfileOwnerCard
-                                item={{
-                                  id: dareme._id,
-                                  title: dareme.title,
-                                  teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                                  cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                                  size: dareme.sizeType,
-                                  leftTime: dareme.time,
-                                  voters: dareme.voteInfo.length,
-                                  donuts: dareme.donuts
-                                }}
-                              />
-                            </div>
-                          ))}
-                      </div>
-                    }
-                    {(fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) &&
-                      <div className="dare-card">
-                        {fundmes.filter((fundme: any) => fundme.isUser === true)
-                          .map((fundme: any, index: any) => (
-                            <div className="profile-dareme" key={index}>
-                              <FundMeProfileOwnerCard
-                                item={{
-                                  id: fundme._id,
-                                  title: fundme.title,
-                                  teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
-                                  cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
-                                  size: fundme.sizeType,
-                                  leftTime: fundme.time,
-                                  voters: fundme.voteInfo.length,
-                                  donuts: fundme.donuts,
-                                  goal: fundme.goal
-                                }}
-                              />
-                            </div>
-                          ))}
-                      </div>
-                    }
-                  </>
-                  :
-                  <div className="no-data">
-                    {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
-                      <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate("/create") }}>
-                        <ContainerBtn text="Create" styleType="fill" icon={[<AddIcon color="white" />, <AddIcon color="white" />]} />
-                      </div> :
-                      <span>No DareMe/FundMe Yet...</span>
-                    }
+            {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0)
+              || (fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) ?
+              <>
+                {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0) &&
+                  <div className="dare-card">
+                    {daremes.filter((dareme: any) => dareme.isUser === true)
+                      .map((dareme: any, index: any) => (
+                        <div className="profile-dareme" key={index}>
+                          <DareMeProfileOwnerCard
+                            item={{
+                              id: dareme._id,
+                              title: dareme.title,
+                              teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                              cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                              size: dareme.sizeType,
+                              leftTime: dareme.time,
+                              voters: dareme.voteInfo.length,
+                              donuts: dareme.donuts
+                            }}
+                          />
+                        </div>
+                      ))}
                   </div>
                 }
-              </div>
-              <div className="i-dared">
-                <div className="title">
-                  <HotIcon color="#EFA058" />
-                  {authuser &&
-                    <p>
-                      {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ? contexts.PROFILE_LETTER.I_DARED : `${authuser.name} ${contexts.PROFILE_LETTER.OTHER_DARED}`}
-                    </p>
-                  }
-                </div>
-                {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0 ?
+                {(fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) &&
                   <div className="dare-card">
-                    {
-                      daremes.filter((dareme: any) => dareme.isUser === false)
-                        .map((dareme: any, index: any) => (
-                          <div className="profile-dareme" key={index}>
-                            {/* <ItemCard
+                    {fundmes.filter((fundme: any) => fundme.isUser === true)
+                      .map((fundme: any, index: any) => (
+                        <div className="profile-dareme" key={index}>
+                          <FundMeProfileOwnerCard
+                            item={{
+                              id: fundme._id,
+                              title: fundme.title,
+                              teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
+                              cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                              size: fundme.sizeType,
+                              leftTime: fundme.time,
+                              voters: fundme.voteInfo.length,
+                              donuts: fundme.donuts,
+                              goal: fundme.goal
+                            }}
+                          />
+                        </div>
+                      ))}
+                  </div>
+                }
+              </>
+              :
+              <div className="no-data">
+                {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
+                  <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate("/create") }}>
+                    <ContainerBtn text="Create" styleType="fill" icon={[<AddIcon color="white" />, <AddIcon color="white" />]} />
+                  </div> :
+                  <span>No DareMe/FundMe Yet...</span>
+                }
+              </div>
+            }
+          </div>
+          <div className="i-dared">
+            <div className="title">
+              <HotIcon color="#EFA058" />
+              {authuser &&
+                <p>
+                  {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ? contexts.PROFILE_LETTER.I_DARED : `${authuser.name} ${contexts.PROFILE_LETTER.OTHER_DARED}`}
+                </p>
+              }
+            </div>
+            {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0 ?
+              <div className="dare-card">
+                {
+                  daremes.filter((dareme: any) => dareme.isUser === false)
+                    .map((dareme: any, index: any) => (
+                      <div className="profile-dareme" key={index}>
+                        {/* <ItemCard
                               owner={{
                                 name: dareme.owner.name,
                                 avatar: dareme.owner.avatar,
@@ -248,25 +246,24 @@ const Profile = () => {
                                 dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
                               }}
                             /> */}
-                          </div>
-                        ))
-                    }
+                      </div>
+                    ))
+                }
+              </div> :
+              <div className="no-data">
+                {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
+                  <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate('/') }}>
+                    <ContainerBtn text="Create with Creator" styleType="fill" icon={[<Dare2Icon color="white" />, <Dare2Icon color="white" />]} />
                   </div> :
-                  <div className="no-data">
-                    {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
-                      <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate('/') }}>
-                        <ContainerBtn text="Create with Creator" styleType="fill" icon={[<Dare2Icon color="white" />, <Dare2Icon color="white" />]} />
-                      </div> :
-                      <span>No Activities Yet...</span>
-                    }
-                  </div>
+                  <span>No Activities Yet...</span>
                 }
               </div>
-            </div>
+            }
           </div>
-        </>}
+        </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

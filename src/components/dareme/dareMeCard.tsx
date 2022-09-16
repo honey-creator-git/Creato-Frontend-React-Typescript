@@ -26,6 +26,7 @@ const DareMeCard = (props: any) => {
   const [muted, setMouted] = useState(true)
   const contexts = useContext(LanguageContext)
   const navigate = useNavigate()
+  const ref = useRef<any>(null)
 
   const displayTime = (left: any) => {
     let res: any
@@ -69,8 +70,8 @@ const DareMeCard = (props: any) => {
             handleClick={() => { navigate(`/${owner.profile}`) }}
           />
         </div>
-        <div className="ownername-lefttime-tip" style={owner.tip ? { width: '225px' } : { width: '205px' }}>
-          <div className="ownername-lefttime">
+        <div className="ownername-lefttime-tip" style={{ width: owner.tip ? '230px' : '210px', height: ref?.current?.offsetHeight > 41 ? '70px' : '55px' }}>
+          <div className="ownername-lefttime" ref={ref}>
             <div className="owner-name">
               <span>{owner.name}</span>
             </div>
