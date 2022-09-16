@@ -93,7 +93,7 @@ const AdminDaremeDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(daremeAction.getDaremeDetails(daremeId));
+    dispatch(daremeAction.getDareMeDetails(daremeId));
   }, [location]);
 
   return (

@@ -92,7 +92,7 @@ const PostFanwall = () => {
 
     useEffect(() => {
         if (itemType) {
-            if (itemType === 'DareMe') dispatch(daremeAction.getDaremeDetails(itemId))
+            if (itemType === 'DareMe') dispatch(daremeAction.getDareMeDetails(itemId))
             else if (itemType === 'FundMe') dispatch(fundmeAction.getFundmeDetails(itemId))
         }
     }, [itemType])

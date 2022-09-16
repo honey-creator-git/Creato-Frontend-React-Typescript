@@ -42,14 +42,15 @@ import Socialaccount from '../pages/profile/edit/socialAccount';
 import Categories from '../pages/profile/edit/categories';
 import Creators from '../pages/profile/creators';
 
-import DaremeDetails from '../pages/dareme/dare/daremeDetails';
-import DaremeVoters from '../pages/dareme/dare/daremeVoters';
-import SupportCreator from '../pages/dareme/dare/supportCreator';
-import DareCreator from '../pages/dareme/dare/dareCreator';
-import GameOn from '../pages/dareme/dare/gameOn';
-import DareRequests from '../pages/dareme/dare/dareRequests';
-import DaremeResult from '../pages/dareme/dare/daremeResult';
-import DaremeDonutWish from '../pages/dareme/dare/donutWish';
+import DaremeDetails from '../pages/dareme/dare/daremeDetails'
+import DareMeDetails from '../pages/dareme/dare/DareMeDetails1'
+import DaremeVoters from '../pages/dareme/dare/daremeVoters'
+import SupportCreator from '../pages/dareme/dare/supportCreator'
+import DareCreator from '../pages/dareme/dare/dareCreator'
+import GameOn from '../pages/dareme/dare/gameOn'
+import DareRequests from '../pages/dareme/dare/dareRequests'
+import DaremeResult from '../pages/dareme/dare/daremeResult'
+import DaremeDonutWish from '../pages/dareme/dare/donutWish'
 
 import PostFanwall from '../pages/fanwall/postFanwall';
 import UploadFanWallVideo from '../pages/fanwall/uploadVideo';
@@ -137,7 +138,8 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
       <Route path="notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
 
-      <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DaremeDetails />} />} />
+      {/* <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DaremeDetails />} />} /> */}
+      <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DareMeDetails />} />} />
       <Route path="dareme/:daremeId/voters" element={<AuthRoute child={<DaremeVoters />} routeType="private" />} />
       <Route path="dareme/:daremeId/support/:optionId" element={<AuthRoute child={<SupportCreator />} />} />
       <Route path="dareme/:daremeId/support/:optionId/wish" element={<AuthRoute child={<DaremeDonutWish />} routeType="private" />} />

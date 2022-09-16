@@ -10,13 +10,13 @@ import CategoryBtn from "../../../components/general/categoryBtn";
 import ContainerBtn from "../../../components/general/containerBtn";
 import DareOption from "../../../components/general/dareOption";
 import Dialog from "../../../components/general/dialog";
+import SignDialog from "../../../components/general/signDialog"
 import WelcomeDlg from "../../../components/general/welcomeDlg"
 import { LanguageContext } from "../../../routes/authRoute";
 import CONSTANT from "../../../constants/constant";
 import { CreatoCoinIcon, NotificationwithCircleIcon, RewardIcon } from "../../../assets/svg";
 import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../../redux/types";
 import "../../../assets/styles/dareme/dare/daremeDetailsStyle.scss";
-import SignDialog from "../../../components/general/signDialog";
 
 const DaremeDetails = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const DaremeDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(daremeAction.getDaremeDetails(daremeId));
+    dispatch(daremeAction.getDareMeDetails(daremeId));
     dispatch({ type: SET_CURRENT_DAREME, payload: null });
   }, [location]);
 

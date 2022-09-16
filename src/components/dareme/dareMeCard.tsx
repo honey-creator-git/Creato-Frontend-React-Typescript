@@ -1,18 +1,9 @@
-import { useEffect, useState, useRef, useContext } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import ReactPlayer from "react-player"
 import Avatar from "../general/avatar"
 import Button from "../general/button"
-import {
-  TipIcon,
-  ClockIcon,
-  CreatoCoinIcon,
-  NoOfPeopleIcon,
-  Dare1Icon,
-  MuteVolumeIcon,
-  UnMuteVolumeIcon,
-  PlayIcon
-} from "../../assets/svg"
+import TeaserCard from "../general/TeaserCard"
+import { TipIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, Dare1Icon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/dareme/components/daremeCardStyle.scss"
@@ -21,12 +12,8 @@ const DareMeCard = (props: any) => {
   const { owner, item, handleSubmit } = props
   const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
-  const playerRef = useRef<ReactPlayer | null>(null)
-  const [play, setPlay] = useState(false)
-  const [muted, setMouted] = useState(true)
   const contexts = useContext(LanguageContext)
   const navigate = useNavigate()
-  const ref = useRef<any>(null)
 
   const displayTime = (left: any) => {
     let res: any
@@ -70,8 +57,8 @@ const DareMeCard = (props: any) => {
             handleClick={() => { navigate(`/${owner.profile}`) }}
           />
         </div>
-        <div className="ownername-lefttime-tip" style={{ width: owner.tip ? '230px' : '210px', height: ref?.current?.offsetHeight > 41 ? '70px' : '55px' }}>
-          <div className="ownername-lefttime" ref={ref}>
+        <div className="ownername-lefttime-tip" style={{ width: owner.tip ? '230px' : '210px' }} >
+          <div className="ownername-lefttime">
             <div className="owner-name">
               <span>{owner.name}</span>
             </div>
@@ -82,47 +69,8 @@ const DareMeCard = (props: any) => {
           {owner.tip ? <div className="tip-button" onClick={() => { navigate(`/${owner.profile}/tip`) }}><TipIcon color="white" /></div> : <></>}
         </div>
       </div>
-      <div className="teaser-video" onClick={() => {
-        if (play) {
-          setPlay(false)
-          setMouted(true)
-          playerRef.current?.seekTo(0)
-        }
-      }}>
-        {(item.cover && !play) &&
-          <div className="cover-image">
-            <img
-              src={item.cover}
-              alt="cover Image"
-              style={item.size ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
-          </div>
-        }
-        {play &&
-          <>
-            <ReactPlayer
-              className={item.size ? "react-player-height" : "react-player-width"}
-              ref={playerRef}
-              url={item.teaser}
-              muted={muted}
-              playing={play}
-              playsinline={true}
-              onProgress={(progress) => {
-                if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-              }}
-            />
-            <div className="mute-icon" onClick={(e) => {
-              e.stopPropagation()
-              setMouted(!muted)
-            }}>
-              {muted === true ? <MuteVolumeIcon color="white" /> : <UnMuteVolumeIcon color="white" />}
-            </div>
-          </>
-        }
-        {!play &&
-          <div className="play-icon" onClick={() => { setPlay(true) }}>
-            <PlayIcon color="white" />
-          </div>
-        }
+      <div className="teaser-video">
+        <TeaserCard cover={item.cover} teaser={item.teaser} size={item.size} type="dareme" />
       </div>
       <div className="item-detail" style={time < 0 ? { background: 'white' } : { background: "linear-gradient(136.21deg, #FFDD94 0%, #FFC38D 27.6%, #FEB389 53.35%, #FDA384 74.31%, #F68B77 100%)" }}>
         <div className="item-title" style={time > 0 ? { color: 'white' } : { color: '#EFA058' }}>

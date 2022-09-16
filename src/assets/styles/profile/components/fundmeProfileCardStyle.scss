@@ -6,76 +6,7 @@
   width: 320px;
 
   .teaser-video {
-    position: relative;
     margin: 0px 20px;
-    width: 280px;
-    height: 480px;
-    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15));
-    border-radius: 5px 5px 0px 0px;
-
-    .cover-image {
-      width: 280px;
-      height: 480px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      border-radius: 5px 5px 0px 0px;
-    }
-
-    .react-player-height {
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px 5px 0px 0px;
-
-      video {
-        width: auto !important;
-        height: 100% !important;
-      }
-    }
-
-    .react-player-width {
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px 5px 0px 0px;
-
-      video {
-        width: 100% !important;
-        height: auto !important;
-      }
-    }
-
-    .mute-icon {
-      position: absolute;
-      right: 15px;
-      bottom: 15px;
-    }
-
-    .play-icon {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      background-color: #14BDC7;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        background-color: #108AA1;
-      }
-    }
   }
 
   .time-info {

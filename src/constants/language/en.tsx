@@ -476,5 +476,5 @@ export const EN = {
     }
 
   },
-  PUBLISH: 'publish'
+  PUBLISH: 'Publish'
 };

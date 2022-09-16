@@ -1,27 +1,15 @@
-import { useEffect, useState, useRef, useContext } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import ReactPlayer from "react-player"
 import Button from "../general/button"
-import {
-  ClockIcon,
-  CreatoCoinIcon,
-  NoOfPeopleIcon,
-  Dare1Icon,
-  MuteVolumeIcon,
-  UnMuteVolumeIcon,
-  PlayIcon
-} from "../../assets/svg"
+import TeaserCard from "../general/TeaserCard"
+import { ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, Dare1Icon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
-import CONSTANT from "../../constants/constant"
 import "../../assets/styles/profile/components/daremeProfileCardStyle.scss"
 
-const DareMeProfileOwnerCard = (props: any) => {
+const DareMeProfileCard = (props: any) => {
   const { item, handleSubmit } = props
   const [time, setTime] = useState(item.leftTime)
   const [timerId, setTimerId] = useState<any>(null)
-  const playerRef = useRef<ReactPlayer | null>(null)
-  const [play, setPlay] = useState(false)
-  const [muted, setMouted] = useState(true)
   const contexts = useContext(LanguageContext)
   const navigate = useNavigate()
 
@@ -61,47 +49,8 @@ const DareMeProfileOwnerCard = (props: any) => {
     <div className="dareme-profile-card-wrapper"
       style={{ background: time > 0 ? 'linear-gradient(136.21deg, #FFDD94 0%, #FFC38D 27.6%, #FEB389 53.35%, #FDA384 74.31%, #F68B77 100%)' : 'white' }}
     >
-      <div className="teaser-video" onClick={() => {
-        if (play) {
-          setPlay(false)
-          setMouted(true)
-          playerRef.current?.seekTo(0)
-        }
-      }}>
-        {(item.cover && !play) &&
-          <div className="cover-image">
-            <img
-              src={item.cover}
-              alt="cover Image"
-              style={item.size ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
-          </div>
-        }
-        {play &&
-          <>
-            <ReactPlayer
-              className={item.size ? "react-player-height" : "react-player-width"}
-              ref={playerRef}
-              url={item.teaser}
-              muted={muted}
-              playing={play}
-              playsinline={true}
-              onProgress={(progress) => {
-                if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
-              }}
-            />
-            <div className="mute-icon" onClick={(e) => {
-              e.stopPropagation()
-              setMouted(!muted)
-            }}>
-              {muted === true ? <MuteVolumeIcon color="white" /> : <UnMuteVolumeIcon color="white" />}
-            </div>
-          </>
-        }
-        {!play &&
-          <div className="play-icon" onClick={() => { setPlay(true) }}>
-            <PlayIcon color="white" />
-          </div>
-        }
+      <div className="teaser-video">
+        <TeaserCard cover={item.cover} teaser={item.teaser} size={item.size} type="dareme" border={"5px 5px 0px 0px"} />
       </div>
       <div className="time-info">
         <div className="item-type">
@@ -138,4 +87,4 @@ const DareMeProfileOwnerCard = (props: any) => {
   )
 }
 
-export default DareMeProfileOwnerCard
+export default DareMeProfileCard

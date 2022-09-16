@@ -10,8 +10,8 @@ import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import WelcomeDlg from "../../components/general/welcomeDlg"
 import AvatarLink from "../../components/dareme/avatarLink"
-import DareMeProfileOwnerCard from "../../components/profile/dareMeProfileOwnerCard"
-import FundMeProfileOwnerCard from "../../components/profile/fundMeProfileOwnerCard"
+import DareMeProfileCard from "../../components/profile/dareMeProfileCard"
+import FundMeProfileCard from "../../components/profile/fundMeProfileCard"
 import { Dare2Icon, HotIcon, AddIcon, RewardIcon, CreatoCoinIcon } from "../../assets/svg"
 import CONSTANT from "../../constants/constant"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
@@ -159,7 +159,7 @@ const Profile = () => {
                     {daremes.filter((dareme: any) => dareme.isUser === true)
                       .map((dareme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
-                          <DareMeProfileOwnerCard
+                          <DareMeProfileCard
                             item={{
                               id: dareme._id,
                               title: dareme.title,
@@ -180,7 +180,7 @@ const Profile = () => {
                     {fundmes.filter((fundme: any) => fundme.isUser === true)
                       .map((fundme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
-                          <FundMeProfileOwnerCard
+                          <FundMeProfileCard
                             item={{
                               id: fundme._id,
                               title: fundme.title,
@@ -226,7 +226,7 @@ const Profile = () => {
                     {daremes.filter((dareme: any) => dareme.isUser === false)
                       .map((dareme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
-                          <DareMeProfileOwnerCard
+                          <DareMeProfileCard
                             item={{
                               id: dareme._id,
                               title: dareme.title,
@@ -247,7 +247,7 @@ const Profile = () => {
                     {fundmes.filter((fundme: any) => fundme.isUser === false)
                       .map((fundme: any, index: any) => (
                         <div className="profile-dareme" key={index}>
-                          <FundMeProfileOwnerCard
+                          <FundMeProfileCard
                             item={{
                               id: fundme._id,
                               title: fundme.title,

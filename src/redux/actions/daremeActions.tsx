@@ -93,6 +93,23 @@ export const daremeAction = {
     else dispatch({ type: SET_DAREME_INITIAL });
   },
 
+  getDareMeDetails: (daremeId: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_DAREME_DETAIL_INITIAL })
+    api.getDareMeDetails(daremeId)
+      .then((result) => {
+        const { data } = result
+        const payload = data.payload
+        if (data.success) {
+          dispatch({ type: SET_DAREME, payload: payload.dareme })
+          dispatch({ type: SET_LOADING_FALSE })
+        }
+      }).catch((err) => {
+        console.log(err)
+        dispatch({ type: SET_LOADING_FALSE })
+      })
+  },
+
   //-------------------------------------
   getDarmesOngoing: () => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE })
@@ -123,19 +140,6 @@ export const daremeAction = {
         if (data.finished) navigate(`/dareme/result/${daremeId}`);
         else navigate(`/dareme/details/${daremeId}`);
       }).catch((err: any) => console.log(err));
-  },
-
-  getDaremeDetails: (daremeId: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_DAREME_DETAIL_INITIAL });
-    api.getDareMeDetails(daremeId)
-      .then((result) => {
-        const { data } = result;
-        if (data.success) {
-          dispatch({ type: SET_DAREME, payload: data.dareme });
-          dispatch({ type: SET_LOADING_FALSE });
-        }
-      }).catch((err) => console.log(err));
   },
 
   getDaremeResult: (daremeId: any) => async (dispatch: Dispatch<any>) => {
