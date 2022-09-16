@@ -23,7 +23,7 @@ const Invitefriends = () => {
   const token: any = JSON.parse(localStorage.getItem('dareme_token') || '{}')
   const decoded: any = decode(token)
   const referral = useSelector((state: any) => state.referral.referralLink)
-  console.log(referral)
+  const user = useSelector((state: any) => state.auth.user)
   const contexts = useContext(LanguageContext)
   const [copy, setCopy] = useState(false)
 
@@ -35,7 +35,7 @@ const Invitefriends = () => {
   return (
     <>
       <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.INVITE_FRIENDS} back={() => navigate(`/myaccount/setting`)} />
+        <Title title={contexts.HEADER_TITLE.INVITE_FRIENDS} back={() => navigate(`/${user.personalisedUrl}`)} />
       </div>
       <div className="invite-friends">
         <div className="title">
