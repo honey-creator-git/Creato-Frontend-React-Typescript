@@ -159,7 +159,7 @@ const FundMeCard = (props: any) => {
           </div>
         </div>
         <div className="goal-donuts" style={time > 0 ? { color: 'white' } : { color: '#14BDC7' }}>
-          <span>{item.donuts.toLocaleString()} / {item.goal.toLocaleString()} Donuts</span>
+          <span style={item.donuts >= item.goal ? { fontSize: '18px' } : {}}>{item.donuts.toLocaleString()}</span>&nbsp;/&nbsp;<span>{item.goal.toLocaleString()} Donuts</span>
         </div>
         <Button
           color="fundme"
