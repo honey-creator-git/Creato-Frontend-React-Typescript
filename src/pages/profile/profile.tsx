@@ -218,38 +218,54 @@ const Profile = () => {
                 </p>
               }
             </div>
-            {daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0 ?
-              <div className="dare-card">
-                {
-                  daremes.filter((dareme: any) => dareme.isUser === false)
-                    .map((dareme: any, index: any) => (
-                      <div className="profile-dareme" key={index}>
-                        {/* <ItemCard
-                              owner={{
-                                name: dareme.owner.name,
-                                avatar: dareme.owner.avatar,
-                                profile: dareme.owner.personalisedUrl,
-                                tip: dareme.owner.tipFunction
-                              }}
-                              item={{
-                                id: dareme.id,
-                                title: dareme.title,
-                                teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                                cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
-                                size: dareme.sizeType,
-                                leftTime: dareme.time,
-                                voters: dareme.voters,
-                                donuts: dareme.donuts,
-                                goal: dareme.goal
-                              }}
-                              handleSubmit={() => {
-                                dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser.personalisedUrl}` });
-                              }}
-                            /> */}
-                      </div>
-                    ))
+            {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0)
+              || (fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === false).length > 0) ?
+              <>
+                {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === false).length > 0) &&
+                  <div className="dare-card">
+                    {daremes.filter((dareme: any) => dareme.isUser === false)
+                      .map((dareme: any, index: any) => (
+                        <div className="profile-dareme" key={index}>
+                          <DareMeProfileOwnerCard
+                            item={{
+                              id: dareme._id,
+                              title: dareme.title,
+                              teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
+                              cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                              size: dareme.sizeType,
+                              leftTime: dareme.time,
+                              voters: dareme.voteInfo.length,
+                              donuts: dareme.donuts
+                            }}
+                          />
+                        </div>
+                      ))}
+                  </div>
                 }
-              </div> :
+                {(fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === false).length > 0) &&
+                  <div className="dare-card">
+                    {fundmes.filter((fundme: any) => fundme.isUser === false)
+                      .map((fundme: any, index: any) => (
+                        <div className="profile-dareme" key={index}>
+                          <FundMeProfileOwnerCard
+                            item={{
+                              id: fundme._id,
+                              title: fundme.title,
+                              teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
+                              cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                              size: fundme.sizeType,
+                              leftTime: fundme.time,
+                              voters: fundme.voteInfo.length,
+                              donuts: fundme.donuts,
+                              goal: fundme.goal
+                            }}
+                          />
+                        </div>
+                      ))}
+                  </div>
+                }
+              </>
+              :
               <div className="no-data">
                 {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
                   <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate('/') }}>
