@@ -64,8 +64,8 @@ const DaremeDetails = () => {
   }
 
   const dareCreator = (user: any) => {
-    if (user) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
-    else setIsSignIn(true);
+    // if (user) dispatch(daremeAction.checkDareCreatorAndResults(daremeId, navigate));
+    // else setIsSignIn(true);
   }
 
   const supportCreator = (user: any, daremeId: any, optionId: any) => {
@@ -73,7 +73,7 @@ const DaremeDetails = () => {
       setIsCopied(false);
       setIsCopyLink(true);
     }
-    else dispatch(daremeAction.checkSupportAndResults(daremeId, optionId, navigate));
+    // else dispatch(daremeAction.checkSupportAndResults(daremeId, optionId, navigate));
   }
 
   useEffect(() => {

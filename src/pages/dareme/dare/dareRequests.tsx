@@ -34,7 +34,7 @@ const DareRequests = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        dispatch(daremeAction.getDaremeRequests(daremeId));
+        dispatch(daremeAction.getDareMeRequests(daremeId));
     }, [location]);
 
     return (

@@ -76,6 +76,7 @@ const DonutWish = () => {
 
   useEffect(() => {
     if (dareme.owner) {
+      if(dareme.finished) navigate(`/dareme/result/${daremeId}`)
       const filters = dareme.options.filter((option: any) => option.option._id === optionId)
       if (filters.length) setOption(filters[0].option)
       setVoted(checkVoted())

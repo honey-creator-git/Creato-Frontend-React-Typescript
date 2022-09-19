@@ -42,7 +42,9 @@ const DaremeVoters = () => {
             <div className="title-header">
                 <Title
                     title={"Voters"}
-                    back={() => { dispatch(daremeAction.checkDetailsAndResults(daremeId, navigate)) }}
+                    back={() => { 
+                        // dispatch(daremeAction.checkDetailsAndResults(daremeId, navigate)) 
+                    }}
                 />
             </div>
             {resultOptions.length > 0 &&

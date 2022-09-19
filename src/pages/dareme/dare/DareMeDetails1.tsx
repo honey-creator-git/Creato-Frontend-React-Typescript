@@ -214,7 +214,7 @@ const DareMeDetails = (props: any) => {
                         type={true}
                         disabled={false}
                         username={"You"}
-                        handleSubmit={() => { }}
+                        handleSubmit={() => { navigate(`/dareme/dare/${daremeId}`) }}
                       />
                     </div>
                   }
