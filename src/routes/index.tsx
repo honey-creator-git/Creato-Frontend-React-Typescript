@@ -47,7 +47,6 @@ import DaremeVoters from '../pages/dareme/dare/daremeVoters'
 import SupportCreator from '../pages/dareme/dare/supportCreator'
 import DareCreator from '../pages/dareme/dare/dareCreator'
 import GameOn from '../pages/dareme/dare/gameOn'
-import DareRequests from '../pages/dareme/dare/dareRequests'
 import DaremeResult from '../pages/dareme/dare/daremeResult'
 import DaremeDonutWish from '../pages/dareme/dare/donutWish'
 
@@ -137,7 +136,6 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
       <Route path="notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
 
-      {/* <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DaremeDetails />} />} /> */}
       <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DareMeDetails />} />} />
       <Route path="dareme/:daremeId/voters" element={<AuthRoute child={<DaremeVoters />} routeType="private" />} />
       <Route path="dareme/:daremeId/support/:optionId" element={<AuthRoute child={<SupportCreator />} />} />
@@ -145,7 +143,6 @@ const AppRoutes = () => {
       <Route path="dareme/result/:daremeId" element={<AuthRoute child={<DaremeResult />} />} />
       <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
       <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />
-      <Route path="dareme/requests/:daremeId" element={<AuthRoute child={<DareRequests />} routeType="private" />} />
 
       <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
