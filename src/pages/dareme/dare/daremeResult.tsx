@@ -63,17 +63,17 @@ const DaremeResult = () => {
       setTotalDonuts(total);
       setResultOptions(dareme.options.sort((first: any, second: any) => {
         return first.option.donuts > second.option.donuts ? -1 : first.option.donuts < second.option.donuts ? 1 :
-          first.option.date < second.option.date ? 1 : first.option.date > second.option.date ? -1 : 0;
-      }));
+          first.option.date < second.option.date ? 1 : first.option.date > second.option.date ? -1 : 0
+      }))
     }
-  }, [dareme]);
+  }, [dareme])
 
   useEffect(() => {
     if (resultOptions.length) {
-      setMaxOption(resultOptions.reduce((prev: any, current: any) => (prev.option.donuts > current.option.donuts) ? prev : current));
-      setIsWin(resultOptions.filter((option: any) => option.option.win === true).length ? true : false);
+      setMaxOption(resultOptions.reduce((prev: any, current: any) => (prev.option.donuts > current.option.donuts) ? prev : current))
+      setIsWin(resultOptions.filter((option: any) => option.option.win === true).length ? true : false)
     }
-  }, [resultOptions]);
+  }, [resultOptions])
 
   useEffect(() => {
     if (dlgState.state) {

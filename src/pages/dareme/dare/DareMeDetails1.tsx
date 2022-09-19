@@ -59,7 +59,7 @@ const DareMeDetails = (props: any) => {
       for (var i = 0; i < dareme.options.length; i++) {
         if (dareme.options[i].option.writer._id === user.id) return true
         for (var j = 0; j < dareme.options[i].option.voteInfo.length; j++)
-          if (dareme.options[i].option.voteInfo[j].voter === user.id && dareme.options[i].option.voteInfo[j].canFree === false) return true
+          if (dareme.options[i].option.voteInfo[j].voter === user.id) return true
       }
       return false
     } else return false
@@ -207,7 +207,7 @@ const DareMeDetails = (props: any) => {
                       />
                     </div>
                   ))}
-                  {dareme.owner._id !== user.id &&
+                  {(user && dareme.owner._id !== user.id) &&
                     <div className="option">
                       <DareOption
                         dareTitle={contexts.DAREME_DETAILS.HAVE_IDEA}

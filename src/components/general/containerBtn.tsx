@@ -1,35 +1,18 @@
-import { useState } from "react";
+import { PRIMARY, ERROR } from "../../constants/Color"
+import { useState } from "react"
 
-interface containerBtnProps {
-  styleType?: string; // fill outline
-  text?: string;
-  icon?: any;
-  disabled?: boolean;
-  bgColor?: string;
-}
+const ContainerBtn = (props: any) => {
+  const [status, setStatus] = useState("default")
+  const { styleType, text, icon, color } = props
 
-const ContainerBtn = (props: containerBtnProps) => {
-  const [status, setStatus] = useState("default");
-  const style = props.styleType;
-  const text = props.text;
-  const icon = props.icon;
+  const colors = color === 'primary' ? PRIMARY : color === 'error' ? ERROR : PRIMARY
 
-  const backgroundColor =
-    props.disabled === true
-      ? "#E1E0DF"
-      : style === "fill"
-        ? "#EFA058"
-        : style === "clear" ? '#FBE5D1'
-          : "white";
-  const backgroundHoverColor = "#F5C395";
-  const backgroundPressedColor = "#EA8426";
-
-  const fontColor =
-    props.disabled === true
-      ? "#938D8A"
-      : style === "fill"
-        ? "white"
-        : "#EFA058";
+  const backgroundColor = props.disabled === true ? "#E1E0DF" : styleType === "fill" ? colors[6] : "white"
+  const backgroundHoverColor = colors[4]
+  const backgroundPressedColor = colors[6]
+  const fontColor = props.disabled === true ? "#938D8A" : styleType === "fill" ? "white" : colors[6]
+  const fontHoverColor = colors[4]
+  const fontPressedColor = colors[6]
 
   const disabledStyle = {
     cursor: "not-allowed",
@@ -42,31 +25,21 @@ const ContainerBtn = (props: containerBtnProps) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  };
+  }
 
   const fillStyle = {
     cursor: "pointer",
     width: "100%",
     height: "50px",
-    backgroundColor: props.bgColor !== undefined ? props.bgColor :
-      (status === "default"
-        ? backgroundColor
-        : status === "hover"
-          ? backgroundHoverColor
-          : backgroundPressedColor),
-    color: props.bgColor !== undefined ? 'white' : (status === "default" ? fontColor : "white"),
-    border: props.bgColor !== undefined ? `1px solid ${props.bgColor}` :
-      (status === "default"
-        ? style !== 'clear' ? "1px solid #EFA058" : "1px solid #FBE5D1"
-        : status === "hover"
-          ? `1px solid ${backgroundHoverColor}`
-          : `1px solid ${backgroundPressedColor}`),
+    backgroundColor: status === "default" ? backgroundColor : status === "hover" ? backgroundHoverColor : backgroundPressedColor,
+    color: status === "default" ? fontColor : "white",
+    border: status === "default" ? `1px solid ${fontColor}` : status === "hover" ? `1px solid ${fontHoverColor}` : `1px solid ${fontPressedColor}`,
     borderRadius: "10px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     transition: "0.3s",
-  };
+  }
 
   const fontStyle = {
     fontFamily: "Lato",
@@ -80,17 +53,16 @@ const ContainerBtn = (props: containerBtnProps) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  };
-
+  }
   const iconStyle = {
     width: "40px",
     height: "40px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  };
+  }
 
-  let btnStyle = props.disabled === true ? disabledStyle : fillStyle;
+  let btnStyle = props.disabled === true ? disabledStyle : fillStyle
 
   return (
     <div
@@ -102,7 +74,7 @@ const ContainerBtn = (props: containerBtnProps) => {
       <div style={fontStyle}>
         {icon !== undefined && (
           <div style={iconStyle}>
-            {style === undefined
+            {styleType === undefined
               ? icon[0]
               : status === "default"
                 ? icon[0]

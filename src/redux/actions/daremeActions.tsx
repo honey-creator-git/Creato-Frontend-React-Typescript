@@ -110,6 +110,20 @@ export const daremeAction = {
       })
   },
 
+  supportCreator: (daremeId: any, optionId: any, reward: any, donuts: any) => async (dispatch: Dispatch<any>) => {
+    api.supportCreator({ daremeId: daremeId, optionId: optionId, amount: donuts })
+      .then((result) => {
+        const { data } = result
+        if (data.success) {
+          const payload = data.payload
+          if (reward > donuts) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
+          else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
+          dispatch({ type: SET_DAREME, payload: payload.dareme })
+          if (payload.user) dispatch({ type: SET_USER, payload: payload.user })
+        }
+      }).catch((err) => console.log(err))
+  },
+
   //-------------------------------------
   getDarmesOngoing: () => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE })
@@ -162,27 +176,6 @@ export const daremeAction = {
         const { data } = result;
         if (data.finished) navigate(`/dareme/result/${daremeId}`)
         else navigate(`/dareme/${daremeId}/support/${optionId}`)
-      }).catch((err: any) => console.log(err))
-  },
-
-  supportCreator: (daremeId: any, optionId: any, donuts: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-    api.checkDareMeFinished(daremeId)
-      .then((result: any) => {
-        const { data } = result
-        if (data.finished) navigate(`/dareme/result/${daremeId}`);
-        else {
-          api.supportCreator({ daremeId: daremeId, optionId: optionId, amount: donuts })
-            .then((result) => {
-              const { data } = result
-              if (data.success) {
-                if (donuts === 1) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
-                else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
-                dispatch({ type: SET_DAREME, payload: data.dareme })
-                dispatch({ type: SET_OPTION, payload: data.option })
-                if (data.user) dispatch({ type: SET_USER, payload: data.user })
-              }
-            }).catch((err) => console.log(err))
-        }
       }).catch((err: any) => console.log(err))
   },
 

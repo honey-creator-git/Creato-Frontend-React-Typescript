@@ -14,7 +14,6 @@ import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { HotIcon, LightbulbIcon } from "../../../assets/svg";
 import SignDialog from "../../../components/general/signDialog";
-import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
 import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
 import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss';
 
@@ -36,7 +35,6 @@ const SupportCreator = () => {
   const [isCopied, setIsCopied] = useState(false)
   const [isSignIn, setIsSignIn] = useState(false)
 
-  const [voteNonSuperfanGif, setVoteNonSuperfanGif] = useState(false)
   const [voteSuperfanGif, setVoteSuperfanGif] = useState(false)
   const [voted, setVoted] = useState(false)
   const contexts = useContext(LanguageContext)
@@ -74,10 +72,7 @@ const SupportCreator = () => {
   }, [dispatch, daremeId])
 
   useEffect(() => {
-    if (dlgState.type === 'vote_non_superfan' && dlgState.state === true) {
-      setIsCopyLink(true)
-      setVoteNonSuperfanGif(true)
-    } else if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
+    if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
       setIsCopyLink(true)
       setVoteSuperfanGif(true)
     }
@@ -85,14 +80,12 @@ const SupportCreator = () => {
   useEffect(() => {
     if (dareme.owner && dareme.finished) navigate(`/dareme/result/${daremeId}`)
     if (dareme.owner && user && dareme.owner._id === user.id) navigate(`/${user.personalisedUrl}`)
-  }, [dareme, user, navigate])
-  useEffect(() => { if (voteNonSuperfanGif) setTimeout(() => { setVoteNonSuperfanGif(false) }, 4000) }, [voteNonSuperfanGif])
+  }, [dareme, user, navigate, daremeId])
   useEffect(() => { if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500) }, [voteSuperfanGif])
   useEffect(() => { window.scrollTo(0, 0) }, [location])
 
   return (
     <div>
-      {voteNonSuperfanGif && <Gif gif={VoteNonSuperfanGif} />}
       {voteSuperfanGif && <Gif gif={VoteSuperfanGif} />}
       <div className="title-header">
         <Title title={contexts.HEADER_TITLE.DAREME_OPTION} back={() => { navigate(`/dareme/details/${daremeId}`) }} />
@@ -135,7 +128,7 @@ const SupportCreator = () => {
               {
                 text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
                 handleClick: () => {
-                  dispatch(daremeAction.supportCreator(daremeId, optionId, dareme.reward, navigate))
+                  dispatch(daremeAction.supportCreator(daremeId, optionId, dareme.reward, dareme.reward))
                   setIsSuperFan(false)
                   setIsCopied(false)
                 }
@@ -152,13 +145,11 @@ const SupportCreator = () => {
             exit={() => {
               setIsCopyLink(false);
               dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
-              setVoteNonSuperfanGif(false)
               setVoteSuperfanGif(false)
             }}
             wrapExit={() => {
               setIsCopyLink(false);
               dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
-              setVoteNonSuperfanGif(false)
               setVoteSuperfanGif(false)
             }}
             context={contexts.DIALOG.BODY_LETTER.HAVE_DARED + dareme.owner.name + contexts.DIALOG.BODY_LETTER.ON_PART + dareme.title}
@@ -231,7 +222,7 @@ const SupportCreator = () => {
                     if (user) navigate('/dareme/' + daremeId + '/support/' + optionId + '/wish')
                     else setIsSignIn(true)
                   }}>
-                    <ContainerBtn text={'Donuts as you like!'} styleType="fill" bgColor="#DE5A67"
+                    <ContainerBtn text={'Donuts as you like!'} styleType="fill" color="error"
                       icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
                     />
                   </div>

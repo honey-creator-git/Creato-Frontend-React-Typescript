@@ -464,7 +464,7 @@ const CreateDareme = () => {
             </div>
             <div className="preview-clear">
               <div className="clear-btn" onClick={() => { setOpenErase(true) }}>
-                <ContainerBtn text={contexts.GENERAL_LETTER.CLEAR_ALL} styleType="clear" />
+                <ContainerBtn text={contexts.GENERAL_LETTER.CLEAR_ALL} />
               </div>
               <div
                 className="prev-btn"
