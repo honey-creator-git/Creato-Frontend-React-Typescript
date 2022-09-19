@@ -15,7 +15,7 @@ const DaremeVoters = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { daremeId } = useParams()
-  const contexts = useContext(LanguageContext);
+  const contexts = useContext(LanguageContext)
   const daremeState = useSelector((state: any) => state.dareme)
   const userState = useSelector((state: any) => state.auth)
   const { dareme } = daremeState
@@ -23,7 +23,7 @@ const DaremeVoters = () => {
   const [resultOptions, setResultOptions] = useState<Array<any>>([])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     dispatch(daremeAction.getDaremeVoters(daremeId))
   }, [location, dispatch, daremeId])
 
@@ -41,55 +41,51 @@ const DaremeVoters = () => {
   return (
     <>
       <div className="title-header">
-        <Title
-          title={"Voters"}
-          back={() => { navigate(`/dareme/details/${daremeId}`) }}
-        />
+        <Title title={"Voters"} back={() => { navigate(`/dareme/details/${daremeId}`) }} />
       </div>
       {resultOptions.length > 0 &&
         <>
           <div className="dareme-voters">
             <div className="dareme-voters-information">
               <div className="dare-options">
-                {
-                  resultOptions.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
-                    <div key={index}>
-                      <div className="dare-option" >
-                        <DareOption
-                          dareTitle={option.option.title}
-                          donuts={option.option.donuts}
-                          voters={option.option.voters}
-                          canVote={true}
-                          disabled={false}
-                          username={option.option.writer.name}
-                          leading={false}
-                          handleSubmit={() => { }}
-                        />
-                      </div>
-                      <div className="vote-details">
-                        {option.option.voteInfo.sort((first: any, second: any) => {
-                          const firstDonuts = first.donuts + (first.canFree === false ? 1 : 0)
-                          const secondDonuts = second.donuts + (second.canFree === false ? 1 : 0)
-                          if (firstDonuts >= secondDonuts) return -1
-                          else return 1
-                        }).map((vote: any, vIndex: any) => (
-                          <div key={vIndex} className="vote-info">
-                            {vote.voter.name &&
-                              <Avatar
-                                avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
-                                username={vote.voter.name}
-                                avatarStyle="horizontal"
-                              />
-                            }
-                            <div className="donuts-count">
-                              <CreatoCoinIcon color="#54504E" />
-                              <span>{vote.donuts + (vote.canFree === false ? 1 : 0)}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                {resultOptions.filter((option: any) => option.option.status === 1).map((option: any, index: any) => (
+                  <div key={index}>
+                    <div className="dare-option" >
+                      <DareOption
+                        dareTitle={option.option.title}
+                        donuts={option.option.donuts}
+                        voters={option.option.voters}
+                        canVote={true}
+                        disabled={false}
+                        username={option.option.writer.name}
+                        leading={false}
+                        handleSubmit={() => { }}
+                      />
                     </div>
-                  ))
+                    <div className="vote-details">
+                      {option.option.voteInfo.sort((first: any, second: any) => {
+                        const firstDonuts = first.donuts + (first.canFree === false ? 1 : 0)
+                        const secondDonuts = second.donuts + (second.canFree === false ? 1 : 0)
+                        if (firstDonuts >= secondDonuts) return -1
+                        else return 1
+                      }).map((vote: any, vIndex: any) => (
+                        <div key={vIndex} className="vote-info">
+                          {vote.voter.name &&
+                            <Avatar
+                              avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
+                              username={vote.voter.name}
+                              avatarStyle="horizontal"
+                            />
+                          }
+                          <div className="donuts-count">
+                            <CreatoCoinIcon color="#54504E" />
+                            <span>{vote.donuts + (vote.canFree === false ? 1 : 0)}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))
                 }
               </div>
             </div>

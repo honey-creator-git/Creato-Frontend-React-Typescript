@@ -42,8 +42,7 @@ import Socialaccount from '../pages/profile/edit/socialAccount';
 import Categories from '../pages/profile/edit/categories';
 import Creators from '../pages/profile/creators';
 
-import DaremeDetails from '../pages/dareme/dare/daremeDetails'
-import DareMeDetails from '../pages/dareme/dare/DareMeDetails1'
+import DareMeDetails from '../pages/dareme/dare/DareMeDetails'
 import DaremeVoters from '../pages/dareme/dare/daremeVoters'
 import SupportCreator from '../pages/dareme/dare/supportCreator'
 import DareCreator from '../pages/dareme/dare/dareCreator'
