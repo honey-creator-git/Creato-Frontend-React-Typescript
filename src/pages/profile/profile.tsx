@@ -2,14 +2,11 @@ import { useState, useEffect, useContext, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import { daremeAction } from "../../redux/actions/daremeActions"
-import { fundmeAction } from "../../redux/actions/fundmeActions"
-import VideoCardMobile from "../../components/dareme/videoCardMobile"
 import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import WelcomeDlg from "../../components/general/welcomeDlg"
-import AvatarLink from "../../components/dareme/avatarLink"
 import DareMeProfileCard from "../../components/profile/dareMeProfileCard"
 import FundMeProfileCard from "../../components/profile/fundMeProfileCard"
 import { Dare2Icon, HotIcon, AddIcon, RewardIcon, CreatoCoinIcon } from "../../assets/svg"
@@ -139,7 +136,7 @@ const Profile = () => {
           />
         </div>
         <div className="profile-menu">
-          {authuser && <ProfileMenu menu={"dareme"} url={authuser.personalisedUrl} />}
+          <ProfileMenu menu={"dareme"} url={authuser ? authuser.personalisedUrl : ''} />
         </div>
         <div className="dare-cards">
           <div className="my-dareMe">

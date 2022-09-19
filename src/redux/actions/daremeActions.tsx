@@ -160,53 +160,39 @@ export const daremeAction = {
     api.checkDareMeFinished(daremeId)
       .then((result: any) => {
         const { data } = result;
-        if (data.finished) navigate(`/dareme/result/${daremeId}`);
-        else navigate(`/dareme/${daremeId}/support/${optionId}`);
-      }).catch((err: any) => console.log(err));
-  },
-
-  getOptionDetails: (optionId: any, daremeId: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_DAREME_INITIAL });
-    api.getOptionDetails(optionId, daremeId)
-      .then((result: any) => {
-        const { data } = result;
-        if (data.success) {
-          dispatch({ type: SET_OPTION, payload: data.option });
-          dispatch({ type: SET_DAREME, payload: data.dareme });
-          dispatch({ type: SET_LOADING_FALSE });
-        }
-      }).catch((err: any) => console.log(err));
+        if (data.finished) navigate(`/dareme/result/${daremeId}`)
+        else navigate(`/dareme/${daremeId}/support/${optionId}`)
+      }).catch((err: any) => console.log(err))
   },
 
   supportCreator: (daremeId: any, optionId: any, donuts: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     api.checkDareMeFinished(daremeId)
       .then((result: any) => {
-        const { data } = result;
+        const { data } = result
         if (data.finished) navigate(`/dareme/result/${daremeId}`);
         else {
           api.supportCreator({ daremeId: daremeId, optionId: optionId, amount: donuts })
             .then((result) => {
-              const { data } = result;
+              const { data } = result
               if (data.success) {
                 if (donuts === 1) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
                 else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
-                dispatch({ type: SET_DAREME, payload: data.dareme });
-                dispatch({ type: SET_OPTION, payload: data.option });
-                if (data.user) dispatch({ type: SET_USER, payload: data.user });
+                dispatch({ type: SET_DAREME, payload: data.dareme })
+                dispatch({ type: SET_OPTION, payload: data.option })
+                if (data.user) dispatch({ type: SET_USER, payload: data.user })
               }
-            }).catch((err) => console.log(err));
+            }).catch((err) => console.log(err))
         }
-      }).catch((err: any) => console.log(err));
+      }).catch((err: any) => console.log(err))
   },
 
   checkDareCreatorAndResults: (daremeId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     api.checkDareMeFinished(daremeId)
       .then((result: any) => {
         const { data } = result;
-        if (data.finished) navigate(`/dareme/result/${daremeId}`);
-        else navigate(`/dareme/dare/${daremeId}`);
-      }).catch((err: any) => console.log(err));
+        if (data.finished) navigate(`/dareme/result/${daremeId}`)
+        else navigate(`/dareme/dare/${daremeId}`)
+      }).catch((err: any) => console.log(err))
   },
 
   getDareCreatorDetails: (daremeId: any) => async (dispatch: Dispatch<any>) => {
@@ -219,7 +205,6 @@ export const daremeAction = {
 
   getDaremesByPersonalisedUrl: (url: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE })
-    dispatch({ type: SET_USERS, payload: [] })
     dispatch({ type: SET_DAREMES, payload: [] })
     dispatch({ type: SET_FUNDMES, payload: [] })
     api.getDaremesByPersonalisedUrl({ url: url })

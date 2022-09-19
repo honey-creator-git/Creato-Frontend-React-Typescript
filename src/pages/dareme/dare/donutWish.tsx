@@ -74,7 +74,7 @@ const DonutWish = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        dispatch(daremeAction.getOptionDetails(optionId, daremeId));
+        // dispatch(daremeAction.getOptionDetails(optionId, daremeId));
     }, [daremeId, optionId, location]);
 
     useEffect(() => {

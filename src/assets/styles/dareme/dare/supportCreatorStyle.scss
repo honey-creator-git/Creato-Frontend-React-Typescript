@@ -1,137 +1,137 @@
 .dareme-support {
-    box-sizing: border-box;
-    display: flex;
-    position: relative;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
 
-    .scroll-bar {
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
+  .scroll-bar {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
 
-        &::-webkit-scrollbar-track {
-            background-color: rgba(245, 195, 149, 0.1);
-            border-radius: 10px;
-        }
+    &::-webkit-scrollbar-track {
+      background-color: rgba(245, 195, 149, 0.1);
+      border-radius: 10px;
+    }
 
-        &::-webkit-scrollbar-thumb {
-            background: rgba(245, 195, 149, 0.5);
-            border-radius: 10px;
-            transition: 0.2s;
-            width: 12px;
+    &::-webkit-scrollbar-thumb {
+      background: rgba(245, 195, 149, 0.5);
+      border-radius: 10px;
+      transition: 0.2s;
+      width: 12px;
 
-            &:hover {
-                background: #efa058;
-            }
-        }
+      &:hover {
+        background: #efa058;
+      }
+    }
+  }
+
+  .dareme-support-information {
+    width: 370px;
+
+    .header-choosen {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 26px;
+      text-align: center;
+      letter-spacing: 0.02em;
+      color: #54504E;
+      margin-bottom: 20px;
+    }
+
+    .number-of-donuts {
+      width: 280px;
+      margin: 10px auto 20px auto;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #000000;
+
+      span {
+        margin-top: 10px;
+        width: 60px;
+        border: 1px solid #000000;
+        border-left: 0px;
+        border-bottom: 0px;
+        border-right: 0px;
+      }
+    }
+
+    .dareme-support-fun {
+      width: 340px;
+      margin: 0 auto;
+
+      .support-option {
+        margin: 0px auto;
+      }
+
+      .support-fun {
+        width: 330px;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+
+      .support-letter {
+        margin-top: 15px;
+        margin-left: 10px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #54504E;
+      }
+
+      .support-explain {
+        margin-left: 10px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        color: #54504E;
+      }
+    }
+  }
+
+  @media (min-width: 880px) {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 40px;
+    justify-content: space-between;
+
+    .dareme-support-videoCardDesktop {
+      width: 370px;
+      display: block;
     }
 
     .dareme-support-information {
-        width: 370px;
+      margin-top: 20px;
+    }
+  }
 
-        .header-choosen {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 800;
-            font-size: 22px;
-            line-height: 26px;
-            text-align: center;
-            letter-spacing: 0.02em;
-            color: #54504E;
-            margin-bottom: 20px;
-        }
+  @media (max-width: 879px) {
+    justify-content: center;
 
-        .number-of-donuts {
-            width: 280px;
-            margin: 10px auto 20px auto;
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
-            text-align: center;
-            color: #BAB6B5;
-
-            span {
-                margin-top: 10px;
-                width: 60px;
-                border: 1px solid #BAB6B5;
-                border-left: 0px;
-                border-bottom: 0px;
-                border-right: 0px;
-            }
-        }
-
-        .dareme-support-fun {
-            width: 340px;
-            margin: 0 auto;
-
-            .support-option {
-                margin: 0px auto;
-            }
-
-            .support-fun {
-                width: 330px;
-                margin: 0 auto;
-                margin-top: 20px;
-            }
-
-            .support-letter {
-                margin-top: 15px;
-                margin-left: 10px;
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 14px;
-                line-height: 16px;
-                color: #54504E;
-            }
-
-            .support-explain {
-                margin-left: 10px;
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 14px;
-                color: #54504E;
-            }
-        }
+    .dareme-support-videoCardDesktop {
+      display: none;
     }
 
-    @media (min-width: 880px) {
-        max-width: 880px;
-        margin: 0 auto;
-        background: #ffffff;
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-        border-radius: 5px;
-        padding: 40px;
-        justify-content: space-between;
-
-        .dareme-support-videoCardDesktop {
-            width: 370px;
-            display: block;
-        }
-
-        .dareme-support-information {
-            margin-top: 20px;
-        }
+    .dareme-support-information {
+      margin: 0 4px;
+      background: #FFFFFF;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+      padding: 15px;
     }
-
-    @media (max-width: 879px) {
-        justify-content: center;
-
-        .dareme-support-videoCardDesktop {
-            display: none;
-        }
-
-        .dareme-support-information {
-            margin: 0 4px;
-            background: #FFFFFF;
-            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-            border-radius: 5px;
-            padding: 15px;
-        }
-    }
+  }
 }

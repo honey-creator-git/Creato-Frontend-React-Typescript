@@ -1,0 +1,70 @@
+.teaser-pop-up-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+
+  .teaser-main-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15));
+
+    .react-player-height {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      video {
+        width: auto !important;
+        height: 100% !important;
+      }
+    }
+
+    .react-player-width {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      video {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+    .mute-icon {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+    }
+
+    .play-icon {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exit-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+  }
+}

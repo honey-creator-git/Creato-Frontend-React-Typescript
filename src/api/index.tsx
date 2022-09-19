@@ -41,7 +41,6 @@ export const getDaremesByPersonalisedUrl = (data: any) => API.post('/api/dareme/
 export const checkDareMeFinished = (daremeId: any) => API.get(`/api/dareme/check/finished/${daremeId}`);
 export const getDareMeDetails = (daremeId: any) => API.get(`/api/dareme/details/${daremeId}`);
 export const getDaremeResult = (daremeId: any) => API.get(`/api/dareme/result/${daremeId}`);
-export const getOptionDetails = (optionId: any, daremeId: any) => API.get(`/api/dareme/${daremeId}/details/${optionId}`);
 export const supportCreator = (data: any) => API.post("/api/dareme/support", data);
 export const getDareCreatorDetails = (daremeId: any) => API.get(`/api/dareme/dare/${daremeId}`);
 export const dareCreator = (data: any) => API.post('/api/dareme/dare/creator', data);

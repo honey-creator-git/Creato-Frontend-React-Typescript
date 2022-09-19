@@ -1,22 +1,21 @@
-import { useState } from "react";
-import { CreatoCoinIcon, Dare1Icon } from "../../assets/svg";
-import { NoOfPeopleIcon } from "../../assets/svg";
+import { useState } from "react"
+import { CreatoCoinIcon, Dare1Icon, NoOfPeopleIcon, EditIcon } from "../../assets/svg"
 
 const DareOption = (props: any) => {
-  const { leading, donuts, canVote, username, dareTitle, disabled, voters } = props;
-  const [state, setState] = useState("default");
+  const { leading, donuts, canVote, username, dareTitle, disabled, voters, type } = props
+  const [state, setState] = useState("default")
 
   const optionBackgroundColor =
     leading === true
       ? "radial-gradient(circle, rgba(251,164,63,0.9) 20%, rgba(252,70,70,0.8) 100%)"
-      : "#F5F5F4";
-  const optionHoverBackgroundColor = leading === true ? "#E88C95" : "#F5C395";
+      : "#F5F5F4"
+  const optionHoverBackgroundColor = leading === true ? "#E88C95" : "#F5C395"
   const optionPressedBackgroundColor =
-    leading === true ? "#DE5A67" : "#EFA058";
+    leading === true ? "#DE5A67" : "#EFA058"
 
-  const fontColor = leading === true ? "white" : "#54504E";
-  const fontHoverColor = leading === true ? "white" : "white";
-  const fontPressedColor = leading === true ? "white" : "white";
+  const fontColor = leading === true ? "white" : "#54504E"
+  const fontHoverColor = leading === true ? "white" : "white"
+  const fontPressedColor = leading === true ? "white" : "white"
   const wrapper = {
     cursor: disabled === false ? "pointer" : "not-allowed",
     width: "100%",
@@ -24,7 +23,7 @@ const DareOption = (props: any) => {
     display: "flex",
     fontFamily: "Lato",
     flexDirection: "column" as const,
-  };
+  }
 
   const option = {
     height: "42px",
@@ -38,7 +37,7 @@ const DareOption = (props: any) => {
           : optionBackgroundColor,
     display: "flex",
     justifyContent: "space-between",
-  };
+  }
 
   const disableOption = {
     height: "42px",
@@ -48,7 +47,7 @@ const DareOption = (props: any) => {
     color: "#938D8A",
     display: "flex",
     justifyContent: "space-between",
-  };
+  }
 
   const optionFontStyle = {
     fontStyle: "normal",
@@ -66,19 +65,19 @@ const DareOption = (props: any) => {
           : state === "hover"
             ? fontHoverColor
             : fontPressedColor,
-  };
+  }
 
   const iconStyle = {
     display: "flex",
     alignItems: "center",
-  };
+  }
 
   const voteStyle = {
     height: "24px",
     display: "flex",
     padding: "0",
     justifyContent: "space-between",
-  };
+  }
 
   const resultStyle = {
     display: "flex",
@@ -88,9 +87,9 @@ const DareOption = (props: any) => {
     fontSize: "12px",
     lineHeight: "14px",
     color: "#000000",
-  };
+  }
 
-  const optionStyle = disabled === false ? option : disableOption;
+  const optionStyle = disabled === false ? option : disableOption
 
   return (
     <div
@@ -102,17 +101,25 @@ const DareOption = (props: any) => {
     >
       <div style={optionStyle}>
         <div style={optionFontStyle}>{dareTitle}</div>
-        {canVote === true && (
+        {type ?
           <div style={iconStyle}>
-            {disabled === true ? (
-              <Dare1Icon color="#938D8A" />
-            ) : state === "default" && leading === false ? (
-              <Dare1Icon color="#EFA058" />
-            ) : (
-              <Dare1Icon color="white" />
-            )}
+            <EditIcon color={state === "default" ? "#EFA058" : "white"} />
           </div>
-        )}
+          :
+          <>
+            {canVote === true && (
+              <div style={iconStyle}>
+                {disabled === true ? (
+                  <Dare1Icon color="#938D8A" />
+                ) : state === "default" && leading === false ? (
+                  <Dare1Icon color="#EFA058" />
+                ) : (
+                  <Dare1Icon color="white" />
+                )}
+              </div>
+            )}
+          </>
+        }
       </div>
       <div style={voteStyle}>
         <div style={resultStyle}>
@@ -122,7 +129,7 @@ const DareOption = (props: any) => {
               <div
                 style={{
                   padding: "0px 5px",
-                  width: "35px",
+                  width: "fit-content",
                   textAlign: "left" as const,
                   fontSize: '12px',
                 }}
@@ -133,7 +140,7 @@ const DareOption = (props: any) => {
               <div
                 style={{
                   padding: "0px 5px",
-                  width: "30px",
+                  width: "fit-content",
                   textAlign: "center" as const,
                 }}
               >
@@ -158,7 +165,7 @@ const DareOption = (props: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DareOption;
+export default DareOption
