@@ -123,31 +123,32 @@ const DareOption = (props: any) => {
       </div>
       <div style={voteStyle}>
         <div style={resultStyle}>
-          {(voters !== undefined) && (
-            <>
-              <CreatoCoinIcon color="#54504E" />
-              <div
-                style={{
-                  padding: "0px 5px",
-                  width: "fit-content",
-                  textAlign: "left" as const,
-                  fontSize: '12px',
-                }}
-              >
-                {donuts.toLocaleString()}
-              </div>
-              <NoOfPeopleIcon color="#54504E" />
-              <div
-                style={{
-                  padding: "0px 5px",
-                  width: "fit-content",
-                  textAlign: "center" as const,
-                }}
-              >
-                {voters.toLocaleString()}
-              </div>
-            </>
-          )}
+          {donuts !== undefined && <>
+            <CreatoCoinIcon color="#54504E" />
+            <div
+              style={{
+                padding: "0px 5px",
+                width: "fit-content",
+                textAlign: "left" as const,
+                fontSize: '12px',
+              }}
+            >
+              {donuts.toLocaleString()}
+            </div>
+          </>}
+          {voters !== undefined && <>
+            <NoOfPeopleIcon color="#54504E" />
+            <div
+              style={{
+                padding: "0px 5px",
+                width: "fit-content",
+                textAlign: "center" as const,
+              }}
+            >
+              {voters.toLocaleString()}
+            </div>
+          </>
+          }
         </div>
         <div
           style={{

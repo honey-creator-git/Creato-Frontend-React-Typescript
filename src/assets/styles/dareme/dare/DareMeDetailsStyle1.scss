@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 900px;
+    max-width: 880px;
     height: 52px;
     margin: 25px auto;
     padding: 0px 10px;
@@ -238,6 +238,67 @@
         }
       }
 
+      .option-type-header {
+        display: flex;
+        justify-content: center;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 28px;
+        margin: 20px auto;
+      }
+
+      .sub-text {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .empty-letter {
+        display: flex;
+        justify-content: center;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #BAB6B5;
+      }
+
+      .idea-button {
+        margin-top: 20px !important;
+        cursor: pointer;
+        width: 300px;
+        margin: 0px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: #FFB389;
+        border-radius: 10px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.05em;
+        color: #FFFFFF;
+
+        &:hover {
+          background-color: rgba($color: #FFB389, $alpha: 0.8);
+        }
+      }
+
       .options {
         display: flex;
         justify-content: center;
@@ -251,7 +312,19 @@
             margin: 5px 10px;
           }
         }
+      }
+    }
+  }
+}
 
+@media screen and (min-width: 1040px) {
+  .dareme-details-wrapper {
+    .option-info {
+      .options {
+        .options-container {
+          width: 960px;
+          margin: 0px auto;
+        }
       }
     }
   }

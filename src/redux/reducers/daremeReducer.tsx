@@ -18,7 +18,6 @@ const INITIAL_STATE: any = {
   teaserFile: null,
   teaserSizeType: null,
   coverFile: null,
-  option: null,
   category: null,
   title: null,
   options: [],
@@ -81,9 +80,6 @@ const daremeReducer = (state: any = INITIAL_STATE, action: any) => {
       }
     case actionTypes.SET_DAREMES:
       state.daremes = payload;
-      return { ...state };
-    case actionTypes.SET_OPTION:
-      state.option = payload;
       return { ...state };
     case actionTypes.SET_TEASER_FILE:
       state.teaserFile = payload;

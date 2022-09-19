@@ -13,7 +13,6 @@ export const SET_FUNDMES = 'SET_FUNDMES';
 export const SET_FUNDME = 'SET_FUNDME';
 export const SET_FUNDME_VOTES = 'SET_FUNDME_VOTES';
 
-export const SET_OPTION = 'SET_OPTION';
 export const SET_TEASER_FILE = "SET_TEASER_FILE";
 export const SET_COVER_FILE = "SET_COVER_FILE";
 export const SET_TEASER_FILE1 = "SET_TEASER_FILE1";

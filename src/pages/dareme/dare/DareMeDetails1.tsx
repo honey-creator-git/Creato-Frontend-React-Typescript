@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 import DareOption from "../../../components/general/dareOption"
 import Avatar from "../../../components/general/avatar"
 import Dialog from "../../../components/general/dialog"
+import SignDialog from "../../../components/general/signDialog"
 import TeaserCard from "../../../components/general/TeaserCard"
 import TeaserCardPopUp from "../../../components/general/TeaserCardPopUp"
 import { daremeAction } from "../../../redux/actions/daremeActions"
 import { LanguageContext } from "../../../routes/authRoute"
-import { BackIcon, ShareIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, RewardIcon, PlayIcon } from "../../../assets/svg"
+import { BackIcon, ShareIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, RewardIcon, PlayIcon, LightbulbIcon } from "../../../assets/svg"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/dareme/dare/DareMeDetailsStyle1.scss"
 
@@ -20,18 +21,24 @@ const DareMeDetails = (props: any) => {
   const { daremeId } = useParams()
   const daremeState = useSelector((state: any) => state.dareme)
   const userState = useSelector((state: any) => state.auth)
+  const loadState = useSelector((state: any) => state.load)
   const { dareme } = daremeState
   const { user } = userState
+  const { prevRoute } = loadState
   const [time, setTime] = useState(0)
   const [flag, setFlag] = useState(false)
   const [timerId, setTimerId] = useState<any>(null)
   const [showResult, setShowResult] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [optionId, setOptionId] = useState<any>(null)
 
   /// Dialog
   const [openSignIn, setOpenSignIn] = useState(false)
   const [openTeaserPopup, setOpenTeaserPopup] = useState(false)
   const [openCopyLink, setOpenCopyLink] = useState(false)
+  const [openRequest, setOpenRequest] = useState(false)
+  const [openAccept, setOpenAccept] = useState(false)
+  const [openDecline, setOpenDecline] = useState(false)
 
   const displayTime = (left: any) => {
     let res: any
@@ -87,13 +94,15 @@ const DareMeDetails = (props: any) => {
       setTimerId(id)
     }
   }, [time, flag])
-  useEffect(() => { dispatch(daremeAction.getDareMeDetails(daremeId)) }, [daremeId, dispatch])
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  useEffect(() => { 
+    dispatch(daremeAction.getDareMeDetails(daremeId))
+    window.scrollTo(0, 0)
+  }, [location, daremeId, dispatch])
 
   return (
     <div className="dareme-details-wrapper">
       <div className="header-part">
-        <div><BackIcon color="black" /></div>
+        <div onClick={() => { navigate(prevRoute) }}><BackIcon color="black" /></div>
         <div className="page-title"><span>{contexts.HEADER_TITLE.DAREME_DETAILS}</span></div>
         <div><ShareIcon color="black" /></div>
       </div>
@@ -125,6 +134,63 @@ const DareMeDetails = (props: any) => {
             daremeId={daremeId}
             ownerName={dareme.owner.name}
           />
+          <SignDialog
+            display={openSignIn}
+            exit={() => { setOpenSignIn(false) }}
+            wrapExit={() => { setOpenSignIn(false) }}
+          />
+          <Dialog
+              title={contexts.DIALOG.HEADER_TITLE.ACCEPT_REQUEST}
+              display={openRequest}
+              exit={() => { setOpenRequest(false) }}
+              wrapExit={() => { setOpenRequest(false) }}
+              buttons={[
+                {
+                  text: contexts.DIALOG.BUTTON_LETTER.DECLINE,
+                  handleClick: () => {
+                    setOpenRequest(false)
+                    setOpenDecline(true)
+                    setTimeout(() => setOpenDecline(false), 2000)
+                    dispatch(daremeAction.declineDareOption(daremeId, optionId))
+                  }
+                },
+                {
+                  text: contexts.DIALOG.BUTTON_LETTER.CONFIRM,
+                  handleClick: () => {
+                    setOpenRequest(false)
+                    setOpenAccept(true)
+                    setCopied(false)
+                    dispatch(daremeAction.acceptDareOption(daremeId, optionId))
+                  }
+                }
+              ]}
+              context={contexts.DIALOG.BODY_LETTER.ACCEPT_REQUEST}
+            />
+            <Dialog
+              display={openDecline}
+              wrapExit={() => { setOpenDecline(false) }}
+              title={contexts.DIALOG.HEADER_TITLE.DARE_DECLIEND}
+              context={contexts.DIALOG.BODY_LETTER.DARE_DECLINED}
+            />
+            <Dialog
+              display={openAccept}
+              wrapExit={() => { setOpenAccept(false); }}
+              title={contexts.DIALOG.HEADER_TITLE.DARE_ACCEPTED}
+              context={contexts.DIALOG.BODY_LETTER.DARE_ACCEPTED}
+              buttons={[
+                {
+                  text: copied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
+                  handleClick: () => {
+                    navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`)
+                    setCopied(true)
+                    setTimeout(() => { setCopied(false) }, 2500)
+                  }
+                }
+              ]}
+              social
+              ownerName={dareme.owner.name}
+              daremeId={daremeId}
+            />
           <div className="details-part">
             <div className="dareme-info">
               <div className="dareme-detail">
@@ -183,13 +249,16 @@ const DareMeDetails = (props: any) => {
               <div className="option-header-part">
                 <div className="option-divider"></div>
                 <div className="option-header">
-                  Pick One Below
+                  Manage Dare Option
                 </div>
                 <div className="option-divider"></div>
               </div>
+              <div className="option-type-header">
+                <span style={{ color: '#EFA058' }}>Available Dare Option</span>
+              </div>
               <div className="options">
                 <div className="options-container">
-                  {dareme.options.sort((first: any, second: any) => {
+                  {dareme.options.filter((option: any) => option.option.status === 1).sort((first: any, second: any) => {
                     if (showResult) return first.option.donuts > second.option.donuts ? -1 : first.option.donuts < second.option.donuts ? 1 :
                       first.option.date < second.option.date ? 1 : first.option.date > second.option.date ? -1 : 0
                     else return 0
@@ -197,7 +266,7 @@ const DareMeDetails = (props: any) => {
                     <div className="option" key={index}>
                       <DareOption
                         dareTitle={option.option.title}
-                        donuts={option.option.donuts}
+                        donuts={showResult ? option.option.donuts : undefined}
                         voters={showResult ? option.option.voters : undefined}
                         canVote={true}
                         disabled={false}
@@ -207,19 +276,76 @@ const DareMeDetails = (props: any) => {
                       />
                     </div>
                   ))}
-                  {(user && dareme.owner._id !== user.id) &&
-                    <div className="option">
-                      <DareOption
-                        dareTitle={contexts.DAREME_DETAILS.HAVE_IDEA}
-                        type={true}
-                        disabled={false}
-                        username={"You"}
-                        handleSubmit={() => { navigate(`/dareme/dare/${daremeId}`) }}
-                      />
-                    </div>
-                  }
                 </div>
               </div>
+              <div className="idea-button" onClick={() => {
+                if (user) navigate(`/dareme/dare/${daremeId}`)
+                else setOpenSignIn(true)
+              }}>
+                <LightbulbIcon color="white" />&nbsp;&nbsp;<span>{contexts.DAREME_DETAILS.HAVE_IDEA}</span>
+              </div>
+              {(user && dareme.owner._id === user.id) &&
+                <div>
+                  <div className="option-type-header">
+                    <span style={{ color: '#E17253' }}>New Dare request</span>
+                  </div>
+                  <div className="sub-text">
+                    <span style={{ color: '#D94E27' }}>Tap to accept or reject Dare requests.</span>
+                    <span style={{ color: 'black' }}>You can accept up to request(s) in total.</span>
+                  </div>
+                  <div className="options">
+                    {dareme.options.filter((option: any) => option.option.status === 0).length > 0 ?
+                      <div className="options-container">
+                        {dareme.options.filter((option: any) => option.option.status === 0).sort((first: any, second: any) => {
+                          return first.option.date < second.option.date ? 1 : first.option.date > second.option.date ? -1 : 0
+                        }).map((option: any, index: any) => (
+                          <div className="option" key={index}>
+                            <DareOption
+                              dareTitle={option.option.title}
+                              donuts={option.option.donuts}
+                              canVote={false}
+                              disabled={false}
+                              username={option.option.writer.name}
+                              leading={true}
+                              handleSubmit={() => { 
+                                setOptionId(option.option._id)
+                                setOpenRequest(true)
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </div> :
+                      <div className="empty-letter">
+                        <span>No dare requests yet.</span>
+                      </div>
+                    }
+                  </div>
+                  {dareme.options.filter((option: any) => option.option.status === -1).length > 0 &&
+                    <>
+                      <div className="option-type-header">
+                        <span style={{ color: '#D6D5CC' }}>Declined Dare request</span>
+                      </div>
+                      <div className="options">
+                        <div className="options-container">
+                          {dareme.options.filter((option: any) => option.option.status === -1).map((option: any, index: any) => (
+                            <div className="option" key={index}>
+                              <DareOption
+                                dareTitle={option.option.title}
+                                donuts={option.option.donuts}
+                                canVote={false}
+                                disabled={true}
+                                username={option.option.writer.name}
+                                leading={false}
+                                handleSubmit={() => { }}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  }
+                </div>
+              }
             </div>
           </div>
         </div>

@@ -337,6 +337,7 @@ const Home = () => {
                     voters: dareme.voteInfo.length,
                     donuts: dareme.donuts,
                   }}
+                  handleSubmit={() => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' }) }}
                 />
               </div>
             ))
@@ -392,6 +393,7 @@ const Home = () => {
                     donuts: fundme.donuts,
                     goal: fundme.goal
                   }}
+                  handleSubmit={() => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' }) }}
                 />
               </div>
             ))
@@ -470,8 +472,8 @@ const Home = () => {
                   finished={true}
                   fanwallData={fanwall}
                   handleSubmit={() => {
-                    if (fanwall?.item?.goal) navigate(`/fundme/fanwall/detail/${fanwall?.id}`)
-                    else navigate(`/dareme/fanwall/detail/${fanwall?.id}`)
+                    if (fanwall?.item?.goal) navigate(`/fundme/fanwall/detail/${fanwall?._id}`)
+                    else navigate(`/dareme/fanwall/detail/${fanwall?._id}`)
                   }}
                 />
                 <AvatarLink
@@ -485,7 +487,7 @@ const Home = () => {
                     setOpenDelPostDlg(true);
                   }}
                   isFanwall={true}
-                  daremeId={fanwall?.id}
+                  daremeId={fanwall?._id}
                 />
               </div>
             ))

@@ -43,13 +43,13 @@ export const getDareMeDetails = (daremeId: any) => API.get(`/api/dareme/details/
 export const getDaremeResult = (daremeId: any) => API.get(`/api/dareme/result/${daremeId}`);
 export const supportCreator = (data: any) => API.post("/api/dareme/support", data);
 export const getDareCreatorDetails = (daremeId: any) => API.get(`/api/dareme/dare/${daremeId}`);
+export const getDaremeVoters = (daremeId: any) => API.get(`/api/dareme/${daremeId}/voters`);
 export const dareCreator = (data: any) => API.post('/api/dareme/dare/creator', data);
 export const checkDareMeRequests = (daremeId: any) => API.get(`/api/dareme/check/requests/${daremeId}`);
 export const getDareMeRequests = (daremeId: any) => API.get(`/api/dareme/requests/${daremeId}`);
 export const acceptDareOption = (data: any) => API.post('/api/dareme/accept', data);
 export const declineDareOption = (data: any) => API.post('/api/dareme/decline', data);
 export const winDareOption = (data: any) => API.post('/api/dareme/win/option', data);
-export const getDaremeOptions = (daremeId: any) => API.get(`/api/dareme/${daremeId}/options`);
 export const checkRefundPossible = (daremeId: any) => API.get(`/api/dareme/${daremeId}/refund_possible`)
 export const refundDonuts = (data: any, daremeId: any) => API.post(`/api/dareme/${daremeId}/refund_donuts`, data)
 export const supportRefund = (daremeId: any) => API.get(`/api/dareme/${daremeId}/support_refund`)

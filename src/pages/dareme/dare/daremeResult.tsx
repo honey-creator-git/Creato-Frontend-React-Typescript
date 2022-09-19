@@ -53,8 +53,8 @@ const DaremeResult = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(daremeAction.getDaremeResult(daremeId));
-  }, [location, dispatch, daremeId]);
+    dispatch(daremeAction.getDaremeResult(daremeId))
+  }, [location, dispatch, daremeId])
 
   useEffect(() => {
     if (dareme.title) {

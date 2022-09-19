@@ -167,6 +167,7 @@ const Profile = () => {
                               voters: dareme.voteInfo.length,
                               donuts: dareme.donuts
                             }}
+                            handleSubmit={() => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}` }) }}
                           />
                         </div>
                       ))}
@@ -189,6 +190,7 @@ const Profile = () => {
                               donuts: fundme.donuts,
                               goal: fundme.goal
                             }}
+                            handleSubmit={() => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}` }) }}
                           />
                         </div>
                       ))}

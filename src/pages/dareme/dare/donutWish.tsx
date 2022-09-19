@@ -82,14 +82,13 @@ const DonutWish = () => {
       setVoted(checkVoted())
     }
   }, [dareme])
-
-  useEffect(() => {
-    dispatch(daremeAction.getDareMeDetails(daremeId))
-    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
-  }, [daremeId])
   useEffect(() => { if (voteNonSuperfanGif) setTimeout(() => { setVoteNonSuperfanGif(false) }, 4000) }, [voteNonSuperfanGif])
   useEffect(() => { if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500) }, [voteSuperfanGif])
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  useEffect(() => { 
+    window.scrollTo(0, 0)
+    dispatch(daremeAction.getDareMeDetails(daremeId))
+    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+  }, [location, daremeId, dispatch])
 
   return (
     <>

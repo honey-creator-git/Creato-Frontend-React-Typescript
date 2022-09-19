@@ -67,11 +67,6 @@ const SupportCreator = () => {
     }
   }, [dareme, optionId])
   useEffect(() => {
-    dispatch(daremeAction.getDareMeDetails(daremeId))
-    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
-  }, [dispatch, daremeId])
-
-  useEffect(() => {
     if (dlgState.type === 'vote_superfan' && dlgState.state === true) {
       setIsCopyLink(true)
       setVoteSuperfanGif(true)
@@ -82,7 +77,11 @@ const SupportCreator = () => {
     if (dareme.owner && user && dareme.owner._id === user.id) navigate(`/${user.personalisedUrl}`)
   }, [dareme, user, navigate, daremeId])
   useEffect(() => { if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500) }, [voteSuperfanGif])
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  useEffect(() => { 
+    window.scrollTo(0, 0) 
+    dispatch(daremeAction.getDareMeDetails(daremeId))
+    dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
+  }, [location, dispatch, daremeId])
 
   return (
     <div>
@@ -192,13 +191,13 @@ const SupportCreator = () => {
                   </div>
                   <div className="support-option">
                     <DareOption
-                      donuts={option.donuts}
+                      donuts={voted ? option.donuts : undefined}
                       voters={voted ? option.voters : undefined}
                       dareTitle={option.title}
                       username={option.writer.name}
                       disabled={false}
                       handleSubmit={() => { }}
-                      canVote={true}
+                      canVote={false}
                       leading={false}
                     />
                   </div>

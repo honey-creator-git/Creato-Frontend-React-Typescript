@@ -287,13 +287,13 @@ const DaremeDetails = () => {
                 </div>
                 <div className="dare-btn">
                   {(user && user.id === dareme.owner._id) ?
-                    <div onClick={() => { dispatch(daremeAction.checkDareMeRequests(dareme._id, navigate)); }}>
+                    // <div onClick={() => { dispatch(daremeAction.checkDareMeRequests(dareme._id, navigate)); }}>
                       <ContainerBtn
                         styleType="fill"
                         text={contexts.DAREME_DETAILS.SEE_REQUESTS}
                         icon={[<NotificationwithCircleIcon color="white" circleColor="white" />, <NotificationwithCircleIcon color="white" circleColor="white" />]}
                       />
-                    </div>
+                    // </div>
                     :
                     <div onClick={() => { dareCreator(user); }}>
                       <ContainerBtn

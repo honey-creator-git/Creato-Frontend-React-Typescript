@@ -7,12 +7,10 @@ const ContainerBtn = (props: any) => {
 
   const colors = color === 'primary' ? PRIMARY : color === 'error' ? ERROR : PRIMARY
 
-  const backgroundColor = props.disabled === true ? "#E1E0DF" : styleType === "fill" ? colors[6] : "white"
-  const backgroundHoverColor = colors[4]
-  const backgroundPressedColor = colors[6]
-  const fontColor = props.disabled === true ? "#938D8A" : styleType === "fill" ? "white" : colors[6]
-  const fontHoverColor = colors[4]
-  const fontPressedColor = colors[6]
+  const backgroundColor = props.disabled === true ? "#E1E0DF" : styleType === "fill" ? colors[5] : "white"
+  const backgroundHoverColor = colors[3]
+  const backgroundPressedColor = colors[5]
+  const fontColor = props.disabled === true ? "#938D8A" : styleType === "fill" ? "white" : colors[5]
 
   const disabledStyle = {
     cursor: "not-allowed",
@@ -33,7 +31,7 @@ const ContainerBtn = (props: any) => {
     height: "50px",
     backgroundColor: status === "default" ? backgroundColor : status === "hover" ? backgroundHoverColor : backgroundPressedColor,
     color: status === "default" ? fontColor : "white",
-    border: status === "default" ? `1px solid ${fontColor}` : status === "hover" ? `1px solid ${fontHoverColor}` : `1px solid ${fontPressedColor}`,
+    border: status === "default" ? `1px solid ${backgroundColor}` : status === "hover" ? `1px solid ${backgroundHoverColor}` : `1px solid ${backgroundPressedColor}`,
     borderRadius: "10px",
     display: "flex",
     justifyContent: "center",
