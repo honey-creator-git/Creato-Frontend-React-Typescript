@@ -20,8 +20,8 @@
 
     .ownername-lefttime-tip {
       z-index: 1;
-      margin-left: -16px;
-      padding: 6px 10px 6px 16px;
+      margin-left: -15px;
+      padding: 6px 10px 6px 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -42,7 +42,7 @@
         letter-spacing: 0.02em;
 
         .owner-name {
-          margin-bottom: 5px;
+          margin-bottom: 2px;
           color: #7E7875;
 
           span {

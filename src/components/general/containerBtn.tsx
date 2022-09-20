@@ -31,7 +31,9 @@ const ContainerBtn = (props: any) => {
     height: "50px",
     backgroundColor: status === "default" ? backgroundColor : status === "hover" ? backgroundHoverColor : backgroundPressedColor,
     color: status === "default" ? fontColor : "white",
-    border: status === "default" ? `1px solid ${backgroundColor}` : status === "hover" ? `1px solid ${backgroundHoverColor}` : `1px solid ${backgroundPressedColor}`,
+    border: styleType === "fill"
+      ? status === "default" ? `1px solid ${backgroundColor}` : status === "hover" ? `1px solid ${backgroundHoverColor}` : `1px solid ${backgroundPressedColor}`
+      : status === "default" ? `1px solid ${fontColor}` : status === "hover" ? `1px solid ${backgroundHoverColor}` : `1px solid ${backgroundPressedColor}`,
     borderRadius: "10px",
     display: "flex",
     justifyContent: "center",

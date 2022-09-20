@@ -1,46 +1,46 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom'
 
-import AuthRoute from './authRoute';
-import Auth from "../pages/auth";
-import Home from "../pages/home";
+import AuthRoute from './authRoute'
+import Auth from "../pages/auth"
+import Home from "../pages/home"
+import Create from '../pages/create'
 
-import Create from '../pages/create';
+import CreateDareme from "../pages/dareme/create/createDareme"
+import UploadVideo from "../pages/dareme/create/uploadVideo"
+import DaremeTitile from "../pages/dareme/create/daremeTitle"
+import DareOptions from "../pages/dareme/create/dareOptions"
+import Preview from '../pages/dareme/create/preview'
+import CoverImage from '../pages/dareme/create/coverImage'
+import DaremeRewards from '../pages/dareme/create/rewards'
 
-import CreateDareme from "../pages/dareme/create/createDareme";
-import UploadVideo from "../pages/dareme/create/uploadVideo";
-import DaremeTitile from "../pages/dareme/create/daremeTitle";
-import DareOptions from "../pages/dareme/create/dareOptions";
-import Preview from '../pages/dareme/create/preview';
-import CoverImage from '../pages/dareme/create/coverImage';
-import DaremeRewards from '../pages/dareme/create/rewards';
+import CreateFundme from '../pages/fundme/create/createFundme'
+import FundUploadVideo from "../pages/fundme/create/uploadVideo"
+import FundmeTitle from "../pages/fundme/create/fundmeTitle"
+import FundmePreview from '../pages/fundme/create/preview'
+import FundCoverImage from '../pages/fundme/create/coverImage'
+// import FundmeDetails from '../pages/fundme/fund/fundmeDetails'
+import FundMeDetails from '../pages/fundme/fund/FundMeDetails1'
+import FundmeRewards from '../pages/fundme/create/rewards'
+import FundmeVoters from '../pages/fundme/fund/fundmeVoters'
+import FundmeResult from '../pages/fundme/fund/fundmeResult'
+import FundmeDonutWish from '../pages/fundme/fund/donutWish'
 
-import CreateFundme from '../pages/fundme/create/createFundme';
-import FundUploadVideo from "../pages/fundme/create/uploadVideo";
-import FundmeTitle from "../pages/fundme/create/fundmeTitle";
-import FundmePreview from '../pages/fundme/create/preview';
-import FundCoverImage from '../pages/fundme/create/coverImage';
-import FundmeDetails from '../pages/fundme/fund/fundmeDetails';
-import FundmeRewards from '../pages/fundme/create/rewards';
-import FundmeVoters from '../pages/fundme/fund/fundmeVoters';
-import FundmeResult from '../pages/fundme/fund/fundmeResult';
-import FundmeDonutWish from '../pages/fundme/fund/donutWish';
+import Profile from '../pages/profile/profile'
+import ProfileFanwall from '../pages/profile/profileFanwall'
+import ProfileEdit from '../pages/profile/edit/profileEdit'
 
-import Profile from '../pages/profile/profile';
-import ProfileFanwall from '../pages/profile/profileFanwall';
-import ProfileEdit from '../pages/profile/edit/profileEdit';
-
-import ProfileWallet from '../pages/profile/wallet/profileWallet';
-import GeneralSetting from '../pages/profile/setting/generalSetting';
-import ProfileNotifications from '../pages/profile/profileNotifications';
-import Earning from '../pages/profile/wallet/earning';
-import Balance from '../pages/profile/wallet/balance';
-import Invitefriends from '../pages/profile/setting/inviteFriends';
-import Payment from '../pages/profile/setting/payment';
-import Language from '../pages/profile/setting/language';
-import ShopDonuts from '../pages/profile/shopDonuts';
-import Socialaccount from '../pages/profile/edit/socialAccount';
-import Categories from '../pages/profile/edit/categories';
-import Creators from '../pages/profile/creators';
+import ProfileWallet from '../pages/profile/wallet/profileWallet'
+import GeneralSetting from '../pages/profile/setting/generalSetting'
+import ProfileNotifications from '../pages/profile/profileNotifications'
+import Earning from '../pages/profile/wallet/earning'
+import Balance from '../pages/profile/wallet/balance'
+import Invitefriends from '../pages/profile/setting/inviteFriends'
+import Payment from '../pages/profile/setting/payment'
+import Language from '../pages/profile/setting/language'
+import ShopDonuts from '../pages/profile/shopDonuts'
+import Socialaccount from '../pages/profile/edit/socialAccount'
+import Categories from '../pages/profile/edit/categories'
+import Creators from '../pages/profile/creators'
 
 import DareMeDetails from '../pages/dareme/dare/DareMeDetails'
 import DaremeVoters from '../pages/dareme/dare/daremeVoters'
@@ -50,44 +50,44 @@ import GameOn from '../pages/dareme/dare/gameOn'
 import DaremeResult from '../pages/dareme/dare/daremeResult'
 import DaremeDonutWish from '../pages/dareme/dare/donutWish'
 
-import PostFanwall from '../pages/fanwall/postFanwall';
-import UploadFanWallVideo from '../pages/fanwall/uploadVideo';
-import FanwallDetails from "../pages/fanwall/fanwallDetail";
-import WatchContent from '../pages/fanwall/watchContent';
+import PostFanwall from '../pages/fanwall/postFanwall'
+import UploadFanWallVideo from '../pages/fanwall/uploadVideo'
+import FanwallDetails from "../pages/fanwall/fanwallDetail"
+import WatchContent from '../pages/fanwall/watchContent'
 
-import AdminHome from '../pages/admin/home';
-import UserList from '../pages/admin/userList';
-import DareMeList from '../pages/admin/dareme/dareMeList';
-import AdminDaremeDetail from '../pages/admin/dareme/AdminDaremeDetail';
-import DareMeTitile from '../pages/admin/dareme/dareMeTitle';
-import DareMeOptions from '../pages/admin/dareme/dareMeOptions';
-import FundMeList from '../pages/admin/fundme/fundMeList';
-import AdminFundmeDetail from '../pages/admin/fundme/AdminFundmeDetail';
-import FundMeTitle from '../pages/admin/fundme/fundMeTitle';
-import Tipping from '../pages/admin/tip/tipping';
-import TipProfile from '../pages/admin/tip/tipProfile';
-import FanwallList from '../pages/admin/fanwall/fanwallList';
-import FanwallDetail from '../pages/admin/fanwall/fanwallDetail';
-import PostAdminFanwall from '../pages/admin/fanwall/postFanwall';
-import UploadAdminVideo from '../pages/admin/fanwall/uploadVideo';
+import AdminHome from '../pages/admin/home'
+import UserList from '../pages/admin/userList'
+import DareMeList from '../pages/admin/dareme/dareMeList'
+import AdminDaremeDetail from '../pages/admin/dareme/AdminDaremeDetail'
+import DareMeTitile from '../pages/admin/dareme/dareMeTitle'
+import DareMeOptions from '../pages/admin/dareme/dareMeOptions'
+import FundMeList from '../pages/admin/fundme/fundMeList'
+import AdminFundmeDetail from '../pages/admin/fundme/AdminFundmeDetail'
+import FundMeTitle from '../pages/admin/fundme/fundMeTitle'
+import Tipping from '../pages/admin/tip/tipping'
+import TipProfile from '../pages/admin/tip/tipProfile'
+import FanwallList from '../pages/admin/fanwall/fanwallList'
+import FanwallDetail from '../pages/admin/fanwall/fanwallDetail'
+import PostAdminFanwall from '../pages/admin/fanwall/postFanwall'
+import UploadAdminVideo from '../pages/admin/fanwall/uploadVideo'
 
-import AdminTransactions from '../pages/admin/transactions/adminTransactions';
-import UserTransactions from '../pages/admin/transactions/userTransactions';
+import AdminTransactions from '../pages/admin/transactions/adminTransactions'
+import UserTransactions from '../pages/admin/transactions/userTransactions'
 import ReferralLinks from '../pages/admin/referral/referralLinks'
 import ReferralLinkDetail from '../pages/admin/referral/referralLinkDetail'
-import Error404 from '../pages/error/error404';
+import Error404 from '../pages/error/error404'
 
-import TipDonut from '../pages/tip/tipDonut';
-import TipMethod from '../pages/tip/tipMethod';
-import TipEditor from '../pages/admin/tip/tipEditor';
+import TipDonut from '../pages/tip/tipDonut'
+import TipMethod from '../pages/tip/tipMethod'
+import TipEditor from '../pages/admin/tip/tipEditor'
 
 ////// ADMIN NOTIFICATIONS /////////
-import Notifications from '../pages/admin/notification/notifications';
-import NotificationSetting from '../pages/admin/notification/notificationSetting';
-import NotificationNew from '../pages/admin/notification/notificationNew';
-import NotificationHistory from '../pages/admin/notification/notificationHistory';
+import Notifications from '../pages/admin/notification/notifications'
+import NotificationSetting from '../pages/admin/notification/notificationSetting'
+import NotificationNew from '../pages/admin/notification/notificationNew'
+import NotificationHistory from '../pages/admin/notification/notificationHistory'
 
-import CoverImageSelect from '../components/coverImage';
+import CoverImageSelect from '../components/coverImage'
 
 const AppRoutes = () => {
   return (
@@ -113,7 +113,7 @@ const AppRoutes = () => {
       <Route path="fundme/create/rewards" element={<AuthRoute child={<FundmeRewards />} routeType="private" />} />
       <Route path="fundme/preview" element={<AuthRoute child={<FundmePreview />} routeType="private" />} />
       <Route path="fundme/create/teaser" element={<AuthRoute child={<FundUploadVideo />} routeType="private" />} />
-      <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundmeDetails />} />} />
+      <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundMeDetails />} />} />
       <Route path="fundme/details/:fundmeId/wish" element={<AuthRoute child={<FundmeDonutWish />} routeType="private" />} />
       <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
       <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />

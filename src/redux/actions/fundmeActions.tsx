@@ -96,17 +96,21 @@ export const fundmeAction = {
       }).catch((err: any) => console.log(err));
   },
 
-  getFundmeDetails: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_FUNDME_DETAIL_INITIAL });
+  getFundMeDetails: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_FUNDME_DETAIL_INITIAL })
     api.getFundMeDetails(fundmeId)
       .then((result: any) => {
-        const { data } = result;
+        const { data } = result
         if (data.success) {
-          dispatch({ type: SET_FUNDME, payload: data.fundme });
-          dispatch({ type: SET_LOADING_FALSE });
+          const payload = data.payload
+          dispatch({ type: SET_FUNDME, payload: payload.fundme })
+          dispatch({ type: SET_LOADING_FALSE })
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        console.log(err)
+        dispatch({ type: SET_LOADING_FALSE })
+      })
   },
 
   checkFundAndResults: (fundmeId: any, donuts: any, navigate: any) => async (dispatch: Dispatch<any>) => {

@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef, useContext } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import ReactPlayer from "react-player"
 import Avatar from "../general/avatar"
 import Button from "../general/button"
 import TeaserCard from "../general/TeaserCard"

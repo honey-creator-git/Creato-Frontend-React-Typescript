@@ -84,7 +84,7 @@ const FundmeDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fundmeAction.getFundmeDetails(fundmeId));
+    // dispatch(fundmeAction.getFundmeDetails(fundmeId));
     dispatch({ type: SET_CURRENT_FUNDME, payload: null });
     dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
   }, [location]);

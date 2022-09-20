@@ -89,7 +89,7 @@ const AdminFundmeDetail = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        dispatch(fundmeAction.getFundmeDetails(fundmeId));
+        dispatch(fundmeAction.getFundMeDetails(fundmeId));
     }, [location]);
 
     return (

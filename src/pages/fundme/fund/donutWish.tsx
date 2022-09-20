@@ -55,7 +55,7 @@ const DonutWish = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fundmeAction.getFundmeDetails(fundmeId));
+    dispatch(fundmeAction.getFundMeDetails(fundmeId));
     dispatch({ type: SET_CURRENT_FUNDME, payload: null });
   }, [location, dispatch, fundmeId]);
 
