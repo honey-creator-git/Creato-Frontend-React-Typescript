@@ -81,7 +81,7 @@ const DonutWish = () => {
       if (filters.length) setOption(filters[0].option)
       setVoted(checkVoted())
     }
-  }, [dareme])
+  }, [dareme, navigate])
   useEffect(() => { if (voteNonSuperfanGif) setTimeout(() => { setVoteNonSuperfanGif(false) }, 4000) }, [voteNonSuperfanGif])
   useEffect(() => { if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500) }, [voteSuperfanGif])
   useEffect(() => { 

@@ -73,12 +73,14 @@ const SupportCreator = () => {
     }
   }, [dlgState])
   useEffect(() => {
-    if (dareme.owner && dareme.finished) navigate(`/dareme/result/${daremeId}`)
-    if (dareme.owner && user && dareme.owner._id === user.id) navigate(`/${user.personalisedUrl}`)
+    if (dareme.owner) {
+      if (dareme.finished) navigate(`/dareme/result/${daremeId}`)
+      if (user && dareme.owner._id === user.id) navigate(`/${user.personalisedUrl}`)
+    }
   }, [dareme, user, navigate, daremeId])
   useEffect(() => { if (voteSuperfanGif) setTimeout(() => { setVoteSuperfanGif(false) }, 3500) }, [voteSuperfanGif])
-  useEffect(() => { 
-    window.scrollTo(0, 0) 
+  useEffect(() => {
+    window.scrollTo(0, 0)
     dispatch(daremeAction.getDareMeDetails(daremeId))
     dispatch({ type: SET_DIALOG_STATE, payload: { type: '', state: false } })
   }, [location, dispatch, daremeId])

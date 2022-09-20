@@ -253,9 +253,6 @@ const DareMeDetails = (props: any) => {
                 </div>
                 <div className="option-divider"></div>
               </div>
-              <div className="option-type-header">
-                <span style={{ color: '#EFA058' }}>Available Dare Option</span>
-              </div>
               <div className="options">
                 <div className="options-container">
                   {dareme.options.filter((option: any) => option.option.status === 1).sort((first: any, second: any) => {
@@ -278,8 +275,12 @@ const DareMeDetails = (props: any) => {
                   ))}
                 </div>
               </div>
+              <div className="or-text"><span>Or</span></div>
               <div className="idea-button" onClick={() => {
-                if (user) navigate(`/dareme/dare/${daremeId}`)
+                if (user) {
+                  if(user.id === dareme.owner._id) setOpenCopyLink(true)
+                  else navigate(`/dareme/dare/${daremeId}`)
+                }
                 else setOpenSignIn(true)
               }}>
                 <LightbulbIcon color="white" />&nbsp;&nbsp;<span>{contexts.DAREME_DETAILS.HAVE_IDEA}</span>
@@ -321,7 +322,7 @@ const DareMeDetails = (props: any) => {
                     }
                   </div>
                   {dareme.options.filter((option: any) => option.option.status === -1).length > 0 &&
-                    <>
+                    <div>
                       <div className="option-type-header">
                         <span style={{ color: '#D6D5CC' }}>Declined Dare request</span>
                       </div>
@@ -342,15 +343,15 @@ const DareMeDetails = (props: any) => {
                           ))}
                         </div>
                       </div>
-                    </>
-                  }
+                    </div>
+                    }
                 </div>
               }
             </div>
           </div>
         </div>
       }
-    </div >
+    </div>
   )
 }
 

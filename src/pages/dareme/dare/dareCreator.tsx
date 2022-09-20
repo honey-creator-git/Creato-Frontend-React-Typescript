@@ -50,8 +50,16 @@ const DareCreator = () => {
     return false
   }
 
-  useEffect(() => { dispatch(daremeAction.getDareMeDetails(daremeId)) }, [dispatch, daremeId])
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  useEffect(() => { 
+    if(dareme.owner && user) {
+      if(dareme.finished) navigate(`/dareme/result/${daremeId}`) 
+      if(dareme.owner._id === user.id) navigate(`/dareme/details/${daremeId}`) 
+    }
+  }, [dareme, user, navigate])
+  useEffect(() => { 
+    window.scrollTo(0, 0)
+    dispatch(daremeAction.getDareMeDetails(daremeId))
+  }, [location, daremeId, dispatch])
 
   return (
     <>

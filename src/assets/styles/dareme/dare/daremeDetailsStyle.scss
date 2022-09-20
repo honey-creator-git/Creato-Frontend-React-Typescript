@@ -274,6 +274,20 @@
         color: #BAB6B5;
       }
 
+      .or-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+      }
+
       .idea-button {
         margin-top: 20px !important;
         cursor: pointer;
@@ -309,7 +323,7 @@
 
           .option {
             width: 300px;
-            margin: 5px 10px;
+            margin: 5px 30px;
           }
         }
       }
@@ -322,7 +336,7 @@
     .option-info {
       .options {
         .options-container {
-          width: 960px;
+          width: 720px;
           margin: 0px auto;
         }
       }
@@ -335,7 +349,7 @@
     .option-info {
       .options {
         .options-container {
-          width: 640px;
+          width: 720px;
           margin: 0px auto;
         }
       }
@@ -343,12 +357,12 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 760px) {
   .dareme-details-wrapper {
     .option-info {
       .options {
         .options-container {
-          width: 320px;
+          width: 360px;
           margin: 0px auto;
         }
       }
