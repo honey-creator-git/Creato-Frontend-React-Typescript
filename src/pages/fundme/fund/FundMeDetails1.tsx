@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../../components/general/avatar"
 import Dialog from "../../../components/general/dialog"
 import SignDialog from "../../../components/general/signDialog"
+import ContainerBtn from "../../../components/general/containerBtn"
 import TeaserCard from "../../../components/general/TeaserCard"
 import TeaserCardPopUp from "../../../components/general/TeaserCardPopUp"
 import { fundmeAction } from "../../../redux/actions/fundmeActions"
 import { LanguageContext } from "../../../routes/authRoute"
-import { BackIcon, ShareIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, RewardIcon, PlayIcon, LightbulbIcon } from "../../../assets/svg"
+import { BackIcon, ShareIcon, ClockIcon, CreatoCoinIcon, NoOfPeopleIcon, RewardIcon, PlayIcon, HotIcon, LightbulbIcon } from "../../../assets/svg"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/fundme/fund/FundMeDetailsStyle1.scss"
 
@@ -195,7 +196,7 @@ const FundMeDetails = (props: any) => {
                   <div className="title-result">
                     <div className="type-lefttime">
                       <div className="item-type">
-                        <CreatoCoinIcon color={'#EA8426'} width={25} />
+                        <CreatoCoinIcon color={'#14BDC7'} width={25} />
                         <span>FundMe</span>
                       </div>
                       <div className="left-time">
@@ -240,6 +241,51 @@ const FundMeDetails = (props: any) => {
               </div>
               <div className="donuts-count">
                 <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
+              </div>
+            </div>
+
+            <div className="support-options">
+              <div className="support-header-part">
+                <div className="support-divider"></div>
+                <div className="support-header">
+                  Pick One Below
+                </div>
+                <div className="support-divider"></div>
+              </div>
+              <div className="support-buttons">
+                <div className="support-button">
+                  <div className="support-fun" onClick={() => { }}>
+                    <ContainerBtn text={`Donut x${fundme.reward} (SuperFan!)`} styleType="fill"
+                      icon={[<HotIcon color="white" />, <HotIcon color="white" />]}
+                    />
+                  </div>
+                  <div className="support-letter">
+                    <span>SuperFans:</span>
+                  </div>
+                  <div className="support-explain">
+                    <span>
+                      Support creators by giving specific amount of donut and get exclusive content.
+                    </span>
+                  </div>
+                </div>
+                <div className="support-button">
+                  <div className="support-fun" onClick={() => {
+                    // if (user) navigate('/dareme/' + daremeId + '/support/' + optionId + '/wish')
+                    // else setIsSignIn(true)
+                  }}>
+                    <ContainerBtn text={'Donuts as you like!'} styleType="fill" color="error"
+                      icon={[<LightbulbIcon color="white" />, <LightbulbIcon color="white" />]}
+                    />
+                  </div>
+                  <div className="support-letter">
+                    <span></span>
+                  </div>
+                  <div className="support-explain">
+                    <span>
+                      Support any number of Donuts as you wish!
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

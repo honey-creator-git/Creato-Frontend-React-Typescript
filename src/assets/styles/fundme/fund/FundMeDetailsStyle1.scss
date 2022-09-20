@@ -103,7 +103,7 @@
                 width: 85px;
                 height: 25px;
                 background: #FFFFFF;
-                color: #EA8426;
+                color: #14BDC7;
                 margin-right: 10px;
               }
 
@@ -263,9 +263,96 @@
       }
     }
 
+    .support-options {
+      box-sizing: border-box;
+      margin-top: 50px;
+      max-width: 1050px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+
+      .support-header-part {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .support-divider {
+          margin-top: 10px;
+          border: 1px solid #000000;
+          width: 240px;
+          border-width: 1px 0px 0px 0px;
+        }
+
+        .support-heasder {
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          text-align: center;
+          color: #000000;
+        }
+      }
+
+      .support-buttons {
+        display: flex;
+        justify-content: space-between;
+        max-width: 720px;
+        margin: 0px auto;
+
+        .support-button {
+          margin-top: 20px;
+          width: 340px;
+          display: flex;
+          flex-direction: column;
+
+          .support-fun {
+            width: 330px;
+            margin: 0 auto;
+          }
+
+          .support-letter {
+            margin-top: 15px;
+            margin-left: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+            color: #54504E;
+          }
+
+          .support-explain {
+            margin-left: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+            color: #54504E;
+          }
+        }
+      }
+    }
   }
 }
 
+@media screen and (max-width: 720px) {
+  .fundme-details-wrapper {
+    .details-part {
+
+      .support-options {
+        margin-top: 20px;
+
+        .support-buttons {
+          max-width: 330px;
+          margin: 0px auto;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 680px) {
   .fundme-details-wrapper {
@@ -334,6 +421,19 @@
 
       .funding-goal {
         max-width: 300px;
+      }
+
+      .support-options {
+        margin-top: 20px;
+
+        .support-header-part {
+          .support-divider {
+            margin-top: 10px;
+            border: 1px solid #000000;
+            width: 80px;
+            border-width: 1px 0px 0px 0px;
+          }
+        }
       }
     }
   }
