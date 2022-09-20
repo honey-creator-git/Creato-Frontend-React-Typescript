@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { SET_DAREME_INITIAL } from "../../../redux/types"
 import VideoCardDesktop from "../../../components/dareme/videoCardDesktop"
 import AvatarLink from "../../../components/dareme/avatarLink"
-import Title from "../../../components/general/title"
 import ContainerBtn from "../../../components/general/containerBtn"
 import Avatar from "../../../components/general/avatar"
 import DareOption from "../../../components/general/dareOption"
@@ -35,9 +34,11 @@ const GameOn = () => {
   useEffect(() => { window.scrollTo(0, 0) }, [location])
 
   return (
-    <>
-      <div className="title-header">
-        <Title title="Game On 👏🏻" />
+    <div className="game-on-main-wrapper">
+      <div className="header-part">
+        <div></div>
+        <div className="page-title"><span>Game On 👏🏻</span></div>
+        <div></div>
       </div>
       {(dareme.owner && option) &&
         <>
@@ -126,7 +127,7 @@ const GameOn = () => {
           </div>
         </>
       }
-    </>
+    </div>
   )
 }
 

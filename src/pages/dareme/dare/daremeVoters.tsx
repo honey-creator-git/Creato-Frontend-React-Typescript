@@ -2,12 +2,11 @@ import { useEffect, useState, useContext } from "react"
 import { useLocation, useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { daremeAction } from "../../../redux/actions/daremeActions"
-import Title from "../../../components/general/title"
 import DareOption from "../../../components/general/dareOption"
 import { LanguageContext } from "../../../routes/authRoute"
 import Avatar from "../../../components/general/avatar"
 import CONSTANT from "../../../constants/constant"
-import { CreatoCoinIcon } from "../../../assets/svg"
+import { CreatoCoinIcon, BackIcon } from "../../../assets/svg"
 import "../../../assets/styles/dareme/dare/daremeVotersStyle.scss"
 
 const DaremeVoters = () => {
@@ -39,9 +38,11 @@ const DaremeVoters = () => {
   }, [dareme, user])
 
   return (
-    <>
-      <div className="title-header">
-        <Title title={"Voters"} back={() => { navigate(`/dareme/details/${daremeId}`) }} />
+    <div className="dareme-voters-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(`/dareme/details/${daremeId}`) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>Voters</span></div>
+        <div></div>
       </div>
       {resultOptions.length > 0 &&
         <>
@@ -92,8 +93,8 @@ const DaremeVoters = () => {
           </div>
         </>
       }
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default DaremeVoters;
+export default DaremeVoters

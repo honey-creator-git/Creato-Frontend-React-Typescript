@@ -1,22 +1,21 @@
-import { useEffect, useState, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { daremeAction } from "../../../redux/actions/daremeActions";
-import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
-import VideoCardMobile from "../../../components/dareme/videoCardMobile";
-import AvatarLink from "../../../components/dareme/avatarLink";
-import Title from "../../../components/general/title";
-import ContainerBtn from "../../../components/general/containerBtn";
-import DareOption from "../../../components/general/dareOption";
-import CategoryBtn from "../../../components/general/categoryBtn";
-import Dialog from "../../../components/general/dialog";
-import RefundDlg from "../../../components/dareme/refundDlg";
-import WelcomeDlg from "../../../components/general/welcomeDlg";
-import CONSTANT from "../../../constants/constant";
-import { LanguageContext } from "../../../routes/authRoute";
-import { CreatoCoinIcon, SpreadIcon, RewardIcon } from "../../../assets/svg";
-import { SET_FANWALL_INITIAL, SET_DIALOG_STATE } from "../../../redux/types";
-import "../../../assets/styles/dareme/dare/daremeResultStyle.scss";
+import { useEffect, useState, useContext } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { daremeAction } from "../../../redux/actions/daremeActions"
+import VideoCardDesktop from "../../../components/dareme/videoCardDesktop"
+import VideoCardMobile from "../../../components/dareme/videoCardMobile"
+import AvatarLink from "../../../components/dareme/avatarLink"
+import ContainerBtn from "../../../components/general/containerBtn"
+import DareOption from "../../../components/general/dareOption"
+import CategoryBtn from "../../../components/general/categoryBtn"
+import Dialog from "../../../components/general/dialog"
+import RefundDlg from "../../../components/dareme/refundDlg"
+import WelcomeDlg from "../../../components/general/welcomeDlg"
+import CONSTANT from "../../../constants/constant"
+import { LanguageContext } from "../../../routes/authRoute"
+import { CreatoCoinIcon, SpreadIcon, RewardIcon, BackIcon, NoOfPeopleIcon } from "../../../assets/svg"
+import { SET_FANWALL_INITIAL, SET_DIALOG_STATE } from "../../../redux/types"
+import "../../../assets/styles/dareme/dare/daremeResultStyle.scss"
 
 const DaremeResult = () => {
   const location = useLocation();
@@ -104,14 +103,11 @@ const DaremeResult = () => {
   }
 
   return (
-    <>
-      <div className="title-header">
-        <Title
-          title={contexts.HEADER_TITLE.DAREME_RESULT}
-          back={() => { navigate(loadState.prevRoute) }}
-          voters={() => { navigate(`/dareme/${daremeId}/voters`) }}
-          ownerId={dareme?.owner?._id}
-        />
+    <div className="dareme-result-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(loadState.prevRoute) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.DAREME_RESULT}</span></div>
+        <div onClick={() => { navigate(`/dareme/${daremeId}/voters`) }}>{(dareme.owner && user && (dareme.owner._id === user.id || user.role === "ADMIN")) && <NoOfPeopleIcon color="#938D8A" />}</div>
       </div>
       {(maxOption && dareme.owner) &&
         <div className="dareme-result">
@@ -511,8 +507,8 @@ const DaremeResult = () => {
           </div>
         </div>
       }
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default DaremeResult;
+export default DaremeResult

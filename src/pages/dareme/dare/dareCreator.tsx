@@ -13,7 +13,7 @@ import Input from "../../../components/general/input";
 import CONSTANT from "../../../constants/constant";
 import { LanguageContext } from "../../../routes/authRoute";
 import { SET_CURRENT_DAREME, SET_PREVIOUS_ROUTE } from "../../../redux/types";
-import { CreatoCoinIcon } from "../../../assets/svg";
+import { CreatoCoinIcon, BackIcon, HelpIcon } from "../../../assets/svg";
 import '../../../assets/styles/dareme/dare/dareCreatorStyle.scss';
 
 const hints = {
@@ -62,12 +62,11 @@ const DareCreator = () => {
   }, [location, daremeId, dispatch])
 
   return (
-    <>
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.DARE_CREATOR}
-          back={() => { navigate(`/dareme/details/${daremeId}`)}}
-          hint={() => setOpenHint(!openHint)}
-        />
+    <div className="dareme-creator-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(`/dareme/details/${daremeId}`) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.DARE_CREATOR}</span></div>
+        <div onClick={() => setOpenHint(!openHint)}><HelpIcon /></div>
       </div>
       <Hint
         style={{ left: "calc(100% - 336px)" }}
@@ -184,8 +183,8 @@ const DareCreator = () => {
           </div>
         </>
       }
-    </>
+    </div>
   )
 }
 
-export default DareCreator;
+export default DareCreator

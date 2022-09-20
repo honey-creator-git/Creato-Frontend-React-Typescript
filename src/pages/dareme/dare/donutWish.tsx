@@ -1,20 +1,20 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { daremeAction } from "../../../redux/actions/daremeActions";
-import Title from "../../../components/general/title";
-import Avatar from "../../../components/general/avatar";
-import Input from "../../../components/general/input";
-import Button from "../../../components/general/button";
-import Dialog from "../../../components/general/dialog";
-import DareOption from "../../../components/general/dareOption";
-import Gif from "../../../components/general/gif";
-import { LanguageContext } from "../../../routes/authRoute";
-import { SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types";
-import CONSTANT from "../../../constants/constant";
-import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif';
-import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
-import "../../../assets/styles/dareme/dare/donutWishStyle.scss";
+import { useEffect, useState, useContext } from "react"
+import { useParams, useLocation, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { daremeAction } from "../../../redux/actions/daremeActions"
+import Avatar from "../../../components/general/avatar"
+import Input from "../../../components/general/input"
+import Button from "../../../components/general/button"
+import Dialog from "../../../components/general/dialog"
+import DareOption from "../../../components/general/dareOption"
+import Gif from "../../../components/general/gif"
+import { LanguageContext } from "../../../routes/authRoute"
+import { SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import CONSTANT from "../../../constants/constant"
+import { BackIcon } from "../../../assets/svg"
+import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif'
+import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif'
+import "../../../assets/styles/dareme/dare/donutWishStyle.scss"
 
 const DonutWish = () => {
   const { daremeId, optionId } = useParams()
@@ -91,12 +91,14 @@ const DonutWish = () => {
   }, [location, daremeId, dispatch])
 
   return (
-    <>
+    <div className="donut-wish-main-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(`/dareme/${daremeId}/support/${optionId}`) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.DONUTS_YOU_LIKE}</span></div>
+        <div></div>
+      </div>
       {voteNonSuperfanGif && <Gif gif={VoteNonSuperfanGif} />}
       {voteSuperfanGif && <Gif gif={VoteSuperfanGif} />}
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.DONUTS_YOU_LIKE} back={() => { navigate(`/dareme/${daremeId}/support/${optionId}`) }} />
-      </div>
       {(dareme.owner && option) &&
         <div className="donut-wish-wrapper">
           <Dialog
@@ -249,8 +251,8 @@ const DonutWish = () => {
           </div>
         </div>
       }
-    </>
+    </div>
   )
 }
 
-export default DonutWish;
+export default DonutWish

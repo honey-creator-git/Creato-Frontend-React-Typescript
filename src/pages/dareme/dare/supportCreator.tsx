@@ -1,21 +1,20 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { daremeAction } from "../../../redux/actions/daremeActions";
-import { SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types";
-import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
-import AvatarLink from "../../../components/dareme/avatarLink";
-import Title from "../../../components/general/title";
-import DareOption from "../../../components/general/dareOption";
-import Dialog from "../../../components/general/dialog";
-import ContainerBtn from "../../../components/general/containerBtn";
-import Gif from "../../../components/general/gif";
-import CONSTANT from "../../../constants/constant";
-import { LanguageContext } from "../../../routes/authRoute";
-import { HotIcon, LightbulbIcon } from "../../../assets/svg";
-import SignDialog from "../../../components/general/signDialog";
-import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif';
-import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss';
+import { useEffect, useState, useContext } from "react"
+import { useParams, useNavigate, useLocation } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { daremeAction } from "../../../redux/actions/daremeActions"
+import { SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import VideoCardDesktop from "../../../components/dareme/videoCardDesktop"
+import AvatarLink from "../../../components/dareme/avatarLink"
+import DareOption from "../../../components/general/dareOption"
+import Dialog from "../../../components/general/dialog"
+import ContainerBtn from "../../../components/general/containerBtn"
+import Gif from "../../../components/general/gif"
+import CONSTANT from "../../../constants/constant"
+import { LanguageContext } from "../../../routes/authRoute"
+import { HotIcon, LightbulbIcon, BackIcon } from "../../../assets/svg"
+import SignDialog from "../../../components/general/signDialog"
+import VoteSuperfanGif from '../../../assets/img/vote_superfan.gif'
+import '../../../assets/styles/dareme/dare/supportCreatorStyle.scss'
 
 const SupportCreator = () => {
   const { daremeId, optionId } = useParams()
@@ -41,8 +40,7 @@ const SupportCreator = () => {
 
   const voteDonuts = (user: any, reward: any) => {
     if (user) {
-      const amount = reward ? reward : 50
-      if (amount > user.wallet) setIsTopUp(true)
+      if (reward > user.wallet) setIsTopUp(true)
       else setIsSuperFan(true)
     } else setIsSignIn(true)
   }
@@ -86,11 +84,13 @@ const SupportCreator = () => {
   }, [location, dispatch, daremeId])
 
   return (
-    <div>
-      {voteSuperfanGif && <Gif gif={VoteSuperfanGif} />}
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.DAREME_OPTION} back={() => { navigate(`/dareme/details/${daremeId}`) }} />
+    <div className="dareme-support-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(`/dareme/details/${daremeId}`) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.DAREME_OPTION}</span></div>
+        <div></div>
       </div>
+      {voteSuperfanGif && <Gif gif={VoteSuperfanGif} />}
       {(option && dareme.owner) &&
         <>
           <SignDialog

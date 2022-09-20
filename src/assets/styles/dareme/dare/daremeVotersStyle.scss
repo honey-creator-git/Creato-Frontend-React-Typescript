@@ -1,64 +1,73 @@
-.dareme-voters {
-  box-sizing: border-box;
-  display: flex;
+.dareme-voters-wrapper {
+  .header-part {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    height: 52px;
+    margin: 25px auto;
+    padding: 0px 10px;
 
-  // .scroll-bar {
-  //   &::-webkit-scrollbar {
-  //     width: 8px;
-  //   }
+    .page-title {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #EFA058;
+    }
+  }
 
-  //   &::-webkit-scrollbar-track {
-  //     background-color: rgba(245, 195, 149, 0.1);
-  //     border-radius: 10px;
-  //   }
+  .dareme-voters {
+    box-sizing: border-box;
+    display: flex;
 
-  //   &::-webkit-scrollbar-thumb {
-  //     background: rgba(245, 195, 149, 0.5);
-  //     border-radius: 10px;
-  //     transition: 0.2s;
-  //     width: 12px;
-
-  //     &:hover {
-  //       background: #efa058;
-  //     }
-  //   }
-  // }
-
-  .dareme-voters-information {
-    width: 370px;
-    margin: 0 auto;
-
-    .dare-options {
-      width: 340px;
+    .dareme-voters-information {
+      width: 370px;
       margin: 0 auto;
-      // overflow-y: scroll;
 
-      .dare-option {
-        margin: 5px 0px;
-      }
+      .dare-options {
+        width: 340px;
+        margin: 0 auto;
+        // overflow-y: scroll;
 
-      .vote-details {
-        padding: 0px 5px;
+        .dare-option {
+          margin: 5px 0px;
+        }
 
-        .vote-info {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .vote-details {
+          padding: 0px 5px;
 
-          .donuts-count {
+          .vote-info {
             display: flex;
             align-items: center;
+            justify-content: space-between;
 
-            span {
-              font-style: normal;
-              font-weight: 400;
-              font-size: 12px;
-              line-height: 14px;
-              color: #54504E;
+            .donuts-count {
+              display: flex;
+              align-items: center;
+
+              span {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color: #54504E;
+              }
             }
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .dareme-voters-wrapper {
+    .header-part {
+      margin: 15px auto;
     }
   }
 }
