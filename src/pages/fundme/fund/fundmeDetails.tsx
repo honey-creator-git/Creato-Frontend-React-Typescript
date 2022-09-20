@@ -207,7 +207,6 @@ const FundMeDetails = (props: any) => {
               {
                 text: contexts.DIALOG.BUTTON_LETTER.TOP_UP,
                 handleClick: () => {
-                  // dispatch({ type: SET_CURRENT_FUNDME, payload: fundmeId });
                   dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/fundme/details/${fundmeId}` })
                   navigate(`/myaccount/shop`)
                 }
@@ -226,6 +225,7 @@ const FundMeDetails = (props: any) => {
                 handleClick: () => {
                   navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundmeId}`)
                   setCopied(true)
+                  setTimeout(() => { setCopied(false) }, 2500)
                 }
               }
             ]}
