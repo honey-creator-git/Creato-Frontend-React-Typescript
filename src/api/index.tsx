@@ -127,9 +127,8 @@ export const getFundmesOngoing = () => API.get(`/api/fundme/ongoingFundmes`);
 export const getFundmesByPersonalisedUrl = (data: any) => API.post('/api/fundme/personalUrl', data);
 export const checkFundMeFinished = (fundmeId: any) => API.get(`/api/fundme/check/finished/${fundmeId}`);
 export const getFundMeDetails = (fundmeId: any) => API.get(`/api/fundme/details/${fundmeId}`)
-export const fundCreator = (data: any) => API.post('/api/fundme/fund/creator', data);
-export const getFundmeResult = (fundmeId: any) => API.get(`/api/fundme/result/${fundmeId}`);
-export const getFundmeVoters = (fundmeId: any) => API.get(`/api/fundme/voters/${fundmeId}`);
+export const fundCreator = (data: any) => API.post('/api/fundme/fund/creator', data)
+export const getFundmeResult = (fundmeId: any) => API.get(`/api/fundme/result/${fundmeId}`)
 export const getFanwallByFundMeId = (fundmeId: any) => API.get(`/api/fanwall/fundme/${fundmeId}`);
 
 export const tipUser = (data: any) => API.post('/api/tip', data);

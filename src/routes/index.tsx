@@ -18,8 +18,7 @@ import FundUploadVideo from "../pages/fundme/create/uploadVideo"
 import FundmeTitle from "../pages/fundme/create/fundmeTitle"
 import FundmePreview from '../pages/fundme/create/preview'
 import FundCoverImage from '../pages/fundme/create/coverImage'
-// import FundmeDetails from '../pages/fundme/fund/fundmeDetails'
-import FundMeDetails from '../pages/fundme/fund/FundMeDetails1'
+import FundMeDetails from '../pages/fundme/fund/FundMeDetails'
 import FundmeRewards from '../pages/fundme/create/rewards'
 import FundmeVoters from '../pages/fundme/fund/fundmeVoters'
 import FundmeResult from '../pages/fundme/fund/fundmeResult'

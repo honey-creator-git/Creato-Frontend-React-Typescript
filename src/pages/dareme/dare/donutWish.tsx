@@ -9,7 +9,7 @@ import Dialog from "../../../components/general/dialog"
 import DareOption from "../../../components/general/dareOption"
 import Gif from "../../../components/general/gif"
 import { LanguageContext } from "../../../routes/authRoute"
-import { SET_CURRENT_DAREME, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import CONSTANT from "../../../constants/constant"
 import { BackIcon } from "../../../assets/svg"
 import VoteNonSuperfanGif from '../../../assets/img/vote_non_superfan.gif'

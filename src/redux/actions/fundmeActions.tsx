@@ -15,6 +15,46 @@ import {
 import * as api from "../../api";
 
 export const fundmeAction = {
+  //// Clean -----------------------------------------
+
+  getFundMeDetails: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    dispatch({ type: SET_FUNDME_DETAIL_INITIAL })
+    api.getFundMeDetails(fundmeId)
+      .then((result: any) => {
+        const { data } = result
+        if (data.success) {
+          const payload = data.payload
+          dispatch({ type: SET_FUNDME, payload: payload.fundme })
+          dispatch({ type: SET_LOADING_FALSE })
+        }
+      }).catch((err) => {
+        console.log(err)
+        dispatch({ type: SET_LOADING_FALSE })
+      })
+  },
+
+  fundCreator: (fundmeId: any, donuts: any, reward: any) => async (dispatch: Dispatch<any>) => {
+    dispatch({ type: SET_LOADING_TRUE })
+    api.fundCreator({ fundmeId: fundmeId, amount: donuts })
+      .then((result: any) => {
+        const { data } = result
+        dispatch({ type: SET_LOADING_FALSE })
+        if (data.success) {
+          const payload = data.payload
+          if (donuts < reward) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
+          else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
+          dispatch({ type: SET_FUNDME, payload: payload.fundme })
+          dispatch({ type: SET_USER, payload: payload.user })
+        }
+      }).catch((err: any) => {
+        console.log(err)
+        dispatch({ type: SET_LOADING_FALSE })
+      })
+  },
+
+
+  //////////////////////////////////////////////////////
   getDraftFundme: (navigate: any) => async (dispatch: Dispatch<any>) => {
     dispatch({ type: SET_LOADING_TRUE });
     api.getDraftFundme()
@@ -94,57 +134,6 @@ export const fundmeAction = {
         if (data.finished) navigate(`/fundme/result/${fundmeId}`);
         else navigate(`/fundme/details/${fundmeId}`);
       }).catch((err: any) => console.log(err));
-  },
-
-  getFundMeDetails: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE })
-    dispatch({ type: SET_FUNDME_DETAIL_INITIAL })
-    api.getFundMeDetails(fundmeId)
-      .then((result: any) => {
-        const { data } = result
-        if (data.success) {
-          const payload = data.payload
-          dispatch({ type: SET_FUNDME, payload: payload.fundme })
-          dispatch({ type: SET_LOADING_FALSE })
-        }
-      }).catch((err) => {
-        console.log(err)
-        dispatch({ type: SET_LOADING_FALSE })
-      })
-  },
-
-  checkFundAndResults: (fundmeId: any, donuts: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    api.checkFundMeFinished(fundmeId)
-      .then((result: any) => {
-        const { data } = result;
-        if (data.finished) navigate(`/fundme/result/${fundmeId}`);
-        else {
-          api.fundCreator({ fundmeId: fundmeId, amount: donuts })
-            .then((result: any) => {
-              const { data } = result;
-              if (data.success) {
-                if (donuts === 1) dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_non_superfan', state: true } })
-                else dispatch({ type: SET_DIALOG_STATE, payload: { type: 'vote_superfan', state: true } })
-                dispatch({ type: SET_LOADING_FALSE });
-                dispatch({ type: SET_FUNDME, payload: data.fundme });
-                if (data.user) dispatch({ type: SET_USER, payload: data.user });
-              }
-            }).catch((err: any) => console.log(err));
-        }
-      }).catch((err: any) => console.log(err));
-  },
-
-  getFundmeVoters: (fundmeId: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    api.getFundmeVoters(fundmeId)
-      .then((result: any) => {
-        const { data } = result;
-        if (data.success) {
-          dispatch({ type: SET_FUNDME_VOTES, payload: data.votes });
-          dispatch({ type: SET_LOADING_FALSE });
-        }
-      }).catch((err) => console.log(err));
   },
 
   getFundmeResult: (fundmeId: any) => async (dispatch: Dispatch<any>) => {

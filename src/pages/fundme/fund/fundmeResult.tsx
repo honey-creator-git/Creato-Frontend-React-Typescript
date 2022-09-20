@@ -1,20 +1,19 @@
-import { useEffect, useState, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { fundmeAction } from "../../../redux/actions/fundmeActions";
-import VideoCardDesktop from "../../../components/dareme/videoCardDesktop";
-import AvatarLink from "../../../components/dareme/avatarLink";
-import VideoCardMobile from "../../../components/dareme/videoCardMobile";
-import Title from "../../../components/general/title";
-import ContainerBtn from "../../../components/general/containerBtn";
-import CategoryBtn from "../../../components/general/categoryBtn";
-import Dialog from "../../../components/general/dialog";
-import WelcomeDlg from "../../../components/general/welcomeDlg";
-import CONSTANT from "../../../constants/constant";
-import { LanguageContext } from "../../../routes/authRoute";
-import { CreatoCoinIcon, RewardIcon, SpreadIcon } from "../../../assets/svg";
-import { SET_FANWALL_INITIAL, SET_DIALOG_STATE } from "../../../redux/types";
-import "../../../assets/styles/fundme/fund/fundmeResultStyle.scss";
+import { useEffect, useState, useContext } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { fundmeAction } from "../../../redux/actions/fundmeActions"
+import VideoCardDesktop from "../../../components/dareme/videoCardDesktop"
+import AvatarLink from "../../../components/dareme/avatarLink"
+import VideoCardMobile from "../../../components/dareme/videoCardMobile"
+import ContainerBtn from "../../../components/general/containerBtn"
+import CategoryBtn from "../../../components/general/categoryBtn"
+import Dialog from "../../../components/general/dialog"
+import WelcomeDlg from "../../../components/general/welcomeDlg"
+import CONSTANT from "../../../constants/constant"
+import { LanguageContext } from "../../../routes/authRoute"
+import { CreatoCoinIcon, RewardIcon, SpreadIcon, BackIcon, NoOfPeopleIcon } from "../../../assets/svg"
+import { SET_FANWALL_INITIAL, SET_DIALOG_STATE } from "../../../redux/types"
+import "../../../assets/styles/fundme/fund/fundmeResultStyle.scss"
 
 const FundmeResult = () => {
   const location = useLocation();
@@ -33,17 +32,20 @@ const FundmeResult = () => {
   const [openWelcomeDlg, setOpenWelcomeDlg] = useState(false)
   const [openWelcomeDlg2, setOpenWelcomeDlg2] = useState(false)
 
-  const fundme = fundmeState.fundme;
-  const fanwall = fanwallState.fanwall;
+  const { fundme } = fundmeState
+  const { fanwall } = fanwallState
+  const { user } = userState
 
-  const user = userState.user;
-  const interval = fundme.goal ? (Number(fundme.goal) / 20).toFixed(1) : 0;
-  const count = fundme.goal ? Number(Math.floor(Number(fundme.wallet) / Number(interval))) : 0;
-  const width = fundme.wallet <= interval ? Math.floor(Number(interval) / Number(fundme.goal) * 330) : Math.floor(Number(interval) * count / Number(fundme.goal) * 330);
+  const displayProcess = (length: any) => {
+    const interval = fundme.goal ? (Number(fundme.goal) / 20).toFixed(1) : 0
+    const count = fundme.goal ? Number(Math.floor(Number(fundme.wallet) / Number(interval))) : 0
+    const width = fundme.wallet < interval ? Math.floor(Number(interval) / Number(fundme.goal) * length) : Math.floor(Number(interval) * count / Number(fundme.goal) * length)
+    return width
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fundmeAction.getFundmeResult(fundmeId));
+    dispatch(fundmeAction.getFundmeResult(fundmeId))
   }, [location, dispatch, fundmeId]);
 
   const calcTime = (time: any) => {
@@ -62,25 +64,20 @@ const FundmeResult = () => {
 
   useEffect(() => {
     if (dlgState.type === 'welcome') {
-      if (dlgState.state) {
-        setOpenWelcomeDlg(true);
-      }
+      if (dlgState.state) setOpenWelcomeDlg(true)
     } else if (dlgState.type === 'welcome2') {
-      if (dlgState.state) {
-        setOpenWelcomeDlg2(true)
-      }
+      if (dlgState.state) setOpenWelcomeDlg2(true)
     }
   }, [dlgState])
 
   return (
-    <>
-      <div className="title-header">
-        <Title
-          title={contexts.HEADER_TITLE.FUNDME_RESULT}
-          back={() => { navigate(prevRoute) }}
-          voters={() => { navigate(`/fundme/${fundmeId}/voters`) }}
-          ownerId={fundme?.owner?._id}
-        />
+    <div className="fundme-result-wrapper">
+      <div className="header-part">
+        <div onClick={() => { navigate(prevRoute) }}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.FUNDME_RESULT}</span></div>
+        <div onClick={() => { if (fundme.owner && user && (fundme.owner._id === user.id || user.role === "ADMIN")) navigate(`/fundme/${fundmeId}/voters`) }}>
+          {(fundme.owner && user && (fundme.owner._id === user.id || user.role === "ADMIN")) && <NoOfPeopleIcon color="#938D8A" />}
+        </div>
       </div>
       {fundme.owner &&
         <>
@@ -213,7 +210,7 @@ const FundmeResult = () => {
                   <label>{fundme.wallet < fundme.goal ? contexts.CREATE_FUNDME_LETTER.FUNDING_GOAL : contexts.CREATE_FUNDME_LETTER.GOAL_REACHED}</label>
                 </div>
                 <div className="process-bar">
-                  <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${width}px` : '330px' }}></div>
+                  <div className="process-value" style={{ width: fundme.wallet < fundme.goal ? `${displayProcess(330)}px` : '330px' }}></div>
                 </div>
                 <div className="donuts-count">
                   <span><span className={fundme.wallet >= fundme.goal ? "over-donuts" : ""}>{fundme.wallet.toLocaleString()}</span> / {fundme.goal.toLocaleString()} {contexts.GENERAL_LETTER.DONUTS}</span>
@@ -264,8 +261,8 @@ const FundmeResult = () => {
           </div>
         </>
       }
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default FundmeResult;
+export default FundmeResult

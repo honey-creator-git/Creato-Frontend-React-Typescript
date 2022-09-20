@@ -107,7 +107,9 @@ const DaremeResult = () => {
       <div className="header-part">
         <div onClick={() => { navigate(loadState.prevRoute) }}><BackIcon color="black" /></div>
         <div className="page-title"><span>{contexts.HEADER_TITLE.DAREME_RESULT}</span></div>
-        <div onClick={() => { navigate(`/dareme/${daremeId}/voters`) }}>{(dareme.owner && user && (dareme.owner._id === user.id || user.role === "ADMIN")) && <NoOfPeopleIcon color="#938D8A" />}</div>
+        <div onClick={() => { if (dareme.owner && user && (dareme.owner._id === user.id || user.role === "ADMIN")) navigate(`/dareme/${daremeId}/voters`) }}>
+          {(dareme.owner && user && (dareme.owner._id === user.id || user.role === "ADMIN")) && <NoOfPeopleIcon color="#938D8A" />}
+        </div>
       </div>
       {(maxOption && dareme.owner) &&
         <div className="dareme-result">

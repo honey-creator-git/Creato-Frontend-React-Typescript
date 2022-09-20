@@ -1,255 +1,439 @@
-.fundme-details {
-  box-sizing: border-box;
+.fundme-details-wrapper {
 
-  .desktop-header-info {
-    width: 100%;
-    margin: 0px auto 10px auto;
+  .header-part {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    height: 52px;
+    margin: 25px auto;
+    padding: 0px 10px;
 
-    .time-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .left-time {
-        font-style: normal;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 18px;
-        color: #E17253;
-      }
-
-      .vote-info {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: bold;
-        color: black;
-
-        span {
-          width: fit-content;
-          margin: auto 5px;
-        }
-      }
-    }
-
-    .title-category {
-      display: flex;
-      justify-content: space-between;
-
-      .dare-title {
-        margin-top: 10px;
-        height: fit-content;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 28px;
-        color: black;
-      }
-
-      .dare-category {
-        margin-left: 260px;
-        margin-top: 10px;
-      }
+    .page-title {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #EFA058;
     }
   }
 
-  .main-body {
-    display: flex;
+  .details-part {
+    .fundme-info {
+      display: flex;
+      justify-content: center;
 
-    .fundme-details-information {
-      width: 370px;
+      .fundme-detail {
+        .basic-info {
+          .profile-name {
+            display: flex;
+            align-items: center;
 
-      .funding-goal {
-        margin-top: 5px;
-        margin-bottom: 15px;
+            .profile {
+              z-index: 2;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 85px;
+              height: 85px;
+              border-radius: 50%;
+              background: linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%);
+            }
 
-        .title {
-          margin-left: 15px;
-          display: flex;
-          align-items: center;
-          font-family: 'Lato';
-          font-style: normal;
-          font-weight: 800;
-          font-size: 20px;
-          line-height: 24px;
-          letter-spacing: 0.02em;
-          color: #EFA058;
-        }
+            .name {
+              box-sizing: border-box;
+              display: flex;
+              justify-content: center;
+              z-index: 1;
+              margin-left: -15px;
+              padding: 6px 10px 6px 15px;
+              width: 250px;
+              height: fit-content;
+              background: linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%);
+              border-radius: 0px 20px 0px 0px;
 
-        .process-bar {
-          margin: 15px auto;
-          position: relative;
-          width: 330px;
-          height: 13px;
-          background: #C4C4C4;
+              span {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+                line-height: 24px;
+                text-align: center;
+                letter-spacing: 0.02em;
+                color: #FFFFFF;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
 
-          .process-value {
-            position: absolute;
-            height: 13px;
-            top: 0px;
-            left: 0px;
-            background-image: linear-gradient(to right, #dd4d71 30%, #e48c3c, );
+          .title-result {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: -30px;
+            padding: 30px 30px;
+            width: 320px;
+            height: 250px;
+            max-height: 250px;
+            background: #FFFFFF;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 0px 0px 20px 20px;
+
+            .type-lefttime {
+              display: flex;
+              justify-content: center;
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 800;
+              font-size: 14px;
+              line-height: 18px;
+              letter-spacing: 0.02em;
+
+              .item-type {
+                display: flex;
+                align-items: center;
+                width: 85px;
+                height: 25px;
+                background: #FFFFFF;
+                color: #14BDC7;
+                margin-right: 10px;
+              }
+
+              .left-time {
+                display: flex;
+                align-items: center;
+                color: #DE5A67;
+                mix-blend-mode: normal;
+              }
+            }
+
+            .title {
+              span {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 22px;
+                line-height: 26px;
+                color: #7E7875;
+              }
+
+              .play-icon {
+                display: none;
+              }
+            }
+
+            .result {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 18px;
+              color: #7E7875;
+
+              span {
+                margin: 0px 5px;
+              }
+            }
           }
         }
 
-        .donuts-count {
-          margin-left: 20px;
-          font-family: 'Lato';
-          font-style: normal;
-          font-weight: 600;
-          font-size: 22px;
-          line-height: 26px;
-          color: #000000;
+        .reward-info {
+          box-sizing: border-box;
+          margin-top: 8px;
+          width: 320px;
+          height: 180px;
+          padding: 16px;
+          background: linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%);
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+          border-radius: 20px;
 
-          .over-donuts {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 800;
-            font-size: 40px;
-            line-height: 28px;
-            color: #EFA058;
+          .reward-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 800;
+              font-size: 14px;
+              line-height: 18px;
+              letter-spacing: 0.02em;
+              color: #FFFFFF;
+            }
+          }
+
+          .divider {
+            margin: 5px auto;
+            width: 280px;
+            height: 0px;
+            border: 1px solid #FFFFFF;
+          }
+
+          .reward-text {
+            height: 112px;
+            display: flex;
+            align-items: center;
+
+            span {
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 22px;
+              line-height: 26px;
+              color: #FFFFFF;
+              text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            }
           }
         }
       }
 
-      .dareme-support-fun {
-        width: 340px;
-        margin: 0 auto;
+      .teaser-part {
+        margin-left: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background: linear-gradient(121.78deg, #14C3C9 0%, #14AFC9 29.13%, #14A5C9 54.17%, #1490C9 97.1%);
+      }
+    }
 
-        .see-superfan-reward {
-          width: 330px;
-          margin: 0px auto 15px auto;
+    .funding-goal {
+      max-width: 600px;
+      margin: 15px auto;
+      padding: 10px;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+
+      .title {
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: 0.02em;
+        color: #EFA058;
+      }
+
+      .process-bar {
+        margin: 15px auto;
+        position: relative;
+        width: 90%;
+        height: 13px;
+        background: #C4C4C4;
+
+        .process-value {
+          position: absolute;
+          height: 13px;
+          top: 0px;
+          left: 0px;
+          background-image: linear-gradient(to right, #dd4d71 30%, #e48c3c, );
+        }
+      }
+
+      .donuts-count {
+        margin-left: 20px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 26px;
+        color: #000000;
+
+        .over-donuts {
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 800;
+          font-size: 40px;
+          line-height: 28px;
+          color: #EFA058;
+        }
+      }
+    }
+
+    .support-options {
+      box-sizing: border-box;
+      margin-top: 50px;
+      max-width: 1050px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+
+      .support-header-part {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .support-divider {
+          margin-top: 10px;
+          border: 1px solid #000000;
+          width: 240px;
+          border-width: 1px 0px 0px 0px;
         }
 
-        .number-of-donuts {
-          width: 280px;
-          margin: 10px auto 20px auto;
-          display: flex;
-          justify-content: space-between;
+        .support-heasder {
           font-family: 'Lato';
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
           line-height: 20px;
           text-align: center;
-          color: #BAB6B5;
+          color: #000000;
+        }
+      }
 
-          span {
-            margin-top: 10px;
-            width: 60px;
-            border: 1px solid #BAB6B5;
-            border-left: 0px;
-            border-bottom: 0px;
-            border-right: 0px;
+      .support-buttons {
+        display: flex;
+        justify-content: space-between;
+        max-width: 720px;
+        margin: 0px auto;
+
+        .support-button {
+          margin-top: 20px;
+          width: 340px;
+          display: flex;
+          flex-direction: column;
+
+          .support-fun {
+            width: 330px;
+            margin: 0 auto;
+          }
+
+          .support-letter {
+            margin-top: 15px;
+            margin-left: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+            color: #54504E;
+          }
+
+          .support-explain {
+            margin-left: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+            color: #54504E;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .fundme-details-wrapper {
+    .details-part {
+
+      .support-options {
+        margin-top: 20px;
+
+        .support-buttons {
+          max-width: 330px;
+          margin: 0px auto;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .fundme-details-wrapper {
+    .header-part {
+      margin: 15px auto;
+    }
+
+    .details-part {
+      .fundme-info {
+        .fundme-detail {
+          .basic-info {
+            .title-result {
+              height: fit-content;
+
+              .type-lefttime {
+                margin: 10px auto;
+              }
+
+              .title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span {
+                  width: 210px;
+                  height: fit-content;
+                }
+
+                .play-icon {
+                  cursor: pointer;
+                  display: block;
+                  width: 40px;
+                  height: 40px;
+                  background-color: #14BDC7;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+
+                  &:hover {
+                    background-color: #108AA1;
+                  }
+                }
+              }
+
+              .result {
+                margin: 10px auto;
+              }
+            }
+          }
+
+          .reward-info {
+            margin-top: 20px;
+            height: 140px;
+
+            .reward-text {
+              height: 72px;
+            }
           }
         }
 
-        .support-fun {
-          width: 330px;
-          margin: 0 auto;
-          margin-top: 20px;
+        .teaser-part {
+          display: none;
         }
-
-        .support-letter {
-          margin-top: 15px;
-          margin-left: 10px;
-          font-family: 'Lato';
-          font-style: normal;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 16px;
-          color: #54504E;
-        }
-
-        .support-explain {
-          margin-left: 10px;
-          font-family: 'Lato';
-          font-style: normal;
-          font-weight: 600;
-          font-size: 12px;
-          line-height: 14px;
-          color: #54504E;
-        }
-      }
-
-      .dare-btn {
-        width: 330px;
-        margin: 0px auto;
-        margin-top: 15px;
-      }
-
-      .below-text {
-        margin-top: 15px;
-        margin-left: 25px;
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        letter-spacing: 0.005em;
-        color: #54504E;
-      }
-    }
-  }
-
-  @media (min-width: 880px) {
-    max-width: 880px;
-    margin: 0 auto;
-    background: #ffffff;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    padding: 40px;
-
-    .main-body {
-      justify-content: space-between;
-
-      .fundme-details-videoCardDesktop {
-        width: 370px;
-        display: block;
-      }
-
-      .fundme-details-videoCardMobile {
-        display: none;
-      }
-    }
-  }
-
-  @media (max-width: 879px) {
-    .desktop-header-info {
-      display: none;
-    }
-
-    .main-body {
-      justify-content: center;
-
-      .fundme-details-videoCardDesktop {
-        display: none;
-      }
-
-      .fundme-details-videoCardMobile {
-        width: 340px;
-        margin: 0 auto;
-        display: block;
       }
 
       .funding-goal {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-        border-radius: 5px;
-        padding: 10px 5px 10px 5px;
-        margin: 10px 15px 30px 15px !important;
+        max-width: 300px;
+      }
 
-        .title {
-          margin-left: 0px !important;
+      .support-options {
+        margin-top: 20px;
+
+        .support-header-part {
+          .support-divider {
+            margin-top: 10px;
+            border: 1px solid #000000;
+            width: 80px;
+            border-width: 1px 0px 0px 0px;
+          }
         }
-      }
-
-      .desktop-header-info {
-        display: none;
-      }
-
-      .donuts-count {
-        margin-left: 5px !important;
       }
     }
   }
