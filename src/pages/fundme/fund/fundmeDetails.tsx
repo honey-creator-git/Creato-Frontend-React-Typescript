@@ -103,12 +103,12 @@ const FundMeDetails = (props: any) => {
 
   useEffect(() => {
     if (fundme.owner) {
+      if (fundme.finished && fundme._id === fundmeId) navigate(`/fundme/result/${fundmeId}`)
       setTime(fundme.time)
       setFlag(true)
     }
   }, [fundme])
   useEffect(() => {
-    if (time < -10) navigate(`/fundme/result/${fundmeId}`)
     if (flag) {
       if (timerId) clearInterval(timerId)
       let id = setInterval(() => { setTime((time: any) => time - 1) }, 1000)

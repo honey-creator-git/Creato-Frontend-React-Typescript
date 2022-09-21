@@ -81,13 +81,13 @@ const DareMeDetails = (props: any) => {
 
   useEffect(() => {
     if (dareme.owner) {
+      if (dareme.finished && daremeId === dareme._id) navigate(`/dareme/result/${daremeId}`)
       setTime(dareme.time)
       setFlag(true)
       setShowResult(canSeeResult())
     }
   }, [dareme])
   useEffect(() => {
-    if (time < -10) navigate(`/dareme/result/${daremeId}`)
     if (flag) {
       if (timerId) clearInterval(timerId)
       let id = setInterval(() => { setTime((time: any) => time - 1) }, 1000)

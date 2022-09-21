@@ -23,7 +23,50 @@
 
   .dareme-result {
 
-    .dareme-result-header {}
+    .dareme-result-header {
+      box-sizing: border-box;
+      max-width: 720px;
+      padding: 0px 20px;
+      margin: 20px auto;
+
+      .left-time-vote-info {
+        display: flex;
+        justify-content: space-between;
+
+        .left-time {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 18px;
+          color: #E17253;
+        }
+
+        .vote-info {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: bold;
+          color: black;
+
+          span {
+            width: fit-content;
+            margin: auto 5px;
+          }
+        }
+      }
+
+      .dareme-title {
+        margin-top: 10px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 26px;
+        color: #7E7875;
+      }
+
+    }
 
     .dareme-result-detail {
       margin: 0px auto;
@@ -31,13 +74,13 @@
       justify-content: center;
       flex-wrap: wrap;
       max-width: 1100px;
-      
+
       .detail-card {
         margin: 10px;
       }
     }
 
-    
+
     // .scroll-bar {
     //   &::-webkit-scrollbar {
     //     width: 8px;
@@ -71,27 +114,27 @@
     //       display: flex;
     //       justify-content: space-between;
 
-    //       .left-time {
-    //         font-style: normal;
-    //         font-weight: bold;
-    //         font-size: 16px;
-    //         line-height: 18px;
-    //         color: #E17253;
-    //       }
+    // .left-time {
+    //   font-style: normal;
+    //   font-weight: bold;
+    //   font-size: 16px;
+    //   line-height: 18px;
+    //   color: #E17253;
+    // }
 
-    //       .vote-info {
-    //         display: flex;
-    //         align-items: center;
-    //         font-size: 14px;
-    //         font-style: normal;
-    //         font-weight: bold;
-    //         color: black;
+    // .vote-info {
+    //   display: flex;
+    //   align-items: center;
+    //   font-size: 14px;
+    //   font-style: normal;
+    //   font-weight: bold;
+    //   color: black;
 
-    //         span {
-    //           width: fit-content;
-    //           margin: auto 5px;
-    //         }
-    //       }
+    //   span {
+    //     width: fit-content;
+    //     margin: auto 5px;
+    //   }
+    // }
     //     }
 
     //     .dare-title {

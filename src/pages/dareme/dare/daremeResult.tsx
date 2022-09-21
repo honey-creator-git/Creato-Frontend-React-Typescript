@@ -339,6 +339,20 @@ const DaremeResult = () => {
             shareType={"win"}
             daremeTitle={dareme.title}
           />
+          <div className="dareme-result-header">
+            <div className="left-time-vote-info">
+              <div className="left-time">
+                <span>{displayTime(dareme.time)}</span>
+              </div>
+              <div className="vote-info">
+                <CreatoCoinIcon color="black" />
+                <span>{dareme.donuts.toLocaleString()}</span>
+              </div>
+            </div>
+            <div className="dareme-title">
+              <span>{dareme.title}</span>
+            </div>
+          </div>
           <div className="dareme-result-detail">
             <div className="detail-card">
               <VoteResult options={dareme.options} />
