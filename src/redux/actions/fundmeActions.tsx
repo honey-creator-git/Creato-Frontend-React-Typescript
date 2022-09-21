@@ -9,7 +9,6 @@ import {
   SET_FANWALL_INITIAL,
   SET_USER,
   SET_FUNDME_DETAIL_INITIAL,
-  SET_FUNDME_VOTES,
   SET_DIALOG_STATE,
 } from "../types";
 import * as api from "../../api";
