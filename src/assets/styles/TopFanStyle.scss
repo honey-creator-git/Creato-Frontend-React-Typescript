@@ -1,0 +1,77 @@
+.topfan-result-wrapper {
+  box-sizing: border-box;
+  width: 350px;
+  height: 620px;
+  background: #FFFFFF;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 40px 10px;
+
+  .header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #54504E;
+  }
+
+  .topfan-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 20px;
+    height: 450px;
+    align-items: flex-end;
+
+    .topfan-card {
+      display: flex;
+      flex-direction: column;
+
+      .topfan-avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .topfan-bar {
+        box-sizing: border-box;
+        width: 80px;
+        border-radius: 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 10px;
+
+        span {
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 800;
+          line-height: 28px;
+          display: flex;
+          align-items: center;
+          color: #FFFFFF;
+          writing-mode: vertical-rl;
+          transform: rotate(180deg);
+        }
+      }
+
+      .topfan-donuts {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+        color: #696462;
+      }
+    }
+  }
+}

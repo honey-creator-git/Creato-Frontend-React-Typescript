@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import visitorImg from "../../assets/img/visitor_avatar.png";
+import visitorImg from "../../assets/img/visitor_avatar.png"
+import React from "react"
+import { useState } from "react"
 
 const Avatar = (props: any) => {
   const { size, avatarStyle, category, username, avatar, handleClick, hover } = props;

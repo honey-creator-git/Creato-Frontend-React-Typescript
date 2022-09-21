@@ -22,156 +22,169 @@
   }
 
   .dareme-result {
-    box-sizing: border-box;
-    display: flex;
 
-    .scroll-bar {
-      &::-webkit-scrollbar {
-        width: 8px;
-      }
+    .dareme-result-header {}
 
-      &::-webkit-scrollbar-track {
-        background-color: rgba(245, 195, 149, 0.1);
-        border-radius: 10px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: rgba(245, 195, 149, 0.5);
-        border-radius: 10px;
-        transition: 0.2s;
-        width: 12px;
-
-        &:hover {
-          background: #efa058;
-        }
-      }
-    }
-
-    .dareme-result-information {
-      width: 370px;
-
-      .desktop-header-info {
-        width: 340px;
-        margin: 0 auto;
-
-        .time-info {
-          display: flex;
-          justify-content: space-between;
-
-          .left-time {
-            font-style: normal;
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 18px;
-            color: #E17253;
-          }
-
-          .vote-info {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: bold;
-            color: black;
-
-            span {
-              width: fit-content;
-              margin: auto 5px;
-            }
-          }
-        }
-
-        .dare-title {
-          margin-top: 10px;
-          height: 56px;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          line-height: 28px;
-          color: black;
-        }
-
-        .dare-category {
-          margin-top: 10px;
-        }
-      }
-
-      .result-info {
-        width: 330px;
-        margin: 0px auto;
-
-        .result-win-options {
-          margin-top: 15px;
-        }
-
-        .tie-letter {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #000000;
-        }
-
-        .result-button {
-          margin-top: 15px;
-        }
-
-        .dare-options {
-          margin-top: 10px;
-
-          .dare-option {
-            margin: 0px 2px 5px 5px;
-          }
-        }
-      }
-    }
-
-    @media (min-width: 880px) {
-      max-width: 880px;
-      margin: 0 auto;
-      background: #ffffff;
-      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-      border-radius: 5px;
-      padding: 40px;
-      justify-content: space-between;
-
-      .dareme-result-videoCardDesktop {
-        width: 370px;
-        display: block;
-      }
-
-      .dareme-result-videoCardMobile {
-        display: none;
-      }
-
-      .dare-options {
-        max-height: 210px;
-        overflow-y: scroll;
-      }
-    }
-
-    @media (max-width: 879px) {
+    .dareme-result-detail {
+      margin: 0px auto;
+      display: flex;
       justify-content: center;
-
-      .dareme-result-videoCardDesktop {
-        display: none;
-      }
-
-      .dareme-result-videoCardMobile {
-        width: 340px;
-        margin: 0 auto;
-        display: block;
-      }
-
-      .desktop-header-info {
-        display: none;
-      }
-
-      .dare-options {
-        max-height: 300px;
-        overflow-y: scroll;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      
+      .detail-card {
+        margin: 10px;
       }
     }
+
+    
+    // .scroll-bar {
+    //   &::-webkit-scrollbar {
+    //     width: 8px;
+    //   }
+
+    //   &::-webkit-scrollbar-track {
+    //     background-color: rgba(245, 195, 149, 0.1);
+    //     border-radius: 10px;
+    //   }
+
+    //   &::-webkit-scrollbar-thumb {
+    //     background: rgba(245, 195, 149, 0.5);
+    //     border-radius: 10px;
+    //     transition: 0.2s;
+    //     width: 12px;
+
+    //     &:hover {
+    //       background: #efa058;
+    //     }
+    //   }
+    // }
+
+    // .dareme-result-information {
+    //   width: 370px;
+
+    //   .desktop-header-info {
+    //     width: 340px;
+    //     margin: 0 auto;
+
+    //     .time-info {
+    //       display: flex;
+    //       justify-content: space-between;
+
+    //       .left-time {
+    //         font-style: normal;
+    //         font-weight: bold;
+    //         font-size: 16px;
+    //         line-height: 18px;
+    //         color: #E17253;
+    //       }
+
+    //       .vote-info {
+    //         display: flex;
+    //         align-items: center;
+    //         font-size: 14px;
+    //         font-style: normal;
+    //         font-weight: bold;
+    //         color: black;
+
+    //         span {
+    //           width: fit-content;
+    //           margin: auto 5px;
+    //         }
+    //       }
+    //     }
+
+    //     .dare-title {
+    //       margin-top: 10px;
+    //       height: 56px;
+    //       font-style: normal;
+    //       font-weight: 600;
+    //       font-size: 24px;
+    //       line-height: 28px;
+    //       color: black;
+    //     }
+
+    //     .dare-category {
+    //       margin-top: 10px;
+    //     }
+    //   }
+
+    //   .result-info {
+    //     width: 330px;
+    //     margin: 0px auto;
+
+    //     .result-win-options {
+    //       margin-top: 15px;
+    //     }
+
+    //     .tie-letter {
+    //       font-style: normal;
+    //       font-weight: 400;
+    //       font-size: 16px;
+    //       line-height: 20px;
+    //       color: #000000;
+    //     }
+
+    //     .result-button {
+    //       margin-top: 15px;
+    //     }
+
+    //     .dare-options {
+    //       margin-top: 10px;
+
+    //       .dare-option {
+    //         margin: 0px 2px 5px 5px;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // @media (min-width: 880px) {
+    //   max-width: 880px;
+    //   margin: 0 auto;
+    //   background: #ffffff;
+    //   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    //   border-radius: 5px;
+    //   padding: 40px;
+    //   justify-content: space-between;
+
+    //   .dareme-result-videoCardDesktop {
+    //     width: 370px;
+    //     display: block;
+    //   }
+
+    //   .dareme-result-videoCardMobile {
+    //     display: none;
+    //   }
+
+    //   .dare-options {
+    //     max-height: 210px;
+    //     overflow-y: scroll;
+    //   }
+    // }
+
+    // @media (max-width: 879px) {
+    //   justify-content: center;
+
+    //   .dareme-result-videoCardDesktop {
+    //     display: none;
+    //   }
+
+    //   .dareme-result-videoCardMobile {
+    //     width: 340px;
+    //     margin: 0 auto;
+    //     display: block;
+    //   }
+
+    //   .desktop-header-info {
+    //     display: none;
+    //   }
+
+    //   .dare-options {
+    //     max-height: 300px;
+    //     overflow-y: scroll;
+    //   }
+    // }
   }
 }
 

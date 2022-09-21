@@ -9,6 +9,8 @@ import ContainerBtn from "../../../components/general/containerBtn"
 import DareOption from "../../../components/general/dareOption"
 import CategoryBtn from "../../../components/general/categoryBtn"
 import Dialog from "../../../components/general/dialog"
+import VoteResult from "../../../components/general/VoteResult"
+import TopFan from "../../../components/general/TopFan"
 import RefundDlg from "../../../components/dareme/refundDlg"
 import WelcomeDlg from "../../../components/general/welcomeDlg"
 import CONSTANT from "../../../constants/constant"
@@ -337,7 +339,15 @@ const DaremeResult = () => {
             shareType={"win"}
             daremeTitle={dareme.title}
           />
-          <div className="dareme-result-videoCardDesktop">
+          <div className="dareme-result-detail">
+            <div className="detail-card">
+              <VoteResult options={dareme.options} />
+            </div>
+            <div className="detail-card">
+              <TopFan topfans={dareme.voteInfo.sort((first: any, second: any) => first.donuts < second.donuts ? 1 : first.donuts > second.donuts ? -1 : 0)} />
+            </div>
+          </div>
+          {/* <div className="dareme-result-videoCardDesktop">
             <VideoCardDesktop
               url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
               sizeType={dareme.sizeType}
@@ -511,8 +521,8 @@ const DaremeResult = () => {
                   ))
                 }
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
       }
     </div>
