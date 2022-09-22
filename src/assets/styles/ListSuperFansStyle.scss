@@ -1,0 +1,123 @@
+.list-superfans-wrapper {
+  box-sizing: border-box;
+  width: 350px;
+  height: 620px;
+  background: #FFFFFF;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 40px 10px;
+
+  .scroll-bar {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(245, 195, 149, 0.1);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(245, 195, 149, 0.5);
+      border-radius: 10px;
+      transition: 0.2s;
+      width: 12px;
+
+      &:hover {
+        background: #efa058;
+      }
+    }
+  }
+
+  .header-title {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #54504E;
+  }
+
+  table,
+  tr,
+  th,
+  td {
+    border-collapse: collapse;
+  }
+
+  .superfan-list {
+    width: 330px;
+    box-sizing: border-box;
+    padding: 0px 5px;
+    max-height: 450px;
+    overflow-y: scroll;
+    margin: 40px 0px 0px 0px;
+
+    table {
+      width: 100%;
+      border: hidden;
+      box-shadow: 0px 0px 0px 1px red;
+      border-radius: 10px 10px 0px 0px;
+
+      thead {
+        width: 100%;
+        background: #EFA058;
+
+        tr {
+          height: 35px;
+
+          th {
+            border: 1px solid #E1E0DF;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+            color: #FFFFFF;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          td {
+            border: 1px solid #E1E0DF;
+
+            .place {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 18px;
+              text-align: center;
+              letter-spacing: 0.005em;
+              color: #000000;
+            }
+
+            .voter-avatar {
+              padding: 0px 5px;
+            }
+
+            .donuts-number {
+              display: flex;
+              align-items: center;
+              font-family: 'Lato';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 18px;
+              text-align: center;
+              letter-spacing: 0.005em;
+              color: #27AE60;
+            }
+          }
+        }
+      }
+    }
+  }
+}
