@@ -15,9 +15,9 @@ const ListSuperFans = (props: any) => {
         <table>
           <thead>
             <tr>
-              <th style={{ borderRadius: '10px 0px 0px 0px' }}>Place</th>
+              <th>Place</th>
               <th>From</th>
-              <th style={{ borderRadius: '0px 10px 0px 0px' }}>Donuts</th>
+              <th>Donuts</th>
             </tr>
           </thead>
           <tbody>
