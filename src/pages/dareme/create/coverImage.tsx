@@ -61,7 +61,7 @@ const CoverImage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         if (daremeState.teaser && daremeStore.teaserFile === null) {
-            fetch(`${CONSTANT.SERVER_URL}/${daremeState.teaser}`)
+            fetch(`${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}`)
                 .then(res => res.blob())
                 .then(blob => {
                     const extension = daremeState.teaser.slice(-3);

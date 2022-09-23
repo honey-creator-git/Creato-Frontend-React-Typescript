@@ -53,7 +53,7 @@ const DareMeCard = (props: any) => {
         <div className="owner-avatar">
           <Avatar
             size="mobile"
-            avatar={owner.avatar.indexOf('uploads') === -1 ? owner.avatar : `${CONSTANT.SERVER_URL}/${owner.avatar}`}
+            avatar={owner.avatar.indexOf('uploads') === -1 ? owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${owner.avatar}`}
             handleClick={() => { navigate(`/${owner.profile}`) }}
           />
         </div>

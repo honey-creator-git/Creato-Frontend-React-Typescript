@@ -11,7 +11,6 @@ import TipCard from "../../components/profile/tipCard";
 import TipMessageDlg from "../../components/profile/tipMessageDlg"
 import SignDialog from "../../components/general/signDialog"
 import { RewardIcon, TipIcon, ExpandIcon, RetrieveIcon } from "../../assets/svg";
-import CONSTANT from "../../constants/constant";
 import { SET_FANWALL_INITIAL, SET_PREVIOUS_ROUTE, SET_TIPID } from "../../redux/types";
 import { LanguageContext } from "../../routes/authRoute";
 import visitorImg from "../../assets/img/visitor_avatar.png"
@@ -67,11 +66,11 @@ const ProfileFanwall = () => {
         tip: tips[index].tip,
         message: tips[index].message,
         avatars: [
-          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
-          tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
+          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}`,
+          tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${process.env.REACT_APP_SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
         ],
         ownername: authuser?.name,
-        ownerURL: `${CONSTANT.SERVER_URL}/${authuser?.personalisedUrl}`
+        ownerURL: `${process.env.REACT_APP_SERVER_URL}/${authuser?.personalisedUrl}`
       });
       setOpenTipMessageDlg(true);
     }
@@ -131,11 +130,11 @@ const ProfileFanwall = () => {
         tip: tip[0].tip,
         message: tip[0].message,
         avatars: [
-          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
-          tip[0].tipper ? tip[0].tipper.avatar.indexOf('uploads') === -1 ? tip[0].tipper.avatar : `${CONSTANT.SERVER_URL}/${tip[0].tipper.avatar}` : visitorImg
+          authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}`,
+          tip[0].tipper ? tip[0].tipper.avatar.indexOf('uploads') === -1 ? tip[0].tipper.avatar : `${process.env.REACT_APP_SERVER_URL}/${tip[0].tipper.avatar}` : visitorImg
         ],
         ownername: authuser?.name,
-        ownerURL: `${CONSTANT.SERVER_URL}/${authuser?.personalisedUrl}`
+        ownerURL: `${process.env.REACT_APP_SERVER_URL}/${authuser?.personalisedUrl}`
       })
       setOpenTipMessageDlg(true);
     }
@@ -207,7 +206,7 @@ const ProfileFanwall = () => {
                           {index < tipIndex &&
                             <div className="card-detail">
                               <TipCard
-                                avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
+                                avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${process.env.REACT_APP_SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
                                 username={tip.tipper ? tip.tipper.name : tip.nickname}
                                 tip={tip.tip}
                                 message={tip.message}
@@ -247,9 +246,9 @@ const ProfileFanwall = () => {
                         <div className="profile-dareme" key={index}>
                           <VideoCardMobile
                             donuts={fanwall.dareme.donuts}
-                            url={`${CONSTANT.SERVER_URL}/${fanwall.video}`}
+                            url={`${process.env.REACT_APP_SERVER_URL}/${fanwall.video}`}
                             sizeType={fanwall.sizeType}
-                            coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                            coverImage={fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                             title={fanwall.dareme.title}
                             goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
                             category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}
@@ -297,9 +296,9 @@ const ProfileFanwall = () => {
                         <div className="profile-dareme" key={index}>
                           <VideoCardMobile
                             donuts={fanwall.dareme.donuts}
-                            url={`${CONSTANT.SERVER_URL}/${fanwall.video}`}
+                            url={`${process.env.REACT_APP_SERVER_URL}/${fanwall.video}`}
                             sizeType={fanwall.sizeType}
-                            coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                            coverImage={fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                             title={fanwall.dareme.title}
                             goal={fanwall.dareme.goal ? fanwall.dareme.goal : null}
                             category={fanwall.dareme.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall.dareme.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall.dareme.category - 1]}

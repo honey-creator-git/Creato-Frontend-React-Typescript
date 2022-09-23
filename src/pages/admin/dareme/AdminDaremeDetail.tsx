@@ -124,11 +124,11 @@ const AdminDaremeDetail = () => {
           <div className="dareme-detail">
             <div className="dareme-detail-videocard">
               <VideoCardDesktop
-                url={loadState.videoFile ? loadState.videoFile.preview : CONSTANT.SERVER_URL + "/" + dareme.teaser}
+                url={loadState.videoFile ? loadState.videoFile.preview : process.env.REACT_APP_SERVER_URL + "/" + dareme.teaser}
                 sizeType={loadState.sizeType ? loadState.sizeType : dareme.sizeType}
                 coverImage={
                   loadState.coverFile ? loadState.coverFile.preview : 
-                  loadState.videoFile ? "" : dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                  loadState.videoFile ? "" : dareme.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}` : ""}
               />
               <ReactPlayer
                 id="element"

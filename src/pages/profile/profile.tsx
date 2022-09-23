@@ -160,8 +160,8 @@ const Profile = () => {
                             item={{
                               id: dareme._id,
                               title: dareme.title,
-                              teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                              cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                              teaser: `${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`,
+                              cover: `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}`,
                               size: dareme.sizeType,
                               leftTime: dareme.time,
                               voters: dareme.voteInfo.length,
@@ -182,8 +182,8 @@ const Profile = () => {
                             item={{
                               id: fundme._id,
                               title: fundme.title,
-                              teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
-                              cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                              teaser: `${process.env.REACT_APP_SERVER_URL}/${fundme.teaser}`,
+                              cover: `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}`,
                               size: fundme.sizeType,
                               leftTime: fundme.time,
                               voters: fundme.voteInfo.length,
@@ -229,8 +229,8 @@ const Profile = () => {
                             item={{
                               id: dareme._id,
                               title: dareme.title,
-                              teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                              cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                              teaser: `${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`,
+                              cover: `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}`,
                               size: dareme.sizeType,
                               leftTime: dareme.time,
                               voters: dareme.voteInfo.length,
@@ -250,8 +250,8 @@ const Profile = () => {
                             item={{
                               id: fundme._id,
                               title: fundme.title,
-                              teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
-                              cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                              teaser: `${process.env.REACT_APP_SERVER_URL}/${fundme.teaser}`,
+                              cover: `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}`,
                               size: fundme.sizeType,
                               leftTime: fundme.time,
                               voters: fundme.voteInfo.length,

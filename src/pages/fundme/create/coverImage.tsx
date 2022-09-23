@@ -61,7 +61,7 @@ const FundCoverImage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         if (fundmeState.teaser && fundmeStore.teaserFile === null) {
-            fetch(`${CONSTANT.SERVER_URL}/${fundmeState.teaser}`)
+            fetch(`${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}`)
                 .then(res => res.blob())
                 .then(blob => {
                     const extension = fundmeState.teaser.slice(-3);

@@ -9,14 +9,13 @@ import { SET_LANGUAGE, SET_USER } from '../redux/types';
 import Layout from '../layout/layout';
 import Layout1 from "../layout/layout1";
 import socketIOClient from "socket.io-client";
-import CONSTANT from '../constants/constant';
 
 interface routeProps {
     child: any;
     routeType?: string;
 }
 
-var socket = socketIOClient(CONSTANT.SERVER_URL);
+var socket = socketIOClient(`${process.env.REACT_APP_SERVER_URL}`);
 export const LanguageContext = createContext<any>(null);
 
 const AuthRoute = (props: routeProps) => {

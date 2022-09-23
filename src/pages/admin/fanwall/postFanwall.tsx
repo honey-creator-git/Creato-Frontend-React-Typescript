@@ -119,9 +119,9 @@ const PostFanwall = () => {
                     />
                     <div className="dareme-post-fanwall-videoCardDesktop">
                         <VideoCardDesktop
-                            url={item.teaser ? `${CONSTANT.SERVER_URL}/${item?.teaser}` : ""}
+                            url={item.teaser ? `${process.env.REACT_APP_SERVER_URL}/${item?.teaser}` : ""}
                             sizeType={item.sizeType}
-                            coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item?.cover}` : ""}
+                            coverImage={item.cover ? `${process.env.REACT_APP_SERVER_URL}/${item?.cover}` : ""}
                         />
                         <AvatarLink
                             username={item.owner?.name}

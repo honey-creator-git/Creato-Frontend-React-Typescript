@@ -136,9 +136,9 @@ const PostFanwall = () => {
                     />
                     <div className="dareme-post-fanwall-videoCardDesktop">
                         <VideoCardDesktop
-                            url={`${CONSTANT.SERVER_URL}/${item.teaser}`}
+                            url={`${process.env.REACT_APP_SERVER_URL}/${item.teaser}`}
                             sizeType={item.sizeType}
-                            coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
+                            coverImage={item.cover ? `${process.env.REACT_APP_SERVER_URL}/${item.cover}` : ""}
                         />
                         <AvatarLink
                             username={item.owner.name}
@@ -215,8 +215,8 @@ const PostFanwall = () => {
                             {fanwall.video ?
                                 <div className="post-video">
                                     <VideoCardFanwall
-                                        url={fanwall.video?.preview ? fanwall.video.preview : fanwall.video ? `${CONSTANT.SERVER_URL}/${fanwall.video}` : ""}
-                                        coverImage={fanwall.cover?.preview ? fanwall.cover.preview : fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                                        url={fanwall.video?.preview ? fanwall.video.preview : fanwall.video ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.video}` : ""}
+                                        coverImage={fanwall.cover?.preview ? fanwall.cover.preview : fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                                         sizeType={fanwall.sizeType ? fanwall.sizeType : false}
                                     />
                                     <div className="delete-icon" onClick={() => {

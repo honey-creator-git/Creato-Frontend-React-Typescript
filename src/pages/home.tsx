@@ -330,8 +330,8 @@ const Home = () => {
                   item={{
                     id: dareme._id,
                     title: dareme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${dareme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${dareme.cover}`,
+                    teaser: `${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`,
+                    cover: `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}`,
                     size: dareme.sizeType,
                     leftTime: dareme.time,
                     voters: dareme.voteInfo.length,
@@ -385,8 +385,8 @@ const Home = () => {
                   item={{
                     id: fundme._id,
                     title: fundme.title,
-                    teaser: `${CONSTANT.SERVER_URL}/${fundme.teaser}`,
-                    cover: `${CONSTANT.SERVER_URL}/${fundme.cover}`,
+                    teaser: `${process.env.REACT_APP_SERVER_URL}/${fundme.teaser}`,
+                    cover: `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}`,
                     size: fundme.sizeType,
                     leftTime: fundme.time,
                     voters: fundme.voteInfo.length,
@@ -434,7 +434,7 @@ const Home = () => {
                     navigate(`/${user?.personalisedUrl}`)
                   }}>
                     <Avatar
-                      avatar={user?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user?.avatar}` : user?.avatar}
+                      avatar={user?.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user?.avatar}` : user?.avatar}
                       size="web"
                       avatarStyle="vertical"
                       category={showCategories(user?.categories)}
@@ -462,10 +462,10 @@ const Home = () => {
               <div className="dareme" key={index}>
                 <VideoCardMobile
                   donuts={fanwall?.item?.donuts ? fanwall?.item?.donuts : 0}
-                  url={`${CONSTANT.SERVER_URL}/${fanwall?.video}`}
+                  url={`${process.env.REACT_APP_SERVER_URL}/${fanwall?.video}`}
                   title={fanwall?.item?.title}
                   sizeType={fanwall?.sizeType}
-                  coverImage={fanwall?.cover ? `${CONSTANT.SERVER_URL}/${fanwall?.cover}` : ""}
+                  coverImage={fanwall?.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall?.cover}` : ""}
                   goal={fanwall?.item?.goal ? fanwall?.item?.goal : null}
                   category={fanwall?.item?.goal ? contexts.FUNDME_CATEGORY_LIST[fanwall?.item?.category - 1] : contexts.DAREME_CATEGORY_LIST[fanwall?.item?.category - 1]}
                   posted={true}

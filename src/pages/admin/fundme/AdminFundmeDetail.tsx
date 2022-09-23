@@ -121,10 +121,10 @@ const AdminFundmeDetail = () => {
                     <div className="dareme-detail">
                         <div className="dareme-detail-videocard">
                             <VideoCardDesktop
-                                url={loadState.videoFile ? loadState.videoFile.preview : CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                                url={loadState.videoFile ? loadState.videoFile.preview : process.env.REACT_APP_SERVER_URL + "/" + fundme.teaser}
                                 sizeType={loadState.sizeType ? loadState.sizeType : fundme.sizeType}
                                 coverImage={loadState.coverFile ? loadState.coverFile.preview :
-                                    loadState.videoFile ? "" : fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
+                                    loadState.videoFile ? "" : fundme.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}` : ""}
                             />
                             <ReactPlayer
                                 id="element"

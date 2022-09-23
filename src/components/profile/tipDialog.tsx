@@ -53,19 +53,19 @@ const TipDialog = (props: any) => {
         <div className="dialog-social">
             <div className="link" onClick={() => {
                 let text = `I have tipped ${donuts} Donuts to ${ownerName} on Creato😀. Come join me at`;
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/${personalisedUrl}/fanwall&quote=${text}`, 'sharer');
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.REACT_APP_CLIENT_URL}/${personalisedUrl}/fanwall&quote=${text}`, 'sharer');
             }}>
                 <FacebookIcon color="#EFA058" />
             </div>
             <div className="link" onClick={() => {
-                let text = `I have tipped ${donuts} Donuts to ${ownerName} on Creato😀. Come join me at %0a${CONSTANT.CLIENT_URL}/${personalisedUrl}/fanwall`;
+                let text = `I have tipped ${donuts} Donuts to ${ownerName} on Creato😀. Come join me at %0a${process.env.REACT_APP_CLIENT_URL}/${personalisedUrl}/fanwall`;
                 window.open(`https://wa.me/?text=${text}`);
             }}>
                 <WhatsappIcon color="#EFA058" />
             </div>
             <div className="link" onClick={() => {
                 let text = `I have tipped ${donuts} Donuts to ${ownerName} on Creato😀. Come join me at`;
-                window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/${personalisedUrl}/fanwall&text=${text}`, 'sharer');
+                window.open(`https://twitter.com/share?url=${process.env.REACT_APP_CLIENT_URL}/${personalisedUrl}/fanwall&text=${text}`, 'sharer');
             }}>
                 <TwitterIcon color="#EFA058" />
             </div>

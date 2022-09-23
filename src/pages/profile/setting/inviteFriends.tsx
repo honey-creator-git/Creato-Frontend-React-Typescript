@@ -91,7 +91,7 @@ const Invitefriends = () => {
           </div>
         </div>
         <div className="copy-field">
-          <div className="text">{CONSTANT.INVITE_LINK + '?invitedBy=' + (decoded.referralLink ? decoded.referralLink : '')}</div>
+          <div className="text">{process.env.REACT_APP_INVITE_LINK + '?invitedBy=' + (decoded.referralLink ? decoded.referralLink : '')}</div>
           <Button
             color="primary"
             shape="rounded"
@@ -99,7 +99,7 @@ const Invitefriends = () => {
             width={50}
             text={!copy ? contexts.INVITE_FRIEND_LETTER.COPY : contexts.INVITE_FRIEND_LETTER.COPIED}
             handleSubmit={() => {
-              navigator.clipboard.writeText(`${CONSTANT.INVITE_LINK}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)
+              navigator.clipboard.writeText(`${process.env.REACT_APP_INVITE_LINK}?invitedBy=${decoded.referralLink ? decoded.referralLink : ''}`)
               setCopy(true)
             }}
           />

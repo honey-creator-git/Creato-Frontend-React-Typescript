@@ -112,7 +112,7 @@ const ProfileEdit = () => {
             {user &&
               <AvatarEditor
                 ref={setEditorRef}
-                image={profile.avatarFile ? profile.avatarFile.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
+                image={profile.avatarFile ? profile.avatarFile.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
                 width={150}
                 height={150}
                 border={30}

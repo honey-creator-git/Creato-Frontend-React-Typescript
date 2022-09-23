@@ -11,7 +11,6 @@ import {
 } from "../../../assets/svg"
 import Button from "../../../components/general/button"
 import Title from "../../../components/general/title"
-import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/profile/socialAccountStyle.scss"
 
 const Socialaccount = () => {
@@ -25,7 +24,7 @@ const Socialaccount = () => {
   const responseGoogleSuccess = async (response: any) => {
     const access_token = response.accessToken
     console.log(access_token)
-    axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${CONSTANT.GOOGLE_CLIENT_ID}`)
+    axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`)
       .then((response: any) => {
         console.log("youtubeId", response.data.items[0].id)
         window.open(`https://www.youtube.com/channel/${response.data.items[0].id}`)
@@ -78,7 +77,7 @@ const Socialaccount = () => {
             <div className="title">Youtube</div>
             <div className="btn">
               <GoogleLogin
-                clientId={CONSTANT.GOOGLE_CLIENT_ID}
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
                 render={(renderProps) => (
                   <Button
                     fillStyle="nofile"

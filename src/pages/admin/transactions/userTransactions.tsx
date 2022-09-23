@@ -204,7 +204,7 @@ const UserTransactions = () => {
                           avatar={
                             transaction?.user ?
                               transaction?.user?.avatar.indexOf('uploads') !== -1 ?
-                                `${CONSTANT.SERVER_URL}/${transaction?.user?.avatar}` :
+                                `${process.env.REACT_APP_SERVER_URL}/${transaction?.user?.avatar}` :
                                 transaction?.user?.avatar : visitorImg}
                           username={transaction?.user ? transaction?.user.name : transaction?.nickname}
                           avatarStyle="horizontal"

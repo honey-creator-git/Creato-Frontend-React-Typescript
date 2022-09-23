@@ -119,7 +119,7 @@ const UploadVideo = () => {
                                 id="element"
                                 ref={playerRef}
                                 className={fanwall.sizeType ? "react-player-height" : "react-player-width"}
-                                url={fanwall.video ? fanwall.video.preview ? fanwall.video.preview : `${CONSTANT.SERVER_URL}/${fanwall.video}` : ""}
+                                url={fanwall.video ? fanwall.video.preview ? fanwall.video.preview : `${process.env.REACT_APP_SERVER_URL}/${fanwall.video}` : ""}
                                 playing={false}
                                 onProgress={(progress) => { if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0); }}
                             />

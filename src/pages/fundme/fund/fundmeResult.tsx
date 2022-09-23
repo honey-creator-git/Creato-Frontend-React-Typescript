@@ -161,9 +161,9 @@ const FundmeResult = () => {
           <div className="fundme-result">
             <div className="fundme-result-videoCardDesktop">
               <VideoCardDesktop
-                url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                url={process.env.REACT_APP_SERVER_URL + "/" + fundme.teaser}
                 sizeType={fundme.sizeType}
-                coverImage={fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
+                coverImage={fundme.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}` : ""}
               />
               <AvatarLink
                 avatar={fundme.owner.avatar}
@@ -177,14 +177,14 @@ const FundmeResult = () => {
             <div className="fundme-result-information">
               <div className="fundme-result-videoCardMobile">
                 <VideoCardMobile
-                  url={CONSTANT.SERVER_URL + "/" + fundme.teaser}
+                  url={process.env.REACT_APP_SERVER_URL + "/" + fundme.teaser}
                   title={fundme.title}
                   time={fundme.time}
                   finished={fundme.finished}
                   donuts={fundme.wallet}
                   category={contexts.FUNDME_CATEGORY_LIST[fundme.category - 1]}
                   sizeType={fundme.sizeType}
-                  coverImage={fundme.cover ? `${CONSTANT.SERVER_URL}/${fundme.cover}` : ""}
+                  coverImage={fundme.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundme.cover}` : ""}
                 />
                 <AvatarLink
                   avatar={fundme.owner.avatar}

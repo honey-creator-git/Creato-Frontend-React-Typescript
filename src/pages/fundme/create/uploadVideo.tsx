@@ -152,7 +152,7 @@ const UploadVideo = () => {
                 playsinline={true}
                 playing={play}
                 className={fundmeState.sizeType ? "react-player-height" : "react-player-width"}
-                url={fundmeState.teaser ? `${CONSTANT.SERVER_URL}/${fundmeState.teaser}` : fundmeStore.teaserFile.preview ? fundmeStore.teaserFile.preview : ""}
+                url={fundmeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}` : fundmeStore.teaserFile.preview ? fundmeStore.teaserFile.preview : ""}
                 onProgress={(progress) => {
                   if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
                   if (progress.playedSeconds > 20) playerRef.current?.seekTo(0);
@@ -161,7 +161,7 @@ const UploadVideo = () => {
               <ReactPlayer
                 hidden
                 id="element"
-                url={fundmeState.teaser ? `${CONSTANT.SERVER_URL}/${fundmeState.teaser}` : fundmeStore.teaserFile.preview ? fundmeStore.teaserFile.preview : ""}
+                url={fundmeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}` : fundmeStore.teaserFile.preview ? fundmeStore.teaserFile.preview : ""}
               />
             </>
           ) : (

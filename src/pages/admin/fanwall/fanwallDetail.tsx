@@ -106,9 +106,9 @@ const EditFanwall = () => {
           />
           <div className="dareme-post-fanwall-videoCardDesktop">
             <VideoCardDesktop
-              url={`${CONSTANT.SERVER_URL}/${item.teaser}`}
+              url={`${process.env.REACT_APP_SERVER_URL}/${item.teaser}`}
               sizeType={item.sizeType}
-              coverImage={item.cover ? `${CONSTANT.SERVER_URL}/${item.cover}` : ""}
+              coverImage={item.cover ? `${process.env.REACT_APP_SERVER_URL}/${item.cover}` : ""}
             />
             <AvatarLink
               username={item.owner.name}
@@ -180,8 +180,8 @@ const EditFanwall = () => {
               {fanwall.video || fanwallState.videoFile ?
                 <div className="post-video">
                   <VideoCardFanwall
-                    url={fanwallState.videoFile ? fanwallState.videoFile.preview : fanwall.video ? `${CONSTANT.SERVER_URL}/${fanwall.video}` : ""}
-                    coverImage={fanwallState.coverFile ? fanwallState.coverFile.preview : fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                    url={fanwallState.videoFile ? fanwallState.videoFile.preview : fanwall.video ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.video}` : ""}
+                    coverImage={fanwallState.coverFile ? fanwallState.coverFile.preview : fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                     sizeType={fanwallState.videoSizeType ? fanwallState.videoSizeType : fanwall.sizeType ? fanwall.sizeType : false}
                   />
                   <div className="delete-icon" onClick={() => {

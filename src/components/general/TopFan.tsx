@@ -16,7 +16,7 @@ const TopFan = (props: any) => {
           <div className="topfan-avatar">
             <Avatar
               size="mobile"
-              avatar={topfans[1] ? topfans[1].voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${topfans[1].voter.avatar}` : topfans[1].voter.avatar : ""}
+              avatar={topfans[1] ? topfans[1].voter.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${topfans[1].voter.avatar}` : topfans[1].voter.avatar : ""}
             />
           </div>
           <div className="topfan-bar" style={{
@@ -35,7 +35,7 @@ const TopFan = (props: any) => {
           <div className="topfan-avatar">
             <Avatar
               size="mobile"
-              avatar={topfans[0] ? topfans[0].voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${topfans[0].voter.avatar}` : topfans[0].voter.avatar : ""}
+              avatar={topfans[0] ? topfans[0].voter.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${topfans[0].voter.avatar}` : topfans[0].voter.avatar : ""}
             />
           </div>
           <div className="topfan-bar" style={{
@@ -54,7 +54,7 @@ const TopFan = (props: any) => {
           <div className="topfan-avatar">
             <Avatar
               size="mobile"
-              avatar={topfans[2] ? topfans[2].voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${topfans[2].voter.avatar}` : topfans[2].voter.avatar : ""}
+              avatar={topfans[2] ? topfans[2].voter.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${topfans[2].voter.avatar}` : topfans[2].voter.avatar : ""}
             />
           </div>
           <div className="topfan-bar" style={{

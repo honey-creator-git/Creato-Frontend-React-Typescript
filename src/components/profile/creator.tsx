@@ -15,7 +15,7 @@ const Creator = (props: any) => {
   return (
     <div className="creator-comp-wrapper">
       <Avatar
-        avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${user.avatar}` : user.avatar : ''}
+        avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : user.avatar : ''}
         size={'mobile'}
       />
       <div className="creator-name">

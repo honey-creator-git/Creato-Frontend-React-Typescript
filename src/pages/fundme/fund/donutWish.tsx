@@ -133,8 +133,8 @@ const DonutWish = () => {
             display={isSuperFan}
             title={contexts.DIALOG.HEADER_TITLE.VOTE_SUPER}
             avatars={[
-              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => { setIsSuperFan(false) }}
             wrapExit={() => { setIsSuperFan(false) }}
@@ -154,8 +154,8 @@ const DonutWish = () => {
             display={isCopyLink}
             title={contexts.DIALOG.HEADER_TITLE.HAVE_DARED}
             avatars={[
-              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => {
               setIsCopyLink(false);
@@ -174,7 +174,7 @@ const DonutWish = () => {
               {
                 text: isCopied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundmeId}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/fundme/details/${fundmeId}`);
                   setIsCopied(true);
                 }
               }
@@ -190,7 +190,7 @@ const DonutWish = () => {
             <div className="avatar">
               <Avatar
                 size="web"
-                avatar={fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`}
+                avatar={fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`}
                 username={fundme.owner.name}
               />
             </div>

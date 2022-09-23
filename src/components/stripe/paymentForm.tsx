@@ -18,7 +18,7 @@ import { LanguageContext } from "../../routes/authRoute";
 import { tipAction } from "../../redux/actions/tipActions";
 import '../../assets/styles/payment/stripe/checkoutFormStyle.scss';
 
-const stripePromise = loadStripe(CONSTANT.STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
 const CheckoutForm = (props: any) => {
     const [numberInfo, setNumberInfo] = useState<any>(null);

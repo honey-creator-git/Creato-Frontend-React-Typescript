@@ -166,20 +166,21 @@ const Auth = (props: any) => {
           {
             text: 'Open / 開啓',
             handleClick: () => {
+              const serverUrl = `${process.env.REACT_APP_SERVER_URL}`
               if (navigator.userAgent.indexOf('like Mac') !== -1) {
                 if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
                 } else {
-                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
                 }
               } else if (navigator.userAgent.indexOf('Android') !== -1) {
                 if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
                   let link = document.createElement('a');
-                  link.setAttribute("href", `intent:${CONSTANT.SERVER_URL}/auth/signin#Intent;end`);
+                  link.setAttribute("href", `intent:${serverUrl}/auth/signin#Intent;end`);
                   link.setAttribute("target", "_blank");
                   link.click();
                 } else {
-                  window.open(`googlechrome://${CONSTANT.SERVER_URL.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
                 }
               }
             }
@@ -209,7 +210,7 @@ const Auth = (props: any) => {
         )}
         <div className="icons">
           <GoogleLogin
-            clientId={CONSTANT.GOOGLE_CLIENT_ID}
+            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
             render={(renderProps) => (
               <div className="icon" onClick={renderProps.onClick}>
                 <GoogleIcon color="#EFA058" />

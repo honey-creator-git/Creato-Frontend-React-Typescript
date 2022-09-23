@@ -49,7 +49,7 @@ const ProfileHeader = (props: any) => {
                     avatarStyle="horizontal"
                     category={categoryText}
                     username={authuser ? authuser.name : ''}
-                    avatar={(authuser && authuser.avatar) ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}` : ''}
+                    avatar={(authuser && authuser.avatar) ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}` : ''}
                 />
             </div>
             <div className="create-btn">
@@ -103,11 +103,11 @@ const TipProfile = () => {
             tip: tips[index].tip,
             message: tips[index].message,
             avatars: [
-                authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
-                tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${CONSTANT.SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
+                authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}`,
+                tips[index].tipper ? tips[index].tipper.avatar.indexOf('uploads') === -1 ? tips[index].tipper.avatar : `${process.env.REACT_APP_SERVER_URL}/${tips[index].tipper.avatar}` : visitorImg
             ],
             ownername: authuser?.name,
-            ownerURL: `${CONSTANT.SERVER_URL}/${authuser?.personalisedUrl}`
+            ownerURL: `${process.env.REACT_APP_SERVER_URL}/${authuser?.personalisedUrl}`
         });
         setOpenTipMessageDlg(true);
     }
@@ -169,7 +169,7 @@ const TipProfile = () => {
                         if (index < tipIndex) {
                             return <div className="card-detail" key={index}>
                                 <TipCard
-                                    avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${CONSTANT.SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
+                                    avatar={tip.tipper ? tip.tipper.avatar.indexOf('uploads') === -1 ? tip.tipper.avatar : `${process.env.REACT_APP_SERVER_URL}/${tip.tipper.avatar}` : visitorImg}
                                     username={tip.tipper ? tip.tipper.name : tip.nickname}
                                     tip={tip.tip}
                                     message={tip.message}

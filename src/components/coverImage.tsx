@@ -72,7 +72,7 @@ const CoverImage = () => {
     useEffect(() => {
         if (item && item.teaser) {
             if (item.teaser && loadState.videoFile === null) {
-                fetch(`${CONSTANT.SERVER_URL}/${item.teaser}`)
+                fetch(`${process.env.REACT_APP_SERVER_URL}/${item.teaser}`)
                     .then(res => res.blob())
                     .then(blob => {
                         const extension = item.teaser.slice(-3)

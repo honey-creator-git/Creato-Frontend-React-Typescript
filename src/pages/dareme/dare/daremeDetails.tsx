@@ -110,7 +110,7 @@ const DareMeDetails = (props: any) => {
         <div>
           <TeaserCardPopUp
             display={openTeaserPopup}
-            teaser={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+            teaser={`${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`}
             size={dareme.sizeType}
             exit={() => { setOpenTeaserPopup(false) }}
           />
@@ -124,7 +124,7 @@ const DareMeDetails = (props: any) => {
               {
                 text: copied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`)
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`)
                   setCopied(true)
                   setTimeout(() => { setCopied(false) }, 2500)
                 }
@@ -181,7 +181,7 @@ const DareMeDetails = (props: any) => {
               {
                 text: copied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`)
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`)
                   setCopied(true)
                   setTimeout(() => { setCopied(false) }, 2500)
                 }
@@ -199,7 +199,7 @@ const DareMeDetails = (props: any) => {
                     <div className="profile">
                       <Avatar
                         size="mobile"
-                        avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`}
+                        avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`}
                         handleClick={() => { navigate(`/${dareme.owner.personalisedUrl}`) }}
                       />
                     </div>
@@ -242,7 +242,7 @@ const DareMeDetails = (props: any) => {
                 </div>
               </div>
               <div className="teaser-part">
-                <TeaserCard cover={`${CONSTANT.SERVER_URL}/${dareme.cover}`} teaser={`${CONSTANT.SERVER_URL}/${dareme.teaser}`} size={dareme.sizeType} type="dareme" border={"10px"} />
+                <TeaserCard cover={`${process.env.REACT_APP_SERVER_URL}/${dareme.cover}`} teaser={`${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`} size={dareme.sizeType} type="dareme" border={"10px"} />
               </div>
             </div>
             <div className="option-info">

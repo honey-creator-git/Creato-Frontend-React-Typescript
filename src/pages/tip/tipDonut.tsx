@@ -15,7 +15,6 @@ import { LanguageContext } from "../../routes/authRoute";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types";
 import { tipAction } from "../../redux/actions/tipActions";
 import { authAction } from "../../redux/actions/authActions";
-import CONSTANT from "../../constants/constant";
 import TippingGif from '../../assets/img/tipping.gif'
 import visitorImg from "../../assets/img/visitor_avatar.png"
 import "../../assets/styles/tip/tipDonutStyle.scss";
@@ -165,8 +164,8 @@ const TipDonut = () => {
             exit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             wrapExit={() => { navigate(`/${authuser?.personalisedUrl}/fanwall`) }}
             avatars={[
-              (authuser.avatar && authuser.avatar.indexOf('uploads') === -1) ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : visitorImg
+              (authuser.avatar && authuser.avatar.indexOf('uploads') === -1) ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : visitorImg
             ]}
             title={contexts.CONGRATS}
             personalisedUrl={authuser?.personalisedUrl}
@@ -193,7 +192,7 @@ const TipDonut = () => {
             <Avatar
               size="web"
               username={authuser?.name}
-              avatar={authuser?.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${authuser?.avatar}` : authuser?.avatar}
+              avatar={authuser?.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${authuser?.avatar}` : authuser?.avatar}
             />
           </div>
           {!user &&

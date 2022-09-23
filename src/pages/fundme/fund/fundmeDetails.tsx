@@ -133,7 +133,7 @@ const FundMeDetails = (props: any) => {
         <div>
           <TeaserCardPopUp
             display={openTeaserPopup}
-            teaser={`${CONSTANT.SERVER_URL}/${fundme.teaser}`}
+            teaser={`${process.env.REACT_APP_SERVER_URL}/${fundme.teaser}`}
             size={fundme.sizeType}
             exit={() => { setOpenTeaserPopup(false) }}
           />
@@ -146,8 +146,8 @@ const FundMeDetails = (props: any) => {
             display={openSuperFan}
             title={"SuperFan😍"}
             avatars={[
-              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => { setOpenSuperFan(false) }}
             wrapExit={() => { setOpenSuperFan(false) }}
@@ -167,8 +167,8 @@ const FundMeDetails = (props: any) => {
             display={openFundCopyLink}
             title={contexts.DIALOG.HEADER_TITLE.HAVE_FUNDED}
             avatars={[
-              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => {
               setOpenFundCopyLink(false)
@@ -185,7 +185,7 @@ const FundMeDetails = (props: any) => {
               {
                 text: copied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundmeId}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/fundme/details/${fundmeId}`);
                   setCopied(true)
                   setTimeout(() => { setCopied(false) }, 2500)
                 }
@@ -223,7 +223,7 @@ const FundMeDetails = (props: any) => {
               {
                 text: copied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundmeId}`)
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/fundme/details/${fundmeId}`)
                   setCopied(true)
                   setTimeout(() => { setCopied(false) }, 2500)
                 }
@@ -243,7 +243,7 @@ const FundMeDetails = (props: any) => {
                     <div className="profile">
                       <Avatar
                         size="mobile"
-                        avatar={fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${CONSTANT.SERVER_URL}/${fundme.owner.avatar}`}
+                        avatar={fundme.owner.avatar.indexOf('uploads') === -1 ? fundme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${fundme.owner.avatar}`}
                         handleClick={() => { navigate(`/${fundme.owner.personalisedUrl}`) }}
                       />
                     </div>
@@ -286,7 +286,7 @@ const FundMeDetails = (props: any) => {
                 </div>
               </div>
               <div className="teaser-part">
-                <TeaserCard cover={`${CONSTANT.SERVER_URL}/${fundme.cover}`} teaser={`${CONSTANT.SERVER_URL}/${fundme.teaser}`} size={fundme.sizeType} type="fundme" border={"10px"} />
+                <TeaserCard cover={`${process.env.REACT_APP_SERVER_URL}/${fundme.cover}`} teaser={`${process.env.REACT_APP_SERVER_URL}/${fundme.teaser}`} size={fundme.sizeType} type="fundme" border={"10px"} />
               </div>
             </div>
             <div className="funding-goal">

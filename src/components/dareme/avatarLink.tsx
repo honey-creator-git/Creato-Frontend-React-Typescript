@@ -38,7 +38,7 @@ const AvatarLink = (props: any) => {
         <>
             <div className="avatar-link-wrapper">
                 <Avatar
-                    avatar={avatar.indexOf('uploads') === -1 ? avatar : `${CONSTANT.SERVER_URL}/${avatar}`}
+                    avatar={avatar.indexOf('uploads') === -1 ? avatar : `${process.env.REACT_APP_SERVER_URL}/${avatar}`}
                     username={username}
                     avatarStyle="horizontal"
                     size="small"
@@ -49,10 +49,10 @@ const AvatarLink = (props: any) => {
                 </div>
                 <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                     <div className="list" onClick={() => {
-                        if (isFanwall) navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/fanwall/detail/${daremeId}`);
+                        if (isFanwall) navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/fanwall/detail/${daremeId}`);
                         else {
-                            if (isFundme) navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`);
-                            else navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                            if (isFundme) navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/fundme/details/${daremeId}`);
+                            else navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`);
                         }
                         setMoreInfo(false);
                     }}>

@@ -1,7 +1,6 @@
-import axios from "axios";
-import CONSTANT from "../constants/constant";
+import axios from "axios"
 
-const API = axios.create({ baseURL: CONSTANT.SERVER_URL });
+const API = axios.create({ baseURL: process.env.REACT_APP_SERVER_URL });
 
 API.interceptors.request.use((req: any) => {
     const token = JSON.parse(localStorage.getItem('dareme_token') || '{}');

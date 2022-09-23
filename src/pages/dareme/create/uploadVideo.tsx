@@ -152,7 +152,7 @@ const UploadVideo = () => {
                 playsinline={true}
                 playing={play}
                 className={daremeState.sizeType ? "react-player-height" : "react-player-width"}
-                url={daremeState.teaser ? `${CONSTANT.SERVER_URL}/${daremeState.teaser}` : daremeStore.teaserFile.preview ? daremeStore.teaserFile.preview : ""}
+                url={daremeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}` : daremeStore.teaserFile.preview ? daremeStore.teaserFile.preview : ""}
                 onProgress={(progress) => {
                   if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
                   if (progress.playedSeconds > 20) playerRef.current?.seekTo(0);
@@ -161,7 +161,7 @@ const UploadVideo = () => {
               <ReactPlayer
                 hidden
                 id="element"
-                url={daremeState.teaser ? `${CONSTANT.SERVER_URL}/${daremeState.teaser}` : daremeStore.teaserFile.preview ? daremeStore.teaserFile.preview : ""}
+                url={daremeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}` : daremeStore.teaserFile.preview ? daremeStore.teaserFile.preview : ""}
               />
             </>
           ) : (

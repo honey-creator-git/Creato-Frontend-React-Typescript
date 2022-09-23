@@ -214,7 +214,7 @@ const CreateDareme = () => {
                 {(!play && (daremeStore.coverFile !== null || (daremeState.cover !== null && daremeStore.teaserFile === null))) &&
                   <div className="cover-image">
                     <img
-                      src={daremeStore.coverFile ? daremeStore.coverFile.preview : daremeState.cover ? `${CONSTANT.SERVER_URL}/${daremeState.cover}` : ""}
+                      src={daremeStore.coverFile ? daremeStore.coverFile.preview : daremeState.cover ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.cover}` : ""}
                       alt="cover Image"
                       style={daremeState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
                   </div>
@@ -223,7 +223,7 @@ const CreateDareme = () => {
                   <div className="video-wrapper">
                     <ReactPlayer
                       className={daremeState.sizeType ? "react-player-height" : "react-player-width"}
-                      url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${CONSTANT.SERVER_URL}/${daremeState.teaser}` : ""}
+                      url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}` : ""}
                       playing={play}
                       ref={playerRef}
                       onProgress={(progress) => {
@@ -236,7 +236,7 @@ const CreateDareme = () => {
                 <ReactPlayer
                   hidden
                   id="element"
-                  url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${CONSTANT.SERVER_URL}/${daremeState.teaser}` : ""}
+                  url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}` : ""}
                 />
                 {((daremeState.teaser || daremeStore.teaserFile) && !play) &&
                   <div className="play-icon">
@@ -487,7 +487,7 @@ const CreateDareme = () => {
               {(!play && (daremeStore.coverFile !== null || daremeState.cover !== null)) &&
                 <div className="cover-image">
                   <img
-                    src={daremeState.cover ? `${CONSTANT.SERVER_URL}/${daremeState.cover}` : daremeStore.coverFile.preview}
+                    src={daremeState.cover ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.cover}` : daremeStore.coverFile.preview}
                     alt="cover Image"
                     style={daremeState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
                 </div>
@@ -495,7 +495,7 @@ const CreateDareme = () => {
               {(play || (daremeStore.coverFile === null && daremeState.cover === null)) &&
                 <ReactPlayer
                   className={daremeState.sizeType ? "react-player-height" : "react-player-width"}
-                  url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${CONSTANT.SERVER_URL}/${daremeState.teaser}` : ""}
+                  url={daremeStore.teaserFile ? daremeStore.teaserFile.preview : daremeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${daremeState.teaser}` : ""}
                   playing={play}
                   ref={playerRef}
                   onProgress={(progress) => {

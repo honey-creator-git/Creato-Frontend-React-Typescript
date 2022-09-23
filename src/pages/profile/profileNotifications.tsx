@@ -6,7 +6,6 @@ import Title from "../../components/general/title";
 import { ClockIcon, CreatoColorIcon, ForwardIcon } from "../../assets/svg";
 import { notificationAction } from "../../redux/actions/notificationAction";
 import Avatar from "../../components/general/avatar";
-import CONSTANT from "../../constants/constant";
 import { LanguageContext } from "../../routes/authRoute";
 import { SET_TIPID, SET_TIPS } from "../../redux/types";
 import '../../assets/styles/profile/profileNotificationsStyle.scss';
@@ -68,7 +67,7 @@ const ProfileNotifications = () => {
                           size="small"
                           style="horizontal"
                           username=""
-                          avatar={notification.sender ? notification.sender.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${notification.sender.avatar}` : notification.sender.avatar : ""}
+                          avatar={notification.sender ? notification.sender.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${notification.sender.avatar}` : notification.sender.avatar : ""}
                         /> :
                         notification.section.info[notification.index].recipient === 'Voter of Non Winning Dares' ? <div style={{ width: '36px' }}><ClockIcon color="#DE5A67" width={35} height={35} /></div> : <CreatoColorIcon />}
                       <div className={notification.section.info[notification.index].recipient === 'Voter of Non Winning Dares' ? 'color-message' : "message"} dangerouslySetInnerHTML={{ __html: notification.msg }}></div>
@@ -100,7 +99,7 @@ const ProfileNotifications = () => {
                             size="small"
                             style="horizontal"
                             username=""
-                            avatar={notification.sender ? notification.sender.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${notification.sender.avatar}` : notification.sender.avatar : ""}
+                            avatar={notification.sender ? notification.sender.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${notification.sender.avatar}` : notification.sender.avatar : ""}
                           /> : notification.section.info[notification.index].recipient === 'Voter of Non Winning Dares' ? <div style={{ width: '36px' }}><ClockIcon color="#DE5A67" width={35} height={35} /></div> : <CreatoColorIcon />}
                         <div className={notification.section.info[notification.index].recipient === 'Voter of Non Winning Dares' ? 'color-message' : "message"} dangerouslySetInnerHTML={{ __html: notification.msg }}></div>
                       </div>

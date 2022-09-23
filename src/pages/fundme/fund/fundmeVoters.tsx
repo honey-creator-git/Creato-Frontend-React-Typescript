@@ -42,7 +42,7 @@ const FundmeVoters = () => {
                   <div key={vIndex} className="vote-info">
                     {vote.voter.name &&
                       <Avatar
-                        avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
+                        avatar={vote.voter.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${vote.voter.avatar}` : vote.voter.avatar}
                         username={vote.voter.name}
                         avatarStyle="horizontal"
                       />

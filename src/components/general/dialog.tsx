@@ -107,13 +107,13 @@ const Dialog = (props: any) => {
                             let text = "";
                             if (isFundme) {
                                 text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
-                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}&quote=${text}`, 'sharer');
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.REACT_APP_CLIENT_URL}/fundme/details/${daremeId}&quote=${text}`, 'sharer');
                             }
                             else {
                                 if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
                                 else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
                                 else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!`;
-                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&quote=${text}`, 'sharer');
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}&quote=${text}`, 'sharer');
                             }
                         }}>
                             <FacebookIcon color="#EFA058" />
@@ -121,13 +121,13 @@ const Dialog = (props: any) => {
                         <div className="link" onClick={() => {
                             let text = "";
                             if (isFundme) {
-                                text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}`;
+                                text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${process.env.REACT_APP_CLIENT_URL}/fundme/details/${daremeId}`;
                                 window.open(`https://wa.me/?text=${text}`);
                             }
                             else {
-                                if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
-                                else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
-                                else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`;
+                                if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!%0a${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`;
+                                else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!%0a${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`;
+                                else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!%0a${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`;
                                 window.open(`https://wa.me/?text=${text}`);
                             }
                         }}>
@@ -137,13 +137,13 @@ const Dialog = (props: any) => {
                             let text = "";
                             if (isFundme) {
                                 text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
-                                window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/fundme/details/${daremeId}&text=${text}`, 'sharer');
+                                window.open(`https://twitter.com/share?url=${process.env.REACT_APP_CLIENT_URL}/fundme/details/${daremeId}&text=${text}`, 'sharer');
                             }
                             else {
                                 if (shareType === "create") text = `I have created a DareMe - ${daremeTitle} on Creato! Join me to create content together with Donuts!`;
                                 else if (shareType === "vote") text = `I have supported ${ownerName} in ${daremeTitle} on Creato! Join me now!`;
                                 else if (shareType === "win") text = `I have decided the winning Dare in ${daremeTitle}! Stay tuned for more!`;
-                                window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer');
+                                window.open(`https://twitter.com/share?url=${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer');
                             }
                         }}>
                             <TwitterIcon color="#EFA058" />

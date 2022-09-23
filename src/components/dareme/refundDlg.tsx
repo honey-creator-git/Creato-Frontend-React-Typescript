@@ -33,7 +33,7 @@ const RefundDlg = (props: any) => {
             }
             <div className="option-card">
               <Avatar
-                avatar={dareme.owner.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}` : dareme.owner.avatar}
+                avatar={dareme.owner.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}` : dareme.owner.avatar}
                 size="web"
                 username={dareme.owner.name}
               />

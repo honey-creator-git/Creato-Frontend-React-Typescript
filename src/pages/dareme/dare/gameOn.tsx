@@ -45,9 +45,9 @@ const GameOn = () => {
           <div className='game-on-wrapper'>
             <div className="game-on-videoCardDesktop">
               <VideoCardDesktop
-                url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+                url={`${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`}
                 sizeType={dareme.sizeType}
-                coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                coverImage={dareme.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}` : ""}
               />
               <AvatarLink
                 avatar={dareme.owner.avatar}
@@ -62,13 +62,13 @@ const GameOn = () => {
                 <div className="avatars">
                   <div className="owner-avatar">
                     <Avatar
-                      avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`}
+                      avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`}
                       size="web"
                     />
                   </div>
                   <div className="user-avatar">
                     <Avatar
-                      avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
+                      avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
                       size="web"
                     />
                   </div>
@@ -86,7 +86,7 @@ const GameOn = () => {
                   <span>{contexts.GAME_ON.GAME_ON_LETTER}</span>
                 </div>
                 <div className="dare-copylink-btn" onClick={() => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`);
                   setIsCopied(true);
                 }}>
                   <ContainerBtn
@@ -96,19 +96,19 @@ const GameOn = () => {
                 </div>
                 <div className="social-icon">
                   <div className="link" onClick={() => {
-                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`)
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`)
                   }}>
                     <FacebookIcon color="#EFA058" />
                   </div>
                   <div className="link" onClick={() => {
-                    let text = `I have dared ${dareme.owner.name} in ${dareme.title} on Creato! Join me now!%0a${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`
+                    let text = `I have dared ${dareme.owner.name} in ${dareme.title} on Creato! Join me now!%0a${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`
                     window.open(`whatsapp://send?text=${text}`);
                   }}>
                     <WhatsappIcon color="#EFA058" />
                   </div>
                   <div className="link" onClick={() => {
                     let text = `I have dared ${dareme.owner.name} in ${dareme.title} on Creato! Join me now!`;
-                    window.open(`https://twitter.com/share?url=${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer')
+                    window.open(`https://twitter.com/share?url=${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}&text=${text}`, 'sharer')
                   }}>
                     <TwitterIcon color="#EFA058" />
                   </div>

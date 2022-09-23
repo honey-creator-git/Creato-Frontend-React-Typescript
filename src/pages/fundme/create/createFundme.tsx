@@ -211,7 +211,7 @@ const CreateFundme = () => {
                 {(!play && (fundmeStore.coverFile !== null || (fundmeState.cover !== null && fundmeStore.teaserFile === null))) &&
                   <div className="cover-image">
                     <img
-                      src={fundmeStore.coverFile ? fundmeStore.coverFile.preview : fundmeState.cover ? `${CONSTANT.SERVER_URL}/${fundmeState.cover}` : ""}
+                      src={fundmeStore.coverFile ? fundmeStore.coverFile.preview : fundmeState.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.cover}` : ""}
                       alt="cover Image"
                       style={fundmeState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
                   </div>
@@ -220,7 +220,7 @@ const CreateFundme = () => {
                   <div className="video-wrapper">
                     <ReactPlayer
                       className={fundmeState.sizeType ? "react-player-height" : "react-player-width"}
-                      url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${CONSTANT.SERVER_URL}/${fundmeState.teaser}` : ""}
+                      url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}` : ""}
                       playing={play}
                       ref={playerRef}
                       onProgress={(progress) => {
@@ -233,7 +233,7 @@ const CreateFundme = () => {
                 <ReactPlayer
                   hidden
                   id="element"
-                  url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${CONSTANT.SERVER_URL}/${fundmeState.teaser}` : ""}
+                  url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}` : ""}
                 />
                 {((fundmeState.teaser || fundmeStore.teaserFile) && !play) &&
                   <div className="play-icon">
@@ -421,7 +421,7 @@ const CreateFundme = () => {
               {(!play && (fundmeStore.coverFile !== null || fundmeState.cover !== null)) &&
                 <div className="cover-image">
                   <img
-                    src={fundmeState.cover ? `${CONSTANT.SERVER_URL}/${fundmeState.cover}` : fundmeStore.coverFile.preview}
+                    src={fundmeState.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.cover}` : fundmeStore.coverFile.preview}
                     alt="cover Image"
                     style={fundmeState.sizeType ? { width: 'auto', height: '100%' } : { width: '100%', height: 'auto' }} />
                 </div>
@@ -429,7 +429,7 @@ const CreateFundme = () => {
               {(play || (fundmeStore.coverFile === null && fundmeState.cover === null)) &&
                 <ReactPlayer
                   className={fundmeState.sizeType ? "react-player-height" : "react-player-width"}
-                  url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${CONSTANT.SERVER_URL}/${fundmeState.teaser}` : ""}
+                  url={fundmeStore.teaserFile ? fundmeStore.teaserFile.preview : fundmeState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundmeState.teaser}` : ""}
                   playing={play}
                   ref={playerRef}
                   onProgress={(progress) => {

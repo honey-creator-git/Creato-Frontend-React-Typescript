@@ -140,7 +140,7 @@ const Header = () => {
                     size="small"
                     avatarStyle="horizontal"
                     username=""
-                    avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
+                    avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
                   />
                 </div>
                 <div

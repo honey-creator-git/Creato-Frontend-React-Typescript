@@ -123,12 +123,12 @@ const Preview = () => {
           {
             text: isCopied ? "Copied" : "Copy link",
             handleClick: () => {
-              navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${dareState._id}`);
+              navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${dareState._id}`);
               setIsCopied(true);
             }
           }
         ]}
-        avatars={dareState.cover ? [`${CONSTANT.SERVER_URL}/${dareState.cover}`] : []}
+        avatars={dareState.cover ? [`${process.env.REACT_APP_SERVER_URL}/${dareState.cover}`] : []}
         sizeType={dareState.sizeType}
         social
         shareType={"create"}
@@ -159,9 +159,9 @@ const Preview = () => {
         <div className="main-body">
           <div className="preview-desktop-videoCardDesktop">
             <VideoCardDesktop
-              url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}
+              url={dareState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${dareState.teaser}` : ""}
               sizeType={dareState.sizeType}
-              coverImage={dareState.cover ? `${CONSTANT.SERVER_URL}/${dareState.cover}` : ""}
+              coverImage={dareState.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareState.cover}` : ""}
             />
             <AvatarLink
               username={user.name}
@@ -174,13 +174,13 @@ const Preview = () => {
           <div className="preview-information">
             <div className="preview-videoCardMobile">
               <VideoCardMobile
-                url={dareState.teaser ? `${CONSTANT.SERVER_URL}/${dareState.teaser}` : ""}
+                url={dareState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${dareState.teaser}` : ""}
                 donuts={0}
                 category={contexts.DAREME_CATEGORY_LIST[dareState.category - 1]}
                 time={dareState.deadline}
                 title={dareState.title}
                 sizeType={dareState.sizeType}
-                coverImage={dareState.cover ? `${CONSTANT.SERVER_URL}/${dareState.cover}` : ""}
+                coverImage={dareState.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareState.cover}` : ""}
                 handleSubmit={() => { }}
               />
               <AvatarLink

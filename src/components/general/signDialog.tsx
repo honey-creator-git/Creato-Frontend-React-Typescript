@@ -132,7 +132,7 @@ const SignDialog = (props: any) => {
             </div>
             <div className="icons">
               <GoogleLogin
-                clientId={CONSTANT.GOOGLE_CLIENT_ID}
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
                 render={(renderProps) => (
                   <div className="icon" onClick={renderProps.onClick}>
                     <GoogleIcon color="#EFA058" />

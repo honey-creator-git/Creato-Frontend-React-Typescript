@@ -102,13 +102,13 @@ const FundmePreview = () => {
           {
             text: isCopied ? "Copied" : "Copy link",
             handleClick: () => {
-              navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/fundme/details/${fundState._id}`);
+              navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/fundme/details/${fundState._id}`);
               setIsCopied(true);
               dispatch({ type: SET_COVER_FILE1, payload: null });
             }
           }
         ]}
-        avatars={fundState.cover ? [`${CONSTANT.SERVER_URL}/${fundState.cover}`] : []}
+        avatars={fundState.cover ? [`${process.env.REACT_APP_SERVER_URL}/${fundState.cover}`] : []}
         sizeType={fundState.sizeType}
         social
         shareType={"create"}
@@ -119,9 +119,9 @@ const FundmePreview = () => {
       <div className="preview-wrapper">
         <div className="preview-desktop-videoCardDesktop">
           <VideoCardDesktop
-            url={fundState.teaser ? `${CONSTANT.SERVER_URL}/${fundState.teaser}` : ""}
+            url={fundState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundState.teaser}` : ""}
             sizeType={fundState.sizeType}
-            coverImage={fundState.cover ? `${CONSTANT.SERVER_URL}/${fundState.cover}` : ""}
+            coverImage={fundState.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundState.cover}` : ""}
           />
           <AvatarLink
             username={user.name}
@@ -151,13 +151,13 @@ const FundmePreview = () => {
           </div>
           <div className="preview-videoCardMobile">
             <VideoCardMobile
-              url={fundState.teaser ? `${CONSTANT.SERVER_URL}/${fundState.teaser}` : ""}
+              url={fundState.teaser ? `${process.env.REACT_APP_SERVER_URL}/${fundState.teaser}` : ""}
               donuts={0}
               category={contexts.FUNDME_CATEGORY_LIST[fundState.category - 1]}
               time={fundState.deadline}
               title={fundState.title}
               sizeType={fundState.sizeType}
-              coverImage={fundState.cover ? `${CONSTANT.SERVER_URL}/${fundState.cover}` : ""}
+              coverImage={fundState.cover ? `${process.env.REACT_APP_SERVER_URL}/${fundState.cover}` : ""}
               handleSubmit={() => { }}
             />
             <AvatarLink

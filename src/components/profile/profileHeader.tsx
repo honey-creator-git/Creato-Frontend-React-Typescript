@@ -153,7 +153,7 @@ const ProfileHeader = (props: profileProps) => {
         <Avatar
           size={props.size}
           avatarStyle="horizontal"
-          avatar={authuser ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${CONSTANT.SERVER_URL}/${authuser.avatar}` : ''}
+          avatar={authuser ? authuser.avatar.indexOf('uploads') === -1 ? authuser.avatar : `${process.env.REACT_APP_SERVER_URL}/${authuser.avatar}` : ''}
         />
         <div className="name-category">
           <span className="name">{authuser ? authuser.name : ''}</span>

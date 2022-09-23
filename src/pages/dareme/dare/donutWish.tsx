@@ -143,8 +143,8 @@ const DonutWish = () => {
             display={isSuperFan}
             title={contexts.DIALOG.HEADER_TITLE.VOTE_SUPER}
             avatars={[
-              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => { setIsSuperFan(false) }}
             wrapExit={() => { setIsSuperFan(false) }}
@@ -164,8 +164,8 @@ const DonutWish = () => {
             display={isCopyLink}
             title={contexts.DIALOG.HEADER_TITLE.HAVE_DARED}
             avatars={[
-              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => {
               setIsCopyLink(false)
@@ -186,7 +186,7 @@ const DonutWish = () => {
               {
                 text: isCopied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`)
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`)
                   setIsCopied(true)
                   setTimeout(() => { setIsCopied(false) }, 2500)
                 }
@@ -202,7 +202,7 @@ const DonutWish = () => {
             <div className="avatar">
               <Avatar
                 size="web"
-                avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`}
+                avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`}
                 username={dareme.owner.name}
               />
             </div>

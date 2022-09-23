@@ -255,8 +255,8 @@ const DaremeResult = () => {
             display={isCopyLink}
             title={'I supported:'}
             avatars={[
-              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
-              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}` : ""
+              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`,
+              user ? user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : ""
             ]}
             exit={() => { setIsCopyLink(false) }}
             wrapExit={() => { setIsCopyLink(false) }}
@@ -265,7 +265,7 @@ const DaremeResult = () => {
               {
                 text: isCopied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/result/${daremeId}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/result/${daremeId}`);
                   setIsCopied(true);
                 }
               }
@@ -329,7 +329,7 @@ const DaremeResult = () => {
               {
                 text: isCopied ? contexts.DIALOG.BUTTON_LETTER.COPIED : contexts.DIALOG.BUTTON_LETTER.COPY_LINK,
                 handleClick: () => {
-                  navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/details/${daremeId}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/details/${daremeId}`);
                   setIsCopied(true);
                 }
               }
@@ -367,9 +367,9 @@ const DaremeResult = () => {
           </div>
           {/* <div className="dareme-result-videoCardDesktop">
             <VideoCardDesktop
-              url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+              url={`${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`}
               sizeType={dareme.sizeType}
-              coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+              coverImage={dareme.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}` : ""}
             />
             <AvatarLink
               username={dareme.owner.name}
@@ -382,14 +382,14 @@ const DaremeResult = () => {
           <div className="dareme-result-information">
             <div className="dareme-result-videoCardMobile">
               <VideoCardMobile
-                url={CONSTANT.SERVER_URL + "/" + dareme.teaser}
+                url={process.env.REACT_APP_SERVER_URL + "/" + dareme.teaser}
                 title={dareme.title}
                 time={dareme.time}
                 finished={dareme.finished}
                 donuts={totalDonuts}
                 category={contexts.DAREME_CATEGORY_LIST[dareme.category - 1]}
                 sizeType={dareme.sizeType}
-                coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                coverImage={dareme.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}` : ""}
               />
               <AvatarLink
                 avatar={dareme.owner.avatar}

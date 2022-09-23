@@ -8,7 +8,6 @@ import ContainerBtn from "../../../components/general/containerBtn";
 import Title from "../../../components/general/title";
 import Dialog from "../../../components/general/dialog";
 import { SpreadIcon } from "../../../assets/svg";
-import CONSTANT from "../../../constants/constant";
 import { paymentAction } from "../../../redux/actions/paymentActions";
 import "../../../assets/styles/profile/paymentStyle.scss";
 
@@ -23,11 +22,11 @@ const Payment = () => {
   const contexts = useContext(LanguageContext)
 
   const connectStripe = () => {
-    window.open(`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${CONSTANT.CLIENT_ID}&scope=read_write`, '_self')
+    window.open(`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT_ID}&scope=read_write`, '_self')
   }
 
   const disConnectStripe = () => {
-    dispatch(paymentAction.disconnectStripe(CONSTANT.CLIENT_ID, navigate))
+    dispatch(paymentAction.disconnectStripe(`${process.env.REACT_APP_STRIPE_CLIENT_ID}`, navigate))
   }
 
   useEffect(() => {

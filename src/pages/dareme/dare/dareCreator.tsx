@@ -101,8 +101,8 @@ const DareCreator = () => {
             exit={() => { setOpenDare(false) }}
             wrapExit={() => { setOpenDare(false) }}
             avatars={[
-              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`,
-              user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`
+              dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`,
+              user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`
             ]}
             context={`${dareme.title}\n\n${Number(amount)} ${contexts.DIALOG.BODY_LETTER.DONUTS_FOR} ${optionTitle}`}
             buttons={[
@@ -115,9 +115,9 @@ const DareCreator = () => {
           <div className='dare-creator-wrapper'>
             <div className="dare-creator-videoCardDesktop">
               <VideoCardDesktop
-                url={`${CONSTANT.SERVER_URL}/${dareme.teaser}`}
+                url={`${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`}
                 sizeType={dareme.sizeType}
-                coverImage={dareme.cover ? `${CONSTANT.SERVER_URL}/${dareme.cover}` : ""}
+                coverImage={dareme.cover ? `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}` : ""}
               />
               <AvatarLink
                 avatar={dareme.owner.avatar}
@@ -132,13 +132,13 @@ const DareCreator = () => {
                 <div className="avatars">
                   <div className="owner-avatar">
                     <Avatar
-                      avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${CONSTANT.SERVER_URL}/${dareme.owner.avatar}`}
+                      avatar={dareme.owner.avatar.indexOf('uploads') === -1 ? dareme.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${dareme.owner.avatar}`}
                       size="web"
                     />
                   </div>
                   <div className="user-avatar">
                     <Avatar
-                      avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${CONSTANT.SERVER_URL}/${user.avatar}`}
+                      avatar={user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
                       size="web"
                     />
                   </div>

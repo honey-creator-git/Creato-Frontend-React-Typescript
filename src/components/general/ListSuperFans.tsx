@@ -28,7 +28,7 @@ const ListSuperFans = (props: any) => {
                   <div className="voter-avatar">
                     <Avatar
                       size="small"
-                      avatar={voter.voter.avatar.indexOf('uploads') !== -1 ? `${CONSTANT.SERVER_URL}/${voter.voter.avatar}` : voter.voter.avatar}
+                      avatar={voter.voter.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${voter.voter.avatar}` : voter.voter.avatar}
                       username={voter.voter.name}
                       avatarStyle="horizontal"
                     />

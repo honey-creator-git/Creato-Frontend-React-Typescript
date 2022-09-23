@@ -248,14 +248,14 @@ const FanwallDetails = () => {
               <div className="card-main-body">
                 <FanwallVideoCard
                   letters={fanwall.message}
-                  url={CONSTANT.SERVER_URL + "/" + fanwall.video}
+                  url={process.env.REACT_APP_SERVER_URL + "/" + fanwall.video}
                   sizeType={fanwall.sizeType}
-                  coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                  coverImage={fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                   lock={checkLock()}
                   handleUnlock={handleUnlock}
                 />
                 <FawnallLike
-                  avatar={fanwall.writer.avatar.indexOf('uploads') === -1 ? fanwall.writer.avatar : `${CONSTANT.SERVER_URL}/${fanwall.writer.avatar}`}
+                  avatar={fanwall.writer.avatar.indexOf('uploads') === -1 ? fanwall.writer.avatar : `${process.env.REACT_APP_SERVER_URL}/${fanwall.writer.avatar}`}
                   likes={fanwall.likes ? fanwall.likes.length : 0}
                   username={fanwall.writer.name}
                   handleLike={handleLike}
@@ -278,7 +278,7 @@ const FanwallDetails = () => {
                   <div onClick={() => { setMoreInfo(true) }} ><MoreIcon color="#EFA058" /></div>
                   <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}}>
                     <div className="list" onClick={() => {
-                      navigator.clipboard.writeText(`${CONSTANT.CLIENT_URL}/dareme/fanwall/detail/${fanwallId}`);
+                      navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/dareme/fanwall/detail/${fanwallId}`);
                       setMoreInfo(false);
                     }}>
                       Copy link
@@ -310,10 +310,10 @@ const FanwallDetails = () => {
               <div className="fanwall-mobile-card">
                 <FanwallVideoCard
                   letters={fanwall.message}
-                  url={CONSTANT.SERVER_URL + "/" + fanwall.video}
+                  url={process.env.REACT_APP_SERVER_URL + "/" + fanwall.video}
                   lock={checkLock()}
                   sizeType={fanwall.sizeType}
-                  coverImage={fanwall.cover ? `${CONSTANT.SERVER_URL}/${fanwall.cover}` : ""}
+                  coverImage={fanwall.cover ? `${process.env.REACT_APP_SERVER_URL}/${fanwall.cover}` : ""}
                   handleUnlock={handleUnlock}
                 />
               </div>
@@ -347,7 +347,7 @@ const FanwallDetails = () => {
               }
               <div className="fanwall-like-mobile">
                 <FawnallLike
-                  avatar={fanwall.writer.avatar.indexOf('uploads') === -1 ? fanwall.writer.avatar : `${CONSTANT.SERVER_URL}/${fanwall.writer.avatar}`}
+                  avatar={fanwall.writer.avatar.indexOf('uploads') === -1 ? fanwall.writer.avatar : `${process.env.REACT_APP_SERVER_URL}/${fanwall.writer.avatar}`}
                   likes={fanwall.likes ? fanwall.likes.length : 0}
                   username={fanwall.writer.name}
                   handleLike={handleLike}
@@ -365,7 +365,7 @@ const FanwallDetails = () => {
                     topFuns.map((fan: any, index: any) => (
                       <div className="top-fan-avatar" key={index} onClick={() => { navigate(`/${fan.personalisedUrl}`); }}>
                         <Avatar
-                          avatar={fan.avatar.indexOf('uploads') === -1 ? fan.avatar : `${CONSTANT.SERVER_URL}/${fan.avatar}`}
+                          avatar={fan.avatar.indexOf('uploads') === -1 ? fan.avatar : `${process.env.REACT_APP_SERVER_URL}/${fan.avatar}`}
                           size="mobile"
                           hover={true}
                           username={fan.name}
