@@ -19,4 +19,21 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'MyFirstSonarCloudServiceConnection'
+    organization: 'HoneyCreator'
+    scannerMode: 'CLI'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      sonar-scanner \
+        -Dsonar.projectKey=HoneyCreator_Creato-Frontend-React-Typescript \
+        -Dsonar.organization=honeycreator \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=5cc5afc36291c483f9fdd0b33d742b0444a19c67
+
   
